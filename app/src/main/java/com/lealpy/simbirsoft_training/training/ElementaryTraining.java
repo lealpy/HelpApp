@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training;
+package com.lealpy.simbirsoft_training.training;
 
 import static java.lang.StrictMath.pow;
 
