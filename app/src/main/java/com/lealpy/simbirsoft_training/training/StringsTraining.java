@@ -1,5 +1,7 @@
 package com.lealpy.simbirsoft_training.training;
 
+import java.util.Arrays;
+
 /**
  * Набор тренингов по работе со строками в java.
  * <p>
@@ -22,8 +24,15 @@ public class StringsTraining {
      * элементов строки text
      */
     public String getOddCharacterString(String text) {
-        //TODO: implement it
-        return "";
+        char[] symbols = text.toCharArray();
+        int lastIndex = text.length() - 1;
+        String oddLetters = "";
+
+        for (int i = 1; i <= lastIndex; i += 2) {
+            oddLetters = oddLetters + symbols[i];
+        }
+
+        return oddLetters;
     }
 
     /**
@@ -37,8 +46,21 @@ public class StringsTraining {
      * вернуть пустой массив
      */
     public int[] getArrayLastSymbol(String text) {
-        //TODO: implement it
-        return new int[]{};
+        int[] arrayLastSymbol = new int[] {};
+
+        if(text.length() == 0) return arrayLastSymbol; //////////////////////////////
+
+        char[] symbols = text.toCharArray();
+        char lastSymbol = symbols[symbols.length - 1];
+
+        for (int i = 0; i < symbols.length - 1; i++) {
+            if(symbols[i] == lastSymbol) {
+                arrayLastSymbol = Arrays.copyOf(arrayLastSymbol, arrayLastSymbol.length + 1);
+                arrayLastSymbol[arrayLastSymbol.length - 1] = i;
+            }
+        }
+
+        return arrayLastSymbol;
     }
 
     /**
@@ -49,8 +71,16 @@ public class StringsTraining {
      * @return количество цифр в строке
      */
     public int getNumbersCount(String text) {
-        //TODO: implement it
-        return 0;
+        char[] symbols = text.toCharArray();
+        int numbersCount = 0;
+
+        for (char symbol : symbols) {
+            if(Character.isDigit(symbol)) {
+                numbersCount++;
+            }
+        }
+
+        return numbersCount;
     }
 
     /**
@@ -61,7 +91,17 @@ public class StringsTraining {
      * @return текст, где цифры заменены словами
      */
     public String replaceAllNumbers(String text) {
-        //TODO: implement it
+        text = text.replaceAll("0", "zero");
+        text = text.replaceAll("1", "one");
+        text = text.replaceAll("2", "two");
+        text = text.replaceAll("3", "three");
+        text = text.replaceAll("4", "four");
+        text = text.replaceAll("5", "five");
+        text = text.replaceAll("6", "six");
+        text = text.replaceAll("7", "seven");
+        text = text.replaceAll("8", "eight");
+        text = text.replaceAll("9", "nine");
+
         return text;
     }
 
@@ -73,8 +113,17 @@ public class StringsTraining {
      * @return измененная строка
      */
     public String capitalReverse(String text) {
-        //TODO: implement it
-        return text;
-    }
+        char[] symbols = text.toCharArray();
 
+        for(int i = 0; i < symbols.length; i ++) {
+            if(Character.isLowerCase(symbols[i])) {
+                symbols[i] = Character.toUpperCase(symbols[i]);
+            }
+            else {
+                symbols[i] = Character.toLowerCase(symbols[i]);
+            }
+        }
+
+        return new String(symbols);
+    }
 }
