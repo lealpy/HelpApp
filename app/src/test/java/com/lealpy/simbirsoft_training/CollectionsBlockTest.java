@@ -9,7 +9,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-import com.lealpy.simbirsoft_training.training.CollectionsBlock;
+import com.lealpy.simbirsoft_training.training.collections_block.CollectionsBlock;
 
 public class CollectionsBlockTest {
 
