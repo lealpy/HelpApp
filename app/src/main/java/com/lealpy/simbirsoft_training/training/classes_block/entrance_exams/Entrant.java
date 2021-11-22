@@ -5,8 +5,8 @@ public class Entrant {
 
     private String name, surname, patronymic;
     private Faculty faculty;
-    boolean isGraduated = false;
-    int markExam1, markExam2, markExam3;
+    public boolean isGraduated = false;
+    public int markExam1, markExam2, markExam3;
 
     Entrant(
             String name,

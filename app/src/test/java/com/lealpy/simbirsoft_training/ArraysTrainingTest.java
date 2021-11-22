@@ -6,7 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
-import com.lealpy.simbirsoft_training.training.ArraysTraining;
+import com.lealpy.simbirsoft_training.training.arrays_training.ArraysTraining;
 
 public class ArraysTrainingTest {
 

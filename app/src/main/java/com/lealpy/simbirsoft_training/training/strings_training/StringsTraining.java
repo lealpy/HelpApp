@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.training;
+package com.lealpy.simbirsoft_training.training.strings_training;
 
 import java.util.Arrays;
 

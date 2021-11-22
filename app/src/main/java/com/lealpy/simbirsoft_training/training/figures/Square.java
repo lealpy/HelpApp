@@ -2,7 +2,7 @@ package com.lealpy.simbirsoft_training.training.figures;
 
 public class Square implements Shape {
 
-    double length;
+    private double length;
 
     Square (double length) {
         this.length = length;

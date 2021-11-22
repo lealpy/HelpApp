@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.lealpy.simbirsoft_training.training.ElementaryTraining;
+import com.lealpy.simbirsoft_training.training.elementary_training.ElementaryTraining;
 
 public class ElementaryTrainingTest {
 

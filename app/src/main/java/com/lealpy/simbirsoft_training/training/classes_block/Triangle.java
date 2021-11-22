@@ -29,15 +29,15 @@ public class Triangle {
         this.angleC = Math.acos((sideBC * sideBC + sideCA * sideCA - sideAB * sideAB) / (2 * sideBC * sideCA));
     }
 
-    double getArea() {
+    public double getArea() {
         return 0.5 * sideAB * sideBC * Math.sin(angleB);
     }
 
-    double getPerimeter() {
+    public double getPerimeter() {
         return sideAB + sideBC + sideCA;
     }
 
-    String getCentroidCoordinates() {
+    public String getCentroidCoordinates() {
         double x = (xA + xB + xC) / 3;
         double y = (yA + yB + yC) / 3;
         return "Точка пересечения медиан треугольника (" + x + "; " + y + ")";

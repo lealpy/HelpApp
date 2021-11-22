@@ -21,7 +21,7 @@ class RandomArrayList {
     private ArrayList<Integer> arrayList;
     private int numberOfElements;
 
-    RandomArrayList (int numberOfElements) {
+    RandomArrayList(int numberOfElements) {
         this.numberOfElements = numberOfElements;
         arrayList = new ArrayList(numberOfElements);
         fillArrayList();

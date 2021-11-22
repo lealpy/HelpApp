@@ -4,10 +4,10 @@ import java.util.Random;
 
 public class Buyer {
 
-    Random random = new Random();
+    private Random random = new Random();
 
     private int id;
-    boolean isInBlacklist = false;
+    public boolean isInBlacklist = false;
 
     Buyer() {
         this.id = random.nextInt(2147483647);

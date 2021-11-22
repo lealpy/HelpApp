@@ -2,7 +2,7 @@ package com.lealpy.simbirsoft_training.training.figures;
 
 public class Circle implements Shape {
 
-    double diameter;
+    private double diameter;
 
     Circle(double diameter) {
         this.diameter = diameter;

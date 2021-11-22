@@ -2,7 +2,7 @@ package com.lealpy.simbirsoft_training.training.figures;
 
 public class Rectangle implements Shape {
 
-    double width, length;
+    private double width, length;
 
     Rectangle(
             double width,
