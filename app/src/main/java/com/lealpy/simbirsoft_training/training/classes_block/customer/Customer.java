@@ -15,30 +15,28 @@ import java.util.Random;
 
 public class Customer {
     private long id;
-    private String
-            surname,
-            name,
-            patronymic,
-            address,
-            cardNumber;
-    private double
-            debit,
-            credit;
-    private int
-            currentMinutesIntercity,
-            currentMinutesCity,
-            defaultMinutesIntercity,
-            defaultMinutesCity;
+    private String surname;
+    private String name;
+    private String patronymic;
+    private String address;
+    private String cardNumber;
+    private double debit;
+    private double credit;
+    private int currentMinutesIntercity;
+    private int currentMinutesCity;
+    private int defaultMinutesIntercity;
+    private int defaultMinutesCity;
 
-    public Customer(String surname,
-                    String name,
-                    String patronymic,
-                    String address,
-                    String cardNumber,
-                    double debit,
-                    double credit,
-                    int defaultMinutesIntercity,
-                    int defaultMinutesCity
+    public Customer(
+            String surname,
+            String name,
+            String patronymic,
+            String address,
+            String cardNumber,
+            double debit,
+            double credit,
+            int defaultMinutesIntercity,
+            int defaultMinutesCity
     ) {
         setId();
         setSurname(surname);

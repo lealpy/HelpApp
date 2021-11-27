@@ -4,7 +4,9 @@ import java.util.Random;
 
 public class Teacher {
 
-    private String name, surname, patronymic;
+    private String name;
+    private String surname;
+    private String patronymic;
     private Subject subject;
 
     Teacher (

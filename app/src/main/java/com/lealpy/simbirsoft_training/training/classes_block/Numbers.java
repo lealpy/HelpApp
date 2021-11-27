@@ -11,7 +11,8 @@ package com.lealpy.simbirsoft_training.training.classes_block;
 
 public class Numbers {
 
-    private int num1, num2;
+    private int num1;
+    private int num2;
 
     public int getNum1() {
         return num1;
@@ -34,7 +35,6 @@ public class Numbers {
     }
 
     public int getMax() {
-        if (num1 > num2) return num1;
-        else return num2;
+        return Math.max (num1, num2);
     }
 }

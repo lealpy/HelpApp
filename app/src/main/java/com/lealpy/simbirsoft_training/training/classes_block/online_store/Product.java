@@ -2,7 +2,8 @@ package com.lealpy.simbirsoft_training.training.classes_block.online_store;
 
 public class Product {
 
-    private String name, description;
+    private String name;
+    private String description;
     private double price;
     private int quantity;
 

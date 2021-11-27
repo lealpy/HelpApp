@@ -13,6 +13,8 @@ package com.lealpy.simbirsoft_training.training.classes_block;
 public class Time {
 
     private int hour, minute, second;
+    final int HOURS_AT_DAY_START = 0;
+    final int HOURS_AT_DAY_FINISH = 24;
 
     Time(int hour, int minute, int second) throws Exception {
         setTime(hour, minute, second);
@@ -25,7 +27,7 @@ public class Time {
     }
 
     public void setHour(int hour) throws Exception {
-        if (hour < 0 || hour > 23) {
+        if (hour < HOURS_AT_DAY_START || hour >= HOURS_AT_DAY_FINISH) {
             throw new Exception("Неверный формат часов");
         }
         this.hour = hour;

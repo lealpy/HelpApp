@@ -13,8 +13,17 @@ package com.lealpy.simbirsoft_training.training.collections_block;
 
 public class Student {
 
-    private String surname, name, patronymic, group;
-    private int yearOfBirth, grade, markMath, markPhysics, markIT, markEnglish, markRussian;
+    private String surname;
+    private String name;
+    private String patronymic;
+    private String group;
+    private int yearOfBirth;
+    private int grade;
+    private int markMath;
+    private int markPhysics;
+    private int markIT;
+    private int markEnglish;
+    private int markRussian;
 
     Student (
             String surname,
