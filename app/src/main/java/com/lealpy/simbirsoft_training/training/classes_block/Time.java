@@ -30,7 +30,9 @@ public class Time {
         if (hour < HOURS_AT_DAY_START || hour >= HOURS_AT_DAY_FINISH) {
             throw new Exception("Неверный формат часов");
         }
-        this.hour = hour;
+        else {
+            this.hour = hour;
+        }
     }
 
     public void setMinute(int minute) throws Exception {

@@ -4,8 +4,14 @@ public class Square implements Shape {
 
     private double length;
 
-    Square (double length) {
-        this.length = length;
+    Square (double length) throws Exception {
+
+        if(length <= 0) {
+            throw new Exception("Сторона квадрата должна быть положительной");
+        }
+        else {
+            this.length = length;
+        }
     }
 
     @Override

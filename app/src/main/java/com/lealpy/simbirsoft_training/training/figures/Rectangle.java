@@ -8,9 +8,15 @@ public class Rectangle implements Shape {
     Rectangle(
             double width,
             double length
-    ) {
-        this.width = width;
-        this.length = length;
+    ) throws Exception {
+        if (width <= 0 || length <= 0) {
+            throw new Exception("Стороны прямоугольника должны быть положительными");
+        }
+        else
+        {
+            this.width = width;
+            this.length = length;
+        }
     }
 
     @Override

@@ -4,8 +4,13 @@ public class Circle implements Shape {
 
     private double diameter;
 
-    Circle(double diameter) {
-        this.diameter = diameter;
+    Circle(double diameter) throws Exception {
+        if (diameter <= 0) {
+            throw new Exception("Диаметр должен быть положительным");
+        }
+        else {
+            this.diameter = diameter;
+        }
     }
 
     @Override
