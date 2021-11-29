@@ -2,10 +2,12 @@ package com.lealpy.simbirsoft_training.training.publication
 
 import java.lang.Exception
 
-// Создать класс Book, реализующий интерфейс Publication. В методе getType для класса Book
-// возвращаем строку с зависимости от количества слов. Если количество слов не превышает 1000,
-// то вывести “Flash Fiction”, 7,500 –“Short Story”, всё, что выше – “Novel”.
-// У класса Book переопределить метод equals
+/**
+ * Создать класс Book, реализующий интерфейс Publication. В методе getType для класса Book
+ * возвращаем строку с зависимости от количества слов. Если количество слов не превышает 1000,
+ * то вывести “Flash Fiction”, 7,500 –“Short Story”, всё, что выше – “Novel”.
+ * У класса Book переопределить метод equals
+*/
 
 class Book (price : Double, override val wordCount: Int) : Publication {
 
@@ -22,9 +24,9 @@ class Book (price : Double, override val wordCount: Int) : Publication {
 
     override fun getType(): String {
         return when(wordCount) {
-            in 1..1000 -> "Flash Fiction"
-            in 1001..7500 -> "Short Story"
-            in 7501..Int.MAX_VALUE -> "Novel"
+            in 1 until MIN_WORDS_IN_SHORT_STORY -> "Flash Fiction"
+            in MIN_WORDS_IN_SHORT_STORY until MIN_WORDS_IN_NOVEL -> "Short Story"
+            in MIN_WORDS_IN_NOVEL .. Int.MAX_VALUE -> "Novel"
             else -> throw Exception("Word count must be positive")
         }
     }
@@ -39,5 +41,10 @@ class Book (price : Double, override val wordCount: Int) : Publication {
         if (wordCount != other.wordCount) return false
 
         return true
+    }
+
+    companion object {
+        private const val MIN_WORDS_IN_SHORT_STORY = 1001
+        private const val MIN_WORDS_IN_NOVEL = 7501
     }
 }

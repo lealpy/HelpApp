@@ -1,7 +1,9 @@
 package com.lealpy.simbirsoft_training.training.publication
 
-//Создать класс Magazine, реализующий интерфейс Publication. В методе getType для класса Magazine
-// возвращаем строку “Magazine”.
+/**
+ * Создать класс Magazine, реализующий интерфейс Publication. В методе getType для класса Magazine
+ * возвращаем строку “Magazine”.
+ */
 
 class Magazine(price : Double, override val wordCount: Int) : Publication {
 
