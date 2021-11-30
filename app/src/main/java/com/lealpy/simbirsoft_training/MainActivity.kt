@@ -2,6 +2,7 @@ package com.lealpy.simbirsoft_training
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.lealpy.simbirsoft_training.training.user.UserProgram
 import com.lealpy.simbirsoft_training.training.publication.PublicationProgram
 
 class MainActivity : AppCompatActivity() {
@@ -10,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         PublicationProgram.execute()
+        UserProgram.execute()
     }
+
 
 }
