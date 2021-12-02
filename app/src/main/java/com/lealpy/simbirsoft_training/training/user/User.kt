@@ -13,7 +13,7 @@ data class User(val name : String, var age : Int, var type: Type) {
     val id = idList[idList.lastIndex] + 1
 
     val startTime: String by lazy {
-        SimpleDateFormat("hh:mm:ss").format(Date())
+        dataPattern.format(Date())
     }
 
     init{
@@ -22,6 +22,7 @@ data class User(val name : String, var age : Int, var type: Type) {
 
     companion object {
         val idList = mutableListOf<Long>(0)
+        val dataPattern = SimpleDateFormat("hh:mm:ss")
     }
 
 }
