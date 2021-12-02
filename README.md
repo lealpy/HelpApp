@@ -334,3 +334,94 @@
 11. Внутри функции `auth` вызвать метод коллбека `authSuccess` и переданный `updateCache`, если проверка возраста пользователя произошла без ошибки. В случае получения ошибки вызвать `authFailed`.
 12. Реализовать изолированный класс `Action` и его наследников – `Registration`, `Login` и `Logout`. `Login` должен принимать в качестве параметра экземпляр класса User.
 13. Реализовать метод `doAction`, принимающий экземпляр класса `Action`. В зависимости от переданного действия выводить в лог текст, к примеру “Auth started”. Для действия `Login` вызывать метод `auth`.
+
+
+
+---
+## VI. Верстка
+---
+### Теоретическая часть
+
+В случае если по ссылке встречается пошаговый гайд - рекомендуется его выполнить в отдельном проекте.
+
+**1. Начало разработки под Android**
++ [Начало разаработки](https://developer.android.com/training/index.html) **(\*\*\*\*)**
+
+**2. Верстка**
++ [Уроки верстки из курсов](http://startandroid.ru/ru/uroki/vse-uroki-spiskom.html) **(\*\*)**
++ [Создание макетов в XML и View groups](https://developer.android.com/guide/topics/ui/declaring-layout.html) **(\*\*\*)**
+
+**3. Типы layout'ов**
++ [Frame Layout](http://developer.alexanderklimov.ru/android/layout/framelayout.php) **(\*\*\*\*)**
++ [Linear Layout](https://developer.android.com/guide/topics/ui/layout/linear.html) **(\*\*\*\*)**
++ [Relative Layout](https://developer.android.com/guide/topics/ui/layout/relative.html) (если есть возможность, лучше использовать Constraint) **(\*\*\*\*)**
+
+**4. Splash Screen**
++ [Как правильно реализовать](https://habr.com/ru/post/345380/) **(\*\*\*\*)**
+
+**5. BottomAppBar**
++ [Обзор](https://developer.android.com/reference/com/google/android/material/bottomappbar/BottomAppBar) **(\*\*\*\*)**
+
+**6. App Bar**
++ [Обзор](https://developer.android.com/training/appbar) **(\*\*\*\*)**
+
+**7. Constraint Layout**
++ [Документация](https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html) **(\*\*\*\*)**
++ [Работа с различными свойствами](https://habrahabr.ru/company/touchinstinct/blog/326814/) **(\*\*\*\*)**
+
+**8. Coordinator Layout**
++ [Документация](https://developer.android.com/jetpack/androidx/releases/coordinatorlayout?hl=ru) **(\*\*\*\*)**
++ [Особенности использования](https://blog.mindorks.com/using-coordinator-layout-in-android) **(\*\*\*\*)**
+
+**9. Ресурсы**
++ [Обзор](https://developer.android.com/guide/topics/resources/providing-resources) **(\*\*\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – MyFirstApp (Часть 1) Роман Григорьев](https://youtu.be/jVwGU3UJVPc) Описывает ресурсы андроид приложения, а так же различие релизной, дебажной сборки и signing config **(\*\*)**
++ [Локализация](https://developer.android.com/guide/topics/resources/localization) **(\*\*)**
++ [Типы ресурсов](https://developer.android.com/guide/topics/resources/available-resources) **(\*\*)**
++ [Шрифты в XML](https://developer.android.com/guide/topics/ui/look-and-feel/fonts-in-xml.html) **(\*\*)**
++ [Загружаемые шрифты](https://developer.android.com/guide/topics/ui/look-and-feel/downloadable-fonts.html) **(\*\*)**
++ [Поддержка разных экранов](https://developer.android.com/guide/practices/screens_support.html) **(\*\*)**
++ [Zeplin](https://habrahabr.ru/company/uteam/blog/315542/) **(\*\*\*)**
+
+**10. Codelabs**
++ [Your first interactive UI](https://codelabs.developers.google.com/codelabs/android-training-layout-editor-part-a/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [The layout editor](https://codelabs.developers.google.com/codelabs/android-training-layout-editor-part-b/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Text and scrolling views](https://codelabs.developers.google.com/codelabs/android-training-text-and-scrolling-views/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Drawables, styles, and themes](https://codelabs.developers.google.com/codelabs/android-training-drawables-styles-and-themes/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Clickable images](https://codelabs.developers.google.com/codelabs/android-training-clickable-images/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Input controls](https://codelabs.developers.google.com/codelabs/android-training-input-controls/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Menus and pickers](https://codelabs.developers.google.com/codelabs/android-training-menus-and-pickers/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [User navigation](https://codelabs.developers.google.com/codelabs/android-training-provide-user-navigation/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [Adaptive layouts](https://codelabs.developers.google.com/codelabs/android-training-adaptive-layouts/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
+
+
+**Важно** В компании при разработке любого мобильного приложения считается правилом хорошего тона придерживаться нефункциональных требований, описанных в [данной статье](http://kb.simbirsoft/nonfunctional-support/)
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте из блока I.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `layouts` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style. В системе PS также необходимо создать созвучную задачу, в которую после завершения будет залогировано время.
+
+1. Создать task в PS с заголовком "VI. Верстка" и взять ее в работу.
+2. Сделать так, чтобы на домашнем экране Android отображалась иконка и название приложения "Хочу помочь". Ресурсы иконок [тут](https://zpl.io/2jkoMOp).
+3. Реализовать Splash Screen согласно [макету](https://zpl.io/2jlk3Mm).
+4. Реализовать экран "Профиль" согласно [макету](https://zpl.io/b6lQpZq).
+ - Экран "Профиль" необходимо отображать после Splash Screen. По нажатию стрелки назад, приложение закрывается.
+ - Необходимо реализовать нижний элемент навигации с помощью стандартного `BottomNavigationView`. Пункт "Помочь" визуально не должен отличаться от остальных четырех. Размеры иконок оставить стандартные для `BottomNavigationView` - 24dp.
+ - В нижнем меню навигации по-умолчанию должен быть выбран пункт "Профиль".
+ - Верстка должна быть реализована в xml.
+ - Верстка должна быть выполнена с учетом "pixel perfect" - когда все элементы дизайна расположены и имеют размеры абсолютно идентичные макету для экрана с теми же размерами, что и макет, и адекватно масштабироваться для других размеров и разрешений.
+ - Все переиспользуемые размеры в xml должны быть вынесены в dimes, цвета в colors, а строки в strings.
+ - Никаких "магических чисел", все должно иметь понятные названия.
+5. Реализовать поведение toolbar-a на экране профиля при скролле, используя CoordinatorLayout.
+ - При прокрутке вниз toolbar вместе с изображением профиля должен постепенно скрываться.
+ - При прокрутке наверх до конца toolbar вместе с изображением профиля должен полностью отображаться.
+ - При полной прокрутке вниз и последующей прокрутке наверх сразу должен отобразиться toolbar без изображения профиля. По мере скролла наверх изображение профиля должно появиться.
+6. Подключить статические анализаторы кода и исправить выявленные замечания
+ - Подключить через gradle [ktlint](https://ktlint.github.io/)
+ - Установить плагин [SonarLint](https://www.sonarlint.org/)
+ - Запустить и исправить выявленные [lint](https://developer.android.com/studio/write/lint) замечания
+ - Запустить и исправить выявленные ktlint замечания
+ - Запустить и исправить выявленные SonarLint замечания
+7. Завершить task в PS и залогировать затраченное время
