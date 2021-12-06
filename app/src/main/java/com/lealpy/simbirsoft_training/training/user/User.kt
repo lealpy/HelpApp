@@ -21,8 +21,8 @@ data class User(val name : String, var age : Int, var type: Type) {
     }
 
     companion object {
-        val idList = mutableListOf<Long>(0)
-        val dataPattern = SimpleDateFormat("hh:mm:ss")
+        private val idList = mutableListOf<Long>(0)
+        private val dataPattern = SimpleDateFormat("hh:mm:ss")
     }
 
 }
