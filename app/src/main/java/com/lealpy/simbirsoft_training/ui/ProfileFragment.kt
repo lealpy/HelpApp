@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentProfileBinding
@@ -24,11 +23,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentProfileBinding.bind(view)
 
-        (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
+        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
 
     }
 
@@ -39,7 +39,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.edit -> Toast.makeText(requireContext(), "Редактирование профиля", Toast.LENGTH_SHORT).show()
+            R.id.edit -> Toast.makeText(
+                requireContext(),
+                requireActivity().getString(R.string.profile_edit),
+                Toast.LENGTH_SHORT
+            ).show()
         }
         return true
     }

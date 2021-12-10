@@ -31,4 +31,5 @@
         android:name="com.lealpy.simbirsoft_training.ui.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
+
 </navigation>
