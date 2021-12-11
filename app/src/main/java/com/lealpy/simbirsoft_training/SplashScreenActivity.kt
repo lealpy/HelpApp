@@ -13,11 +13,14 @@ class SplashScreenActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         GlobalScope.launch {
-            delay(1000L)
-            println("World!")
+            delay(screenTimeMillis)
             startActivity(intent)
             finish()
         }
 
+    }
+
+    companion object {
+        private const val screenTimeMillis = 500L
     }
 }

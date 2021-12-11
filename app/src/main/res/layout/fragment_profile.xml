@@ -25,7 +25,7 @@
             app:statusBarScrim="@color/light_green">
 
             <ImageView
-                android:id="@+id/backdrop"
+                android:id="@+id/avatarUser"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center|end"
@@ -54,7 +54,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.ProfileFragment" >
+            tools:context=".ui.profile.ProfileFragment" >
 
             <TextView
                 android:id="@+id/name"
