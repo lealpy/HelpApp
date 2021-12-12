@@ -18,6 +18,7 @@ import com.lealpy.simbirsoft_training.databinding.FragmentProfileBinding
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
+
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
 
     private val viewModel by lazy {
@@ -67,7 +68,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         cameraLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    handleCameraImage(result.data)
+                    val bitmap = result.data?.extras?.get("data") as Bitmap
+                    binding.avatarUser.setImageBitmap(bitmap)
                 }
             }
     }
@@ -77,20 +79,12 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         cameraLauncher.launch(cameraIntent)
     }
 
-    private fun handleCameraImage(intent: Intent?) {
-        val bitmap = intent?.extras?.get("data") as Bitmap
-        binding.avatarUser.setImageBitmap(bitmap)
-
-    }
-
     private fun showDialog() {
         PhotoDialogFragment().show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
     }
 
-
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.toolbar_menu, menu)
+        inflater.inflate(R.menu.profile_toolbar_menu, menu)
         super.onCreateOptionsMenu(menu,inflater)
     }
 

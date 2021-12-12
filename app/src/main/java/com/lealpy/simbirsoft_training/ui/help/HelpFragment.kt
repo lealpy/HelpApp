@@ -16,8 +16,8 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         ViewModelProvider(this).get(HelpViewModel::class.java)
     }
 
-    private val helpAdapter = HelpAdapter(
-        object: HelpAdapter.OnItemClickListener {
+    private val helpAdapter = HelpItemAdapter(
+        object: HelpItemAdapter.OnItemClickListener {
             override fun onItemClick(helpItem: HelpItem) {
                 // Задел на будущее
             }

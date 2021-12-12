@@ -67,4 +67,11 @@
         <item name="android:textSize">21sp</item>
     </style>
 
+    <style name="tab_layout" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
 </resources>

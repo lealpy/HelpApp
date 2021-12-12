@@ -1,6 +1,5 @@
 package com.lealpy.simbirsoft_training.ui.help
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,9 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.simbirsoft_training.databinding.HelpItemBinding
 
-class HelpAdapter (
+class HelpItemAdapter (
     private val onItemClickListener: OnItemClickListener,
-): ListAdapter<HelpItem, HelpAdapter.HelpItemHolder>(DiffCallback()) {
+): ListAdapter<HelpItem, HelpItemAdapter.HelpItemHolder>(DiffCallback()) {
 
     inner class HelpItemHolder(
         private val binding: HelpItemBinding
@@ -56,7 +55,6 @@ class HelpAdapter (
         override fun areItemsTheSame(oldItem: HelpItem, newItem: HelpItem) =
             oldItem.id == newItem.id
 
-        @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: HelpItem, newItem: HelpItem) =
             oldItem == newItem
     }

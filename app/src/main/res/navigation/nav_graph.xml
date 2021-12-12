@@ -8,12 +8,12 @@
 
     <fragment
         android:id="@+id/navigationNews"
-        android:name="com.lealpy.simbirsoft_training.ui.NewsFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/navigationSearch"
-        android:name="com.lealpy.simbirsoft_training.ui.SearchFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
@@ -23,7 +23,7 @@
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/navigationHistory"
-        android:name="com.lealpy.simbirsoft_training.ui.HistoryFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment

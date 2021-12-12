@@ -24,20 +24,46 @@
     <string name="delete">Удалить</string>
     <string name="choose_help_category">Выберите категорию помощи</string>
 
+    <string name="search_by_events">По мероприятиям</string>
+    <string name="search_by_nko">По НКО</string>
+
     <string name="children">Дети</string>
     <string name="adults">Взрослые</string>
     <string name="elderly">Пожилые</string>
     <string name="animals">Животные</string>
     <string name="events">Мероприятия</string>
+    <string name="search_by_events_hint">Напишите в строке поиска название мероприятия или ключевые слова</string>
+    <string name="search_by_events_example">Например, мастер-класс, помощь</string>
+    <string name="search_by_nko_hint">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
+    <string name="fond_name">Благотворительный фонд Алины Кабаевой</string>
 
-
-
+    <string-array name="nko_items">
+        <item>Благотворительный фонд Алины Кабаевой</item>
+        <item>Во имя жизни</item>
+        <item>Благотворительный фонд В. Потанина</item>
+        <item>Детские домики</item>
+        <item>Мозаика счастья</item>
+        <item>Гринпис России</item>
+        <item>WWF России</item>
+        <item>Благотворительный фонд Елены и Геннадия Тимченко</item>
+        <item>Волонтеры в помощь детям-сиротам</item>
+        <item>Наше будущее</item>
+        <item>Гарант</item>
+        <item>Со-единение</item>
+        <item>Линия жизни</item>
+        <item>Арифметика добра</item>
+        <item>Правозащитный центр «Мемориал»</item>
+        <item>Обнаженные сердца</item>
+        <item>Искусство наука и спорт</item>
+        <item>Лиза Алерт</item>
+        <item>Дорога к дому</item>
+        <item>Подсолнух</item>
+    </string-array>
 
     <string-array name="photo_dialog_elements">
         <item>Выбрать фото</item>
         <item>Сделать снимок</item>
         <item>Удалить</item>
     </string-array>
-
 
 </resources>
