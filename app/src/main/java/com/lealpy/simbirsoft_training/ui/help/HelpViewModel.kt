@@ -10,11 +10,11 @@ class HelpViewModel(application: Application): AndroidViewModel(application) {
 
     private val _helpItems = MutableLiveData(
         listOf(
-            HelpItem(0, R.drawable.child, application.getString(R.string.children)),
-            HelpItem(1, R.drawable.adult, application.getString(R.string.adults)),
-            HelpItem(0, R.drawable.elderly, application.getString(R.string.elderly)),
-            HelpItem(0, R.drawable.animal, application.getString(R.string.animals)),
-            HelpItem(0, R.drawable.event, application.getString(R.string.events))
+            HelpItem(0, R.drawable.child, application.getString(R.string.help_screen_item_children)),
+            HelpItem(1, R.drawable.adult, application.getString(R.string.help_screen_item_adults)),
+            HelpItem(0, R.drawable.elderly, application.getString(R.string.help_screen_item_elderly)),
+            HelpItem(0, R.drawable.animal, application.getString(R.string.help_screen_item_animals)),
+            HelpItem(0, R.drawable.event, application.getString(R.string.help_screen_item_events))
         )
     )
 

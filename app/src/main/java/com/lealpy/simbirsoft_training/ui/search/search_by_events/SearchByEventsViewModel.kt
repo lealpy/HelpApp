@@ -22,7 +22,7 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
 
     private fun initSpannableString(application: Application): SpannableStringBuilder {
 
-        val searchExample = SpannableStringBuilder(application.getString(R.string.search_by_events_example))
+        val searchExample = SpannableStringBuilder(application.getString(R.string.search_by_events_search_example))
 
         val spanStart = searchExample.indexOf(' ') + 1
         val spanFinish = searchExample.length

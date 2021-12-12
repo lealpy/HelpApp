@@ -8,30 +8,30 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/choosePhotoBtn"
-        style="@style/dialog_button"
+        style="@style/DialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/choose_photo"
+        android:text="@string/profile_dialog_choose_photo_title"
         android:drawableLeft="@drawable/ic_baseline_upload_24"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/makePhotoBtn"
-        style="@style/dialog_button"
+        style="@style/DialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/make_photo"
+        android:text="@string/profile_dialog_make_photo_title"
         android:drawableLeft="@drawable/ic_baseline_photo_camera_24"
         app:layout_constraintTop_toBottomOf="@+id/choosePhotoBtn"
         app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/deleteBtn"
-        style="@style/dialog_button"
+        style="@style/DialogButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/delete"
+        android:text="@string/profile_dialog_delete_title"
         android:drawableLeft="@drawable/ic_baseline_delete_forever_24"
         app:layout_constraintTop_toBottomOf="@+id/makePhotoBtn"
         app:layout_constraintStart_toStartOf="parent" />

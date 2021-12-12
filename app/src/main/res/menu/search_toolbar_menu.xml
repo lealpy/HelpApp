@@ -6,7 +6,7 @@
         android:id="@+id/search"
         android:icon="@drawable/ic_baseline_search_24"
         android:iconTint="@color/white"
-        android:title="@string/search"
+        android:title="@string/search_screen_name"
         app:showAsAction="ifRoom"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 

@@ -39,8 +39,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
             when(position) {
-                0 -> tab.text = requireActivity().getString(R.string.search_by_events)
-                1 -> tab.text = requireActivity().getString(R.string.search_by_nko)
+                0 -> tab.text = requireActivity().getString(R.string.search_by_events_title)
+                1 -> tab.text = requireActivity().getString(R.string.search_by_nko_title)
             }
 
         }.attach()
@@ -85,7 +85,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         when(item.itemId) {
             R.id.search -> Toast.makeText(
                 requireContext(),
-                requireActivity().getString(R.string.profile_edit),
+                requireActivity().getString(R.string.profile_edit_click_message),
                 Toast.LENGTH_SHORT
             ).show()
         }

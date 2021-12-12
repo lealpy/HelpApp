@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
         app:drawableTint="@color/warm_grey"
-        tools:text="@string/fond_name" />
+        tools:text="@string/random_fond_name" />
 
     <View
         android:layout_width="match_parent"

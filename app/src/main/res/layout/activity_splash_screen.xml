@@ -26,18 +26,18 @@
         app:layout_constraintTop_toBottomOf="@+id/appLogo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        style="@style/progress_bar" />
+        style="@style/ProgressBar" />
 
     <TextView
         android:id="@+id/loadingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/loading"
+        android:text="@string/splash_screen_loading_title"
         android:layout_marginTop="@dimen/loading_text_margin_top"
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        style="@style/text_view_loading" />
+        style="@style/TextViewLoading" />
 
     <ImageView
         android:id="@+id/simbirsoftLogo"

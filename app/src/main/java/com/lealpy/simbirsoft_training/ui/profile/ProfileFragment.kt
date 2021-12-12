@@ -92,7 +92,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         when(item.itemId) {
             R.id.edit -> Toast.makeText(
                 requireContext(),
-                requireActivity().getString(R.string.profile_edit),
+                requireActivity().getString(R.string.profile_edit_click_message),
                 Toast.LENGTH_SHORT
             ).show()
         }
