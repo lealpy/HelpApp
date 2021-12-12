@@ -40,7 +40,7 @@
                 android:layout_height="?attr/actionBarSize"
                 android:background="@android:color/transparent"
                 app:layout_collapseMode="pin"
-                app:title="@string/profile" />
+                app:title="@string/profile_screen_name" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -64,52 +64,52 @@
                 android:layout_marginTop="@dimen/name_margin_top"
                 android:fontFamily="@font/roboto_regular"
                 android:includeFontPadding="false"
-                android:text="@string/name_user"
+                android:text="@string/profile_user_name"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                style="@style/text_view_primary" />
+                style="@style/TextViewPrimary" />
 
             <TextView
                 android:id="@+id/dateOfBirthHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/date_of_birth"
+                android:text="@string/profile_user_birthday_title"
                 android:layout_marginTop="@dimen/date_of_birth_hint_margin_top"
                 android:layout_marginStart="@dimen/common_margin_start"
                 app:layout_constraintTop_toBottomOf="@+id/name"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/text_view_hint" />
+                style="@style/TextViewHint" />
 
             <TextView
                 android:id="@+id/dateOfBirth"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/_01_02_1980"
+                android:text="@string/profile_user_birthday"
                 android:layout_marginStart="@dimen/common_margin_start"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirthHint"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/text_view_secondary" />
+                style="@style/TextViewSecondary" />
 
             <TextView
                 android:id="@+id/fieldOfActivityHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/field_of_activity"
+                android:text="@string/profile_user_field_of_activity_title"
                 android:layout_marginTop="@dimen/field_of_activity_hint_margin_top"
                 android:layout_marginStart="@dimen/common_margin_start"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirth"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/text_view_hint" />
+                style="@style/TextViewHint" />
 
             <TextView
                 android:id="@+id/fieldOfActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/surgery_traumatology"
+                android:text="@string/profile_user_field_of_activity"
                 android:layout_marginStart="@dimen/common_margin_start"
                 app:layout_constraintTop_toBottomOf="@+id/fieldOfActivityHint"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/text_view_secondary" />
+                style="@style/TextViewSecondary" />
 
             <View
                 android:id="@+id/horizontalLine1"
@@ -118,18 +118,18 @@
                 android:layout_marginTop="@dimen/horizontal_line_margin_top"
                 app:layout_constraintTop_toBottomOf="@+id/fieldOfActivity"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/horizontal_line" />
+                style="@style/HorizontalLine" />
 
             <TextView
                 android:id="@+id/getPush"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/get_push"
+                android:text="@string/profile_get_push_title"
                 android:layout_marginTop="@dimen/get_push_margin_top"
                 android:layout_marginStart="@dimen/common_margin_start"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalLine1"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/text_view_secondary" />
+                style="@style/TextViewSecondary" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switcher"
@@ -141,7 +141,7 @@
                 app:layout_constraintStart_toEndOf="@+id/getPush"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:checked="true"
-                style="@style/switcher" />
+                style="@style/Switcher" />
 
             <View
                 android:id="@+id/horizontalLine2"
@@ -150,18 +150,18 @@
                 android:layout_marginTop="@dimen/horizontal_line_margin_top"
                 app:layout_constraintTop_toBottomOf="@+id/getPush"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/horizontal_line" />
+                style="@style/HorizontalLine" />
 
             <TextView
                 android:id="@+id/yourFriendsHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/your_friends"
+                android:text="@string/profile_friends_title"
                 android:layout_marginTop="@dimen/your_friends_hint_margin_top"
                 android:layout_marginStart="@dimen/common_margin_start"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalLine2"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/text_view_hint" />
+                style="@style/TextViewHint" />
 
             <ImageView
                 android:id="@+id/avatarFriend1"
@@ -177,12 +177,12 @@
                 android:id="@+id/nameFriend1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name_friend_3"
+                android:text="@string/profile_friend_3_name"
                 android:layout_marginStart="@dimen/name_friend_margin_start"
                 app:layout_constraintTop_toTopOf="@+id/avatarFriend1"
                 app:layout_constraintBottom_toBottomOf="@+id/avatarFriend1"
                 app:layout_constraintStart_toEndOf="@+id/avatarFriend1"
-                style="@style/text_view_secondary" />
+                style="@style/TextViewSecondary" />
 
             <ImageView
                 android:id="@+id/avatarFriend2"
@@ -198,12 +198,12 @@
                 android:id="@+id/nameFriend2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name_friend_2"
+                android:text="@string/profile_friend_2_name"
                 android:layout_marginStart="@dimen/name_margin_top"
                 app:layout_constraintTop_toTopOf="@+id/avatarFriend2"
                 app:layout_constraintBottom_toBottomOf="@+id/avatarFriend2"
                 app:layout_constraintStart_toEndOf="@+id/avatarFriend2"
-                style="@style/text_view_secondary" />
+                style="@style/TextViewSecondary" />
 
             <ImageView
                 android:id="@+id/avatarFriend3"
@@ -219,12 +219,12 @@
                 android:id="@+id/nameFriend3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/name_friend_1"
+                android:text="@string/profile_friend_1_name"
                 android:layout_marginStart="@dimen/name_friend_margin_start"
                 app:layout_constraintTop_toTopOf="@+id/avatarFriend3"
                 app:layout_constraintBottom_toBottomOf="@+id/avatarFriend3"
                 app:layout_constraintStart_toEndOf="@+id/avatarFriend3"
-                style="@style/text_view_secondary" />
+                style="@style/TextViewSecondary" />
 
             <View
                 android:id="@+id/horizontalLine3"
@@ -233,19 +233,19 @@
                 android:layout_marginTop="@dimen/horizontal_line_3_margin_top"
                 app:layout_constraintTop_toBottomOf="@+id/avatarFriend3"
                 app:layout_constraintStart_toStartOf="parent"
-                style="@style/horizontal_line" />
+                style="@style/HorizontalLine" />
 
             <Button
                 android:id="@+id/exitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/exit_button_margin_top"
-                android:text="@string/exit_from_account"
+                android:text="@string/profile_logout_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalLine3"
-                style="@style/button" />
+                style="@style/Button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -41,7 +41,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         when(item.itemId) {
             R.id.edit -> Toast.makeText(
                 requireContext(),
-                requireActivity().getString(R.string.profile_edit),
+                requireActivity().getString(R.string.profile_edit_menu_name),
                 Toast.LENGTH_SHORT
             ).show()
         }
