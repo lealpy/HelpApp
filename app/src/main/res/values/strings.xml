@@ -17,6 +17,6 @@
     <string name="help_screen_name">Помочь</string>
     <string name="history_screen_name">История</string>
     <string name="profile_screen_name">Профиль</string>
-    <string name="edit">Редактировать</string>
-    <string name="profile_edit_menu_name">Редактирование профиля</string>
+    <string name="profile_edit_menu_title">Редактировать</string>
+    <string name="profile_edit_click_message">Редактирование профиля</string>
 </resources>
