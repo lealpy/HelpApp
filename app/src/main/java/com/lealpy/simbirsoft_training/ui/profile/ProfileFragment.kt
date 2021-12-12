@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
@@ -69,7 +70,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
                     val bitmap = result.data?.extras?.get("data") as Bitmap
-                    binding.avatarUser.setImageBitmap(bitmap)
+
+                    var croppedBitmapWidth = bitmap.width
+                    var croppedBitmapHeight = (bitmap.width / photoWidthHeight).toInt()
+
+                    val croppedBitmap = Bitmap.createBitmap(
+                        bitmap,
+                        0,
+                        0,
+                        croppedBitmapWidth,
+                        croppedBitmapHeight
+                    )
+                    Log.d("MyLog", "width ${bitmap.width}")
+                    Log.d("MyLog", "height ${bitmap.height}")
+                    Log.d("MyLog", "crop height $croppedBitmapHeight")
+
+                    binding.avatarUser.setImageBitmap(croppedBitmap)
                 }
             }
     }
@@ -97,6 +113,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             ).show()
         }
         return true
+    }
+    companion object {
+        private const val photoWidthHeight = 18.0 / 11.0
     }
 
 }

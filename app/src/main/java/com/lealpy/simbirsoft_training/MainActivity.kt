@@ -14,8 +14,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        PublicationProgram.execute()
-        UserProgram.execute()
+        //PublicationProgram.execute()
+        //UserProgram.execute()
 
         val navController = findNavController(R.id.navHostFragment)
         val navView: BottomNavigationView = findViewById(R.id.navView)
