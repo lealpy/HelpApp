@@ -26,4 +26,5 @@
     <dimen name="dimen_19_sp">19sp</dimen>
     <dimen name="dimen_21_sp">21sp</dimen>
     <dimen name="dimen_24_sp">24sp</dimen>
+    <dimen name="dimen_5_dp">5dp</dimen>
 </resources>

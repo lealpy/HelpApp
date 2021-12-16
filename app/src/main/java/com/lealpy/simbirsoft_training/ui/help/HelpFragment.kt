@@ -40,11 +40,18 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
     }
 
     private fun initViews() {
-        binding.recyclerView.layoutManager = GridLayoutManager(context, spanCount)
+        binding.recyclerView.layoutManager = GridLayoutManager(context, SPAN_COUNT)
         binding.recyclerView.adapter = helpAdapter
+        val helpItemDecoration = activity?.resources?.getDimension(R.dimen.dimen_8_dp)?.let { space ->
+            HelpItemDecoration(SPAN_COUNT, space.toInt())
+        }
+
+        if(helpItemDecoration != null) {
+            binding.recyclerView.addItemDecoration(helpItemDecoration)
+        }
     }
 
     companion object {
-        private const val spanCount = 2
+        private const val SPAN_COUNT = 2
     }
 }
