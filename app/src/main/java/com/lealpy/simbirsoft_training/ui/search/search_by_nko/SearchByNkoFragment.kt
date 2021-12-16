@@ -43,8 +43,11 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = nkoAdapter
 
-        val nkoItemDivider = activity?.getDrawable(R.drawable.divider)?.let { drawable ->
-            NkoItemDivider(drawable, requireContext())
+        val nkoItemDivider =
+            activity?.getDrawable(R.drawable.divider)?.let { drawable ->
+            activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
+                NkoItemDivider(drawable, paddingLeft)
+            }
         }
 
         if (nkoItemDivider != null) {
