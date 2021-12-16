@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByEventsBinding
 
@@ -12,9 +12,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
     private lateinit var binding : FragmentSearchByEventsBinding
 
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(SearchByEventsViewModel::class.java)
-    }
+    private val viewModel : SearchByEventsViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 

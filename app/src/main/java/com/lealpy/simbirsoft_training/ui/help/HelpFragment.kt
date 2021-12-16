@@ -3,7 +3,7 @@ package com.lealpy.simbirsoft_training.ui.help
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentHelpBinding
@@ -12,9 +12,7 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
 
     private lateinit var binding : FragmentHelpBinding
 
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(HelpViewModel::class.java)
-    }
+    private val viewModel : HelpViewModel by activityViewModels()
 
     private val helpAdapter = HelpItemAdapter(
         object: HelpItemAdapter.OnItemClickListener {

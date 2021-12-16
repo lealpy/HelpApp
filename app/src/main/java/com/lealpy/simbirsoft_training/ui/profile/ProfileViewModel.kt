@@ -1,16 +1,18 @@
 package com.lealpy.simbirsoft_training.ui.profile
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import android.widget.Toast
+import androidx.lifecycle.AndroidViewModel
+import com.lealpy.simbirsoft_training.R
 
-class ProfileViewModel : ViewModel() {
+class ProfileViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _photo = MutableLiveData<Int> ()
-    val photo : LiveData<Int> = _photo
-
-    fun setPhoto(photo : Int) {
-        _photo.value = photo
+    fun onMenuEditClicked() {
+        Toast.makeText(
+            getApplication(),
+            getApplication<Application>().resources.getString(R.string.profile_edit_click_message),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }

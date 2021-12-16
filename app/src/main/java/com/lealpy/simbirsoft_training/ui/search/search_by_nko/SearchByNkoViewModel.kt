@@ -5,15 +5,17 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lealpy.simbirsoft_training.R
+import com.lealpy.simbirsoft_training.ui.search.SearchFragment
 import java.util.*
 
 class SearchByNkoViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _nkoItems = MutableLiveData ( getRandomNkoList(application) )
+    private val _nkoItems = MutableLiveData<List<NkoItem>> ()
     val nkoItems : LiveData<List<NkoItem>> = _nkoItems
 
-    private fun getRandomNkoList(application: Application) : List<NkoItem> {
-        val nkoNames = application.resources.getStringArray(R.array.nko_items)
+    private fun getRandomNkoList() {
+
+        val nkoNames = getApplication<Application>().resources.getStringArray(R.array.nko_items)
 
         var nkoItems = mutableListOf<NkoItem>()
 
@@ -29,7 +31,15 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
             index <= randomListSize
         }.toMutableList()
 
-        return nkoItems
+        _nkoItems.value = nkoItems
+
+    }
+
+    fun onTabSelected(position: Int) {
+        when(position) {
+            SearchFragment.POSITION_SEARCH_BY_NKO -> getRandomNkoList()
+            else -> Unit
+        }
     }
 
 }

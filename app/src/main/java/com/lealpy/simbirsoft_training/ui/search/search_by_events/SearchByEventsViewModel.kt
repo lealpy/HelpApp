@@ -42,7 +42,11 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
         searchExample.setSpan(
             object: ClickableSpan() {
                 override fun onClick(widget: View) {
-                    Toast.makeText(application, "Клик услышан", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        application,
+                        application.getString(R.string.search_by_events_search_example_clicked),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             },
             spanStart,

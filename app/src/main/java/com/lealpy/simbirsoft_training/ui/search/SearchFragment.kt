@@ -1,19 +1,24 @@
 package com.lealpy.simbirsoft_training.ui.search
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchBinding
+import com.lealpy.simbirsoft_training.ui.search.search_by_nko.SearchByNkoViewModel
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var binding: FragmentSearchBinding
+
+    private val viewModel : SearchByNkoViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +34,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         setHasOptionsMenu(true);
         (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
+
     }
 
     private fun initViewPager() {
@@ -39,15 +45,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
             when(position) {
-                0 -> tab.text = requireActivity().getString(R.string.search_by_events_title)
-                1 -> tab.text = requireActivity().getString(R.string.search_by_nko_title)
+                POSITION_SEARCH_BY_EVENTS -> tab.text = requireActivity().getString(R.string.search_by_events_title)
+                POSITION_SEARCH_BY_NKO -> tab.text = requireActivity().getString(R.string.search_by_nko_title)
             }
 
         }.attach()
 
         binding.tabLayout.addOnTabSelectedListener (object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-
+                if(tab != null) {
+                    viewModel.onTabSelected(tab.position)
+                }
             }
 
             override fun onTabReselected(tab: TabLayout.Tab?) {
@@ -62,10 +70,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         inflater.inflate(R.menu.search_toolbar_menu, menu)
         val searchItem = menu.findItem(R.id.search)
         val searchView = searchItem?.actionView as SearchView
+
+        searchView.background = activity?.getDrawable(R.drawable.background_search_view)
+        searchView.queryHint = activity?.getString(R.string.search_searchview_hint)
+        searchView.maxWidth = Integer.MAX_VALUE
+        activity?.let { searchItem.icon.setColorFilter(it.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP) }
+        searchView.setIconifiedByDefault(false)
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
-                searchView.setQuery("", false)
+                searchView.setQuery("query set", false)
                 searchItem.collapseActionView()
                 Toast.makeText(requireContext(), "onQueryTextSubmit", Toast.LENGTH_SHORT).show()
                 return true
@@ -85,11 +100,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         when(item.itemId) {
             R.id.search -> Toast.makeText(
                 requireContext(),
-                requireActivity().getString(R.string.profile_edit_click_message),
+                requireActivity().getString(R.string.search_search_btn_click_message),
                 Toast.LENGTH_SHORT
             ).show()
         }
         return true
+    }
+
+    companion object {
+        const val POSITION_SEARCH_BY_EVENTS = 0
+        const val POSITION_SEARCH_BY_NKO = 1
     }
 
 }

@@ -5,13 +5,12 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentProfileBinding
@@ -22,18 +21,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
 
-    private val viewModel by lazy {
-        ViewModelProvider(this).get(ProfileViewModel::class.java)
-    }
+    private val viewModel : ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        setHasOptionsMenu(true);
 
+        initMenu()
         return super.onCreateView(inflater, container, savedInstanceState)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,6 +46,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         initDialogListener()
         initCameraLauncher()
 
+    }
+
+    private fun initMenu() {
+        setHasOptionsMenu(true);
     }
 
     private fun initViews() {
@@ -71,8 +73,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 if (result.resultCode == Activity.RESULT_OK) {
                     val bitmap = result.data?.extras?.get("data") as Bitmap
 
-                    var croppedBitmapWidth = bitmap.width
-                    var croppedBitmapHeight = (bitmap.width / photoWidthHeight).toInt()
+                    val croppedBitmapWidth = bitmap.width
+                    val croppedBitmapHeight = (bitmap.width / photoWidthHeight).toInt()
 
                     val croppedBitmap = Bitmap.createBitmap(
                         bitmap,
@@ -81,9 +83,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         croppedBitmapWidth,
                         croppedBitmapHeight
                     )
-                    Log.d("MyLog", "width ${bitmap.width}")
-                    Log.d("MyLog", "height ${bitmap.height}")
-                    Log.d("MyLog", "crop height $croppedBitmapHeight")
 
                     binding.avatarUser.setImageBitmap(croppedBitmap)
                 }
@@ -106,14 +105,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.edit -> Toast.makeText(
-                requireContext(),
-                requireActivity().getString(R.string.profile_edit_click_message),
-                Toast.LENGTH_SHORT
-            ).show()
+            R.id.edit -> viewModel.onMenuEditClicked()
         }
         return true
     }
+
     companion object {
         private const val photoWidthHeight = 18.0 / 11.0
     }
