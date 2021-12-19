@@ -40,7 +40,6 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
     }
 
     private fun initViews() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = nkoAdapter
 
         val nkoItemDivider =

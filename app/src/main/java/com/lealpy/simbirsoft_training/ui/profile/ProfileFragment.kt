@@ -23,6 +23,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel : ProfileViewModel by activityViewModels()
 
+    private val photoDialogFragment = PhotoDialogFragment()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +61,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initDialogListener() {
-        PhotoDialogFragment().setupListener(parentFragmentManager, requireActivity()) { selectedItem ->
+        photoDialogFragment.setupListener(parentFragmentManager, requireActivity()) { selectedItem ->
             when(selectedItem) {
                 PhotoDialogFragment.SELECTED_MAKE_PHOTO -> setupCamera()
                 PhotoDialogFragment.SELECTED_DELETE_PHOTO -> binding.avatarUser.setImageResource(R.drawable.no_photo)
@@ -95,7 +97,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun showDialog() {
-        PhotoDialogFragment().show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
+        photoDialogFragment.show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
