@@ -89,6 +89,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
+
+
     private fun onGotReadStoragePermissionResult(granted: Boolean) {
         if (granted) {
             choosePhotoFromGallery()
