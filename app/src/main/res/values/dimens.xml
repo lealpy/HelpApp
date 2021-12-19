@@ -27,4 +27,10 @@
     <dimen name="dimen_21_sp">21sp</dimen>
     <dimen name="dimen_24_sp">24sp</dimen>
     <dimen name="dimen_5_dp">5dp</dimen>
+    <dimen name="dimen_22_dp">22dp</dimen>
+    <dimen name="dimen_23_sp">23sp</dimen>
+    <dimen name="dimen_35_dp">35dp</dimen>
+    <dimen name="dimen_0_dp">0dp</dimen>
+    <dimen name="dimen_19_dp">19dp</dimen>
+    <dimen name="dimen_18_dp">18dp</dimen>
 </resources>

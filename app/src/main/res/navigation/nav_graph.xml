@@ -10,7 +10,11 @@
         android:id="@+id/navigationNews"
         android:name="com.lealpy.simbirsoft_training.ui.news.NewsFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/actionNavigationNewsToNewsFilterFragment"
+            app:destination="@id/newsFilterFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigationSearch"
         android:name="com.lealpy.simbirsoft_training.ui.search.SearchFragment"
@@ -31,5 +35,13 @@
         android:name="com.lealpy.simbirsoft_training.ui.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
+    <fragment
+        android:id="@+id/newsFilterFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.news.NewsFilterFragment"
+        android:label="NewsFilterFragment" >
+        <action
+            android:id="@+id/actionNewsFilterFragmentToNavigationNews"
+            app:destination="@id/navigationNews" />
+    </fragment>
 
 </navigation>

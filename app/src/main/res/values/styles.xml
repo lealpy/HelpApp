@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="TextView">
+    <style name="TextViewNewsFilterFilterTitle">
         <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+        <item name="android:textColor">@color/black_87</item>
     </style>
 
-    <style name="TextView.Primary">
+    <style name="TextViewPrimary">
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/dimen_24_sp</item>
         <item name="android:textColor">@color/black_ss_app</item>
     </style>
 
-    <style name="TextView.Secondary">
+    <style name="TextViewSecondary">
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/dimen_16_sp</item>
         <item name="android:textColor">@color/black_ss_app</item>
     </style>
 
-    <style name="TextView.Hint">
+    <style name="TextViewHint">
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/dimen_12_sp</item>
         <item name="android:textColor">@color/grey_ss_app</item>
     </style>
 
-    <style name="TextView.Loading">
+    <style name="TextViewLoading">
+        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textSize">@dimen/dimen_14_sp</item>
         <item name="android:textColor">@color/black_70</item>
     </style>
@@ -73,5 +79,17 @@
         <item name="android:textSize">@dimen/dimen_14_sp</item>
         <item name="android:letterSpacing">0.1</item>
     </style>
+
+    <style name="NewsItemImageShape">
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/dimen_14_sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="ToolbarColoredBackArrow" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColorSecondary">@color/white</item>
+    </style>
+
 
 </resources>

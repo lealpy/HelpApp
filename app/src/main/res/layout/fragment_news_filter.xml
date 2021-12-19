@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_grey_two">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/leaf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
+
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_21_sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/officina_sans_extra_bold_scc"
+            android:text="@string/news_filter_screen_name"
+            android:layout_gravity="center" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tittle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_20_dp"
+        android:layout_marginTop="@dimen/dimen_20_dp"
+        android:text="@string/news_filter_screen_title"
+        android:textColor="@color/black_70"
+        android:textSize="@dimen/dimen_14_sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_20_dp"
+        android:background="@color/white"
+        android:paddingStart="@dimen/dimen_20_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tittle">
+
+        <TextView
+            android:id="@+id/filterTitleChildren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:text="@string/help_category_children"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/TextViewNewsFilterFilterTitle" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/filterSwitcherChildren"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16_dp"
+            android:checked="true"
+            app:layout_constraintTop_toTopOf="@id/filterTitleChildren"
+            app:layout_constraintBottom_toBottomOf="@id/filterTitleChildren"
+            app:layout_constraintStart_toEndOf="@+id/filterTitleChildren"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Switcher" />
+
+        <View
+            android:id="@+id/filterDividerChildren"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:background="@color/cool_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterTitleChildren" />
+
+        <TextView
+            android:id="@+id/filterTitleAdults"
+            style="@style/TextViewNewsFilterFilterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:text="@string/help_category_adults"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterDividerChildren" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/filterSwitcherAdults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16_dp"
+            android:checked="true"
+            app:layout_constraintTop_toTopOf="@id/filterTitleAdults"
+            app:layout_constraintBottom_toBottomOf="@id/filterTitleAdults"
+            app:layout_constraintStart_toEndOf="@+id/filterTitleAdults"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Switcher" />
+
+        <View
+            android:id="@+id/filterDividerAdults"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:background="@color/cool_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterTitleAdults" />
+
+        <TextView
+            android:id="@+id/filterTitleElderly"
+            style="@style/TextViewNewsFilterFilterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:text="@string/help_category_elderly"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterDividerAdults" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/filterSwitcherElderly"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16_dp"
+            android:checked="true"
+            app:layout_constraintTop_toTopOf="@id/filterTitleElderly"
+            app:layout_constraintBottom_toBottomOf="@id/filterTitleElderly"
+            app:layout_constraintStart_toEndOf="@+id/filterTitleElderly"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Switcher" />
+
+        <View
+            android:id="@+id/filterDividerElderly"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:background="@color/cool_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterTitleElderly" />
+
+        <TextView
+            android:id="@+id/filterTitleAnimals"
+            style="@style/TextViewNewsFilterFilterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:layout_marginBottom="@dimen/dimen_18_dp"
+            android:text="@string/help_category_animals"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterDividerElderly" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/filterSwitcherAnimals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16_dp"
+            android:checked="true"
+            app:layout_constraintTop_toTopOf="@id/filterTitleAnimals"
+            app:layout_constraintBottom_toBottomOf="@id/filterTitleAnimals"
+            app:layout_constraintStart_toEndOf="@+id/filterTitleAnimals"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Switcher" />
+
+        <View
+            android:id="@+id/filterDividerAnimals"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:background="@color/cool_grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterTitleAnimals" />
+
+        <TextView
+            android:id="@+id/filterTitleEvents"
+            style="@style/TextViewNewsFilterFilterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_18_dp"
+            android:layout_marginBottom="@dimen/dimen_18_dp"
+            android:text="@string/help_category_events"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filterDividerAnimals" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/filterSwitcherEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/dimen_16_dp"
+            android:checked="true"
+            app:layout_constraintTop_toTopOf="@id/filterTitleEvents"
+            app:layout_constraintBottom_toBottomOf="@id/filterTitleEvents"
+            app:layout_constraintStart_toEndOf="@+id/filterTitleEvents"
+            app:layout_constraintEnd_toEndOf="parent"
+            style="@style/Switcher" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

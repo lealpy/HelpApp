@@ -17,7 +17,7 @@
     <string name="help_screen_name">Помочь</string>
     <string name="history_screen_name">История</string>
     <string name="profile_screen_name">Профиль</string>
-    <string name="menu_title_edit">Редактировать</string>
+    <string name="profile_toolbar_edit_title">Редактировать</string>
     <string name="profile_edit_click_message">Редактирование профиля</string>
     <string name="profile_dialog_choose_photo_title">Выбрать фото</string>
     <string name="profile_dialog_make_photo_title">Сделать снимок</string>
@@ -29,11 +29,11 @@
     <string name="search_by_events_title">По мероприятиям</string>
     <string name="search_by_nko_title">По НКО</string>
 
-    <string name="help_screen_item_children">Дети</string>
-    <string name="help_screen_item_adults">Взрослые</string>
-    <string name="help_screen_item_elderly">Пожилые</string>
-    <string name="help_screen_item_animals">Животные</string>
-    <string name="help_screen_item_events">Мероприятия</string>
+    <string name="help_category_children">Дети</string>
+    <string name="help_category_adults">Взрослые</string>
+    <string name="help_category_elderly">Пожилые</string>
+    <string name="help_category_animals">Животные</string>
+    <string name="help_category_events">Мероприятия</string>
     <string name="search_by_events_search_hint">Напишите в строке поиска название мероприятия или ключевые слова</string>
     <string name="search_by_events_search_example">Например, мастер-класс, помощь</string>
     <string name="search_by_events_search_example_clicked">По НКО</string>
@@ -45,6 +45,19 @@
     <string name="permission_denied_forever_message" translatable="false">"Вы отклонили разрешение навсегда. Вы можете изменить свое решение в настройках.\n\nОткрыть настройки?"</string>
     <string name="open" translatable="false">Открыть</string>
     <string name="cancel" translatable="false">Отмена</string>
+
+    <string name="news_item_title_1">Спонсоры отремонтируют школу-интернат</string>
+    <string name="news_item_date_1">Осталось 13 дней (21.09 – 20.10)</string>
+    <string name="news_item_text_1">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …</string>
+
+    <string name="news_item_title_2">Конкурс по вокальному пению в детском доме №6</string>
+    <string name="news_item_date_2">Октябрь 20, 2016</string>
+    <string name="news_item_text_2">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …</string>
+    <string name="news_toolbar_filter_title">Фильтр</string>
+    <string name="news_filter_screen_name">Фильтр</string>
+    <string name="news_filter_screen_title">Категории помощи</string>
+    <string name="search_toolbar_search_title">Поиск</string>
+    <string name="news_toolbar_ok_title">Ок</string>
 
     <string-array name="nko_items">
         <item>Благотворительный фонд Алины Кабаевой</item>

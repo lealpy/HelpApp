@@ -46,7 +46,7 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
         val nkoItemDivider =
             activity?.getDrawable(R.drawable.divider)?.let { drawable ->
             activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
-                NkoItemDivider(drawable, paddingLeft)
+                NkoItemDecoration(drawable, paddingLeft)
             }
         }
 

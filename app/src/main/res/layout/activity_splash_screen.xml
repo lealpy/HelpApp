@@ -37,7 +37,7 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        style="@style/TextView.Loading" />
+        style="@style/TextViewLoading" />
 
     <ImageView
         android:id="@+id/simbirsoftLogo"

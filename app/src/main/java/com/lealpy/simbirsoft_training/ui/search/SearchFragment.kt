@@ -34,7 +34,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         setHasOptionsMenu(true);
         (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
         (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
-
     }
 
     private fun initViewPager() {
@@ -68,7 +67,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_toolbar_menu, menu)
-        val searchItem = menu.findItem(R.id.search)
+        val searchItem = menu.findItem(R.id.SearchToolbarSearch)
         val searchView = searchItem?.actionView as SearchView
 
         searchView.background = activity?.getDrawable(R.drawable.background_search_view)
@@ -98,7 +97,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.search -> Toast.makeText(
+            R.id.SearchToolbarSearch -> Toast.makeText(
                 requireContext(),
                 requireActivity().getString(R.string.search_search_btn_click_message),
                 Toast.LENGTH_SHORT

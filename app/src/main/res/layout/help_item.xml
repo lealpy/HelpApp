@@ -28,6 +28,6 @@
         android:fontFamily="@font/officina_sans_extra_bold_scc"
         android:textColor="@color/light_olive_green"
         android:textSize="@dimen/dimen_15_sp"
-        tools:text="@string/help_screen_item_animals" />
+        tools:text="@string/help_category_animals" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

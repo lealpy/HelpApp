@@ -47,15 +47,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel : ProfileViewModel by activityViewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        initMenu()
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -64,6 +55,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
 
+        initMenu()
         initViews()
         initDialogListener()
 
@@ -186,7 +178,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.edit -> viewModel.onMenuEditClicked()
+            R.id.profileToolbarEdit -> viewModel.onMenuEditClicked()
         }
         return true
     }

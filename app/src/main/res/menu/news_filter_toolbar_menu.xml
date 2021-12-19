@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/profileToolbarEdit"
-        android:icon="@drawable/ic_baseline_mode_edit_24"
+        android:id="@+id/newsFilterToolbarOk"
+        android:icon="@drawable/ic_ok"
         android:iconTint="@color/white"
-        android:title="@string/profile_toolbar_edit_title"
+        android:title="@string/news_toolbar_ok_title"
         app:showAsAction="ifRoom"/>
 
 </menu>
