@@ -40,6 +40,12 @@
     <string name="search_by_nko_search_hint">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
     <string name="random_fond_name">Благотворительный фонд Алины Кабаевой</string>
 
+    <string name="profile_alert_camera_permission_denied_title">Разрешение отклонено</string>
+    <string name="profile_alert_storage_permission_denied_title">Разрешение отклонено</string>
+    <string name="permission_denied_forever_message" translatable="false">"Вы отклонили разрешение навсегда. Вы можете изменить свое решение в настройках.\n\nОткрыть настройки?"</string>
+    <string name="open" translatable="false">Открыть</string>
+    <string name="cancel" translatable="false">Отмена</string>
+
     <string-array name="nko_items">
         <item>Благотворительный фонд Алины Кабаевой</item>
         <item>Во имя жизни</item>
