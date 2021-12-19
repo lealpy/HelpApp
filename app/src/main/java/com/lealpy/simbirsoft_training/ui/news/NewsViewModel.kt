@@ -8,13 +8,19 @@ import com.lealpy.simbirsoft_training.R
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
-    val newsList = listOf(
+    private val newsList = listOf(
         NewsItem(
-            0,
-            R.drawable.news_item_1_image,
-            application.getString(R.string.news_item_title_1),
-            application.getString(R.string.news_item_text_1),
-            application.getString(R.string.news_item_date_1),
+            id = 0,
+            image = R.drawable.news_item_1_image,
+            title = application.getString(R.string.news_item_title_1),
+            abbreviatedText = application.getString(R.string.news_item_1_abbreviated_text),
+            date = application.getString(R.string.news_item_1_date),
+            fundName = application.getString(R.string.news_item_1_fund_name),
+            address = application.getString(R.string.news_item_1_address),
+            phone = application.getString(R.string.news_item_1_phone),
+            image2 = R.drawable.news_item_1_image_2,
+            image3 = R.drawable.news_item_1_image_3,
+            fullText = application.getString(R.string.news_item_1_full_text),
             isChildrenCategory = true,
             isAdultsCategory = false,
             isElderlyCategory = false,
@@ -22,11 +28,17 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             isEventsCategory = false
         ),
         NewsItem(
-            1,
-            R.drawable.news_item_2_image,
-            application.getString(R.string.news_item_title_2),
-            application.getString(R.string.news_item_text_2),
-            application.getString(R.string.news_item_date_2),
+            id = 1,
+            image = R.drawable.news_item_2_image,
+            title = application.getString(R.string.news_item_2_title),
+            abbreviatedText = application.getString(R.string.news_item_2_text),
+            date = application.getString(R.string.news_item_2_date),
+            fundName = application.getString(R.string.news_item_2_fund_name),
+            address = application.getString(R.string.news_item_2_address),
+            phone = application.getString(R.string.news_item_2_phone),
+            image2 = R.drawable.news_item_1_image_2,
+            image3 = R.drawable.news_item_1_image_3,
+            fullText = application.getString(R.string.news_item_2_full_text),
             isChildrenCategory = true,
             isAdultsCategory = false,
             isElderlyCategory = false,

@@ -74,7 +74,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newsItemDecor"
-        tools:text="@string/news_item_text_1" />
+        tools:text="@string/news_item_1_abbreviated_text" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/newsItemDate"
@@ -91,7 +91,7 @@
         android:textSize="@dimen/dimen_12_sp"
         app:icon="@drawable/ic_icon_calendar"
         app:iconGravity="textStart"
-        tools:text="@string/news_item_date_1"
+        tools:text="@string/news_item_1_date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/newsItemText"/>

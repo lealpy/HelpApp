@@ -16,19 +16,19 @@ import com.lealpy.simbirsoft_training.R
 class SearchByEventsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _searchExampleText = MutableLiveData (
-        initSpannableString(application)
+        initSpannableString()
     )
     val searchExampleText : LiveData<SpannableStringBuilder> = _searchExampleText
 
-    private fun initSpannableString(application: Application): SpannableStringBuilder {
+    private fun initSpannableString(): SpannableStringBuilder {
 
-        val searchExample = SpannableStringBuilder(application.getString(R.string.search_by_events_search_example))
+        val searchExample = SpannableStringBuilder(getApplication<Application>().getString(R.string.search_by_events_search_example))
 
         val spanStart = searchExample.indexOf(' ') + 1
         val spanFinish = searchExample.length
 
         searchExample.setSpan(
-            ForegroundColorSpan(application.getColor(R.color.leaf)),
+            ForegroundColorSpan(getApplication<Application>().getColor(R.color.leaf)),
             spanStart,
             spanFinish,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -43,8 +43,8 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
             object: ClickableSpan() {
                 override fun onClick(widget: View) {
                     Toast.makeText(
-                        application,
-                        application.getString(R.string.search_by_events_search_example_clicked),
+                        getApplication(),
+                        getApplication<Application>().getString(R.string.click_heard),
                         Toast.LENGTH_SHORT
                     ).show()
                 }

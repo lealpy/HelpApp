@@ -14,6 +14,9 @@
         <action
             android:id="@+id/actionNavigationNewsToNewsFilterFragment"
             app:destination="@id/newsFilterFragment" />
+        <action
+            android:id="@+id/actionNavigationNewsToNewsDescriptionFragment"
+            app:destination="@id/newsDescriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/navigationSearch"
@@ -38,10 +41,10 @@
     <fragment
         android:id="@+id/newsFilterFragment"
         android:name="com.lealpy.simbirsoft_training.ui.news.NewsFilterFragment"
-        android:label="NewsFilterFragment" >
-        <action
-            android:id="@+id/actionNewsFilterFragmentToNavigationNews"
-            app:destination="@id/navigationNews" />
-    </fragment>
+        android:label="NewsFilterFragment" />
+    <fragment
+        android:id="@+id/newsDescriptionFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.news.news_description.NewsDescriptionFragment"
+        android:label="NewsDescriptionFragment" />
 
 </navigation>

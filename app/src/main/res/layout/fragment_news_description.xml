@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/leaf"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24" >
+
+        <TextView
+            android:id="@+id/toolbarTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/dimen_21_sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/officina_sans_extra_bold_scc"
+            android:layout_gravity="center"
+            tools:text="@string/news_item_title_1"
+            android:singleLine="true" />
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/donateThings">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_16_dp"
+                android:layout_marginStart="@dimen/dimen_20_dp"
+                android:layout_marginEnd="@dimen/dimen_50_dp"
+                android:fontFamily="@font/officina_sans_extra_bold_scc"
+                android:lineSpacingExtra="@dimen/dimen_12_dp"
+                android:textColor="@color/blue_grey"
+                android:textSize="@dimen/dimen_21_sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/news_item_title_1" />
+
+            <TextView
+                android:id="@+id/date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/dimen_15_dp"
+                android:drawablePadding="@dimen/dimen_10_dp"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:textColor="@color/soft_grey"
+                android:textSize="@dimen/dimen_12_sp"
+                app:drawableLeftCompat="@drawable/ic_icon_calendar"
+                app:drawableTint="@color/soft_grey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/title"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="@string/news_item_1_date" />
+
+            <TextView
+                android:id="@+id/fundName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_11_dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black_60"
+                android:textSize="@dimen/dimen_12_sp"
+                app:layout_constraintStart_toStartOf="@+id/date"
+                app:layout_constraintTop_toBottomOf="@+id/date"
+                tools:text="@string/news_item_1_fund_name" />
+
+            <TextView
+                android:id="@+id/address"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15_dp"
+                android:layout_marginEnd="@dimen/dimen_20_dp"
+                android:drawablePadding="@dimen/dimen_15_dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:textColor="@color/black_70"
+                android:textSize="@dimen/dimen_14_sp"
+                app:drawableLeftCompat="@drawable/ic_nav"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fundName"
+                app:layout_constraintTop_toBottomOf="@+id/fundName"
+                tools:text="@string/news_item_1_address" />
+
+            <TextView
+                android:id="@+id/phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15_dp"
+                android:drawablePadding="@dimen/dimen_15_dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:textColor="@color/black_70"
+                android:textSize="@dimen/dimen_14_sp"
+                app:drawableLeftCompat="@drawable/ic_phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fundName"
+                app:layout_constraintTop_toBottomOf="@+id/address"
+                tools:text="@string/news_item_1_phone" />
+
+            <TextView
+                android:id="@+id/feedback"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_15_dp"
+                android:drawablePadding="@dimen/dimen_15_dp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/roboto_regular"
+                android:gravity="center_vertical"
+                android:text="@string/news_description_feedback_title"
+                android:textColor="@color/black_70"
+                android:textSize="@dimen/dimen_14_sp"
+                app:drawableLeftCompat="@drawable/ic_mail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fundName"
+                app:layout_constraintTop_toBottomOf="@+id/phone"
+                 />
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="205dp"
+                android:layout_height="158dp"
+                android:layout_marginTop="@dimen/dimen_19_dp"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintBottom_toBottomOf="@id/image3"
+                app:layout_constraintStart_toStartOf="@+id/feedback"
+                app:layout_constraintTop_toBottomOf="@+id/feedback"
+                app:srcCompat="@drawable/news_item_1_image" />
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="@dimen/dimen_20_dp"
+                android:adjustViewBounds="true"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/image"
+                app:layout_constraintTop_toTopOf="@+id/image"
+                app:layout_constraintBottom_toTopOf="@id/image3"
+                app:srcCompat="@drawable/news_item_1_image_2" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dimen_10_dp"
+                app:layout_constraintEnd_toEndOf="@+id/image2"
+                app:layout_constraintStart_toStartOf="@+id/image2"
+                app:layout_constraintTop_toBottomOf="@+id/image2"
+                app:srcCompat="@drawable/news_item_1_image_3"
+                app:layout_constraintBottom_toBottomOf="@id/image"/>
+
+            <TextView
+                android:id="@+id/fullText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20_dp"
+                android:layout_marginEnd="@dimen/dimen_20_dp"
+                android:fontFamily="@font/roboto_regular"
+                android:textColor="@color/black_70"
+                android:textSize="@dimen/dimen_14_sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/image"
+                app:layout_constraintTop_toBottomOf="@+id/image"
+                tools:text="@string/news_item_1_full_text" />
+
+            <TextView
+                android:id="@+id/site"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_20_dp"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@string/news_description_site_title"
+                android:textColor="@color/leaf"
+                android:textSize="@dimen/dimen_14_sp"
+                app:layout_constraintStart_toStartOf="@+id/fullText"
+                app:layout_constraintTop_toBottomOf="@+id/fullText" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_30_dp"
+                android:backgroundTint="@color/light_grey_two"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/site"
+                app:layout_constraintTop_toBottomOf="@id/site">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/dimen_20_dp"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/news_description_avatar_1" />
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/news_description_avatar_2" />
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/news_description_avatar_3" />
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/news_description_avatar_4" />
+
+                    <ImageView
+                        android:layout_width="36dp"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/news_description_avatar_5" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/dimen_14_sp"
+                        android:textColor="@color/black_54"
+                        android:fontFamily="@font/roboto_regular"
+                        android:layout_marginStart="@dimen/dimen_10_dp"
+                        android:text="@string/news_description_rated_value"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/donateThings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:drawableTop="@drawable/ic_shirt"
+        android:text="@string/news_description_donate_things_title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/donateThingsDivider"
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/NewsDescriptionHelpButton"/>
+
+    <View
+        android:id="@+id/donateThingsDivider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen_24_dp"
+        android:layout_marginBottom="@dimen/dimen_24_dp"
+        android:background="@color/light_grey_two"
+        app:layout_constraintBottom_toBottomOf="@id/donateThings"
+        app:layout_constraintEnd_toStartOf="@+id/becomeVolunteer"
+        app:layout_constraintStart_toEndOf="@id/donateThings"
+        app:layout_constraintTop_toTopOf="@id/donateThings" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/becomeVolunteer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:drawableTop="@drawable/ic_hands"
+        android:text="@string/news_description_become_volunteer_title"
+        app:layout_constraintBottom_toBottomOf="@+id/donateThings"
+        app:layout_constraintEnd_toStartOf="@+id/becomeVolunteerDivider"
+        app:layout_constraintStart_toEndOf="@+id/donateThingsDivider"
+        app:layout_constraintTop_toTopOf="@+id/donateThings"
+        style="@style/NewsDescriptionHelpButton"/>
+
+    <View
+        android:id="@+id/becomeVolunteerDivider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen_24_dp"
+        android:layout_marginBottom="@dimen/dimen_24_dp"
+        android:background="@color/light_grey_two"
+        app:layout_constraintBottom_toBottomOf="@id/becomeVolunteer"
+        app:layout_constraintEnd_toStartOf="@+id/profHelp"
+        app:layout_constraintStart_toEndOf="@id/becomeVolunteer"
+        app:layout_constraintTop_toTopOf="@id/becomeVolunteer" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/profHelp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:drawableTop="@drawable/ic_tools"
+        android:text="@string/news_description_prof_help_title"
+        app:layout_constraintBottom_toBottomOf="@+id/becomeVolunteer"
+        app:layout_constraintEnd_toStartOf="@+id/profHelpDivider"
+        app:layout_constraintStart_toEndOf="@+id/becomeVolunteerDivider"
+        app:layout_constraintTop_toTopOf="@+id/becomeVolunteer"
+        style="@style/NewsDescriptionHelpButton"/>
+
+    <View
+        android:id="@+id/profHelpDivider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dimen_24_dp"
+        android:layout_marginBottom="@dimen/dimen_24_dp"
+        android:background="@color/light_grey_two"
+        app:layout_constraintBottom_toBottomOf="@id/profHelp"
+        app:layout_constraintEnd_toStartOf="@+id/donateMoney"
+        app:layout_constraintStart_toEndOf="@id/profHelp"
+        app:layout_constraintTop_toTopOf="@id/profHelp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/donateMoney"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:drawableTop="@drawable/ic_coins"
+        android:text="@string/news_description_donate_money_title"
+        app:layout_constraintBottom_toBottomOf="@+id/profHelp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profHelpDivider"
+        app:layout_constraintTop_toTopOf="@+id/becomeVolunteer"
+        style="@style/NewsDescriptionHelpButton"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

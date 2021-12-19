@@ -18,7 +18,7 @@
         app:navigationIcon="@drawable/ic_baseline_arrow_back_24">
 
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/dimen_21_sp"

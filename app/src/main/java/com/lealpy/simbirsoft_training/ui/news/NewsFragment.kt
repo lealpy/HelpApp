@@ -7,11 +7,13 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsBinding
+import com.lealpy.simbirsoft_training.ui.news.news_description.NewsDescriptionFragment
 
 class NewsFragment : Fragment(R.layout.fragment_news) {
 
@@ -22,7 +24,20 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private val newsAdapter = NewsItemAdapter(
         object : NewsItemAdapter.OnItemClickListener {
             override fun onItemClick(newsItem: NewsItem) {
-                // Задел на будущее
+                findNavController().navigate(
+                    R.id.actionNavigationNewsToNewsDescriptionFragment,
+                    bundleOf(
+                        NewsDescriptionFragment.TITLE_KEY to newsItem.title,
+                        NewsDescriptionFragment.DATE_KEY to newsItem.date,
+                        NewsDescriptionFragment.FUND_NAME_KEY to newsItem.fundName,
+                        NewsDescriptionFragment.ADDRESS_KEY to newsItem.address,
+                        NewsDescriptionFragment.PHONE_KEY to newsItem.phone,
+                        NewsDescriptionFragment.FULL_TEXT_KEY to newsItem.fullText,
+                        NewsDescriptionFragment.IMAGE_KEY to newsItem.image,
+                        NewsDescriptionFragment.IMAGE_2_KEY to newsItem.image2,
+                        NewsDescriptionFragment.IMAGE_3_KEY to newsItem.image3,
+                    )
+                )
             }
         }
     )

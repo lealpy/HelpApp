@@ -10,7 +10,9 @@
 
     <color name="white_70">#b3ffffff</color>
     <color name="black_ss_app">#de000000</color>
+    <color name="black_40">#66000000</color>
     <color name="black_54">#8a000000</color>
+    <color name="black_60">#99000000</color>
     <color name="black_70">#b3000000</color>
     <color name="black_87">#de000000</color>
     <color name="light_green">#4E9F1C</color>
@@ -23,6 +25,7 @@
 
     <color name="grey_ss_app">#61000000</color>
     <color name="cool_grey">#aabbbb</color>
+    <color name="soft_grey">#94998a</color>
     <color name="pale_grey">#eff3f6</color>
     <color name="warm_grey">#979797</color>
     <color name="light_grey">#eaede8</color>
