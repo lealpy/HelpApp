@@ -44,6 +44,8 @@
 
     <style name="DialogButton">
         <item name="android:paddingStart">@dimen/dimen_24_dp</item>
+        <item name="android:paddingTop">@dimen/dimen_22_dp</item>
+        <item name="android:paddingBottom">@dimen/dimen_22_dp</item>
         <item name="iconPadding">@dimen/dimen_24_dp</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:backgroundTint">@color/white</item>
