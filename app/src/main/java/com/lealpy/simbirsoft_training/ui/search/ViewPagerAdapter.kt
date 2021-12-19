@@ -13,7 +13,7 @@ class ViewPagerAdapter(
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
-        return tabsNumber
+        return TABS_NUMBER
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -25,7 +25,7 @@ class ViewPagerAdapter(
     }
 
     companion object {
-        private const val tabsNumber = 2
+        private const val TABS_NUMBER = 2
     }
 
 }

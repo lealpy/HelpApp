@@ -59,7 +59,6 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
     private fun initViews() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = newsAdapter
 
         val newsItemDecoration = activity?.resources?.getDimension(R.dimen.dimen_8_dp)?.let { spacing ->

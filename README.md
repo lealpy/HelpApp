@@ -510,3 +510,71 @@
  - Данные для отображения результата необходимо генерировать случайным образом при каждом перелистывании `ViewPager2`.
 5. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 6. Завершить task в PS и залогировать затраченное время
+
+
+
+---
+## VIII. Структуры данных. Работа с файлами
+---
+### Теоретическая часть
+
+**1. Работа с файлами в java. Сериализация**
++ [Потоки ввода-вывода](https://metanit.com/java/tutorial/6.1.php)  **(\*\*\*\*)**
++ [Закрытие потоков](https://metanit.com/java/tutorial/6.2.php)  **(\*\*\*\*)**
++ [Чтение и запись файлов. FileInputStream и FileOutputStream](https://metanit.com/java/tutorial/6.3.php)  **(\*\*\*\*)**
++ [Классы ByteArrayInputStream и ByteArrayOutputStream](https://metanit.com/java/tutorial/6.4.php)  **(\*\*)**
++ [Буферизуемые потоки. Классы BufferedInputStream и BufferedOuputStream](https://metanit.com/java/tutorial/6.5.php)  **(\*\*\*\*)**
++ [Чтение и запись текстовых файлов. FileReader и FileWriter](https://metanit.com/java/tutorial/6.8.php)  **(\*\*)**
++ [Буферизируемые символьные потоки. BufferedReader и BufferedWriter](https://metanit.com/java/tutorial/6.9.php)  **(\*\*)**
++ [Сериализация объектов](https://metanit.com/java/tutorial/6.10.php)  **(\*\*)**
++ [Класс File. Работа с файлами и каталогами](https://metanit.com/java/tutorial/6.11.php)  **(\*\*\*\*)**
++ [Работа с ZIP-архивами](https://metanit.com/java/tutorial/6.12.php)  **(\*\*)**
+
+**2. JSON**
++ [Понятие](https://ru.wikipedia.org/wiki/JSON)  **(\*\*\*\*)**
++ [Парсинг в Android](https://metanit.com/java/android/13.3.php)  **(\*\*\*\*)**
++ [Gson](https://habrahabr.ru/company/naumen/blog/228279/) **(\*\*\*\*)**
++ [Moshi](https://github.com/square/moshi?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=1682) **(\*)**
++ [Jackson](https://github.com/FasterXML/jackson-core?utm_source=android-arsenal.com&utm_medium=referral&utm_campaign=230) **(\*)**
+
+**3. Работа с файловой системой Android**
++ [SharedPreferences](https://developer.android.com/training/basics/data-storage/shared-preferences.html?hl=ru#GetSharedPreferences) **(\*\*\*\*)**
++ [Настройки через Preferences](https://developer.android.com/guide/topics/ui/settings.html) **(\*\*)**
++ [Android data storage](https://developer.android.com/training/basics/data-storage/files.html) **(\*\*\*\*)**
++ [FileProvider](https://developer.android.com/reference/android/support/v4/content/FileProvider.html) **(\*\*\*)**
+
+**4. Работа с датой и временем**
++ [Date, Calendar](http://developer.alexanderklimov.ru/android/java/date.php) **(\*\*\*\*)**
++ [Date в Java 8](http://www.baeldung.com/java-8-date-time-intro) **(\*\*\*\*)**
++ [Работа со временем в java ](https://habrahabr.ru/post/274811/) **(\*\*)**
+
+**5. DiffUtils**
++ [Обзор](https://medium.com/@iammert/using-diffutil-in-android-recyclerview-bdca8e4fbb00) **(\*\*\*\*)**
++ [ListAdapter](https://developer.android.com/reference/androidx/recyclerview/widget/ListAdapter.html?hl=en) **(\*\*\*\*)**
+
+**6. Codelabs**
++ [Shared preferences](https://codelabs.developers.google.com/codelabs/android-training-shared-preferences/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [App settings](https://codelabs.developers.google.com/codelabs/android-training-adding-settings-to-app/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `data_structures` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style. Верстка экранов должна быть выполнена по принципу pixel-perfect.
+
+1. Создать task в PS с заголовком "VIII. Структуры данных" и взять ее в работу.
+2. Доработать логику диалога на экране "Профиль".
+ - По нажатию на кнопку "Выбрать фото" необходимо открывать галерею устройства. Выбранное в галерее фото должно заменять текущее на экране профиля
+3. Подключить к проекту [ThreeTenABP](https://github.com/JakeWharton/ThreeTenABP). Все операции с датой и временем должны быть реализованы через классы данной библиотеки.
+4. Сверстать экран "Новости" согласно [макету](https://zpl.io/brkm3we). Переход на этот экран осуществляется при выборе пункта "Новости" в нижнем меню. Экран содержит список благотворительных событий, относящихся к выбранным категориям.
+ - Одно событие может относиться сразу к нескольких категориям помощи.
+5. Сверстать экран "Фильтр" согласно [макету](https://zpl.io/2ZxPMeG). Переход на этот экран осуществляется при клике на иконку в правом верхнем углу экрана "Новости".
+ - На экране вместо фразы "Как вы хотите помочь?" необходимо отображать "Категории помощи" и ниже список всех возможных категорий (категории, которые отображаются на главном экране - дети, пожилые и тд).
+ - При смене категорий в фильтре обновлять список на экране "Новости" обязательно при помощи DiffUtils.
+6. Сверстать экран "Детальное описание события" согласно [макету](https://zpl.io/adA93Z5). Переход на этот экран осуществляется при выборе любого события из списка. Данный экран должен получить информацию о том, какое событие было выбрано на предыдущем шаге.
+7. Необходимо создать два json'а. Содержащих в себе массивы категорий и благотворительных событий. Информация об объектах должна быть достаточной для формирования отображений на экранах, а также для корректного разделения по категориям помощи. Каждый объект должен обладать уникальным (среди объектов своего типа) идентификатором. Проверить корректность созданных json-ов через [online-parser](http://json.parser.online.fr/). Записать их в 2 файла и поместить в папку assets проекта.
+8. Необходимо создать сущности соответствующие понятиям Категория и Событие.
+9. Создать класс, который будет читать созданные json из файлов, парсить их и преобразовывать в массивы.
+10. Наполнить экраны полученными данными.
+11. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+12. Завершить task в PS и залогировать затраченное время

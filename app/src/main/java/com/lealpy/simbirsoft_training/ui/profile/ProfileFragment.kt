@@ -47,6 +47,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val viewModel : ProfileViewModel by activityViewModels()
 
+    private val photoDialogFragment = PhotoDialogFragment()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -72,7 +74,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initDialogListener() {
-        PhotoDialogFragment().setupListener(parentFragmentManager, requireActivity()) { selectedItem ->
+        photoDialogFragment.setupListener(parentFragmentManager, requireActivity()) { selectedItem ->
             when(selectedItem) {
                 PhotoDialogFragment.SELECTED_CHOOSE_PHOTO -> readStoragePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                 PhotoDialogFragment.SELECTED_MAKE_PHOTO -> cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
@@ -168,7 +170,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun showDialog() {
-        PhotoDialogFragment().show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
+        photoDialogFragment.show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
