@@ -11,7 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.*
-import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -25,18 +25,24 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
 
-    private lateinit var cameraLauncher: ActivityResultLauncher<Intent>
-
-    private lateinit var galleryLauncher: ActivityResultLauncher<Intent>
-
     private val readStoragePermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
         ::onGotReadStoragePermissionResult
     )
 
+    private val galleryLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+        ::onGotGalleryResult
+    )
+
     private val cameraPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
         ::onGotCameraPermissionResult
+    )
+
+    private val cameraLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult(),
+        ::onGotCameraResult
     )
 
     private val viewModel : ProfileViewModel by activityViewModels()
@@ -46,10 +52,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         initMenu()
         return super.onCreateView(inflater, container, savedInstanceState)
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,8 +66,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         initViews()
         initDialogListener()
-        initGalleryLauncher()
-        initCameraLauncher()
 
     }
 
@@ -87,20 +89,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun initGalleryLauncher() {
-        galleryLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val selectedImageURI = result.data?.data
-                if(selectedImageURI != null) {
-                    val inputStream = requireActivity().contentResolver.openInputStream(selectedImageURI)
-                    val bitmap = BitmapFactory.decodeStream(inputStream)
-                    val croppedBitmap = cropBitmap(bitmap)
-                    binding.avatarUser.setImageBitmap(croppedBitmap)
-                }
-            }
-        }
-    }
-
     private fun onGotReadStoragePermissionResult(granted: Boolean) {
         if (granted) {
             choosePhotoFromGallery()
@@ -117,16 +105,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         galleryLauncher.launch(galleryIntent)
     }
 
-    private fun initCameraLauncher() {
-        cameraLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                if (result.resultCode == Activity.RESULT_OK) {
-                    val bitmap = result.data?.extras?.get("data") as Bitmap
-                    val croppedBitmap = cropBitmap(bitmap)
-                    binding.avatarUser.setImageBitmap(croppedBitmap)
-                }
+    private fun onGotGalleryResult(result : ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val selectedImageURI = result.data?.data
+            if(selectedImageURI != null) {
+                val inputStream = requireActivity().contentResolver.openInputStream(selectedImageURI)
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                val croppedBitmap = cropBitmap(bitmap)
+                binding.avatarUser.setImageBitmap(croppedBitmap)
             }
+        }
     }
+
+
 
     private fun onGotCameraPermissionResult(granted: Boolean) {
         if (granted) {
@@ -143,8 +134,17 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         cameraLauncher.launch(cameraIntent)
     }
 
-    private fun askUserForOpeningAppSettings(title : String) {
+    private fun onGotCameraResult(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val bitmap = result.data?.extras?.get("data") as Bitmap
+            val croppedBitmap = cropBitmap(bitmap)
+            binding.avatarUser.setImageBitmap(croppedBitmap)
+        }
+    }
 
+
+
+    private fun askUserForOpeningAppSettings(title : String) {
         val appSettingsIntent = Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
             Uri.fromParts("package", requireActivity().packageName, null)
@@ -161,7 +161,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 .create()
                 .show()
         }
-
     }
 
     private fun cropBitmap(bitmap: Bitmap) : Bitmap {
