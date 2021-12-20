@@ -5,7 +5,8 @@
     <item
         android:id="@+id/edit"
         android:icon="@drawable/ic_baseline_mode_edit_24"
-        android:title="@string/profile_edit_menu_title"
+        android:iconTint="@color/white"
+        android:title="@string/menu_title_edit"
         app:showAsAction="ifRoom"/>
 
 </menu>

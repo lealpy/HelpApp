@@ -5,23 +5,23 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
 
-    <style name="TextViewPrimary" parent="TextView">
-        <item name="android:textSize">24sp</item>
+    <style name="TextView.Primary">
+        <item name="android:textSize">@dimen/dimen_24_sp</item>
         <item name="android:textColor">@color/black_ss_app</item>
     </style>
 
-    <style name="TextViewSecondary" parent="TextView">
-        <item name="android:textSize">16sp</item>
+    <style name="TextView.Secondary">
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
         <item name="android:textColor">@color/black_ss_app</item>
     </style>
 
-    <style name="TextViewHint" parent="TextView">
-        <item name="android:textSize">12sp</item>
+    <style name="TextView.Hint">
+        <item name="android:textSize">@dimen/dimen_12_sp</item>
         <item name="android:textColor">@color/grey_ss_app</item>
     </style>
 
-    <style name="TextViewLoading" parent="TextView">
-        <item name="android:textSize">14sp</item>
+    <style name="TextView.Loading">
+        <item name="android:textSize">@dimen/dimen_14_sp</item>
         <item name="android:textColor">@color/black_70</item>
     </style>
 
@@ -32,26 +32,46 @@
     <style name="Button">
         <item name="android:textAllCaps">false</item>
         <item name="android:backgroundTint">@color/dark_green</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/dimen_14_sp</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="DialogButton">
+        <item name="android:paddingStart">@dimen/dimen_24_dp</item>
+        <item name="iconPadding">@dimen/dimen_24_dp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:textColor">@color/black_87</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textAlignment">textStart</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="drawableTint">@color/drawable_dialog</item>
     </style>
 
     <style name="ProgressBar">
         <item name="android:indeterminateTint">@color/turtle_green</item>
         <item name="android:backgroundTint">@color/dark_green</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/dimen_14_sp</item>
     </style>
 
     <style name="Switcher">
         <item name="android:checked">true</item>
         <item name="android:showText">false</item>
-        <item name="switchMinWidth">50dp</item>
+        <item name="switchMinWidth">@dimen/dimen_50_dp</item>
         <item name="layout_constraintHorizontal_bias">1.0</item>
     </style>
 
     <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance" >
         <item name="android:fontFamily">@font/officina_sans_extra_bold_scc</item>
-        <item name="android:textSize">21sp</item>
+        <item name="android:textSize">@dimen/dimen_21_sp</item>
+    </style>
+
+    <style name="TabLayout" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">@dimen/dimen_14_sp</item>
+        <item name="android:letterSpacing">0.1</item>
     </style>
 
 </resources>

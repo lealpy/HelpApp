@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_grey"
+    android:gravity="center">
+
+    <ImageView
+        android:id="@+id/helpItemImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_24_dp"
+        android:layout_marginTop="@dimen/dimen_12_dp"
+        android:layout_marginEnd="@dimen/dimen_24_dp"
+        android:adjustViewBounds="true"
+        tools:srcCompat="@drawable/animal" />
+
+    <TextView
+        android:id="@+id/helpItemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_12_dp"
+        android:layout_marginBottom="@dimen/dimen_12_dp"
+        android:fontFamily="@font/officina_sans_extra_bold_scc"
+        android:textColor="@color/light_olive_green"
+        android:textSize="@dimen/dimen_15_sp"
+        tools:text="@string/help_screen_item_animals" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

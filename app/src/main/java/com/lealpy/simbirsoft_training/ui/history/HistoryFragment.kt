@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.ui
+package com.lealpy.simbirsoft_training.ui.history
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.lealpy.simbirsoft_training.R
 
-class HelpFragment : Fragment() {
-
+class HistoryFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
-        return inflater.inflate(R.layout.fragment_help, container, false)
+        return inflater.inflate(R.layout.fragment_history, container, false)
     }
 
 }
