@@ -2,7 +2,6 @@ package com.lealpy.simbirsoft_training.utils
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.lealpy.simbirsoft_training.ui.profile.ProfileFragment
 
 object AppUtils {
 
