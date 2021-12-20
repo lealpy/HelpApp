@@ -20,6 +20,7 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentProfileBinding
+import com.lealpy.simbirsoft_training.utils.AppUtils
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
@@ -107,7 +108,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             if(selectedImageURI != null) {
                 val inputStream = requireActivity().contentResolver.openInputStream(selectedImageURI)
                 val bitmap = BitmapFactory.decodeStream(inputStream)
-                val croppedBitmap = cropBitmap(bitmap)
+                val croppedBitmap = AppUtils.cropBitmap(bitmap, BITMAP_RATIO)
                 binding.avatarUser.setImageBitmap(croppedBitmap)
             }
         }
@@ -133,7 +134,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private fun onGotCameraResult(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             val bitmap = result.data?.extras?.get("data") as Bitmap
-            val croppedBitmap = cropBitmap(bitmap)
+            val croppedBitmap = AppUtils.cropBitmap(bitmap, BITMAP_RATIO)
             binding.avatarUser.setImageBitmap(croppedBitmap)
         }
     }
@@ -159,16 +160,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun cropBitmap(bitmap: Bitmap) : Bitmap {
-        return Bitmap.createBitmap(
-            bitmap,
-            0,
-            0,
-            bitmap.width,
-            (bitmap.width / photoWidthHeight).toInt()
-        )
-    }
-
     private fun showDialog() {
         photoDialogFragment.show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
     }
@@ -186,7 +177,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     companion object {
-        private const val photoWidthHeight = 18.0 / 11.0
+        private const val BITMAP_RATIO = 18.0 / 11.0
     }
 
 }

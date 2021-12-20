@@ -14,7 +14,7 @@ class NewsItemDecoration(
         parent: RecyclerView,
         state: RecyclerView.State
     ) {
-        val position = parent.getChildAdapterPosition(view) // item position
+        val position = parent.getChildAdapterPosition(view)
         outRect.left = spacing
         outRect.right = spacing
         if (position == 0) {

@@ -1,16 +1,16 @@
 package com.lealpy.simbirsoft_training.ui.news
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.lealpy.simbirsoft_training.utils.AppUtils
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val jsonFileString = getJsonDataFromAsset(application, NEWS_ITEMS_JSON_FILE_NAME)
+    private val jsonFileString = AppUtils.getJsonDataFromAsset(application, NEWS_ITEMS_JSON_FILE_NAME)
     private val gson = Gson()
     private val itemTypes = object : TypeToken<List<NewsItem>>() {}.type
     private val newsItemsFromJson : List<NewsItem> = gson.fromJson(jsonFileString, itemTypes)
@@ -32,10 +32,6 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _isEventsChecked = MutableLiveData(true)
     val isEventsChecked: LiveData<Boolean> = _isEventsChecked
-
-    private fun getJsonDataFromAsset(context: Context, fileName: String): String {
-        return context.assets.open(fileName).bufferedReader().use { it.readText() }
-    }
 
     fun applyFilters(
         isChildrenChecked: Boolean,
