@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newsItemImage"
-        tools:text="@string/news_item_title_1"/>
+        tools:text="@string/news_item_1_title"/>
 
     <ImageView
         android:id="@+id/newsItemDecor"

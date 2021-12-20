@@ -24,7 +24,7 @@
             android:textColor="@color/white"
             android:fontFamily="@font/officina_sans_extra_bold_scc"
             android:layout_gravity="center"
-            tools:text="@string/news_item_title_1"
+            tools:text="@string/news_item_1_title"
             android:singleLine="true" />
 
     </androidx.appcompat.widget.Toolbar>
@@ -55,7 +55,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="@string/news_item_title_1" />
+                tools:text="@string/news_item_1_title" />
 
             <TextView
                 android:id="@+id/date"

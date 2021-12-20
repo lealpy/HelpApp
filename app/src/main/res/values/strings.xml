@@ -48,27 +48,29 @@
     <string name="open" translatable="false">Открыть</string>
     <string name="cancel" translatable="false">Отмена</string>
 
-    <string name="news_item_title_1">Спонсоры отремонтируют школу-интернат</string>
+    <string name="news_item_1_title">Спонсоры отремонтируют школу-интернат</string>
     <string name="news_item_1_date">Осталось 13 дней (21.09 – 20.10)</string>
     <string name="news_item_1_abbreviated_text">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …</string>
+    <string name="news_item_1_fund_name">Благотворительный Фонд «Счастливый Мир»</string>
+    <string name="news_item_1_address">Санкт-Петербург, Кирочная улица, д. 50А, каб. 208</string>
+    <string name="news_item_1_phone">+7 (937) 037 37-73\n+7 (937) 016 16-16</string>
+    <string name="news_item_1_full_text">Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.\n\nПри этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.</string>
 
     <string name="news_item_2_title">Конкурс по вокальному пению в детском доме №6</string>
     <string name="news_item_2_date">Октябрь 20, 2016</string>
-    <string name="news_item_2_text">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …</string>
+    <string name="news_item_2_abbreviated_text">Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …</string>
+    <string name="news_item_2_fund_name">Благотворительный фонд «Обнаженные сердца»</string>
+    <string name="news_item_2_address">Брянская область, Дубровский район, пгт. Дубровка, ул. Журавлева, д. 50</string>
+    <string name="news_item_2_phone">8 999 111 22 33</string>
+    <string name="news_item_2_full_text">Воспитанница Дубровского детского дома - интерната Ольгина Ольга заняла 1 место в областном конкурсе по вокальному пению. Мы сердечно поздравляем Олю и желаем ей дальнейших успехов в творческой деятельности!</string>
+
     <string name="news_toolbar_filter_title">Фильтр</string>
     <string name="news_filter_screen_name">Фильтр</string>
     <string name="news_filter_screen_title">Категории помощи</string>
     <string name="search_toolbar_search_title">Поиск</string>
     <string name="news_filter_toolbar_ok_title">Ок</string>
     <string name="news_description_toolbar_share_title">Поделиться</string>
-    <string name="news_item_1_fund_name">Благотворительный Фонд «Счастливый Мир»</string>
-    <string name="news_item_1_address">Санкт-Петербург, Кирочная улица, д. 50А, каб. 208</string>
-    <string name="news_item_1_phone">+7 (937) 037 37-73\n+7 (937) 016 16-16</string>
-    <string name="news_item_2_fund_name">Благотворительный фонд «Обнаженные сердца»</string>
-    <string name="news_item_2_address">Брянская область, Дубровский район, пгт. Дубровка, ул. Журавлева, д. 50</string>
-    <string name="news_item_2_phone">8 999 111 22 33</string>
-    <string name="news_item_1_full_text">Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.\n\nПри этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.</string>
-    <string name="news_item_2_full_text">Воспитанница Дубровского детского дома - интерната Ольгина Ольга заняла 1 место в областном конкурсе по вокальному пению. Мы сердечно поздравляем Олю и желаем ей дальнейших успехов в творческой деятельности!</string>
+
     <string name="news_description_feedback_title">У вас есть вопросы? Напишите нам</string>
     <string name="news_description_site_title">Перейти на сайт организации</string>
     <string name="news_description_donate_things_title">Помочь вещами</string>
