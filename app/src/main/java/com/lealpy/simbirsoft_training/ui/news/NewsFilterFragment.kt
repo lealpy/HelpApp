@@ -50,9 +50,11 @@ class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
 
     private fun initToolbar() {
         setHasOptionsMenu(true);
-        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val appCompatActivity = (activity as? AppCompatActivity)
+        appCompatActivity?.setSupportActionBar(binding.toolbar)
+        appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
+        appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

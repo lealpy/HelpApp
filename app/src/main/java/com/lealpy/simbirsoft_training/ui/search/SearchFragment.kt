@@ -31,9 +31,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initToolbar() {
-        setHasOptionsMenu(true);
-        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
+        setHasOptionsMenu(true)
+
+        val appCompatActivity = (activity as? AppCompatActivity)
+        appCompatActivity?.setSupportActionBar(binding.toolbar)
+        appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun initViewPager() {

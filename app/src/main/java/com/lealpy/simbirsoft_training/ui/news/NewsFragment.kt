@@ -24,19 +24,23 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private val newsAdapter = NewsItemAdapter(
         object : NewsItemAdapter.OnItemClickListener {
             override fun onItemClick(newsItem: NewsItem) {
+
+                val args = bundleOf(
+                    NewsDescriptionFragment.TITLE_KEY to newsItem.title,
+                    NewsDescriptionFragment.DATE_KEY to newsItem.date,
+                    NewsDescriptionFragment.FUND_NAME_KEY to newsItem.fundName,
+                    NewsDescriptionFragment.ADDRESS_KEY to newsItem.address,
+                    NewsDescriptionFragment.PHONE_KEY to newsItem.phone,
+                    NewsDescriptionFragment.FULL_TEXT_KEY to newsItem.fullText,
+                    NewsDescriptionFragment.IMAGE_KEY to newsItem.image,
+                    NewsDescriptionFragment.IMAGE_2_KEY to newsItem.image2,
+                    NewsDescriptionFragment.IMAGE_3_KEY to newsItem.image3,
+                )
+
                 findNavController().navigate(
                     R.id.actionNavigationNewsToNewsDescriptionFragment,
-                    bundleOf(
-                        NewsDescriptionFragment.TITLE_KEY to newsItem.title,
-                        NewsDescriptionFragment.DATE_KEY to newsItem.date,
-                        NewsDescriptionFragment.FUND_NAME_KEY to newsItem.fundName,
-                        NewsDescriptionFragment.ADDRESS_KEY to newsItem.address,
-                        NewsDescriptionFragment.PHONE_KEY to newsItem.phone,
-                        NewsDescriptionFragment.FULL_TEXT_KEY to newsItem.fullText,
-                        NewsDescriptionFragment.IMAGE_KEY to newsItem.image,
-                        NewsDescriptionFragment.IMAGE_2_KEY to newsItem.image2,
-                        NewsDescriptionFragment.IMAGE_3_KEY to newsItem.image3,
-                    )
+                    args
+
                 )
             }
         }
@@ -54,8 +58,10 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
     private fun initToolbar() {
         setHasOptionsMenu(true);
-        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
-        (activity as? AppCompatActivity)?.supportActionBar?.setDisplayShowTitleEnabled(false)
+
+        val appCompatActivity = (activity as? AppCompatActivity)
+        appCompatActivity?.setSupportActionBar(binding.toolbar)
+        appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun initViews() {

@@ -79,21 +79,24 @@
     <com.google.android.material.button.MaterialButton
         android:id="@+id/newsItemDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dimen_32_dp"
         android:layout_marginTop="@dimen/dimen_16_dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/turtle_green"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center"
+        android:padding="0dp"
         android:textAlignment="center"
         android:textAllCaps="false"
-        app:cornerRadius="@dimen/dimen_0_dp"
         android:textSize="@dimen/dimen_12_sp"
+        android:insetTop="@dimen/dimen_0_dp"
+        android:insetBottom="@dimen/dimen_0_dp"
         app:icon="@drawable/ic_icon_calendar"
         app:iconGravity="textStart"
-        tools:text="@string/news_item_1_date"
+        app:cornerRadius="@dimen/dimen_0_dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/newsItemText"/>
+        app:layout_constraintTop_toBottomOf="@id/newsItemText"
+        tools:text="@string/news_item_1_date" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
