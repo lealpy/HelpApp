@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsBinding
 import com.lealpy.simbirsoft_training.ui.news.news_description.NewsDescriptionFragment
+import kotlinx.android.synthetic.main.fragment_news_description.*
 
 class NewsFragment : Fragment(R.layout.fragment_news) {
 
@@ -25,22 +26,24 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         object : NewsItemAdapter.OnItemClickListener {
             override fun onItemClick(newsItem: NewsItem) {
 
-                val args = bundleOf(
-                    NewsDescriptionFragment.TITLE_KEY to newsItem.title,
-                    NewsDescriptionFragment.DATE_KEY to newsItem.date,
-                    NewsDescriptionFragment.FUND_NAME_KEY to newsItem.fundName,
-                    NewsDescriptionFragment.ADDRESS_KEY to newsItem.address,
-                    NewsDescriptionFragment.PHONE_KEY to newsItem.phone,
-                    NewsDescriptionFragment.FULL_TEXT_KEY to newsItem.fullText,
-                    NewsDescriptionFragment.IMAGE_KEY to newsItem.image,
-                    NewsDescriptionFragment.IMAGE_2_KEY to newsItem.image2,
-                    NewsDescriptionFragment.IMAGE_3_KEY to newsItem.image3,
+                val dataForNewsDescription = DataForNewsDescription (
+                    title = newsItem.title,
+                    date = newsItem.date,
+                    fundName = newsItem.fundName,
+                    address = newsItem.address,
+                    phone = newsItem.phone,
+                    image = newsItem.image,
+                    image2 = newsItem.image2,
+                    image3 = newsItem.image3,
+                    fullText = newsItem.fullText
                 )
+
+                val args = Bundle()
+                args.putParcelable(NewsDescriptionFragment.ARGS_KEY, dataForNewsDescription)
 
                 findNavController().navigate(
                     R.id.actionNavigationNewsToNewsDescriptionFragment,
                     args
-
                 )
             }
         }

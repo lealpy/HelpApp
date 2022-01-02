@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsDescriptionBinding
+import com.lealpy.simbirsoft_training.ui.news.DataForNewsDescription
 
 class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
@@ -132,41 +133,44 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun getArgumentsData() {
-        arguments?.getString(TITLE_KEY)?.let { title ->
+
+        val args = arguments?.getParcelable<DataForNewsDescription>(ARGS_KEY)
+
+        args?.title?.let { title ->
             binding.toolbarTitle.text = title
             binding.title.text = title
         }
 
-        arguments?.getString(DATE_KEY)?.let { date ->
+        args?.date?.let { date ->
             binding.date.text = date
         }
 
-        arguments?.getString(FUND_NAME_KEY)?.let { fundName ->
+        args?.fundName?.let { fundName ->
             binding.fundName.text = fundName
         }
 
-        arguments?.getString(ADDRESS_KEY)?.let { address ->
+        args?.address?.let { address ->
             binding.address.text = address
         }
 
-        arguments?.getString(PHONE_KEY)?.let { phone ->
+        args?.phone?.let { phone ->
             binding.phone.text = phone
         }
 
-        arguments?.getString(FULL_TEXT_KEY)?.let { fullText ->
+        args?.fullText?.let { fullText ->
             binding.fullText.text = fullText
         }
 
-        arguments?.getInt(IMAGE_KEY)?.let { imageId ->
+        args?.image?.let { imageId ->
             binding.image.setImageResource(imageId)
         }
 
-        arguments?.getInt(IMAGE_2_KEY)?.let { imageId ->
-            binding.image2.setImageResource(imageId)
+        args?.image2?.let { image2Id ->
+            binding.image2.setImageResource(image2Id)
         }
 
-        arguments?.getInt(IMAGE_3_KEY)?.let { imageId ->
-            binding.image3.setImageResource(imageId)
+        args?.image3?.let { image3Id ->
+            binding.image3.setImageResource(image3Id)
         }
     }
 
@@ -184,16 +188,7 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     companion object {
-        const val TITLE_KEY = "TITTLE_KEY"
-        const val DATE_KEY = "DATE_KEY"
-        const val FUND_NAME_KEY = "FUND_NAME_KEY"
-        const val ADDRESS_KEY = "ADDRESS_KEY"
-        const val PHONE_KEY = "PHONE_KEY"
-        const val FULL_TEXT_KEY = "FULL_TEXT_KEY"
-        const val IMAGE_KEY = "IMAGE_KEY"
-        const val IMAGE_2_KEY = "IMAGE_2_KEY"
-        const val IMAGE_3_KEY = "IMAGE_3_KEY"
-
+        const val ARGS_KEY = "ARGS_KEY"
         private const val SYMBOLS_AFTER_QUESTION = 2
     }
 
