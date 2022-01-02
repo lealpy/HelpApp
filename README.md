@@ -578,3 +578,61 @@
 10. Наполнить экраны полученными данными.
 11. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 12. Завершить task в PS и залогировать затраченное время
+
+
+
+---
+## IX. Многопоточность
+---
+### Теоретическая часть
+
+**1. Базовые понятия**
++ [Многопоточность. Определение](https://ru.wikipedia.org/wiki/%D0%9C%D0%BD%D0%BE%D0%B3%D0%BE%D0%BF%D0%BE%D1%82%D0%BE%D1%87%D0%BD%D0%BE%D1%81%D1%82%D1%8C)  **(\*\*\*\*)**
++ [Мьютекс](https://ru.wikipedia.org/wiki/%D0%9C%D1%8C%D1%8E%D1%82%D0%B5%D0%BA%D1%81)  **(\*\*)**
++ [Семафор](https://ru.wikipedia.org/wiki/%D0%A1%D0%B5%D0%BC%D0%B0%D1%84%D0%BE%D1%80_(%D0%B8%D0%BD%D1%84%D0%BE%D1%80%D0%BC%D0%B0%D1%82%D0%B8%D0%BA%D0%B0))  **(\*\*)**
++ [Дэдлок](https://ru.wikipedia.org/wiki/Взаимная_блокировка)  **(\*\*\*)**
++ [Starvation and Livelock](https://docs.oracle.com/javase/tutorial/essential/concurrency/starvelive.html)  **(\*\*\*)**
++ [Атомарные операции](https://ru.wikipedia.org/wiki/%D0%90%D1%82%D0%BE%D0%BC%D0%B0%D1%80%D0%BD%D0%B0%D1%8F_%D0%BE%D0%BF%D0%B5%D1%80%D0%B0%D1%86%D0%B8%D1%8F)  **(\*\*\*)**
++ [Atomic типы](http://java-online.ru/concurrent-atomic.xhtml)  **(\*\*\*)**
+
+**2. Многопоточность в java**
++ [Java Memory Model](https://youtu.be/iB2N8aqwtxc?list=WL) **(\*\*\*\*)**
++ [Thread](https://habrahabr.ru/post/164487/) **(\*\*\*\*)**
++ [Синхронизация потоков. Оператор synchronized](https://metanit.com/java/tutorial/8.3.php) **(\*\*\*\*)**
++ [Синхронизированные коллекции](https://habrahabr.ru/company/luxoft/blog/157273/)  **(\*\*\*)**
++ [Volatile поля](http://tutorials.jenkov.com/java-concurrency/volatile.html)  **(\*\*\*)**
++ [Executors](http://winterbe.com/posts/2015/04/07/java8-concurrency-tutorial-thread-executor-examples/) **(\*\*\*\*)**
+
+**3. Фоновая работа в Android**
++ [Looper, Handler, and HandlerThread](https://blog.mindorks.com/android-core-looper-handler-and-handlerthread-bd54d69fe91a). [Видео](https://www.youtube.com/watch?v=gDvjU8HSuYE)  **(\*\*\*)**
+
++ [Loader (Deprecated)](https://habrahabr.ru/company/e-Legion/blog/265405/) **(\*\*)**
++ [AsyncTask (Deprecated)](https://developer.android.com/reference/android/os/AsyncTask.html)  **(\*\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – Background. Алексей Макаров](https://youtu.be/yyZh3ME7Jyk?list=PLQC2_0cDcSKBNCR8UWeElzCUuFkXASduz) обозревает инструменты для взаимодействия с потоками в андроиде НО Нужно учитывать, что asyncTask и Loader помечены как deprecated **(\*\*)**
+
+**4. Service**
++ [Service - основы](https://developer.android.com/guide/components/services.html)  **(\*\*\*\*)**
++ [IntentService](http://developer.alexanderklimov.ru/android/theory/intentservice.php)  **(\*\*\*\*)**
++ [Job Scheduler](http://ticketmastermobilestudio.com/blog/how-to-use-androids-job-scheduler) **(\*\*\*\*)**
++ [Work Manager](https://developer.android.com/topic/libraries/architecture/workmanager) **(\*\*)**
++ [Background Execution Limits Android 8.0+](https://developer.android.com/about/versions/oreo/background.html) **(\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – Service & Broadcasts. Алексей Макаров](https://youtu.be/rxQYPxHkxi0?list=PLQC2_0cDcSKBNCR8UWeElzCUuFkXASduz) Лектор рассказывает про сервисы, их сферу применения, какие флаги к ним применяются и как они работают достаточно подробно **(\*\*)**
+
+**5. Codelabs**
++ [JobScheduler](https://codelabs.developers.google.com/codelabs/android-training-job-scheduler/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
++ [WorkManager](https://codelabs.developers.google.com/codelabs/android-workmanager/index.html?index=..%2F..index#0) **(\*\*)**
++ [AsyncTask](https://codelabs.developers.google.com/codelabs/android-training-create-asynctask/index.html?index=..%2F..%2Fandroid-training#0) **(\*\*)**
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `concurrency` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style.
+
+1. Создать task в PS с заголовком "IX. Многопоточность" и взять ее в работу.
+2. В рамках предыдущего задания было реализовано чтение из файла. Реализовать чтение из файла и парсинг в background-потоке каждым из предложенных способов. С помощью AsyncTask, Executor, IntentService. При повороте экрана не должно происходить повторное чтение из файла.
+3. Перед чтением данных остановить рабочий background-поток (Thread.sleep(5000)), для показательного отображения Progress Indicator (имитация запроса к сети).
+4. Реализовать Progress Indicator на экранах "Категории помощи" и "Новости". Индикатор должен показываться с момента запроса данных до момента их отображения на экране. **Внимание!** Все действия c UI должны совершаться в главном потоке.
+5. Для сохранения и восстановления данных при смене конфигурации использовать savedInstanceState.
+6. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+7. Завершить task в PS и залогировать затраченное время
