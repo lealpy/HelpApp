@@ -79,27 +79,4 @@
     <string name="news_description_donate_money_title">Помочь деньгами</string>
     <string name="news_description_rated_value">+102</string>
 
-    <string-array name="nko_items">
-        <item>Благотворительный фонд Алины Кабаевой</item>
-        <item>Во имя жизни</item>
-        <item>Благотворительный фонд В. Потанина</item>
-        <item>Детские домики</item>
-        <item>Мозаика счастья</item>
-        <item>Гринпис России</item>
-        <item>WWF России</item>
-        <item>Благотворительный фонд Елены и Геннадия Тимченко</item>
-        <item>Волонтеры в помощь детям-сиротам</item>
-        <item>Наше будущее</item>
-        <item>Гарант</item>
-        <item>Со-единение</item>
-        <item>Линия жизни</item>
-        <item>Арифметика добра</item>
-        <item>Правозащитный центр «Мемориал»</item>
-        <item>Обнаженные сердца</item>
-        <item>Искусство наука и спорт</item>
-        <item>Лиза Алерт</item>
-        <item>Дорога к дому</item>
-        <item>Подсолнух</item>
-    </string-array>
-
 </resources>

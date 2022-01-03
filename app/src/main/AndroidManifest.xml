@@ -37,6 +37,8 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
+        <service android:name="com.lealpy.simbirsoft_training.ui.search.search_by_nko.GetNkoItemsFromJsonIntentService" />
+
     </application>
 
 </manifest>

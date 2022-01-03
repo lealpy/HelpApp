@@ -1,6 +1,5 @@
 package com.lealpy.simbirsoft_training.ui.news.news_description
 
-import android.app.Application
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder

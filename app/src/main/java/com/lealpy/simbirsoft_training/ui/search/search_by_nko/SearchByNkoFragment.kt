@@ -36,6 +36,10 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
         viewModel.nkoItems.observe(viewLifecycleOwner) { nkoItems ->
             nkoAdapter.submitList(nkoItems)
         }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
+        }
     }
 
     private fun initViews() {
@@ -50,6 +54,11 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
 
         if (nkoItemDivider != null) {
             binding.recyclerView.addItemDecoration(nkoItemDivider)
+        }
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onRefreshSwiped()
+            binding.swipeRefreshLayout.isRefreshing = false
         }
 
     }
