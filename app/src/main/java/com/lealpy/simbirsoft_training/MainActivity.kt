@@ -2,7 +2,6 @@ package com.lealpy.simbirsoft_training
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import kotlinx.android.synthetic.main.activity_main.*
@@ -18,25 +17,6 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavView.setupWithNavController(navController)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when(destination.id) {
-                R.id.navigationNews -> showBottomNavView()
-                R.id.navigationSearch -> showBottomNavView()
-                R.id.navigationHelp -> showBottomNavView()
-                R.id.navigationHistory -> showBottomNavView()
-                R.id.navigationProfile -> showBottomNavView()
-                else -> hideBottomNavView()
-            }
-        }
-
-    }
-
-    private fun showBottomNavView() {
-        bottomNavView.visibility = View.VISIBLE
-    }
-
-    private fun hideBottomNavView() {
-        bottomNavView.visibility = View.GONE
     }
 
     override fun onBackPressed() {
@@ -45,8 +25,7 @@ class MainActivity : AppCompatActivity() {
             navController.currentDestination?.id == R.id.navigationSearch ||
             navController.currentDestination?.id == R.id.navigationHelp ||
             navController.currentDestination?.id == R.id.navigationHistory ||
-            navController.currentDestination?.id == R.id.navigationProfile ||
-            navController.currentDestination?.id == R.id.authorizationFragment
+            navController.currentDestination?.id == R.id.navigationProfile
         ) {
             finish()
         }

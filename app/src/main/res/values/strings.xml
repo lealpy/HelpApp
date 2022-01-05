@@ -78,15 +78,5 @@
     <string name="news_description_prof_help_title">Проф. помощь</string>
     <string name="news_description_donate_money_title">Помочь деньгами</string>
     <string name="news_description_rated_value">+102</string>
-    <string name="authorization_title">Авторизация</string>
-    <string name="authorization_hint_login_via_social">Для участия в мероприятиях войдите в приложение через социальые сети</string>
-    <string name="authorization_hint_login_via_app">Или авторизуйтесь через приложение</string>
-    <string name="authorization_hint_e_mail">E-mail</string>
-    <string name="authorization_hint_enter_e_mail">Введите e-mail</string>
-    <string name="authorization_hint_password">Пароль</string>
-    <string name="authorization_hint_enter_password">Введите пароль</string>
-    <string name="authorization_enter_button_text">Войти</string>
-    <string name="authorization_forgot_password_button">Забыли пароль?</string>
-    <string name="authorization_registration_button">Регистрация</string>
 
 </resources>

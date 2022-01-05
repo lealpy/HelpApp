@@ -8,7 +8,6 @@ import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.lealpy.simbirsoft_training.ui.help.HelpItem
 import com.lealpy.simbirsoft_training.utils.AppUtils
 import java.util.concurrent.Executors
 
