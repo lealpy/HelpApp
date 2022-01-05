@@ -2,9 +2,11 @@ package com.lealpy.simbirsoft_training
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,8 +17,27 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val navView: BottomNavigationView = findViewById(R.id.navView)
-        navView.setupWithNavController(navController)
+        bottomNavView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when(destination.id) {
+                R.id.navigationNews -> showBottomNavView()
+                R.id.navigationSearch -> showBottomNavView()
+                R.id.navigationHelp -> showBottomNavView()
+                R.id.navigationHistory -> showBottomNavView()
+                R.id.navigationProfile -> showBottomNavView()
+                else -> hideBottomNavView()
+            }
+        }
+
+    }
+
+    private fun showBottomNavView() {
+        bottomNavView.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNavView() {
+        bottomNavView.visibility = View.GONE
     }
 
     override fun onBackPressed() {

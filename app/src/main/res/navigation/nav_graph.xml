@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigationHelp">
+    app:startDestination="@id/authorizationFragment">
 
     <fragment
         android:id="@+id/navigationNews"
@@ -41,10 +41,21 @@
     <fragment
         android:id="@+id/newsFilterFragment"
         android:name="com.lealpy.simbirsoft_training.ui.news.NewsFilterFragment"
-        android:label="NewsFilterFragment" />
+        android:label="NewsFilterFragment"
+        tools:layout="@layout/fragment_news_filter"/>
     <fragment
         android:id="@+id/newsDescriptionFragment"
         android:name="com.lealpy.simbirsoft_training.ui.news.news_description.NewsDescriptionFragment"
-        android:label="NewsDescriptionFragment" />
+        android:label="NewsDescriptionFragment"
+        tools:layout="@layout/fragment_news_description"/>
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.authorization.AuthorizationFragment"
+        android:label="AuthorizationFragment"
+        tools:layout="@layout/fragment_authorization">
+        <action
+            android:id="@+id/actionAuthorizationFragmentToNavigationHelp"
+            app:destination="@id/navigationHelp" />
+    </fragment>
 
 </navigation>

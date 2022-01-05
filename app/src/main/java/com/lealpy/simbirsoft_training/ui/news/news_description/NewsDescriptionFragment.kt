@@ -5,7 +5,6 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.Menu
 import android.view.MenuInflater
@@ -73,12 +72,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         val spanFinish = spanFeedback.length
 
         spanFeedback.setSpan(
-            activity?.getColor(R.color.leaf)?.let { ForegroundColorSpan(it) },
-            spanStart,
-            spanFinish,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        spanFeedback.setSpan(
             UnderlineSpan(),
             spanStart,
             spanFinish,
@@ -104,12 +97,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
         val spanStart = 0
         val spanFinish = spanFeedback.length
-
-        spanFeedback.setSpan(
-            activity?.getColor(R.color.leaf)?.let { ForegroundColorSpan(it) },
-            spanStart,
-            spanFinish,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         spanFeedback.setSpan(
             UnderlineSpan(),

@@ -43,7 +43,9 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
             getHelpItemsFromJSON.execute()
         }
         else {
-            helpItems.value = savedInstanceState.getParcelableArrayList(HELP_ITEMS_KEY)
+            val savedHelpItems = savedInstanceState.getParcelableArrayList<HelpItem>(HELP_ITEMS_KEY)
+            if(savedHelpItems != null) helpItems.value = savedHelpItems
+            else getHelpItemsFromJSON.execute()
         }
 
     }
@@ -105,7 +107,7 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
     companion object {
         private const val SPAN_COUNT = 2
         private const val HELP_ITEMS_JSON_FILE_NAME = "help_items.json"
-        private const val THREAD_SLEEP_MILLIS : Long = 2000
+        private const val THREAD_SLEEP_MILLIS : Long = 5000
         private const val HELP_ITEMS_KEY = "HELP_ITEMS_KEY"
     }
 
