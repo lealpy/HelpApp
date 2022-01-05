@@ -5,8 +5,8 @@ import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -27,6 +27,8 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         initSpannableStringForgotPassword()
         initSpannableStringRegistration()
         initViews()
+
+        binding.enterBtn.isEnabled = true //->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     }
 
     private fun initViews() {
@@ -41,6 +43,11 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         binding.passwordEditText.addTextChangedListener {
             binding.enterBtn.isEnabled = eMailEditText.length() >= EMAIL_MIN_SYMBOLS && passwordEditText.length() >= PASSWORD_MIN_SYMBOLS
         }
+
+        binding.vkIcon.setOnClickListener { showToast() }
+        binding.fbIcon.setOnClickListener { showToast() }
+        binding.okIcon.setOnClickListener { showToast() }
+
     }
 
     private fun initSpannableStringForgotPassword() {
@@ -51,12 +58,6 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         val spanFinish = forgotPasswordButton.length
 
         forgotPasswordButton.setSpan(
-            activity?.getColor(R.color.leaf)?.let { ForegroundColorSpan(it) },
-            spanStart,
-            spanFinish,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        forgotPasswordButton.setSpan(
             UnderlineSpan(),
             spanStart,
             spanFinish,
@@ -64,13 +65,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
         forgotPasswordButton.setSpan(
             object: ClickableSpan() {
-                override fun onClick(widget: View) {
-                    Toast.makeText(
-                        requireContext(),
-                        activity?.getString(R.string.click_heard),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                override fun onClick(widget: View) { showToast() }
             },
             spanStart,
             spanFinish,
@@ -97,13 +92,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
         registrationButton.setSpan(
             object: ClickableSpan() {
-                override fun onClick(widget: View) {
-                    Toast.makeText(
-                        requireContext(),
-                        activity?.getString(R.string.click_heard),
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
+                override fun onClick(widget: View) { showToast() }
             },
             spanStart,
             spanFinish,
@@ -113,6 +102,23 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         binding.registrationBtn.text = registrationButton
         binding.registrationBtn.movementMethod = LinkMovementMethod.getInstance()
 
+    }
+
+    private fun showToast() {
+        Toast.makeText(
+            requireContext(),
+            activity?.getString(R.string.click_heard),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                requireActivity().onBackPressed()
+            }
+        }
+        return true
     }
 
     companion object {

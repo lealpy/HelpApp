@@ -147,16 +147,16 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             binding.fullText.text = fullText
         }
 
-        args?.image?.let { imageId ->
-            binding.image.setImageResource(imageId)
+        args?.image?.let { image ->
+            binding.image.setImageBitmap(image)
         }
 
-        args?.image2?.let { image2Id ->
-            binding.image2.setImageResource(image2Id)
+        args?.image2?.let { image2 ->
+            binding.image2.setImageBitmap(image2)
         }
 
-        args?.image3?.let { image3Id ->
-            binding.image3.setImageResource(image3Id)
+        args?.image3?.let { image3 ->
+            binding.image3.setImageBitmap(image3)
         }
     }
 

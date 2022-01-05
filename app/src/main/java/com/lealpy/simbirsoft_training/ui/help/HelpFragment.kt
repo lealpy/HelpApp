@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lealpy.simbirsoft_training.R
@@ -93,8 +94,30 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
             Thread.sleep(THREAD_SLEEP_MILLIS)
             val jsonFileString = AppUtils.getJsonDataFromAsset(requireContext(), HELP_ITEMS_JSON_FILE_NAME)
             val gson = Gson()
-            val itemTypes = object : TypeToken<List<HelpItem>>() {}.type
-            return gson.fromJson(jsonFileString, itemTypes)
+            val itemTypes = object : TypeToken<List<HelpItemJSON>>() {}.type
+            val helpItemsFromJSON = gson.fromJson<List<HelpItemJSON>>(jsonFileString, itemTypes)
+
+            val helpItemsResult = mutableListOf<HelpItem>()
+            helpItemsFromJSON.forEach { helpItemFromJSON ->
+
+                val bitmap = Glide
+                    .with(requireContext())
+                    .asBitmap()
+                    .load(helpItemFromJSON.imageURL)
+                    .submit()
+                    .get()
+
+                helpItemsResult.add(
+                    HelpItem(
+                        id = helpItemFromJSON.id,
+                        image = bitmap,
+                        text = helpItemFromJSON.text
+                    )
+                )
+
+            }
+
+            return helpItemsResult
         }
 
         override fun onPostExecute(helpItemsResult: List<HelpItem>?) {
@@ -107,7 +130,7 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
     companion object {
         private const val SPAN_COUNT = 2
         private const val HELP_ITEMS_JSON_FILE_NAME = "help_items.json"
-        private const val THREAD_SLEEP_MILLIS : Long = 5000
+        private const val THREAD_SLEEP_MILLIS : Long = 2000
         private const val HELP_ITEMS_KEY = "HELP_ITEMS_KEY"
     }
 

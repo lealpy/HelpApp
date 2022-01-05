@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +45,8 @@ class MainActivity : AppCompatActivity() {
             navController.currentDestination?.id == R.id.navigationSearch ||
             navController.currentDestination?.id == R.id.navigationHelp ||
             navController.currentDestination?.id == R.id.navigationHistory ||
-            navController.currentDestination?.id == R.id.navigationProfile
+            navController.currentDestination?.id == R.id.navigationProfile ||
+            navController.currentDestination?.id == R.id.authorizationFragment
         ) {
             finish()
         }

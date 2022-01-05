@@ -28,7 +28,7 @@ class NewsItemAdapter (
         }
 
         fun bind(newsItem: NewsItem) {
-            binding.newsItemImage.setImageResource(newsItem.image)
+            binding.newsItemImage.setImageBitmap(newsItem.image)
             binding.newsItemTitle.text = newsItem.title
             binding.newsItemText.text = newsItem.abbreviatedText
             binding.newsItemDate.text = newsItem.date
