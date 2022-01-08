@@ -696,3 +696,59 @@
  - Выбрать наиболее подходящую под [задание](http://gitlab.simbirsoft/internships/mobile/android_trainee_education/-/blob/master/Программа-обучения-android-разработчика/VI.-Структуры-данных.-Работа-с-файлами.md#vi-структуры-данных-работа-с-файлами) комбинацию subscribeOn и observeOn
 8. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 9. Завершить task в PS и залогировать затраченное время
+
+
+
+---
+## XI. Работа с сетью
+---
+### Теоретическая часть
+**1. Базовые понятия**
++ [HTTP](https://ru.wikipedia.org/wiki/HTTP) **(\*\*\*)**
++ [HTTP codes](https://ru.wikipedia.org/wiki/Список_кодов_состояния_HTTP) **(\*\*\*)**
++ [RESTful](https://habrahabr.ru/company/hexlet/blog/274675/) **(\*\*\*)**
++ [RESTful API — ложь](https://habrahabr.ru/post/265845/) **(\*)**
++ [WebSocket](https://stfalcon.com/ru/blog/post/android-websocket) **(\*\*)**
+
+**2. Библиотеки**
++ [OkHttp](http://square.github.io/okhttp/) **(\*\*\*\*)**
++ [Retrofit](http://square.github.io/retrofit/) **(\*\*\*\*)**
++ [Handling API calls using Retrofit 2 and RxJava 2](https://medium.com/3xplore/handling-api-calls-using-retrofit-2-and-rxjava-2-1871c891b6ae) **(\*\*\*\*)**
++ [OkHttp. Interceptors](https://github.com/square/okhttp/wiki/Interceptors) **(\*\*\*)**
++ [OkHttp which ignores all SSL errors](https://gist.github.com/chalup/8706740) **(\*\*\*)**
++ [Logging interceptor for okhttp](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor) **(\*\*)**
++ [Glide](https://blog.mindorks.com/downloading-and-showing-image-with-glide-library-in-android), подробнее о [кешировании изображений](https://futurestud.io/tutorials/glide-caching-basics) **(\*\*\*\*)**
++ [Picasso](https://code.tutsplus.com/tutorials/code-an-image-gallery-android-app-with-picasso--cms-30966), подробнее о [кешировании изображений](https://futurestud.io/tutorials/picasso-influencing-image-caching) **(\*\*\*\*)**
++ [Coil](https://medium.com/better-programming/how-to-use-coil-kotlins-native-image-loader-d6715dda7d26), подробнее о [кешировании изображений](https://coil-kt.github.io/coil/getting_started/#preloading) **(\*\*\*\*)**
++ [Сравнение Glide, Picasso и Coil](https://proandroiddev.com/coil-vs-picasso-vs-glide-get-ready-go-774add8cfd40) **(\*\*)**
+
+**3. Отладка. Перехват и подмена трафика мобильных устройств**
++ [Postman](https://habr.com/ru/company/kolesa/blog/351250/)  **(\*\*)**
++ [Fiddler](https://learn.javascript.ru/fiddler)  **(\*\*)**
++ [Charles](http://wormiks.ru/faq_po_programmam_wormix/11-charles_instrukcija_polzovatelja_i_faq.html)  **(\*\*)**
++ [Перехват и подмена трафика мобильных устройств](https://kb.simbirsoft.com/article/traffic-sniffers/)  **(\*)**
+
+**4. Codelabs**
++ [Android Network Security Configuration](https://codelabs.developers.google.com/codelabs/android-network-security-config/index.html?index=..%2F..index#0) **(\*\*)**
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `networking
+` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style.
+
+1. Создать task в PS с заголовком "XI. Работа с сетью" и взять ее в работу.
+2. Необходимо реализовать транспортный слой приложения, который будет осуществалять загрузку данных с [сервера](https://mobile-study.simbirsoft1.com). Запросы, реализуемые сервером, и формат ответов можно посмотреть открыв ссылку в браузере.
+**Важно** Сервер доступен только из сети SimbirSoft.
+ - Данные от сервера получать в виде Observable
+ - Все "тяжелые" операции должны быть реализованы в фоновом потоке
+ - На время выполнения фоновых операций пользователю должен быть показан Activity Indicator
+3. Заменить загрузку из файла на старте приложения на загрузку с сервера. В случае если ответ от сервера ошибочен - загрузить данные из файла.
+ - Все "тяжелые" операции должны быть реализованы в фоновом потоке
+ - На время выполнения фоновых операций пользователю должен быть показан Activity Indicator
+4. Реализовать загрузку изображений для блока "Ваши друзья" на экране профиля, используя библиотеку Glide, Picasso или Coil
+ - Во время загрузки изображения, а также при ошибке загрузки, необходимо реализовать отображение плейсхолдера
+ - Отключить кэширование изображений в памяти устройства (Disk Cache)
+5. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+6. Завершить task в PS и залогировать затраченное время
