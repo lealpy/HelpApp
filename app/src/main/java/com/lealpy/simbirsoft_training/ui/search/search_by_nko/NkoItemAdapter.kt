@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lealpy.simbirsoft_training.databinding.NkoItemBinding
+import com.lealpy.simbirsoft_training.databinding.ItemNkoBinding
 
 class NkoItemAdapter (
     private val onItemClickListener: OnItemClickListener,
 ): ListAdapter<NkoItem, NkoItemAdapter.NkoItemHolder>(DiffCallback()) {
 
     inner class NkoItemHolder(
-        private val binding: NkoItemBinding
+        private val binding: ItemNkoBinding
     ): RecyclerView.ViewHolder(binding.root) {
         init {
             binding.apply {
@@ -32,7 +32,7 @@ class NkoItemAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NkoItemHolder {
-        val binding = NkoItemBinding.inflate(
+        val binding = ItemNkoBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

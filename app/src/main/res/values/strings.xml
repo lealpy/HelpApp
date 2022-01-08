@@ -35,7 +35,7 @@
     <string name="help_category_animals">Животные</string>
     <string name="help_category_events">Мероприятия</string>
     <string name="search_by_events_search_hint">Напишите в строке поиска название мероприятия или ключевые слова</string>
-    <string name="search_by_events_search_example">Например, мастер-класс, помощь</string>
+    <string name="search_by_events_search_example">Например,\u0020</string>
     <string name="search_by_events_search_example_clicked">По НКО</string>
     <string name="search_by_nko_search_hint">Ключевые слова: мастер-класс, помощь\nРезультаты поиска: 109 мероприятий</string>
     <string name="random_fond_name">Благотворительный фонд Алины Кабаевой</string>
@@ -88,5 +88,9 @@
     <string name="authorization_enter_button_text">Войти</string>
     <string name="authorization_forgot_password_button">Забыли пароль?</string>
     <string name="authorization_registration_button">Регистрация</string>
+    <string name="event_item_random_date">18.09.2021</string>
+    <string name="event_item_random_title">Выставка собак в Московской области</string>
+    <string name="search_by_events_nothing_found">Ничего не найдено</string>
+    <string name="search_by_events_search_example_1">мастер-класс</string>
 
 </resources>

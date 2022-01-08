@@ -51,7 +51,7 @@
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
         tools:itemCount="5"
-        tools:listitem="@layout/help_item" />
+        tools:listitem="@layout/item_help" />
 
     <ProgressBar
         android:id="@+id/progressBar"

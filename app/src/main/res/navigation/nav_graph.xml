@@ -55,7 +55,9 @@
         tools:layout="@layout/fragment_authorization">
         <action
             android:id="@+id/actionAuthorizationFragmentToNavigationHelp"
-            app:destination="@id/navigationHelp" />
+            app:destination="@id/navigationHelp"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.lealpy.simbirsoft_training.MainActivity
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsBinding
 import com.lealpy.simbirsoft_training.ui.news.news_description.NewsDescriptionFragment
@@ -20,25 +21,16 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         object : NewsItemAdapter.OnItemClickListener {
             override fun onItemClick(newsItem: NewsItem) {
 
-                val dataForNewsDescription = DataForNewsDescription (
-                    title = newsItem.title,
-                    date = newsItem.date,
-                    fundName = newsItem.fundName,
-                    address = newsItem.address,
-                    phone = newsItem.phone,
-                    image = newsItem.image,
-                    image2 = newsItem.image2,
-                    image3 = newsItem.image3,
-                    fullText = newsItem.fullText
-                )
-
                 val args = Bundle()
-                args.putParcelable(NewsDescriptionFragment.ARGS_KEY, dataForNewsDescription)
+                args.putLong(NewsDescriptionFragment.ARGS_KEY, newsItem.id)
 
                 findNavController().navigate(
                     R.id.actionNavigationNewsToNewsDescriptionFragment,
                     args
                 )
+
+                viewModel.onNewsViewed(newsItem.id)
+
             }
         }
     )
@@ -52,7 +44,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         initObservers()
         initToolbar()
 
-        if(viewModel.newsItems.value == null) viewModel.getNewsItemsFromJSON()
+        if(viewModel.newsItems.value == null) viewModel.getNewsItems()
     }
 
     private fun initToolbar() {
@@ -76,7 +68,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getNewsItemsFromJSON()
+            viewModel.getNewsItems()
             binding.swipeRefreshLayout.isRefreshing = false
         }
 
@@ -85,10 +77,15 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun initObservers() {
         viewModel.newsItems.observe(viewLifecycleOwner) { newsItems ->
             newsAdapter.submitList(newsItems)
+            viewModel.onNewsItemsUpdated()
         }
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
             binding.progressBar.visibility = progressBarVisibility
+        }
+
+        viewModel.badgeNumber.observe(viewLifecycleOwner) { badgeNumber ->
+            (activity as? MainActivity)?.badgeSubject?.onNext(badgeNumber)
         }
     }
 

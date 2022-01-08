@@ -16,7 +16,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsDescriptionBinding
-import com.lealpy.simbirsoft_training.ui.news.DataForNewsDescription
 
 class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
@@ -30,19 +29,41 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
         binding = FragmentNewsDescriptionBinding.bind(view)
 
-        initToolbar()
         getArgumentsData()
+        initObservers()
         initViews()
+        initToolbar()
         initSpanFeedback()
         initSpanSite()
-        initObservers()
 
+    }
+
+    private fun getArgumentsData() {
+        val newsItemId = arguments?.getLong(ARGS_KEY)
+        viewModel.getId(newsItemId ?: 0)
     }
 
     private fun initObservers() {
 
         viewModel.toastText.observe(viewLifecycleOwner) { text ->
             Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
+        }
+
+        viewModel.newsItem.observe(viewLifecycleOwner) { newsItem ->
+            binding.toolbarTitle.text = newsItem.title
+            binding.title.text = newsItem.title
+            binding.date.text = newsItem.date
+            binding.fundName.text = newsItem.fundName
+            binding.address.text = newsItem.address
+            binding.phone.text = newsItem.phone
+            binding.fullText.text = newsItem.fullText
+            binding.image.setImageBitmap(newsItem.image)
+            binding.image2.setImageBitmap(newsItem.image2)
+            binding.image3.setImageBitmap(newsItem.image3)
+        }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
         }
 
     }
@@ -116,48 +137,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         binding.site.text = spanFeedback
         binding.site.movementMethod = LinkMovementMethod.getInstance()
 
-    }
-
-    private fun getArgumentsData() {
-
-        val args = arguments?.getParcelable<DataForNewsDescription>(ARGS_KEY)
-
-        args?.title?.let { title ->
-            binding.toolbarTitle.text = title
-            binding.title.text = title
-        }
-
-        args?.date?.let { date ->
-            binding.date.text = date
-        }
-
-        args?.fundName?.let { fundName ->
-            binding.fundName.text = fundName
-        }
-
-        args?.address?.let { address ->
-            binding.address.text = address
-        }
-
-        args?.phone?.let { phone ->
-            binding.phone.text = phone
-        }
-
-        args?.fullText?.let { fullText ->
-            binding.fullText.text = fullText
-        }
-
-        args?.image?.let { image ->
-            binding.image.setImageBitmap(image)
-        }
-
-        args?.image2?.let { image2 ->
-            binding.image2.setImageBitmap(image2)
-        }
-
-        args?.image3?.let { image3 ->
-            binding.image3.setImageBitmap(image3)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

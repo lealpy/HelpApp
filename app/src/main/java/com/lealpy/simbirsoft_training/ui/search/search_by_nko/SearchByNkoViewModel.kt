@@ -22,6 +22,8 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
 
+    private var searchText = ""
+
     private val getNkoItemsFromJsonBroadcastReceiver = GetNkoItemsFromJsonBroadcastReceiver()
 
     private fun getNkoItemsFromJSON() {
@@ -62,6 +64,10 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
 
     fun onRefreshSwiped() {
         getNkoItemsFromJSON()
+    }
+
+    fun onSearchChanged(searchText: String) {
+        this.searchText = searchText
     }
 
     inner class GetNkoItemsFromJsonBroadcastReceiver : BroadcastReceiver() {
