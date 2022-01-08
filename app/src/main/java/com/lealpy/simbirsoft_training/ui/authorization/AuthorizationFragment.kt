@@ -38,7 +38,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
     private fun initViews() {
         //Строка для тестирования:
-        binding.enterBtn.isEnabled = true
+        //binding.enterBtn.isEnabled = true
         binding.enterBtn.setOnClickListener {
             findNavController().navigate(R.id.actionAuthorizationFragmentToNavigationHelp)
         }

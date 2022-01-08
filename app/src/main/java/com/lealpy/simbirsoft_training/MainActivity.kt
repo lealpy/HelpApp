@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initBottomNavView()
+        if(savedInstanceState == null) getStartBadgeNumber()
 
     }
 
@@ -57,8 +58,6 @@ class MainActivity : AppCompatActivity() {
                 throw Exception(error.message)
             }
         )
-
-        getStartBadgeNumber()
 
     }
 
