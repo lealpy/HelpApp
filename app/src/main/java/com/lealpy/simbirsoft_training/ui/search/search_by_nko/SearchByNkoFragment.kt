@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByNkoBinding
 
@@ -45,7 +44,7 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
         val nkoItemDivider =
             activity?.getDrawable(R.drawable.divider)?.let { drawable ->
             activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
-                NkoItemDivider(drawable, paddingLeft)
+                NkoItemDecoration(drawable, paddingLeft)
             }
         }
 

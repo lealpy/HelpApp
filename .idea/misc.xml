@@ -16,11 +16,11 @@
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/drawable/news_item_image_shape.xml" value="0.3769230769230769" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/drawable/product_logo.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/drawable/styles.xml" value="0.3828125" />
-        <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_help.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_history.xml" value="0.33" />
-        <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_news.xml" value="0.30113636363636365" />
+        <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_news.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_news_description.xml" value="0.33" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_news_filter.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_photo_dialog.xml" value="0.33" />
@@ -29,7 +29,7 @@
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_search_by_events.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/fragment_search_by_nko.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/help_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/news_item.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/news_item.xml" value="0.33" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/layout/nko_item.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/lealp/AndroidStudioProjects/SimbirSoft_training/app/src/main/res/menu/menu_search.xml" value="0.36666666666666664" />

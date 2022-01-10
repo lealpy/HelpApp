@@ -6,7 +6,10 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
-class NkoItemDivider(private val mDivider : Drawable, private val paddingLeft: Int) : ItemDecoration() {
+class NkoItemDecoration(
+    private val mDivider : Drawable,
+    private val paddingLeft: Int
+) : ItemDecoration() {
 
     override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         val left = parent.paddingLeft + paddingLeft

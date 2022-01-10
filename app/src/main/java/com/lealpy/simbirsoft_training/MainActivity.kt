@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.lealpy.simbirsoft_training.training.publication.PublicationProgram
-import com.lealpy.simbirsoft_training.training.user.UserProgram
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
