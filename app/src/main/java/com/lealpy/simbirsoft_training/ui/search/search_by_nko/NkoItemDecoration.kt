@@ -36,11 +36,13 @@ class NkoItemDecoration(
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
         val child: View = parent.getChildAt(parent.childCount - 1)
-        val params = child.layoutParams as RecyclerView.LayoutParams
-        val top: Int = child.bottom + params.bottomMargin
-        val bottom = top + mDivider.intrinsicHeight
-        mDivider.setBounds(left, top, right, bottom)
-        mDivider.draw(canvas)
+        val params = child.layoutParams as? RecyclerView.LayoutParams
+        if(params != null) {
+            val top: Int = child.bottom + params.bottomMargin
+            val bottom = top + mDivider.intrinsicHeight
+            mDivider.setBounds(left, top, right, bottom)
+            mDivider.draw(canvas)
+        }
     }
 
     private fun drawTopLine(canvas: Canvas, parent: RecyclerView) {

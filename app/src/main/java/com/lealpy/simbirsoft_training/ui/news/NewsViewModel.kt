@@ -52,8 +52,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             val itemTypes = object : TypeToken<List<NewsItemJSON>>() {}.type
             val newsItemsFromJson : List<NewsItemJSON> = gson.fromJson(jsonFileString, itemTypes)
 
-            val newsItemsResult = mutableListOf<NewsItem>()
-            newsItemsFromJson.forEach { newsItemFromJSON ->
+            val newsItemsResult = newsItemsFromJson.map { newsItemFromJSON ->
 
                 val image = Glide
                     .with(getApplication<Application>())
@@ -75,26 +74,24 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
                     .load(newsItemFromJSON.image3URL)
                     .submit()
                     .get()
-
-                newsItemsResult.add(
-                    NewsItem(
-                        id = newsItemFromJSON.id,
-                        image = image,
-                        title = newsItemFromJSON.title,
-                        abbreviatedText = newsItemFromJSON.abbreviatedText,
-                        date = newsItemFromJSON.date,
-                        fundName = newsItemFromJSON.fundName,
-                        address = newsItemFromJSON.address,
-                        phone = newsItemFromJSON.phone,
-                        image2 = image2,
-                        image3 = image3,
-                        fullText = newsItemFromJSON.fullText,
-                        isChildrenCategory = newsItemFromJSON.isChildrenCategory,
-                        isAdultsCategory = newsItemFromJSON.isAdultsCategory,
-                        isElderlyCategory = newsItemFromJSON.isElderlyCategory,
-                        isAnimalsCategory = newsItemFromJSON.isAnimalsCategory,
-                        isEventsCategory = newsItemFromJSON.isEventsCategory
-                    )
+                
+                NewsItem(
+                    id = newsItemFromJSON.id,
+                    image = image,
+                    title = newsItemFromJSON.title,
+                    abbreviatedText = newsItemFromJSON.abbreviatedText,
+                    date = newsItemFromJSON.date,
+                    fundName = newsItemFromJSON.fundName,
+                    address = newsItemFromJSON.address,
+                    phone = newsItemFromJSON.phone,
+                    image2 = image2,
+                    image3 = image3,
+                    fullText = newsItemFromJSON.fullText,
+                    isChildrenCategory = newsItemFromJSON.isChildrenCategory,
+                    isAdultsCategory = newsItemFromJSON.isAdultsCategory,
+                    isElderlyCategory = newsItemFromJSON.isElderlyCategory,
+                    isAnimalsCategory = newsItemFromJSON.isAnimalsCategory,
+                    isEventsCategory = newsItemFromJSON.isEventsCategory
                 )
 
             }
