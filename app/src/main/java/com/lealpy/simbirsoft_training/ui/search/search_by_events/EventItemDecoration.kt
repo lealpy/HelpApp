@@ -24,11 +24,13 @@ class EventItemDecoration(
         val right = parent.width - parent.paddingRight
         for (i in 0 until parent.childCount) {
             val child: View = parent.getChildAt(i)
-            val params = child.layoutParams as RecyclerView.LayoutParams
-            val top: Int = child.bottom + params.bottomMargin
-            val bottom = top + mDivider.intrinsicHeight
-            mDivider.setBounds(left, top, right, bottom)
-            mDivider.draw(canvas)
+            val params = child.layoutParams as? RecyclerView.LayoutParams
+            if(params != null) {
+                val top: Int = child.bottom + params.bottomMargin
+                val bottom = top + mDivider.intrinsicHeight
+                mDivider.setBounds(left, top, right, bottom)
+                mDivider.draw(canvas)
+            }
         }
     }
 
