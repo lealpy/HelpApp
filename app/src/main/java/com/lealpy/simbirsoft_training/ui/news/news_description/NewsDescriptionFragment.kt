@@ -6,11 +6,13 @@ import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.UnderlineSpan
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -35,7 +37,20 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         initToolbar()
         initSpanFeedback()
         initSpanSite()
+        overrideOnBackPressed()
 
+    }
+
+    private fun overrideOnBackPressed() {
+        activity?.onBackPressedDispatcher?.addCallback(
+            viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    viewModel.clearViewModel()
+                    isEnabled = false
+                    activity?.onBackPressed()
+                }
+            }
+        )
     }
 
     private fun getArgumentsData() {
@@ -64,6 +79,10 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
             binding.progressBar.visibility = progressBarVisibility
+        }
+
+        viewModel.finishFragment.observe(viewLifecycleOwner) { isFinishFragment ->
+            if(isFinishFragment == true) activity?.supportFragmentManager?.popBackStack()
         }
 
     }

@@ -40,7 +40,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
         binding.recyclerView.adapter = eventAdapter
 
         val eventItemDivider =
-            activity?.getDrawable(R.drawable.divider)?.let { drawable ->
+            activity?.getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
                 activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
                     EventItemDecoration(drawable, paddingLeft)
                 }
@@ -97,6 +97,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
                 }
 
                 override fun onClick(widget: View) {
+                    viewModel.onSearchExampleClicked(searchExample.toString())
                 }
             },
             spanStart,

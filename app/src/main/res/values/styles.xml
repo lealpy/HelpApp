@@ -111,4 +111,8 @@
         <item name="android:textColorHint">@color/black_38</item>
     </style>
 
+    <style name="Circular">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>

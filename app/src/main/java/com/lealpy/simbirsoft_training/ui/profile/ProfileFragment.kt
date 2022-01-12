@@ -11,6 +11,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.*
+import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -18,6 +19,8 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentProfileBinding
 import com.lealpy.simbirsoft_training.utils.AppUtils
@@ -72,6 +75,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         binding.avatarUser.setOnClickListener {
             showDialog()
         }
+
+        loadImageIntoImageView(FRIEND_1_IMAGE_URL, binding.avatarFriend1)
+        loadImageIntoImageView(FRIEND_2_IMAGE_URL, binding.avatarFriend2)
+        loadImageIntoImageView(FRIEND_3_IMAGE_URL, binding.avatarFriend3)
+
     }
 
     private fun initDialogListener() {
@@ -82,6 +90,20 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 PhotoDialogFragment.SELECTED_DELETE_PHOTO -> binding.avatarUser.setImageResource(R.drawable.no_photo)
             }
         }
+    }
+
+
+
+    private fun loadImageIntoImageView(imageURL : String, imageView : ImageView) {
+        Glide
+            .with(requireContext())
+            .asBitmap()
+            .load(imageURL)
+            .placeholder(R.drawable.no_photo)
+            .error(R.drawable.no_photo)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(false)
+            .into(imageView)
     }
 
 
@@ -178,6 +200,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     companion object {
         private const val BITMAP_RATIO = 18.0 / 11.0
+        private const val FRIEND_1_IMAGE_URL = "https://user-images.githubusercontent.com/90380451/149196125-b3fe5703-386f-4842-bb2a-10f3d0b7284f.png"
+        private const val FRIEND_2_IMAGE_URL = "https://user-images.githubusercontent.com/90380451/149196129-d97e1509-ae98-4cf0-82cd-fa3b2e59a5c9.png"
+        private const val FRIEND_3_IMAGE_URL = "https://user-images.githubusercontent.com/90380451/149196131-e8f334c6-b755-424b-be42-5093b62cd5e8.png"
     }
 
 }

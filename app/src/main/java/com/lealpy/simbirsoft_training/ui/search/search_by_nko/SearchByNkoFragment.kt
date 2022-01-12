@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByNkoBinding
+import kotlinx.android.synthetic.main.fragment_search_by_nko.*
 
 class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
 
@@ -34,11 +35,17 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
 
     private fun initObservers() {
         viewModel.nkoItems.observe(viewLifecycleOwner) { nkoItems ->
-            nkoAdapter.submitList(nkoItems)
+            nkoAdapter.submitList(nkoItems) {
+                binding.recyclerView.scrollToPosition(0)
+            }
         }
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
             binding.progressBar.visibility = progressBarVisibility
+        }
+
+        viewModel.searchResults.observe(viewLifecycleOwner) { text ->
+            binding.searchResults.text = text
         }
     }
 
@@ -46,7 +53,7 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
         binding.recyclerView.adapter = nkoAdapter
 
         val nkoItemDivider =
-            activity?.getDrawable(R.drawable.divider)?.let { drawable ->
+            activity?.getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
             activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
                 NkoItemDecoration(drawable, paddingLeft)
             }

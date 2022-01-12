@@ -38,11 +38,22 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         initToolbar()
         initViewPager()
+        initObservers()
 
         if(savedInstanceState != null) {
             searchText = savedInstanceState.getString(SEARCH_KEY)
         }
 
+    }
+
+    private fun initObservers() {
+        searchByEventsViewModel.searchViewQuery.observe(viewLifecycleOwner) { query ->
+            searchView?.setQuery(query, true)
+        }
+
+        searchByNkoViewModel.searchViewQuery.observe(viewLifecycleOwner) { query ->
+            searchView?.setQuery(query, true)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -75,8 +86,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         binding.tabLayout.addOnTabSelectedListener (object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                if(tab != null) {
-                    searchByNkoViewModel.onTabSelected(tab.position)
+                when(tab?.position) {
+                    POSITION_SEARCH_BY_EVENTS -> searchByEventsViewModel.onEventTabSelected()
+                    POSITION_SEARCH_BY_NKO -> searchByNkoViewModel.onNkoTabSelected()
                 }
             }
 
@@ -95,8 +107,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         if (searchText != null) {
             searchItem.expandActionView()
-            searchView?.setQuery(searchText, true);
-            searchView?.clearFocus();
+            searchView?.setQuery(searchText, true)
+            searchView?.clearFocus()
         }
 
         searchView?.background = activity?.getDrawable(R.drawable.background_search_view)
