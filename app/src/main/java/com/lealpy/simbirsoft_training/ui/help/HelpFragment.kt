@@ -97,22 +97,19 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
             val itemTypes = object : TypeToken<List<HelpItemJSON>>() {}.type
             val helpItemsFromJSON = gson.fromJson<List<HelpItemJSON>>(jsonFileString, itemTypes)
 
-            val helpItemsResult = mutableListOf<HelpItem>()
-            helpItemsFromJSON.forEach { helpItemFromJSON ->
+            val helpItemsResult = helpItemsFromJSON.map { helpItemFromJSON ->
 
-                val bitmap = Glide
-                    .with(requireContext())
-                    .asBitmap()
-                    .load(helpItemFromJSON.imageURL)
-                    .submit()
-                    .get()
+            val bitmap = Glide
+                .with(requireContext())
+                .asBitmap()
+                .load(helpItemFromJSON.imageURL)
+                .submit()
+                .get()
 
-                helpItemsResult.add(
-                    HelpItem(
-                        id = helpItemFromJSON.id,
-                        image = bitmap,
-                        text = helpItemFromJSON.text
-                    )
+                HelpItem(
+                    id = helpItemFromJSON.id,
+                    image = bitmap,
+                    text = helpItemFromJSON.text
                 )
 
             }
