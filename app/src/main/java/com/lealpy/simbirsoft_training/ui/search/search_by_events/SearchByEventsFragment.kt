@@ -7,6 +7,7 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
@@ -33,6 +34,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
         initViews()
         initObservers()
         initSpannableString()
+        //initOnClick()
     }
 
     private fun initViews() {
@@ -98,6 +100,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
                 override fun onClick(widget: View) {
                     viewModel.onSearchExampleClicked(searchExample.toString())
+                    showToast()
                 }
             },
             spanStart,
@@ -108,6 +111,20 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
         binding.blankSearchExample1.text = searchExample
         binding.blankSearchExample1.movementMethod = LinkMovementMethod.getInstance()
 
+    }
+
+    private fun initOnClick() {
+        binding.blankSearchExample1.setOnClickListener {
+            showToast()
+        }
+    }
+
+    private fun showToast() {
+        Toast.makeText(
+            requireContext(),
+            activity?.getString(R.string.click_heard),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }
