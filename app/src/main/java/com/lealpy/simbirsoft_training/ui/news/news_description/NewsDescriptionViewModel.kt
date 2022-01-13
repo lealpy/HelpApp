@@ -107,7 +107,7 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
                 _newsItem.postValue(newsItemResult)
             }
 
-            _progressBarVisibility.postValue(View.INVISIBLE)
+            _progressBarVisibility.postValue(View.GONE)
         }
 
         executorService.shutdown()

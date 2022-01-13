@@ -75,7 +75,7 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
             val result = intent?.getParcelableArrayListExtra<NkoItem>(GetNkoItemsFromJsonIntentService.EXTRA_KEY_OUT)
             if (result != null) nkoItemsFromJSON = result
             getRandomNkoItems()
-            _progressBarVisibility.value = View.INVISIBLE
+            _progressBarVisibility.value = View.GONE
         }
     }
 

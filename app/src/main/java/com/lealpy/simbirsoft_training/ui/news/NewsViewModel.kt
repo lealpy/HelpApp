@@ -41,6 +41,8 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val viewedNewsId = mutableSetOf<Long>()
 
+    private val requestManager = Glide.with(getApplication<Application>())
+
     fun getNewsItems() {
 
         _isChildrenChecked.value = true
@@ -58,37 +60,9 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             val gson = Gson()
             val itemTypes = object : TypeToken<List<NewsItemJSON>>() {}.type
             val newsItemsFromJson : List<NewsItemJSON> = gson.fromJson(jsonFileString, itemTypes)
-
-            loadedNewsItems = newsItemsFromJson.map { newsItemFromJSON ->
-                val image = Glide
-                    .with(getApplication<Application>())
-                    .asBitmap()
-                    .load(newsItemFromJSON.imageURL)
-                    .submit()
-                    .get()
-
-                NewsItem(
-                    id = newsItemFromJSON.id,
-                    image = image,
-                    title = newsItemFromJSON.title,
-                    abbreviatedText = newsItemFromJSON.abbreviatedText,
-                    date = newsItemFromJSON.date,
-                    fundName = null,
-                    address = null,
-                    phone = null,
-                    image2 = null,
-                    image3 = null,
-                    fullText = null,
-                    isChildrenCategory = newsItemFromJSON.isChildrenCategory,
-                    isAdultsCategory = newsItemFromJSON.isAdultsCategory,
-                    isElderlyCategory = newsItemFromJSON.isElderlyCategory,
-                    isAnimalsCategory = newsItemFromJSON.isAnimalsCategory,
-                    isEventsCategory = newsItemFromJSON.isEventsCategory
-                )
-            }
-
+            loadedNewsItems = AppUtils.newsItemsJsonToNewsItems(newsItemsFromJson, requestManager)
             _newsItems.postValue(loadedNewsItems)
-            _progressBarVisibility.postValue(View.INVISIBLE)
+            _progressBarVisibility.postValue(View.GONE)
         }
 
         executorService.shutdown()

@@ -54,7 +54,7 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
 
         if(searchText.isNotBlank()) {
 
-            _blankSearchViewsVisibility.value = View.INVISIBLE
+            _blankSearchViewsVisibility.value = View.GONE
             _progressBarVisibility.value = View.VISIBLE
             _recyclerViewVisibility.value = View.VISIBLE
 
@@ -77,10 +77,10 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
 
                         _nothingFoundViewsVisibility.postValue(
                             if(eventItems.isEmpty()) View.VISIBLE
-                            else View.INVISIBLE
+                            else View.GONE
                         )
 
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
 
                     },
                     { error ->
@@ -92,8 +92,8 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
 
         else {
             _blankSearchViewsVisibility.value = View.VISIBLE
-            _nothingFoundViewsVisibility.value = View.INVISIBLE
-            _recyclerViewVisibility.value = View.INVISIBLE
+            _nothingFoundViewsVisibility.value = View.GONE
+            _recyclerViewVisibility.value = View.GONE
         }
 
     }

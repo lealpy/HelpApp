@@ -119,7 +119,7 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
 
         override fun onPostExecute(helpItemsResult: List<HelpItem>?) {
             helpItems.value = helpItemsResult
-            progressBarVisibility.value = View.INVISIBLE
+            progressBarVisibility.value = View.GONE
         }
 
     }
