@@ -3,7 +3,7 @@ package com.lealpy.simbirsoft_training.ui.search.search_by_nko
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByNkoBinding
 
@@ -11,7 +11,7 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
 
     private lateinit var binding : FragmentSearchByNkoBinding
 
-    private val viewModel : SearchByNkoViewModel by activityViewModels()
+    private val viewModel : SearchByNkoViewModel by viewModels()
 
     private val nkoAdapter = NkoItemAdapter(
         object: NkoItemAdapter.OnItemClickListener {
