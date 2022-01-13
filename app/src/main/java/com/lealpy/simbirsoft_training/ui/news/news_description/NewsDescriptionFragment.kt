@@ -13,7 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsDescriptionBinding
 
@@ -21,7 +21,7 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
     private lateinit var binding : FragmentNewsDescriptionBinding
 
-    private val viewModel : NewsDescriptionViewModel by activityViewModels()
+    private val viewModel : NewsDescriptionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 

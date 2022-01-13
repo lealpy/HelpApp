@@ -8,7 +8,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByEventsBinding
 
@@ -16,7 +16,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
     private lateinit var binding : FragmentSearchByEventsBinding
 
-    private val viewModel : SearchByEventsViewModel by activityViewModels()
+    private val viewModel : SearchByEventsViewModel by viewModels()
 
     private val eventAdapter = EventItemAdapter(
         object: EventItemAdapter.OnItemClickListener {
