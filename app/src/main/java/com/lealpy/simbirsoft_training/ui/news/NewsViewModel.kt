@@ -34,7 +34,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     private val _isEventsChecked = MutableLiveData(true)
     val isEventsChecked: LiveData<Boolean> = _isEventsChecked
 
-    private val glideManager = Glide.with(getApplication<Application>())
+    private val requestManager = Glide.with(getApplication<Application>())
 
     fun getNewsItemsFromJSON() {
 
@@ -53,34 +53,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             val gson = Gson()
             val itemTypes = object : TypeToken<List<NewsItemJSON>>() {}.type
             val newsItemsFromJson : List<NewsItemJSON> = gson.fromJson(jsonFileString, itemTypes)
-
-            val newsItemsResult = newsItemsFromJson.map { newsItemFromJSON ->
-
-                val image = AppUtils.getBitmapFromUrl(glideManager, newsItemFromJSON.imageURL)
-                val image2 = AppUtils.getBitmapFromUrl(glideManager, newsItemFromJSON.image2URL)
-                val image3 = AppUtils.getBitmapFromUrl(glideManager, newsItemFromJSON.image3URL)
-                
-                NewsItem(
-                    id = newsItemFromJSON.id,
-                    image = image,
-                    title = newsItemFromJSON.title,
-                    abbreviatedText = newsItemFromJSON.abbreviatedText,
-                    date = newsItemFromJSON.date,
-                    fundName = newsItemFromJSON.fundName,
-                    address = newsItemFromJSON.address,
-                    phone = newsItemFromJSON.phone,
-                    image2 = image2,
-                    image3 = image3,
-                    fullText = newsItemFromJSON.fullText,
-                    isChildrenCategory = newsItemFromJSON.isChildrenCategory,
-                    isAdultsCategory = newsItemFromJSON.isAdultsCategory,
-                    isElderlyCategory = newsItemFromJSON.isElderlyCategory,
-                    isAnimalsCategory = newsItemFromJSON.isAnimalsCategory,
-                    isEventsCategory = newsItemFromJSON.isEventsCategory
-                )
-
-            }
-
+            val newsItemsResult = AppUtils.newsItemsJsonToNewsItems(newsItemsFromJson, requestManager)
             _newsItems.postValue(newsItemsResult)
             _progressBarVisibility.postValue(View.GONE)
         }
