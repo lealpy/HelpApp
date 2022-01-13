@@ -2,15 +2,13 @@ package com.lealpy.simbirsoft_training.utils
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import com.lealpy.simbirsoft_training.ui.help.HelpItem
 import com.lealpy.simbirsoft_training.ui.help.HelpItemJson
 import com.lealpy.simbirsoft_training.ui.news.NewsItem
 import com.lealpy.simbirsoft_training.ui.news.NewsItemJson
-import java.io.FileWriter
 
 object AppUtils {
 
@@ -19,12 +17,6 @@ object AppUtils {
     inline fun <reified T> getItemJsonFromFile(context: Context, fileName: String) : T {
         val jsonFileString = context.assets.open(fileName).bufferedReader().use { it.readText() }
         return Gson().fromJson(jsonFileString, object: TypeToken<T>() {}.type)
-    }
-
-    inline fun <reified T> saveItemJsonToFile(items: T, fileName: String)  {
-        val writer = FileWriter(fileName)
-        val gson = GsonBuilder().create()
-        gson.toJson(items, writer)
     }
 
     fun cropBitmap(bitmap: Bitmap, ratio : Double) : Bitmap {
@@ -37,15 +29,17 @@ object AppUtils {
         )
     }
 
-    fun helpItemsJsonToHelpItems(context: Context, helpItemsJson: List<HelpItemJson>) : List<HelpItem> {
-        return helpItemsJson.map { helpItemJson ->
+    private fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
+        return requestManager
+            .asBitmap()
+            .load(url)
+            .submit()
+            .get()
+    }
 
-            val image = Glide
-                .with(context)
-                .asBitmap()
-                .load(helpItemJson.imageURL)
-                .submit()
-                .get()
+    fun helpItemsJsonToHelpItems(helpItemsJson: List<HelpItemJson>, requestManager : RequestManager) : List<HelpItem> {
+        return helpItemsJson.map { helpItemJson ->
+            val image = getBitmapFromUrl(requestManager, helpItemJson.imageURL)
 
             HelpItem(
                 id = helpItemJson.id,
@@ -55,14 +49,9 @@ object AppUtils {
         }
     }
 
-    fun newsItemsJsonToNewsItems(context: Context, newsItemsJson: List<NewsItemJson>) : List<NewsItem> {
+    fun newsItemsJsonToNewsItems(newsItemsJson: List<NewsItemJson>, requestManager : RequestManager) : List<NewsItem> {
         return newsItemsJson.map { newsItemJson ->
-            val image = Glide
-                .with(context)
-                .asBitmap()
-                .load(newsItemJson.imageURL)
-                .submit()
-                .get()
+            val image = getBitmapFromUrl(requestManager, newsItemJson.imageURL)
 
             NewsItem(
                 id = newsItemJson.id,
@@ -85,27 +74,10 @@ object AppUtils {
         }
     }
 
-    fun newsItemJsonToNewsItem(context: Context, newsItemJson: NewsItemJson) : NewsItem {
-        val image = Glide
-            .with(context)
-            .asBitmap()
-            .load(newsItemJson.imageURL)
-            .submit()
-            .get()
-
-        val image2 = Glide
-            .with(context)
-            .asBitmap()
-            .load(newsItemJson.image2URL)
-            .submit()
-            .get()
-
-        val image3 = Glide
-            .with(context)
-            .asBitmap()
-            .load(newsItemJson.image3URL)
-            .submit()
-            .get()
+    fun newsItemJsonToNewsItem(newsItemJson: NewsItemJson, requestManager : RequestManager) : NewsItem {
+        val image = getBitmapFromUrl(requestManager, newsItemJson.imageURL)
+        val image2 = getBitmapFromUrl(requestManager, newsItemJson.image2URL)
+        val image3 = getBitmapFromUrl(requestManager, newsItemJson.image3URL)
 
         return NewsItem(
             id = newsItemJson.id,

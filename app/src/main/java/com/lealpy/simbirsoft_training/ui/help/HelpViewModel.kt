@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
 import com.lealpy.simbirsoft_training.HelpApp
 import com.lealpy.simbirsoft_training.utils.AppUtils
 import io.reactivex.disposables.CompositeDisposable
@@ -18,6 +19,8 @@ class HelpViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
+
+    private val requestManager = Glide.with(getApplication<Application>())
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -38,17 +41,17 @@ class HelpViewModel(application: Application) : AndroidViewModel(application) {
                 .observeOn(Schedulers.computation())
                 .subscribe(
                     { helpItemsJsonFromServer ->
-                        val helpItemsResult = AppUtils.helpItemsJsonToHelpItems(getApplication(), helpItemsJsonFromServer)
+                        val helpItemsResult = AppUtils.helpItemsJsonToHelpItems(helpItemsJsonFromServer, requestManager)
                         _helpItems.postValue(helpItemsResult)
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
                     },
                     { error ->
                         error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
 
                         val helpItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<HelpItemJson>>(getApplication(), HELP_ITEMS_JSON_FILE_NAME)
-                        val helpItemsResult = AppUtils.helpItemsJsonToHelpItems(getApplication(), helpItemsJsonFromFile)
+                        val helpItemsResult = AppUtils.helpItemsJsonToHelpItems(helpItemsJsonFromFile, requestManager)
                         _helpItems.postValue(helpItemsResult)
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
                     }
                 )
             )

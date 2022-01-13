@@ -53,14 +53,13 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
                 .subscribe(
                     { nkoItemsFromServer ->
                         setRandomNkoItems(nkoItemsFromServer)
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
                     },
                     { error ->
                         error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
-
                         val nkoItemsFromFile = AppUtils.getItemJsonFromFile<List<NkoItem>>(getApplication(), NKO_ITEMS_JSON_FILE_NAME)
                         setRandomNkoItems(nkoItemsFromFile)
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
                     }
                 )
             )

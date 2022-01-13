@@ -6,6 +6,7 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bumptech.glide.Glide
 import com.lealpy.simbirsoft_training.HelpApp
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.ui.news.NewsItem
@@ -26,6 +27,8 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
 
     private val _finishFragment = MutableLiveData <Boolean> ()
     val finishFragment : LiveData<Boolean> = _finishFragment
+
+    private val requestManager = Glide.with(getApplication<Application>())
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -48,13 +51,13 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
                 .subscribe(
                     { newsItemsJsonFromServer ->
                         item(newsItemsJsonFromServer, newsItemId)
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
                     },
                     { error ->
                         error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
                         val newsItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<NewsItemJson>>(getApplication(), NEWS_ITEMS_JSON_FILE_NAME)
                         item(newsItemsJsonFromFile, newsItemId)
-                        _progressBarVisibility.postValue(View.INVISIBLE)
+                        _progressBarVisibility.postValue(View.GONE)
                     }
                 )
             )
@@ -66,7 +69,7 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
             newsItemJson.id == newsItemId
         }
         if(newsItemJson != null) {
-            val newsItem = AppUtils.newsItemJsonToNewsItem(getApplication<Application>(), newsItemJson)
+            val newsItem = AppUtils.newsItemJsonToNewsItem(newsItemJson, requestManager)
             _newsItem.postValue(newsItem)
         }
         else {
