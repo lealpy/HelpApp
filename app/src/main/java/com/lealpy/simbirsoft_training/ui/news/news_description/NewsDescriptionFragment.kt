@@ -6,16 +6,14 @@ import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.text.style.UnderlineSpan
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsDescriptionBinding
 
@@ -23,34 +21,17 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
     private lateinit var binding : FragmentNewsDescriptionBinding
 
-    private val viewModel : NewsDescriptionViewModel by activityViewModels()
+    private val viewModel : NewsDescriptionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentNewsDescriptionBinding.bind(view)
-
         getArgumentsData()
         initObservers()
         initViews()
         initToolbar()
         initSpanFeedback()
         initSpanSite()
-        overrideOnBackPressed()
-
-    }
-
-    private fun overrideOnBackPressed() {
-        activity?.onBackPressedDispatcher?.addCallback(
-            viewLifecycleOwner, object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    viewModel.clearViewModel()
-                    isEnabled = false
-                    activity?.onBackPressed()
-                }
-            }
-        )
     }
 
     private fun getArgumentsData() {
@@ -59,7 +40,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initObservers() {
-
         viewModel.toastText.observe(viewLifecycleOwner) { text ->
             Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
         }
@@ -84,7 +64,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         viewModel.finishFragment.observe(viewLifecycleOwner) { isFinishFragment ->
             if(isFinishFragment == true) activity?.supportFragmentManager?.popBackStack()
         }
-
     }
 
     private fun initViews() {
@@ -105,7 +84,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initSpanFeedback() {
-
         val spanFeedback = SpannableStringBuilder(activity?.getString(R.string.news_description_feedback_title))
 
         val spanStart = spanFeedback.indexOf('?') + SYMBOLS_AFTER_QUESTION
@@ -128,11 +106,9 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
             binding.feedback.text = spanFeedback
             binding.feedback.movementMethod = LinkMovementMethod.getInstance()
-
     }
 
     private fun initSpanSite() {
-
         val spanFeedback = SpannableStringBuilder(activity?.getString(R.string.news_description_site_title))
 
         val spanStart = 0
@@ -155,7 +131,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
         binding.site.text = spanFeedback
         binding.site.movementMethod = LinkMovementMethod.getInstance()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

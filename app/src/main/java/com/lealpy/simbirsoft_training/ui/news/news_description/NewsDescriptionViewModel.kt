@@ -101,10 +101,6 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
         fetchNewsItem(newsItemId)
     }
 
-    fun clearViewModel() {
-        onCleared()
-    }
-
     companion object {
         private const val NEWS_ITEMS_JSON_FILE_NAME = "news_items.json"
     }

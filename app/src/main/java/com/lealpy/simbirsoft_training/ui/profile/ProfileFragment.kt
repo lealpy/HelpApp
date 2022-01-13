@@ -53,6 +53,8 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val photoDialogFragment = PhotoDialogFragment()
 
+    private val requestManager by lazy { Glide.with(requireContext()) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         super.onViewCreated(view, savedInstanceState)
@@ -95,8 +97,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
 
     private fun loadImageIntoImageView(imageURL : String, imageView : ImageView) {
-        Glide
-            .with(requireContext())
+        requestManager
             .asBitmap()
             .load(imageURL)
             .placeholder(R.drawable.no_photo)

@@ -154,7 +154,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/image3"
                 app:layout_constraintStart_toStartOf="@+id/feedback"
                 app:layout_constraintTop_toBottomOf="@+id/feedback"
-                app:srcCompat="@drawable/news_item_1_image" />
+                tools:srcCompat="@drawable/news_item_1_image" />
 
             <ImageView
                 android:id="@+id/image2"
@@ -168,7 +168,7 @@
                 app:layout_constraintStart_toEndOf="@+id/image"
                 app:layout_constraintTop_toTopOf="@+id/image"
                 app:layout_constraintBottom_toTopOf="@id/image3"
-                app:srcCompat="@drawable/news_item_1_image_2" />
+                tools:srcCompat="@drawable/news_item_1_image_2" />
 
             <ImageView
                 android:id="@+id/image3"
@@ -178,8 +178,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/image2"
                 app:layout_constraintStart_toStartOf="@+id/image2"
                 app:layout_constraintTop_toBottomOf="@+id/image2"
-                app:srcCompat="@drawable/news_item_1_image_3"
-                app:layout_constraintBottom_toBottomOf="@id/image"/>
+                app:layout_constraintBottom_toBottomOf="@id/image"
+                tools:srcCompat="@drawable/news_item_1_image_3" />
 
             <TextView
                 android:id="@+id/fullText"
