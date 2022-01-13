@@ -34,6 +34,8 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     private val _isEventsChecked = MutableLiveData(true)
     val isEventsChecked: LiveData<Boolean> = _isEventsChecked
 
+    private val glideManager = Glide.with(getApplication<Application>())
+
     fun getNewsItemsFromJSON() {
 
         _isChildrenChecked.value = true
@@ -54,26 +56,9 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
             val newsItemsResult = newsItemsFromJson.map { newsItemFromJSON ->
 
-                val image = Glide
-                    .with(getApplication<Application>())
-                    .asBitmap()
-                    .load(newsItemFromJSON.imageURL)
-                    .submit()
-                    .get()
-
-                val image2 = Glide
-                    .with(getApplication<Application>())
-                    .asBitmap()
-                    .load(newsItemFromJSON.image2URL)
-                    .submit()
-                    .get()
-
-                val image3 = Glide
-                    .with(getApplication<Application>())
-                    .asBitmap()
-                    .load(newsItemFromJSON.image3URL)
-                    .submit()
-                    .get()
+                val image = AppUtils.getBitmapFromUrl(glideManager, newsItemFromJSON.imageURL)
+                val image2 = AppUtils.getBitmapFromUrl(glideManager, newsItemFromJSON.image2URL)
+                val image3 = AppUtils.getBitmapFromUrl(glideManager, newsItemFromJSON.image3URL)
                 
                 NewsItem(
                     id = newsItemFromJSON.id,
@@ -97,7 +82,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             }
 
             _newsItems.postValue(newsItemsResult)
-            _progressBarVisibility.postValue(View.INVISIBLE)
+            _progressBarVisibility.postValue(View.GONE)
         }
 
         executorService.shutdown()

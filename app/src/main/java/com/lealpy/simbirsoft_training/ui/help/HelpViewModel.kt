@@ -23,7 +23,7 @@ class HelpViewModel (application: Application) : AndroidViewModel(application) {
 
         override fun postExecute(helpItemsResult: List<HelpItem>?) {
             _helpItems.value = helpItemsResult
-            _progressBarVisibility.value = View.INVISIBLE
+            _progressBarVisibility.value = View.GONE
         }
     }
 

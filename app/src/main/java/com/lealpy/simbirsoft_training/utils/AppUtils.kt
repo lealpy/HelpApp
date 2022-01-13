@@ -2,6 +2,7 @@ package com.lealpy.simbirsoft_training.utils
 
 import android.content.Context
 import android.graphics.Bitmap
+import com.bumptech.glide.RequestManager
 
 object AppUtils {
 
@@ -17,6 +18,14 @@ object AppUtils {
             bitmap.width,
             (bitmap.width / ratio).toInt()
         )
+    }
+
+    fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
+        return requestManager
+            .asBitmap()
+            .load(url)
+            .submit()
+            .get()
     }
 
 }

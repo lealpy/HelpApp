@@ -13,13 +13,15 @@ class GetHelpItemsAsyncTask(
     private val contextRef : WeakReference<Context>
 ) : AsyncTask<Unit, Unit, List<HelpItem>>() {
 
+    private val glideManager = contextRef.get()?.let { Glide.with(it) }
+
     override fun onPreExecute() {
         asyncTaskResponse.preExecute()
     }
 
     override fun doInBackground(vararg params: Unit?): List<HelpItem> {
         val context = contextRef.get()
-        return if(context != null) {
+        return if(context != null && glideManager != null) {
             Thread.sleep(HelpFragment.THREAD_SLEEP_MILLIS)
             val jsonFileString = AppUtils.getJsonDataFromAsset(context,
                 HelpFragment.HELP_ITEMS_JSON_FILE_NAME)
@@ -29,8 +31,7 @@ class GetHelpItemsAsyncTask(
 
             val helpItemsResult = helpItemsFromJSON.map { helpItemFromJSON ->
 
-                val bitmap = Glide
-                    .with(context)
+                val bitmap = glideManager
                     .asBitmap()
                     .load(helpItemFromJSON.imageURL)
                     .submit()
