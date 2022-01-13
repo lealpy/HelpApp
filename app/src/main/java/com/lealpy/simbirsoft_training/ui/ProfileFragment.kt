@@ -39,7 +39,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.edit -> Toast.makeText(
+            R.id.profileToolbarEdit -> Toast.makeText(
                 requireContext(),
                 requireActivity().getString(R.string.profile_edit_click_message),
                 Toast.LENGTH_SHORT
