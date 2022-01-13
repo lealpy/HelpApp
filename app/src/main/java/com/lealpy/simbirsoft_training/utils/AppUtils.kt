@@ -3,6 +3,8 @@ package com.lealpy.simbirsoft_training.utils
 import android.content.Context
 import android.graphics.Bitmap
 import com.bumptech.glide.RequestManager
+import com.lealpy.simbirsoft_training.ui.help.HelpItem
+import com.lealpy.simbirsoft_training.ui.help.HelpItemJSON
 import com.lealpy.simbirsoft_training.ui.news.NewsItem
 import com.lealpy.simbirsoft_training.ui.news.NewsItemJSON
 
@@ -22,7 +24,7 @@ object AppUtils {
         )
     }
 
-    fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
+    private fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
         return requestManager
             .asBitmap()
             .load(url)
@@ -52,6 +54,25 @@ object AppUtils {
                 isElderlyCategory = newsItemFromJSON.isElderlyCategory,
                 isAnimalsCategory = newsItemFromJSON.isAnimalsCategory,
                 isEventsCategory = newsItemFromJSON.isEventsCategory
+            )
+        }
+    }
+
+    fun helpItemsJsonToHelpItems(
+        helpItemsJSON: List<HelpItemJSON>,
+        requestManager: RequestManager,
+    ): List<HelpItem> {
+        return helpItemsJSON.map { helpItemJSON ->
+            val bitmap = requestManager
+                .asBitmap()
+                .load(helpItemJSON.imageURL)
+                .submit()
+                .get()
+
+            HelpItem(
+                id = helpItemJSON.id,
+                image = bitmap,
+                text = helpItemJSON.text
             )
         }
     }
