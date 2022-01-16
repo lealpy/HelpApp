@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByNkoBinding
-import kotlinx.android.synthetic.main.fragment_search_by_nko.*
 
 class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
 
