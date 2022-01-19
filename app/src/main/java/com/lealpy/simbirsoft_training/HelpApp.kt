@@ -1,10 +1,12 @@
 package com.lealpy.simbirsoft_training
 
 import android.app.Application
+import androidx.room.Room
 import com.lealpy.simbirsoft_training.data.EventApi
 import com.lealpy.simbirsoft_training.data.HelpApi
 import com.lealpy.simbirsoft_training.data.NewsApi
 import com.lealpy.simbirsoft_training.data.NkoApi
+import com.lealpy.simbirsoft_training.database.HelpAppDatabase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,6 +19,14 @@ class HelpApp : Application() {
     lateinit var newsApi : NewsApi
     lateinit var eventApi : EventApi
     lateinit var nkoApi : NkoApi
+
+    val database: HelpAppDatabase by lazy {
+        Room.databaseBuilder(
+            applicationContext,
+            HelpAppDatabase::class.java,
+            ROOM_DATABASE_FILE_NAME
+        ).build()
+    }
 
     init {
         configureRetrofit()
@@ -45,5 +55,6 @@ class HelpApp : Application() {
 
     companion object {
         private const val RETROFIT_BASE_URL = "https://help-app.getsandbox.com"
+        private const val ROOM_DATABASE_FILE_NAME = "database.db"
     }
 }

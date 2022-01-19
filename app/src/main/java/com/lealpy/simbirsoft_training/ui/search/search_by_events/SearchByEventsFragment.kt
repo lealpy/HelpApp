@@ -33,6 +33,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
         initViews()
         initObservers()
+        viewModel.onViewCreated()
         initSpannableString()
         //initOnClick()
     }
