@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.database.events
+package com.lealpy.simbirsoft_training.data.database.events
 
 import io.reactivex.Completable
 import io.reactivex.Single

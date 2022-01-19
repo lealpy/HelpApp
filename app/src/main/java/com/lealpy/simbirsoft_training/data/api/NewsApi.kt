@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.data
+package com.lealpy.simbirsoft_training.data.api
 
 import com.lealpy.simbirsoft_training.ui.news.NewsItemJson
 import io.reactivex.Single

@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.bumptech.glide.Glide
 import com.lealpy.simbirsoft_training.HelpApp
-import com.lealpy.simbirsoft_training.database.help.HelpEntity
-import com.lealpy.simbirsoft_training.database.help.HelpRepository
+import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
+import com.lealpy.simbirsoft_training.data.database.help.HelpRepository
 import com.lealpy.simbirsoft_training.utils.AppUtils
 import com.lealpy.simbirsoft_training.utils.AppUtils.LOG_TAG
 import io.reactivex.disposables.CompositeDisposable

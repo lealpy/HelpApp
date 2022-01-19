@@ -5,8 +5,8 @@ import android.graphics.Bitmap
 import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.lealpy.simbirsoft_training.database.events.EventEntity
-import com.lealpy.simbirsoft_training.database.help.HelpEntity
+import com.lealpy.simbirsoft_training.data.database.events.EventEntity
+import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
 import com.lealpy.simbirsoft_training.ui.help.HelpItem
 import com.lealpy.simbirsoft_training.ui.help.HelpItemJson
 import com.lealpy.simbirsoft_training.ui.news.NewsItem

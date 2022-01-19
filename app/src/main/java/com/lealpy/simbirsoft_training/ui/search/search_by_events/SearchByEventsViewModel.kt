@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.lealpy.simbirsoft_training.HelpApp
-import com.lealpy.simbirsoft_training.database.events.EventEntity
-import com.lealpy.simbirsoft_training.database.events.EventRepository
+import com.lealpy.simbirsoft_training.data.database.events.EventEntity
+import com.lealpy.simbirsoft_training.data.database.events.EventRepository
 import com.lealpy.simbirsoft_training.utils.AppUtils
 import com.lealpy.simbirsoft_training.utils.AppUtils.LOG_TAG
 import io.reactivex.disposables.CompositeDisposable

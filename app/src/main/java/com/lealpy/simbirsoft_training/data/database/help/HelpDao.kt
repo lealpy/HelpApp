@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.database.help
+package com.lealpy.simbirsoft_training.data.database.help
 
 import androidx.room.*
 import io.reactivex.Completable

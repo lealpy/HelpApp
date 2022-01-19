@@ -2,11 +2,11 @@ package com.lealpy.simbirsoft_training
 
 import android.app.Application
 import androidx.room.Room
-import com.lealpy.simbirsoft_training.data.EventApi
-import com.lealpy.simbirsoft_training.data.HelpApi
-import com.lealpy.simbirsoft_training.data.NewsApi
-import com.lealpy.simbirsoft_training.data.NkoApi
-import com.lealpy.simbirsoft_training.database.HelpAppDatabase
+import com.lealpy.simbirsoft_training.data.api.EventApi
+import com.lealpy.simbirsoft_training.data.api.HelpApi
+import com.lealpy.simbirsoft_training.data.api.NewsApi
+import com.lealpy.simbirsoft_training.data.api.NkoApi
+import com.lealpy.simbirsoft_training.data.database.HelpAppDatabase
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
