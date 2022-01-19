@@ -29,6 +29,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private var searchView : SearchView? = null
     private var searchText : String? = null
+    private var searchItem : MenuItem? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -48,11 +49,19 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun initObservers() {
         searchByEventsViewModel.searchViewQuery.observe(viewLifecycleOwner) { query ->
+            if(query.isNotBlank()) {
+                searchItem?.expandActionView()
+            }
             searchView?.setQuery(query, true)
+            searchView?.clearFocus()
         }
 
         searchByNkoViewModel.searchViewQuery.observe(viewLifecycleOwner) { query ->
+            if(query.isNotBlank()) {
+                searchItem?.expandActionView()
+            }
             searchView?.setQuery(query, true)
+            searchView?.clearFocus()
         }
     }
 
@@ -102,11 +111,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.search_toolbar_menu, menu)
-        val searchItem = menu.findItem(R.id.SearchToolbarSearch)
+        searchItem = menu.findItem(R.id.SearchToolbarSearch)
         searchView = searchItem?.actionView as SearchView?
 
         if (searchText != null) {
-            searchItem.expandActionView()
+            searchItem?.expandActionView()
             searchView?.setQuery(searchText, true)
             searchView?.clearFocus()
         }
@@ -114,7 +123,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         searchView?.background = activity?.getDrawable(R.drawable.background_search_view)
         searchView?.queryHint = activity?.getString(R.string.search_searchview_hint)
         searchView?.maxWidth = Integer.MAX_VALUE
-        activity?.let { searchItem.icon.setColorFilter(it.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP) }
+        activity?.let { searchItem?.icon?.setColorFilter(it.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP) }
         searchView?.setIconifiedByDefault(false)
 
         Observable.create<String> { emitter ->
