@@ -62,7 +62,7 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         }
 
         viewModel.finishFragment.observe(viewLifecycleOwner) { isFinishFragment ->
-            if(isFinishFragment == true) activity?.supportFragmentManager?.popBackStack()
+            if(isFinishFragment == true) requireActivity().supportFragmentManager.popBackStack()
         }
     }
 
@@ -77,14 +77,14 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     private fun initToolbar() {
         setHasOptionsMenu(true)
 
-        val appCompatActivity = (activity as? AppCompatActivity)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
         appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     private fun initSpanFeedback() {
-        val spanFeedback = SpannableStringBuilder(activity?.getString(R.string.news_description_feedback_title))
+        val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_feedback_title))
 
         val spanStart = spanFeedback.indexOf('?') + SYMBOLS_AFTER_QUESTION
         val spanFinish = spanFeedback.length
@@ -109,7 +109,7 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initSpanSite() {
-        val spanFeedback = SpannableStringBuilder(activity?.getString(R.string.news_description_site_title))
+        val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_site_title))
 
         val spanStart = 0
         val spanFinish = spanFeedback.length
