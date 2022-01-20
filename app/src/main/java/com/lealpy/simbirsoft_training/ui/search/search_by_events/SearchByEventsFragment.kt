@@ -47,7 +47,9 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
             )
         }
 
-        binding.recyclerView.addItemDecoration(eventItemDivider)
+        if(eventItemDivider != null) {
+            binding.recyclerView.addItemDecoration(eventItemDivider)
+        }
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onRefreshSwiped()
