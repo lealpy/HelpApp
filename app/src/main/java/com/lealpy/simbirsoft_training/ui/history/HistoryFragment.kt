@@ -27,7 +27,7 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         binding.test2.setOnClickListener { rxTest2() }
         binding.test3.setOnClickListener { rxTest3() }
 
-        fetchHelpItemsJSON((activity?.application as? HelpApp)?.helpApi)
+        fetchHelpItemsJSON((requireActivity().application as? HelpApp)?.helpApi)
     }
 
     private fun fetchHelpItemsJSON(helpApi: HelpApi?) {

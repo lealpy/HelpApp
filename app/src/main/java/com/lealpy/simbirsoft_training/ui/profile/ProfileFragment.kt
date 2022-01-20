@@ -61,7 +61,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
         binding = FragmentProfileBinding.bind(view)
 
-        (activity as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
+        (requireActivity() as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
 
         initMenu()
         initViews()
@@ -114,7 +114,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             choosePhotoFromGallery()
         } else {
             if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
-                askUserForOpeningAppSettings(requireActivity().getString(R.string.profile_alert_storage_permission_denied_title))
+                askUserForOpeningAppSettings(requireContext().getString(R.string.profile_alert_storage_permission_denied_title))
             }
         }
     }
@@ -144,7 +144,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             takePhotoOnCamera()
         } else {
             if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.CAMERA)) {
-                askUserForOpeningAppSettings(requireActivity().getString(R.string.profile_alert_camera_permission_denied_title))
+                askUserForOpeningAppSettings(requireContext().getString(R.string.profile_alert_camera_permission_denied_title))
             }
         }
     }

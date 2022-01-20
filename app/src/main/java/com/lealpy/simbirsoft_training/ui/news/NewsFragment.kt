@@ -47,7 +47,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun initToolbar() {
         setHasOptionsMenu(true);
 
-        val appCompatActivity = (activity as? AppCompatActivity)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
     }
@@ -56,13 +56,11 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
         binding.recyclerView.adapter = newsAdapter
 
-        val newsItemDecoration = activity?.resources?.getDimension(R.dimen.dimen_8_dp)?.let { spacing ->
-            NewsItemDecoration(spacing.toInt())
-        }
+        val newsItemDecoration = NewsItemDecoration(
+            requireContext().resources.getDimension(R.dimen.dimen_8_dp).toInt()
+        )
 
-        if(newsItemDecoration != null) {
-            binding.recyclerView.addItemDecoration(newsItemDecoration)
-        }
+        binding.recyclerView.addItemDecoration(newsItemDecoration)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onSwipedRefresh()
@@ -83,7 +81,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         }
 
         viewModel.badgeNumber.observe(viewLifecycleOwner) { badgeNumber ->
-            (activity as? MainActivity)?.badgeSubject?.onNext(badgeNumber)
+            (requireActivity() as? MainActivity)?.badgeSubject?.onNext(badgeNumber)
         }
 
     }

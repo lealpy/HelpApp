@@ -69,6 +69,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
                 .subscribe(
                     { newsItemsJsonFromServer ->
                         val newsItemsResult = AppUtils.newsItemsJsonToNewsItems(newsItemsJsonFromServer, requestManager)
+                        loadedNewsItems = newsItemsResult
                         _newsItems.postValue(newsItemsResult)
                         _progressBarVisibility.postValue(View.GONE)
                     },
@@ -77,6 +78,7 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
                         val newsItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<NewsItemJson>>(getApplication(), NEWS_ITEMS_JSON_FILE_NAME)
                         val newsItemsResult = AppUtils.newsItemsJsonToNewsItems(newsItemsJsonFromFile, requestManager)
+                        loadedNewsItems = newsItemsResult
                         _newsItems.postValue(newsItemsResult)
                         _progressBarVisibility.postValue(View.GONE)
                     }

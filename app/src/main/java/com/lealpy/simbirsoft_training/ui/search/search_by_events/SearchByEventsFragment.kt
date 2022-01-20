@@ -41,12 +41,12 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
         binding.recyclerView.adapter = eventAdapter
 
-        val eventItemDivider =
-            activity?.getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
-                activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
-                    EventItemDecoration(drawable, paddingLeft)
-                }
-            }
+        val eventItemDivider = requireContext().getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
+            EventItemDecoration(
+                drawable,
+                requireContext().resources.getDimension(R.dimen.dimen_20_dp).toInt()
+            )
+        }
 
         if (eventItemDivider != null) {
             binding.recyclerView.addItemDecoration(eventItemDivider)
@@ -87,7 +87,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
     private fun initSpannableString() {
 
-        val searchExample = SpannableStringBuilder(activity?.getString(R.string.search_by_events_search_example_1))
+        val searchExample = SpannableStringBuilder(requireContext().getString(R.string.search_by_events_search_example_1))
 
         val spanStart = 0
         val spanFinish = searchExample.length
@@ -115,7 +115,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
     private fun showToast() {
         Toast.makeText(
             requireContext(),
-            activity?.getString(R.string.click_heard),
+            requireContext().getString(R.string.click_heard),
             Toast.LENGTH_SHORT
         ).show()
     }

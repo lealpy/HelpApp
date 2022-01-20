@@ -74,7 +74,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun initToolbar() {
         setHasOptionsMenu(true)
 
-        val appCompatActivity = (activity as? AppCompatActivity)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
     }
@@ -120,10 +120,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             searchView?.clearFocus()
         }
 
-        searchView?.background = activity?.getDrawable(R.drawable.background_search_view)
-        searchView?.queryHint = activity?.getString(R.string.search_searchview_hint)
+        searchView?.background = requireContext().getDrawable(R.drawable.background_search_view)
+        searchView?.queryHint = requireContext().getString(R.string.search_searchview_hint)
         searchView?.maxWidth = Integer.MAX_VALUE
-        activity?.let { searchItem?.icon?.setColorFilter(it.getColor(R.color.white), PorterDuff.Mode.SRC_ATOP) }
+        searchItem?.icon?.setColorFilter(requireContext().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
         searchView?.setIconifiedByDefault(false)
 
         Observable.create<String> { emitter ->

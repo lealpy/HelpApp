@@ -33,13 +33,12 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
 
         binding.recyclerView.adapter = helpAdapter
 
-        val helpItemDecoration = activity?.resources?.getDimension(R.dimen.dimen_8_dp)?.let { space ->
-            HelpItemDecoration(SPAN_COUNT, space.toInt())
-        }
+        val helpItemDecoration = HelpItemDecoration(
+            SPAN_COUNT,
+            requireContext().resources.getDimension(R.dimen.dimen_8_dp).toInt()
+        )
 
-        if(helpItemDecoration != null) {
-            binding.recyclerView.addItemDecoration(helpItemDecoration)
-        }
+        binding.recyclerView.addItemDecoration(helpItemDecoration)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onSwipedRefresh()

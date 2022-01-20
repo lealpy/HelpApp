@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsFilterBinding
 
@@ -51,7 +52,7 @@ class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
     private fun initToolbar() {
         setHasOptionsMenu(true);
 
-        val appCompatActivity = (activity as? AppCompatActivity)
+        val appCompatActivity = (requireActivity() as? AppCompatActivity)
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
         appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -65,7 +66,7 @@ class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.newsFilterToolbarOk -> {
-                requireActivity().onBackPressed()
+                findNavController().popBackStack()
                 viewModel.applyFilters(
                     binding.filterSwitcherChildren.isChecked,
                     binding.filterSwitcherAdults.isChecked,
@@ -75,7 +76,7 @@ class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
                 )
             }
             android.R.id.home -> {
-                requireActivity().onBackPressed()
+                findNavController().popBackStack()
             }
         }
         return true
