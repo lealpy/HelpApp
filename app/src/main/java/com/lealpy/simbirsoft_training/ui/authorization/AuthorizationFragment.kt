@@ -38,7 +38,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
     private fun initViews() {
         //Строка для тестирования:
-        //binding.enterBtn.isEnabled = true
+        binding.enterBtn.isEnabled = true
         binding.enterBtn.setOnClickListener {
             findNavController().navigate(R.id.actionAuthorizationFragmentToNavigationHelp)
         }
@@ -69,7 +69,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun initSpannableStringForgotPassword() {
-        val forgotPasswordButton = SpannableStringBuilder(activity?.getString(R.string.authorization_forgot_password_button))
+        val forgotPasswordButton = SpannableStringBuilder(requireContext().getString(R.string.authorization_forgot_password_button))
         val spanStart = 0
         val spanFinish = forgotPasswordButton.length
 
@@ -92,7 +92,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun initSpannableStringRegistration() {
-        val registrationButton = SpannableStringBuilder(activity?.getString(R.string.authorization_registration_button))
+        val registrationButton = SpannableStringBuilder(requireContext().getString(R.string.authorization_registration_button))
         val spanStart = 0
         val spanFinish = registrationButton.length
 
@@ -117,7 +117,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     private fun showToast() {
         Toast.makeText(
             requireContext(),
-            activity?.getString(R.string.click_heard),
+            requireContext().getString(R.string.click_heard),
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -125,7 +125,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     private fun initToolbar() {
         setHasOptionsMenu(true);
 
-        val appCompatActivity = activity as? AppCompatActivity
+        val appCompatActivity = requireActivity() as? AppCompatActivity
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
         appCompatActivity?.supportActionBar?.setDisplayHomeAsUpEnabled(true)

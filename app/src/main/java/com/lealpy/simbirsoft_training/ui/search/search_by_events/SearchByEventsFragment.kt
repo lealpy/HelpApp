@@ -8,6 +8,7 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByEventsBinding
@@ -16,7 +17,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
     private lateinit var binding : FragmentSearchByEventsBinding
 
-    private val viewModel : SearchByEventsViewModel by viewModels()
+    private val viewModel : SearchByEventsViewModel by activityViewModels()
 
     private val eventAdapter = EventItemAdapter(
         object: EventItemAdapter.OnItemClickListener {
@@ -39,16 +40,14 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
         binding.recyclerView.adapter = eventAdapter
 
-        val eventItemDivider =
-            activity?.getDrawable(R.drawable.divider)?.let { drawable ->
-                activity?.resources?.getDimension(R.dimen.dimen_20_dp)?.toInt()?.let { paddingLeft ->
-                    EventItemDecoration(drawable, paddingLeft)
-                }
-            }
-
-        if (eventItemDivider != null) {
-            binding.recyclerView.addItemDecoration(eventItemDivider)
+        val eventItemDivider = requireContext().getDrawable(R.drawable.divider)?.let { drawable ->
+            EventItemDecoration(
+                drawable,
+                requireContext().resources.getDimension(R.dimen.dimen_20_dp).toInt()
+            )
         }
+
+        binding.recyclerView.addItemDecoration(eventItemDivider)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             viewModel.onRefreshSwiped()
@@ -85,7 +84,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
     private fun initSpannableString() {
 
-        val searchExample = SpannableStringBuilder(activity?.getString(R.string.search_by_events_search_example_1))
+        val searchExample = SpannableStringBuilder(requireContext().getString(R.string.search_by_events_search_example_1))
 
         val spanStart = 0
         val spanFinish = searchExample.length
