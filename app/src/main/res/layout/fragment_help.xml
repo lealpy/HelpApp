@@ -53,4 +53,16 @@
         tools:itemCount="5"
         tools:listitem="@layout/help_item" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/dimen_38_dp"
+        android:layout_height="@dimen/dimen_38_dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:visibility="visible"
+        style="@style/ProgressBar" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

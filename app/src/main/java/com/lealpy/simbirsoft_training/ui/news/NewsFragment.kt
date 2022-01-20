@@ -1,11 +1,8 @@
 package com.lealpy.simbirsoft_training.ui.news
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -54,6 +51,8 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         initViews()
         initObservers()
         initToolbar()
+
+        if(viewModel.newsItems.value == null) viewModel.getNewsItemsFromJSON()
     }
 
     private fun initToolbar() {
@@ -65,6 +64,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
     private fun initViews() {
+
         binding.recyclerView.adapter = newsAdapter
 
         val newsItemDecoration = activity?.resources?.getDimension(R.dimen.dimen_8_dp)?.let { spacing ->
@@ -75,11 +75,20 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             binding.recyclerView.addItemDecoration(newsItemDecoration)
         }
 
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getNewsItemsFromJSON()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
     }
 
     private fun initObservers() {
         viewModel.newsItems.observe(viewLifecycleOwner) { newsItems ->
             newsAdapter.submitList(newsItems)
+        }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
         }
     }
 

@@ -1,25 +1,41 @@
 package com.lealpy.simbirsoft_training.ui.help
 
 import android.app.Application
+import android.os.Bundle
+import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.lealpy.simbirsoft_training.utils.AppUtils
+import java.lang.ref.WeakReference
 
-class HelpViewModel(application: Application): AndroidViewModel(application) {
+class HelpViewModel (application: Application) : AndroidViewModel(application) {
 
-    private val jsonFileString = AppUtils.getJsonDataFromAsset(application, HELP_ITEMS_JSON_FILE_NAME)
-    private val gson = Gson()
-    private val itemTypes = object : TypeToken<List<HelpItem>>() {}.type
-    private val helpItemsFromJson : List<HelpItem> = gson.fromJson(jsonFileString, itemTypes)
-
-    private val _helpItems = MutableLiveData( helpItemsFromJson )
+    private val _helpItems = MutableLiveData<List<HelpItem>>()
     val helpItems: LiveData<List<HelpItem>> = _helpItems
 
-    companion object {
-        private const val HELP_ITEMS_JSON_FILE_NAME = "help_items.json"
+    private val _progressBarVisibility = MutableLiveData<Int>()
+    val progressBarVisibility: LiveData<Int> = _progressBarVisibility
+
+    private val asyncTaskResponse = object : AsyncTaskResponse {
+        override fun preExecute() {
+            _progressBarVisibility.value = View.VISIBLE
+        }
+
+        override fun postExecute(helpItemsResult: List<HelpItem>?) {
+            _helpItems.value = helpItemsResult
+            _progressBarVisibility.value = View.GONE
+        }
+    }
+
+    fun onViewCreated(savedInstanceState : Bundle?) {
+        if (savedInstanceState == null || _helpItems.value == null) {
+            val getHelpItemsAsyncTask = GetHelpItemsAsyncTask(
+                asyncTaskResponse,
+                WeakReference(getApplication())
+            )
+
+            getHelpItemsAsyncTask.execute()
+        }
     }
 
 }

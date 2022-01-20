@@ -28,7 +28,7 @@ class HelpItemAdapter (
         }
 
         fun bind(helpItem: HelpItem) {
-            binding.helpItemImage.setImageResource(helpItem.image)
+            binding.helpItemImage.setImageBitmap(helpItem.image)
             binding.helpItemText.text = helpItem.text
         }
     }

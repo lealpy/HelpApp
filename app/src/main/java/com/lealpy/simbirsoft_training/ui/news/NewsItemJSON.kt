@@ -1,18 +1,16 @@
 package com.lealpy.simbirsoft_training.ui.news
 
-import android.graphics.Bitmap
-
-data class NewsItem (
+data class NewsItemJSON (
     val id : Long,
-    val image : Bitmap,
+    val imageURL : String,
     val title : String,
     val abbreviatedText : String,
     val date : String,
     val fundName : String,
     val address: String,
     val phone : String,
-    val image2 : Bitmap,
-    val image3 : Bitmap,
+    val image2URL : String,
+    val image3URL : String,
     val fullText : String,
     val isChildrenCategory : Boolean,
     val isAdultsCategory : Boolean,

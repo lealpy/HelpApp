@@ -1,12 +1,10 @@
 package com.lealpy.simbirsoft_training.ui.news.news_description
 
-import android.app.Application
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.text.style.UnderlineSpan
 import android.view.Menu
 import android.view.MenuInflater
@@ -15,7 +13,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsDescriptionBinding
 import com.lealpy.simbirsoft_training.ui.news.DataForNewsDescription
@@ -24,7 +22,7 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
     private lateinit var binding : FragmentNewsDescriptionBinding
 
-    private val viewModel : NewsDescriptionViewModel by activityViewModels()
+    private val viewModel : NewsDescriptionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
@@ -74,12 +72,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         val spanFinish = spanFeedback.length
 
         spanFeedback.setSpan(
-            activity?.getColor(R.color.leaf)?.let { ForegroundColorSpan(it) },
-            spanStart,
-            spanFinish,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
-
-        spanFeedback.setSpan(
             UnderlineSpan(),
             spanStart,
             spanFinish,
@@ -105,12 +97,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
         val spanStart = 0
         val spanFinish = spanFeedback.length
-
-        spanFeedback.setSpan(
-            activity?.getColor(R.color.leaf)?.let { ForegroundColorSpan(it) },
-            spanStart,
-            spanFinish,
-            Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         spanFeedback.setSpan(
             UnderlineSpan(),
@@ -161,16 +147,16 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             binding.fullText.text = fullText
         }
 
-        args?.image?.let { imageId ->
-            binding.image.setImageResource(imageId)
+        args?.image?.let { image ->
+            binding.image.setImageBitmap(image)
         }
 
-        args?.image2?.let { image2Id ->
-            binding.image2.setImageResource(image2Id)
+        args?.image2?.let { image2 ->
+            binding.image2.setImageBitmap(image2)
         }
 
-        args?.image3?.let { image3Id ->
-            binding.image3.setImageResource(image3Id)
+        args?.image3?.let { image3 ->
+            binding.image3.setImageBitmap(image3)
         }
     }
 

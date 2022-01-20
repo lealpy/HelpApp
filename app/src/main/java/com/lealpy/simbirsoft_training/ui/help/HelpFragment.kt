@@ -22,24 +22,16 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentHelpBinding.bind(view)
-
         initViews()
         initObservers()
-
-    }
-
-    private fun initObservers() {
-        viewModel.helpItems.observe(viewLifecycleOwner) { helpItems ->
-            helpAdapter.submitList(helpItems)
-        }
+        viewModel.onViewCreated(savedInstanceState)
     }
 
     private fun initViews() {
         binding.recyclerView.adapter = helpAdapter
+
         val helpItemDecoration = activity?.resources?.getDimension(R.dimen.dimen_8_dp)?.let { space ->
             HelpItemDecoration(SPAN_COUNT, space.toInt())
         }
@@ -49,7 +41,20 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         }
     }
 
+    private fun initObservers() {
+        viewModel.helpItems.observe(viewLifecycleOwner) { helpItems ->
+            helpAdapter.submitList(helpItems)
+        }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
+        }
+    }
+
     companion object {
         private const val SPAN_COUNT = 2
+        const val HELP_ITEMS_JSON_FILE_NAME = "help_items.json"
+        const val THREAD_SLEEP_MILLIS : Long = 2000
     }
+
 }

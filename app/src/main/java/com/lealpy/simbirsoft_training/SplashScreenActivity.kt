@@ -6,6 +6,7 @@ import android.os.Bundle
 import kotlinx.coroutines.*
 
 class SplashScreenActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
@@ -13,7 +14,7 @@ class SplashScreenActivity : AppCompatActivity() {
         val intent = Intent(this, MainActivity::class.java)
 
         GlobalScope.launch {
-            delay(screenTimeMillis)
+            delay(SCREEN_TIME_MILLIS)
             startActivity(intent)
             finish()
         }
@@ -21,6 +22,6 @@ class SplashScreenActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val screenTimeMillis = 500L
+        private const val SCREEN_TIME_MILLIS = 500L
     }
 }

@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
 
@@ -36,6 +37,8 @@
             <meta-data android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>
         </activity>
+
+        <service android:name="com.lealpy.simbirsoft_training.ui.search.search_by_nko.GetNkoItemsFromJsonIntentService" />
 
     </application>
 

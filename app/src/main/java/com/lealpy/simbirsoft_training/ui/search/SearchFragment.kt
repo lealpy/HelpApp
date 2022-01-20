@@ -39,7 +39,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     }
 
     private fun initViewPager() {
-        val adapter = ViewPagerAdapter(parentFragmentManager, lifecycle)
+        val adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
 
         binding.viewPager.adapter = adapter
 
