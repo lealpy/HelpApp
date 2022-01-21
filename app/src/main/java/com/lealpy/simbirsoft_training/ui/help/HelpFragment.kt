@@ -26,10 +26,11 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         binding = FragmentHelpBinding.bind(view)
         initViews()
         initObservers()
-        viewModel.onViewCreated(savedInstanceState)
+        viewModel.onViewCreated()
     }
 
     private fun initViews() {
+
         binding.recyclerView.adapter = helpAdapter
 
         val helpItemDecoration = HelpItemDecoration(
@@ -38,9 +39,16 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         )
 
         binding.recyclerView.addItemDecoration(helpItemDecoration)
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onSwipedRefresh()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
     }
 
     private fun initObservers() {
+
         viewModel.helpItems.observe(viewLifecycleOwner) { helpItems ->
             helpAdapter.submitList(helpItems)
         }
@@ -52,8 +60,6 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
 
     companion object {
         private const val SPAN_COUNT = 2
-        const val HELP_ITEMS_JSON_FILE_NAME = "help_items.json"
-        const val THREAD_SLEEP_MILLIS : Long = 2000
     }
 
 }

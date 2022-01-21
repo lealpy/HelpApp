@@ -7,6 +7,7 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -40,7 +41,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
         binding.recyclerView.adapter = eventAdapter
 
-        val eventItemDivider = requireContext().getDrawable(R.drawable.divider)?.let { drawable ->
+        val eventItemDivider = requireContext().getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
             EventItemDecoration(
                 drawable,
                 requireContext().resources.getDimension(R.dimen.dimen_20_dp).toInt()
@@ -98,6 +99,8 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
                 }
 
                 override fun onClick(widget: View) {
+                    viewModel.onSearchExampleClicked(searchExample.toString())
+                    showToast()
                 }
             },
             spanStart,
@@ -108,6 +111,14 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
         binding.blankSearchExample1.text = searchExample
         binding.blankSearchExample1.movementMethod = LinkMovementMethod.getInstance()
 
+    }
+
+    private fun showToast() {
+        Toast.makeText(
+            requireContext(),
+            requireContext().getString(R.string.click_heard),
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
 }

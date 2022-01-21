@@ -1,6 +1,6 @@
 package com.lealpy.simbirsoft_training.ui.news
 
-data class NewsItemJSON (
+data class NewsItemJson (
     val id : Long,
     val imageURL : String,
     val title : String,

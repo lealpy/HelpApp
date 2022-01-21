@@ -24,18 +24,14 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     private val viewModel : NewsDescriptionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentNewsDescriptionBinding.bind(view)
-
         getArgumentsData()
         initObservers()
         initViews()
         initToolbar()
         initSpanFeedback()
         initSpanSite()
-
     }
 
     private fun getArgumentsData() {
@@ -44,7 +40,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initObservers() {
-
         viewModel.toastText.observe(viewLifecycleOwner) { text ->
             Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
         }
@@ -66,6 +61,9 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             binding.progressBar.visibility = progressBarVisibility
         }
 
+        viewModel.finishFragment.observe(viewLifecycleOwner) { isFinishFragment ->
+            if(isFinishFragment == true) requireActivity().supportFragmentManager.popBackStack()
+        }
     }
 
     private fun initViews() {
@@ -86,7 +84,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initSpanFeedback() {
-
         val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_feedback_title))
 
         val spanStart = spanFeedback.indexOf('?') + SYMBOLS_AFTER_QUESTION
@@ -109,11 +106,9 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
             binding.feedback.text = spanFeedback
             binding.feedback.movementMethod = LinkMovementMethod.getInstance()
-
     }
 
     private fun initSpanSite() {
-
         val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_site_title))
 
         val spanStart = 0
@@ -136,7 +131,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
         binding.site.text = spanFeedback
         binding.site.movementMethod = LinkMovementMethod.getInstance()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

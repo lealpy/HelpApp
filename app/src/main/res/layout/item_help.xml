@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/dimen_12_dp"
         android:layout_marginEnd="@dimen/dimen_24_dp"
         android:adjustViewBounds="true"
-        tools:srcCompat="@drawable/animal" />
+        tools:srcCompat="@drawable/help_animal" />
 
     <TextView
         android:id="@+id/helpItemText"

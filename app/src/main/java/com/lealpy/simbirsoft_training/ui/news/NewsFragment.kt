@@ -37,14 +37,11 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentNewsBinding.bind(view)
-
         initViews()
         initObservers()
         initToolbar()
-
-        if(viewModel.newsItems.value == null) viewModel.getNewsItems()
+        viewModel.onViewCreated()
     }
 
     private fun initToolbar() {
@@ -66,13 +63,14 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         binding.recyclerView.addItemDecoration(newsItemDecoration)
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            viewModel.getNewsItems()
+            viewModel.onSwipedRefresh()
             binding.swipeRefreshLayout.isRefreshing = false
         }
 
     }
 
     private fun initObservers() {
+
         viewModel.newsItems.observe(viewLifecycleOwner) { newsItems ->
             newsAdapter.submitList(newsItems)
             viewModel.onNewsItemsUpdated()
@@ -85,6 +83,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
         viewModel.badgeNumber.observe(viewLifecycleOwner) { badgeNumber ->
             (requireActivity() as? MainActivity)?.badgeSubject?.onNext(badgeNumber)
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

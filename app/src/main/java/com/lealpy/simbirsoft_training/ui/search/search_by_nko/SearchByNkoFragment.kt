@@ -35,18 +35,24 @@ class SearchByNkoFragment : Fragment(R.layout.fragment_search_by_nko) {
 
     private fun initObservers() {
         viewModel.nkoItems.observe(viewLifecycleOwner) { nkoItems ->
-            nkoAdapter.submitList(nkoItems)
+            nkoAdapter.submitList(nkoItems) {
+                binding.recyclerView.scrollToPosition(0)
+            }
         }
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
             binding.progressBar.visibility = progressBarVisibility
+        }
+
+        viewModel.searchResults.observe(viewLifecycleOwner) { text ->
+            binding.searchResults.text = text
         }
     }
 
     private fun initViews() {
         binding.recyclerView.adapter = nkoAdapter
 
-        val nkoItemDivider = requireContext().getDrawable(R.drawable.divider)?.let { drawable ->
+        val nkoItemDivider = requireContext().getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
             NkoItemDecoration(
                 drawable,
                 requireContext().resources.getDimension(R.dimen.dimen_20_dp).toInt()

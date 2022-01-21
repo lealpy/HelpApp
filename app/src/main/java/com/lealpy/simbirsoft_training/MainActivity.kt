@@ -4,20 +4,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import com.lealpy.simbirsoft_training.ui.news.NewsItemJSON
-import com.lealpy.simbirsoft_training.ui.news.NewsViewModel
-import com.lealpy.simbirsoft_training.utils.AppUtils
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
+import com.lealpy.simbirsoft_training.SplashScreenActivity.Companion.EXTRA_KEY
 import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val navController by lazy { findNavController(R.id.navHostFragment) }
+
     val badgeSubject: PublishSubject<Int> = PublishSubject.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,11 +20,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initBottomNavView()
-        if(savedInstanceState == null) getStartBadgeNumber()
+
+        if(savedInstanceState == null) {
+            val startBadgeNumber = intent.getIntExtra(EXTRA_KEY, DEFAULT_BADGE_NUMBER)
+            badgeSubject.onNext(startBadgeNumber)
+        }
 
     }
 
     private fun initBottomNavView() {
+
         bottomNavView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
@@ -60,30 +59,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getStartBadgeNumber() {
-        Observable.create<Int> { emitter ->
-            val jsonFileString = AppUtils.getJsonDataFromAsset(this, NewsViewModel.NEWS_ITEMS_JSON_FILE_NAME)
-            val gson = Gson()
-            val itemTypes = object : TypeToken<List<NewsItemJSON>>() {}.type
-            val newsItemsFromJson : List<NewsItemJSON> = gson.fromJson(jsonFileString, itemTypes)
-            val startBadgeNumber = newsItemsFromJson.size
-
-            if (!emitter.isDisposed) {
-                emitter.onNext(startBadgeNumber)
-            }
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { startBadgeNumber ->
-                    badgeSubject.onNext(startBadgeNumber)
-                },
-                { error ->
-                    throw java.lang.Exception(error.message)
-                },
-            )
-    }
-
     private fun showBottomNavView() {
         bottomNavView.visibility = View.VISIBLE
     }
@@ -103,5 +78,9 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         super.onBackPressed()
+    }
+
+    companion object {
+        private const val DEFAULT_BADGE_NUMBER = 0
     }
 }

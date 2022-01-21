@@ -1,17 +1,14 @@
 package com.lealpy.simbirsoft_training.ui.search.search_by_events
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.lealpy.simbirsoft_training.HelpApp
 import com.lealpy.simbirsoft_training.utils.AppUtils
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
-import java.lang.Exception
+import io.reactivex.disposables.CompositeDisposable
 
 class SearchByEventsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -30,7 +27,19 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
     private val _recyclerViewVisibility = MutableLiveData<Int>()
     val recyclerViewVisibility: LiveData<Int> = _recyclerViewVisibility
 
+    private val _searchViewQuery = MutableLiveData<String>()
+    val searchViewQuery: LiveData<String> = _searchViewQuery
+
     private var searchText = ""
+
+    private val compositeDisposable = CompositeDisposable()
+
+    private val eventApi = (getApplication<Application>() as? HelpApp)?.eventApi
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
+    }
 
     fun onSearchChanged(searchText: String) {
         this.searchText = searchText
@@ -41,13 +50,13 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
         search(searchText)
     }
 
-    private fun getEventItemsFromJSON() : List<EventItem> {
-        val jsonFileString = AppUtils.getJsonDataFromAsset(getApplication(),
-            EVENT_ITEMS_JSON_FILE_NAME)
-        val gson = Gson()
-        val itemTypes = object : TypeToken<List<EventItem>>() {}.type
-        val eventItemsFromJson : List<EventItem> = gson.fromJson(jsonFileString, itemTypes)
-        return eventItemsFromJson
+    fun onEventTabSelected() {
+        _searchViewQuery.value = searchText
+    }
+
+    fun onSearchExampleClicked(searchExample : String) {
+        searchText = searchExample
+        _searchViewQuery.value = searchExample
     }
 
     private fun search(searchText: String) {
@@ -58,35 +67,23 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
             _progressBarVisibility.value = View.VISIBLE
             _recyclerViewVisibility.value = View.VISIBLE
 
-            Observable.create<List<EventItem>> { emitter ->
-
-                val filteredEventItemsFromJSON = getEventItemsFromJSON().filter { eventItemJSON ->
-                    eventItemJSON.title.contains(searchText)
-                }
-
-                if (!emitter.isDisposed) {
-                    emitter.onNext(filteredEventItemsFromJSON)
-                }
-
-            }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { eventItems ->
-                        _eventItems.postValue(eventItems)
-
-                        _nothingFoundViewsVisibility.postValue(
-                            if(eventItems.isEmpty()) View.VISIBLE
-                            else View.GONE
-                        )
-
-                        _progressBarVisibility.postValue(View.GONE)
-
-                    },
-                    { error ->
-                        throw Exception(error.message)
-                    }
+            eventApi?.let {
+                compositeDisposable.add(eventApi
+                    .getEventItemsJson()
+                    .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                    .observeOn(io.reactivex.schedulers.Schedulers.computation())
+                    .subscribe(
+                        { eventItemsFromServer ->
+                            showSearchResults(eventItemsFromServer, searchText)
+                        },
+                        { error ->
+                            error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
+                            val eventItemsFromFile = AppUtils.getItemJsonFromFile<List<EventItem>>(getApplication(), EVENT_ITEMS_JSON_FILE_NAME)
+                            showSearchResults(eventItemsFromFile, searchText)
+                        }
+                    )
                 )
+            }
 
         }
 
@@ -96,6 +93,21 @@ class SearchByEventsViewModel(application: Application) : AndroidViewModel(appli
             _recyclerViewVisibility.value = View.GONE
         }
 
+    }
+
+    private fun showSearchResults(eventItems : List<EventItem>, searchText: String) {
+        val filteredEventItems = eventItems.filter { eventItem ->
+            eventItem.title.contains(searchText)
+        }
+
+        _eventItems.postValue(filteredEventItems)
+
+        _nothingFoundViewsVisibility.postValue(
+            if(filteredEventItems.isEmpty()) View.VISIBLE
+            else View.GONE
+        )
+
+        _progressBarVisibility.postValue(View.GONE)
     }
 
     companion object {

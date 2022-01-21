@@ -3,25 +3,56 @@ package com.lealpy.simbirsoft_training
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.coroutines.*
+import android.util.Log
+import com.lealpy.simbirsoft_training.ui.news.NewsItemJson
+import com.lealpy.simbirsoft_training.ui.news.NewsViewModel.Companion.NEWS_ITEMS_JSON_FILE_NAME
+import com.lealpy.simbirsoft_training.utils.AppUtils
+import io.reactivex.disposables.CompositeDisposable
 
 class SplashScreenActivity : AppCompatActivity() {
+
+    private val compositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        getBadgeNumberAndStartMainActivity()
+    }
 
-        val intent = Intent(this, MainActivity::class.java)
-
-        GlobalScope.launch {
-            delay(SCREEN_TIME_MILLIS)
-            startActivity(intent)
-            finish()
+    private fun getBadgeNumberAndStartMainActivity() {
+        val newsApi = (application as? HelpApp)?.newsApi
+        newsApi?.let {
+            compositeDisposable.add(newsApi
+                .getNewsItemsJson()
+                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.schedulers.Schedulers.computation())
+                .subscribe(
+                    { newsItemsJsonFromServer ->
+                        val startBadgeNumber = newsItemsJsonFromServer.size
+                        startMainActivity(startBadgeNumber)
+                    },
+                    { error ->
+                        error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
+                        val newsItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<NewsItemJson>>(this, NEWS_ITEMS_JSON_FILE_NAME)
+                        val startBadgeNumber = newsItemsJsonFromFile.size
+                        startMainActivity(startBadgeNumber)
+                    }
+                )
+            )
         }
 
     }
 
+    private fun startMainActivity(startBadgeNumber : Int) {
+        Thread.sleep(SCREEN_TIME_MILLIS)
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra(EXTRA_KEY, startBadgeNumber)
+        startActivity(intent)
+        finish()
+    }
+
     companion object {
         private const val SCREEN_TIME_MILLIS = 500L
+        const val EXTRA_KEY = "com.lealpy.simbirsoft_training.SplashScreenActivity.EXTRA_KEY"
     }
 }

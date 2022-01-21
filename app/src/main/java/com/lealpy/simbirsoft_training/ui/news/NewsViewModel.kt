@@ -1,16 +1,17 @@
 package com.lealpy.simbirsoft_training.ui.news
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.bumptech.glide.Glide
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import com.lealpy.simbirsoft_training.HelpApp
 import com.lealpy.simbirsoft_training.utils.AppUtils
-import java.util.concurrent.Executors
+import com.lealpy.simbirsoft_training.utils.AppUtils.LOG_TAG
+import io.reactivex.disposables.CompositeDisposable
 
 class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -44,30 +45,48 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val requestManager = Glide.with(getApplication<Application>())
 
-    fun getNewsItems() {
+    private val compositeDisposable = CompositeDisposable()
 
+    private val newsApi = (getApplication() as? HelpApp)?.newsApi
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
+    }
+
+    private fun fetchNewsItems() {
+
+        _progressBarVisibility.value = View.VISIBLE
         _isChildrenChecked.value = true
         _isAdultsChecked.value = true
         _isElderlyChecked.value = true
         _isAnimalsChecked.value = true
         _isEventsChecked.value = true
 
-        val executorService = Executors.newSingleThreadExecutor()
+        newsApi?.let {
+            compositeDisposable.add(newsApi
+                .getNewsItemsJson()
+                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+                .observeOn(io.reactivex.schedulers.Schedulers.computation())
+                .subscribe(
+                    { newsItemsJsonFromServer ->
+                        val newsItemsResult = AppUtils.newsItemsJsonToNewsItems(newsItemsJsonFromServer, requestManager)
+                        loadedNewsItems = newsItemsResult
+                        _newsItems.postValue(newsItemsResult)
+                        _progressBarVisibility.postValue(View.GONE)
+                    },
+                    { error ->
+                        error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
 
-        executorService.execute {
-            _progressBarVisibility.postValue(View.VISIBLE)
-            Thread.sleep(THREAD_SLEEP_MILLIS)
-            val jsonFileString = AppUtils.getJsonDataFromAsset(getApplication(), NEWS_ITEMS_JSON_FILE_NAME)
-            val gson = Gson()
-            val itemTypes = object : TypeToken<List<NewsItemJSON>>() {}.type
-            val newsItemsFromJson : List<NewsItemJSON> = gson.fromJson(jsonFileString, itemTypes)
-            loadedNewsItems = AppUtils.newsItemsJsonToNewsItems(newsItemsFromJson, requestManager)
-            _newsItems.postValue(loadedNewsItems)
-            _progressBarVisibility.postValue(View.GONE)
+                        val newsItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<NewsItemJson>>(getApplication(), NEWS_ITEMS_JSON_FILE_NAME)
+                        val newsItemsResult = AppUtils.newsItemsJsonToNewsItems(newsItemsJsonFromFile, requestManager)
+                        loadedNewsItems = newsItemsResult
+                        _newsItems.postValue(newsItemsResult)
+                        _progressBarVisibility.postValue(View.GONE)
+                    }
+                )
+            )
         }
-
-        executorService.shutdown()
-
     }
 
     private fun updateNewsBadge() {
@@ -117,9 +136,16 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
         updateNewsBadge()
     }
 
+    fun onViewCreated() {
+        if(_newsItems.value == null) fetchNewsItems()
+    }
+
+    fun onSwipedRefresh() {
+        fetchNewsItems()
+    }
+
     companion object {
         const val NEWS_ITEMS_JSON_FILE_NAME = "news_items.json"
-        private const val THREAD_SLEEP_MILLIS : Long = 2000
     }
 
 }
