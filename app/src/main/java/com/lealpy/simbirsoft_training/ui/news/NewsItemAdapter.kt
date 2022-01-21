@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lealpy.simbirsoft_training.databinding.NewsItemBinding
+import com.lealpy.simbirsoft_training.databinding.ItemNewsBinding
 
 class NewsItemAdapter (
     private val onItemClickListener: OnItemClickListener,
 ): ListAdapter<NewsItem, NewsItemAdapter.NewsItemHolder>(DiffCallback()) {
 
     inner class NewsItemHolder(
-        private val binding: NewsItemBinding
+        private val binding: ItemNewsBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -36,7 +36,7 @@ class NewsItemAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsItemHolder {
-        val binding = NewsItemBinding.inflate(
+        val binding = ItemNewsBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

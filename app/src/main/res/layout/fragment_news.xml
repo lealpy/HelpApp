@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="2"
-            tools:listitem="@layout/news_item" />
+            tools:listitem="@layout/item_news" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 

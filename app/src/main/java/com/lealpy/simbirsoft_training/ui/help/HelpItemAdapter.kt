@@ -5,14 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.lealpy.simbirsoft_training.databinding.HelpItemBinding
+import com.lealpy.simbirsoft_training.databinding.ItemHelpBinding
 
 class HelpItemAdapter (
     private val onItemClickListener: OnItemClickListener,
 ): ListAdapter<HelpItem, HelpItemAdapter.HelpItemHolder>(DiffCallback()) {
 
     inner class HelpItemHolder(
-        private val binding: HelpItemBinding
+        private val binding: ItemHelpBinding
     ): RecyclerView.ViewHolder(binding.root) {
 
         init {
@@ -34,7 +34,7 @@ class HelpItemAdapter (
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HelpItemHolder {
-        val binding = HelpItemBinding.inflate(
+        val binding = ItemHelpBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

@@ -107,4 +107,8 @@
         <item name="iconPadding">@dimen/dimen_7_dp</item>
     </style>
 
+    <style name="EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColorHint">@color/black_38</item>
+    </style>
+
 </resources>

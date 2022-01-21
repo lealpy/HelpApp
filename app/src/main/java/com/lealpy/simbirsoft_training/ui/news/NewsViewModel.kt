@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -34,9 +35,16 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
     private val _isEventsChecked = MutableLiveData(true)
     val isEventsChecked: LiveData<Boolean> = _isEventsChecked
 
+    private val _badgeNumber = MutableLiveData<Int>()
+    val badgeNumber: LiveData<Int> = _badgeNumber
+
+    private var loadedNewsItems = listOf<NewsItem>()
+
+    private val viewedNewsId = mutableSetOf<Long>()
+
     private val requestManager = Glide.with(getApplication<Application>())
 
-    fun getNewsItemsFromJSON() {
+    fun getNewsItems() {
 
         _isChildrenChecked.value = true
         _isAdultsChecked.value = true
@@ -53,13 +61,21 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
             val gson = Gson()
             val itemTypes = object : TypeToken<List<NewsItemJSON>>() {}.type
             val newsItemsFromJson : List<NewsItemJSON> = gson.fromJson(jsonFileString, itemTypes)
-            val newsItemsResult = AppUtils.newsItemsJsonToNewsItems(newsItemsFromJson, requestManager)
-            _newsItems.postValue(newsItemsResult)
+            loadedNewsItems = AppUtils.newsItemsJsonToNewsItems(newsItemsFromJson, requestManager)
+            _newsItems.postValue(loadedNewsItems)
             _progressBarVisibility.postValue(View.GONE)
         }
 
         executorService.shutdown()
 
+    }
+
+    private fun updateNewsBadge() {
+        var badgeNumber = 0
+        _newsItems.value?.forEach { newsItem ->
+            if(!viewedNewsId.contains(newsItem.id)) badgeNumber ++
+        }
+        _badgeNumber.postValue(badgeNumber)
     }
 
     fun applyFilters(
@@ -69,33 +85,19 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
         isAnimalsChecked: Boolean,
         isEventsChecked: Boolean,
     ) {
-        val childrenCategoryList = if(isChildrenChecked) {
-            _newsItems.value?.filter { it.isChildrenCategory }
-        } else emptyList()
-
-        val adultCategoryList = if(isAdultsChecked) {
-            _newsItems.value?.filter { it.isAdultsCategory }
-        } else emptyList()
-
-        val elderlyCategoryList = if(isElderlyChecked) {
-            _newsItems.value?.filter { it.isElderlyCategory }
-        } else emptyList()
-
-        val animalsCategoryList = if(isAnimalsChecked) {
-            _newsItems.value?.filter { it.isAnimalsCategory }
-        } else emptyList()
-
-        val eventsCategoryList = if(isEventsChecked) {
-            _newsItems.value?.filter { it.isEventsCategory }
-        } else emptyList()
-
         val filteredNewsSet = mutableSetOf<NewsItem>()
 
-        if (childrenCategoryList != null) filteredNewsSet.addAll(childrenCategoryList)
-        if (adultCategoryList != null) filteredNewsSet.addAll(adultCategoryList)
-        if (elderlyCategoryList != null) filteredNewsSet.addAll(elderlyCategoryList)
-        if (animalsCategoryList != null) filteredNewsSet.addAll(animalsCategoryList)
-        if (eventsCategoryList != null) filteredNewsSet.addAll(eventsCategoryList)
+        loadedNewsItems.forEach { newsItem ->
+            if(
+                isChildrenChecked && newsItem.isChildrenCategory ||
+                isAdultsChecked && newsItem.isAdultsCategory ||
+                isElderlyChecked && newsItem.isElderlyCategory ||
+                isAnimalsChecked && newsItem.isAnimalsCategory ||
+                isEventsChecked && newsItem.isEventsCategory
+            ) {
+                filteredNewsSet.add(newsItem)
+            }
+        }
 
         _newsItems.value = filteredNewsSet.toList()
 
@@ -106,8 +108,17 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
         _isEventsChecked.value = isEventsChecked
     }
 
+    fun onNewsViewed(id: Long) {
+        viewedNewsId.add(id)
+        updateNewsBadge()
+    }
+
+    fun onNewsItemsUpdated() {
+        updateNewsBadge()
+    }
+
     companion object {
-        private const val NEWS_ITEMS_JSON_FILE_NAME = "news_items.json"
+        const val NEWS_ITEMS_JSON_FILE_NAME = "news_items.json"
         private const val THREAD_SLEEP_MILLIS : Long = 2000
     }
 

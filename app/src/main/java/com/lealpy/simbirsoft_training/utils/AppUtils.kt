@@ -24,7 +24,7 @@ object AppUtils {
         )
     }
 
-    fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
+    private fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
         return requestManager
             .asBitmap()
             .load(url)
@@ -32,32 +32,28 @@ object AppUtils {
             .get()
     }
 
-    fun newsItemsJsonToNewsItems(
-        newsItemsJSON: List<NewsItemJSON>,
-        requestManager: RequestManager,
-    ): List<NewsItem> {
-        return newsItemsJSON.map { newsItemJSON ->
-            val image = getBitmapFromUrl(requestManager, newsItemJSON.imageURL)
-            val image2 = getBitmapFromUrl(requestManager, newsItemJSON.image2URL)
-            val image3 = getBitmapFromUrl(requestManager, newsItemJSON.image3URL)
+    fun newsItemsJsonToNewsItems(newsItemsJSON : List<NewsItemJSON>, requestManager : RequestManager) : List<NewsItem>{
+        return newsItemsJSON.map { newsItemFromJSON ->
+
+            val image = AppUtils.getBitmapFromUrl(requestManager, newsItemFromJSON.imageURL)
 
             NewsItem(
-                id = newsItemJSON.id,
+                id = newsItemFromJSON.id,
                 image = image,
-                title = newsItemJSON.title,
-                abbreviatedText = newsItemJSON.abbreviatedText,
-                date = newsItemJSON.date,
-                fundName = newsItemJSON.fundName,
-                address = newsItemJSON.address,
-                phone = newsItemJSON.phone,
-                image2 = image2,
-                image3 = image3,
-                fullText = newsItemJSON.fullText,
-                isChildrenCategory = newsItemJSON.isChildrenCategory,
-                isAdultsCategory = newsItemJSON.isAdultsCategory,
-                isElderlyCategory = newsItemJSON.isElderlyCategory,
-                isAnimalsCategory = newsItemJSON.isAnimalsCategory,
-                isEventsCategory = newsItemJSON.isEventsCategory
+                title = newsItemFromJSON.title,
+                abbreviatedText = newsItemFromJSON.abbreviatedText,
+                date = newsItemFromJSON.date,
+                fundName = null,
+                address = null,
+                phone = null,
+                image2 = null,
+                image3 = null,
+                fullText = null,
+                isChildrenCategory = newsItemFromJSON.isChildrenCategory,
+                isAdultsCategory = newsItemFromJSON.isAdultsCategory,
+                isElderlyCategory = newsItemFromJSON.isElderlyCategory,
+                isAnimalsCategory = newsItemFromJSON.isAnimalsCategory,
+                isEventsCategory = newsItemFromJSON.isEventsCategory
             )
         }
     }

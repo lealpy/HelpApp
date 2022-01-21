@@ -48,5 +48,16 @@
         android:name="com.lealpy.simbirsoft_training.ui.news.news_description.NewsDescriptionFragment"
         android:label="NewsDescriptionFragment"
         tools:layout="@layout/fragment_news_description"/>
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.lealpy.simbirsoft_training.ui.authorization.AuthorizationFragment"
+        android:label="AuthorizationFragment"
+        tools:layout="@layout/fragment_authorization">
+        <action
+            android:id="@+id/actionAuthorizationFragmentToNavigationHelp"
+            app:destination="@id/navigationHelp"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"/>
+    </fragment>
 
 </navigation>
