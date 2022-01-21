@@ -5,6 +5,7 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -84,38 +85,21 @@ class NewsViewModel(application: Application) : AndroidViewModel(application) {
         isAnimalsChecked: Boolean,
         isEventsChecked: Boolean,
     ) {
-
-        val childrenCategoryList = if(isChildrenChecked) {
-            loadedNewsItems.filter { it.isChildrenCategory }
-        } else emptyList()
-
-        val adultCategoryList = if(isAdultsChecked) {
-            loadedNewsItems.filter { it.isAdultsCategory }
-        } else emptyList()
-
-        val elderlyCategoryList = if(isElderlyChecked) {
-            loadedNewsItems.filter { it.isElderlyCategory }
-        } else emptyList()
-
-        val animalsCategoryList = if(isAnimalsChecked) {
-            loadedNewsItems.filter { it.isAnimalsCategory }
-        } else emptyList()
-
-        val eventsCategoryList = if(isEventsChecked) {
-            loadedNewsItems.filter { it.isEventsCategory }
-        } else emptyList()
-
         val filteredNewsSet = mutableSetOf<NewsItem>()
 
-        filteredNewsSet.addAll(childrenCategoryList)
-        filteredNewsSet.addAll(adultCategoryList)
-        filteredNewsSet.addAll(elderlyCategoryList)
-        filteredNewsSet.addAll(animalsCategoryList)
-        filteredNewsSet.addAll(eventsCategoryList)
+        loadedNewsItems.forEach { newsItem ->
+            if(
+                isChildrenChecked && newsItem.isChildrenCategory ||
+                isAdultsChecked && newsItem.isAdultsCategory ||
+                isElderlyChecked && newsItem.isElderlyCategory ||
+                isAnimalsChecked && newsItem.isAnimalsCategory ||
+                isEventsChecked && newsItem.isEventsCategory
+            ) {
+                filteredNewsSet.add(newsItem)
+            }
+        }
 
         _newsItems.value = filteredNewsSet.toList()
-
-        updateNewsBadge()
 
         _isChildrenChecked.value = isChildrenChecked
         _isAdultsChecked.value = isAdultsChecked
