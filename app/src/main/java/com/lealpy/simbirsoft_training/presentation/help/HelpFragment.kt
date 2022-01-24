@@ -6,7 +6,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentHelpBinding
-import com.lealpy.simbirsoft_training.domain.model.HelpItem
 
 class HelpFragment : Fragment(R.layout.fragment_help) {
 
@@ -14,13 +13,9 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
 
     private val viewModel : HelpViewModel by activityViewModels()
 
-    private val helpAdapter = HelpItemAdapter(
-        object: HelpItemAdapter.OnItemClickListener {
-            override fun onItemClick(helpItem: HelpItem) {
-                // Задел на будущее
-            }
-        }
-    )
+    private val helpAdapter = HelpItemAdapter {
+        viewModel.onItemClicked()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,7 +26,6 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
     }
 
     private fun initViews() {
-
         binding.recyclerView.adapter = helpAdapter
 
         val helpItemDecoration = HelpItemDecoration(
@@ -45,11 +39,9 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
             viewModel.onSwipedRefresh()
             binding.swipeRefreshLayout.isRefreshing = false
         }
-
     }
 
     private fun initObservers() {
-
         viewModel.helpItems.observe(viewLifecycleOwner) { helpItems ->
             helpAdapter.submitList(helpItems)
         }

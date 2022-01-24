@@ -4,20 +4,15 @@ import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.View
-import com.lealpy.simbirsoft_training.App
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.data.api.HelpApi
 import com.lealpy.simbirsoft_training.databinding.FragmentHistoryBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 class HistoryFragment : Fragment(R.layout.fragment_history) {
 
     private lateinit var binding : FragmentHistoryBinding
-
-    private val compositeDisposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,28 +21,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         binding.test1.setOnClickListener { rxTest1() }
         binding.test2.setOnClickListener { rxTest2() }
         binding.test3.setOnClickListener { rxTest3() }
-
-        fetchHelpItemsJSON((requireActivity().application as? App)?.helpApi)
-    }
-
-    private fun fetchHelpItemsJSON(helpApi: HelpApi?) {
-        helpApi?.let {
-            compositeDisposable.add(helpApi.getHelpItemsJson()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { helpItemsJSON ->
-                        helpItemsJSON.forEach {
-                            Log.d("MyLog", it.text)
-                            Log.d("MyLog", it.id.toString())
-                        }
-                    },
-                    { error ->
-                        throw Exception(error.message)
-                    }
-                )
-            )
-        }
     }
 
     private fun rxTest1() {
@@ -65,11 +38,9 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         val numbersSubscription = numbers.subscribe { number ->
             Log.d(LOG_TAG, "At the subscribe. Current item is $number. CurrentThread is ${Thread.currentThread().name}, id ${Thread.currentThread().id}.")
         }
-
     }
 
     private fun rxTest2() {
-
         data class Person (
             val name : String,
             val age : Int
@@ -115,7 +86,6 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         val personsSubscription = persons.subscribe { person ->
             Log.d(LOG_TAG, "At the subscribe. Current person is $person. CurrentThread is ${Thread.currentThread().name}, id ${Thread.currentThread().id}.")
         }
-
     }
 
     private fun rxTest3() {

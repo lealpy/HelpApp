@@ -2,9 +2,14 @@ package com.lealpy.simbirsoft_training.utils
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.widget.Toast
 import com.bumptech.glide.RequestManager
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.data.database.events.EventEntity
 import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
 import com.lealpy.simbirsoft_training.domain.model.HelpItem
@@ -12,14 +17,32 @@ import com.lealpy.simbirsoft_training.data.model.HelpItemJson
 import com.lealpy.simbirsoft_training.domain.model.NewsItem
 import com.lealpy.simbirsoft_training.data.model.NewsItemJson
 import com.lealpy.simbirsoft_training.domain.model.EventItem
+import javax.inject.Inject
 
-object AppUtils {
+class AppUtils @Inject constructor(
+    val appContext: Context,
+    private val requestManager: RequestManager
+    ) {
 
-    const val LOG_TAG = "HelpAppLog"
+    companion object {
+        const val LOG_TAG = "HelpAppLog"
+    }
 
-    inline fun <reified T> getItemJsonFromFile(context: Context, fileName: String) : T {
-        val jsonFileString = context.assets.open(fileName).bufferedReader().use { it.readText() }
-        return Gson().fromJson(jsonFileString, object: TypeToken<T>() {}.type)
+    fun getBitmapFromUrl(url : String) : Bitmap {
+        return requestManager
+            .asBitmap()
+            .load(url)
+            .placeholder(R.drawable.no_photo)
+            .error(R.drawable.no_photo)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(false)
+            .submit()
+            .get()
+    }
+
+    fun getBitmapFromUri(uri : Uri) : Bitmap {
+        val inputStream = appContext.contentResolver.openInputStream(uri)
+        return BitmapFactory.decodeStream(inputStream)
     }
 
     fun cropBitmap(bitmap: Bitmap, ratio : Double) : Bitmap {
@@ -32,17 +55,18 @@ object AppUtils {
         )
     }
 
-    private fun getBitmapFromUrl(requestManager : RequestManager, url : String) : Bitmap {
-        return requestManager
-            .asBitmap()
-            .load(url)
-            .submit()
-            .get()
+    fun showToast(text : String) {
+        Toast.makeText(appContext, text, Toast.LENGTH_SHORT).show()
     }
 
-    fun helpItemsJsonToHelpItems(helpItemsJson: List<HelpItemJson>, requestManager : RequestManager) : List<HelpItem> {
+    inline fun <reified T> getItemJsonFromFile(fileName: String) : T {
+        val jsonFileString = appContext.assets.open(fileName).bufferedReader().use { it.readText() }
+        return Gson().fromJson(jsonFileString, object: TypeToken<T>() {}.type)
+    }
+
+    fun helpItemsJsonToHelpItems(helpItemsJson: List<HelpItemJson>) : List<HelpItem> {
         return helpItemsJson.map { helpItemJson ->
-            val image = getBitmapFromUrl(requestManager, helpItemJson.imageURL)
+            val image = getBitmapFromUrl(helpItemJson.imageURL)
 
             HelpItem(
                 id = helpItemJson.id,
@@ -62,9 +86,9 @@ object AppUtils {
         }
     }
 
-    fun helpEntitiesToHelpItems(helpEntities: List<HelpEntity>, requestManager : RequestManager) : List<HelpItem> {
+    fun helpEntitiesToHelpItems(helpEntities: List<HelpEntity>) : List<HelpItem> {
         return helpEntities.map { helpEntity ->
-            val image = getBitmapFromUrl(requestManager, helpEntity.imageUrl)
+            val image = getBitmapFromUrl(helpEntity.imageUrl)
 
             HelpItem(
                 id = helpEntity.id,
@@ -94,9 +118,9 @@ object AppUtils {
         }
     }
 
-    fun newsItemsJsonToNewsItems(newsItemsJson: List<NewsItemJson>, requestManager : RequestManager) : List<NewsItem> {
+    fun newsItemsJsonToNewsItems(newsItemsJson: List<NewsItemJson>) : List<NewsItem> {
         return newsItemsJson.map { newsItemJson ->
-            val image = getBitmapFromUrl(requestManager, newsItemJson.imageURL)
+            val image = getBitmapFromUrl(newsItemJson.imageURL)
 
             NewsItem(
                 id = newsItemJson.id,
@@ -119,10 +143,10 @@ object AppUtils {
         }
     }
 
-    fun newsItemJsonToNewsItem(newsItemJson: NewsItemJson, requestManager : RequestManager) : NewsItem {
-        val image = getBitmapFromUrl(requestManager, newsItemJson.imageURL)
-        val image2 = getBitmapFromUrl(requestManager, newsItemJson.image2URL)
-        val image3 = getBitmapFromUrl(requestManager, newsItemJson.image3URL)
+    fun newsItemJsonToNewsItem(newsItemJson: NewsItemJson) : NewsItem {
+        val image = getBitmapFromUrl(newsItemJson.imageURL)
+        val image2 = getBitmapFromUrl(newsItemJson.image2URL)
+        val image3 = getBitmapFromUrl(newsItemJson.image3URL)
 
         return NewsItem(
             id = newsItemJson.id,

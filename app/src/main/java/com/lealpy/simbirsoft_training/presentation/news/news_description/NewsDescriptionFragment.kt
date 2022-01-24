@@ -10,13 +10,14 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentNewsDescriptionBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
     private lateinit var binding : FragmentNewsDescriptionBinding
@@ -40,10 +41,6 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initObservers() {
-        viewModel.toastText.observe(viewLifecycleOwner) { text ->
-            Toast.makeText(requireContext(), text, Toast.LENGTH_SHORT).show()
-        }
-
         viewModel.newsItem.observe(viewLifecycleOwner) { newsItem ->
             binding.toolbarTitle.text = newsItem.title
             binding.title.text = newsItem.title

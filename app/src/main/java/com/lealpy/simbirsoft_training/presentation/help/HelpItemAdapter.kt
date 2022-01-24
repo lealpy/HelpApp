@@ -9,7 +9,7 @@ import com.lealpy.simbirsoft_training.databinding.ItemHelpBinding
 import com.lealpy.simbirsoft_training.domain.model.HelpItem
 
 class HelpItemAdapter (
-    private val onItemClickListener: OnItemClickListener,
+    private val onItemClick: (helpItem : HelpItem) -> Unit,
 ): ListAdapter<HelpItem, HelpItemAdapter.HelpItemHolder>(DiffCallback()) {
 
     inner class HelpItemHolder(
@@ -17,13 +17,11 @@ class HelpItemAdapter (
     ): RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.apply {
-                binding.root.setOnClickListener {
-                    val position = layoutPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        val helpItem = getItem(position)
-                        onItemClickListener.onItemClick(helpItem)
-                    }
+            binding.root.setOnClickListener {
+                val position = layoutPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val helpItem = getItem(position)
+                    onItemClick(helpItem)
                 }
             }
         }
@@ -48,10 +46,6 @@ class HelpItemAdapter (
         holder.bind(item)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(helpItem: HelpItem)
-    }
-
     class DiffCallback: DiffUtil.ItemCallback<HelpItem>() {
         override fun areItemsTheSame(oldItem: HelpItem, newItem: HelpItem) =
             oldItem.id == newItem.id
@@ -59,4 +53,5 @@ class HelpItemAdapter (
         override fun areContentsTheSame(oldItem: HelpItem, newItem: HelpItem) =
             oldItem == newItem
     }
+
 }

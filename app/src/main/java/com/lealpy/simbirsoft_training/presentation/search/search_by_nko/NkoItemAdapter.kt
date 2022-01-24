@@ -9,22 +9,21 @@ import com.lealpy.simbirsoft_training.databinding.ItemNkoBinding
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
 
 class NkoItemAdapter (
-    private val onItemClickListener: OnItemClickListener,
+    private val onItemClick : (nkoItem : NkoItem) -> Unit,
 ): ListAdapter<NkoItem, NkoItemAdapter.NkoItemHolder>(DiffCallback()) {
 
     inner class NkoItemHolder(
         private val binding: ItemNkoBinding
     ): RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.apply {
-                binding.root.setOnClickListener {
-                    val position = layoutPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        val nkoItem = getItem(position)
-                        onItemClickListener.onItemClick(nkoItem)
-                    }
+            binding.root.setOnClickListener {
+                val position = layoutPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val nkoItem = getItem(position)
+                    onItemClick(nkoItem)
                 }
             }
+
         }
 
         fun bind(nkoItem: NkoItem) {
@@ -46,10 +45,6 @@ class NkoItemAdapter (
         holder.bind(item)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(nkoItem: NkoItem)
-    }
-
     class DiffCallback: DiffUtil.ItemCallback<NkoItem>() {
         override fun areItemsTheSame(oldItem: NkoItem, newItem: NkoItem) =
             oldItem.id == newItem.id
@@ -57,4 +52,5 @@ class NkoItemAdapter (
         override fun areContentsTheSame(oldItem: NkoItem, newItem: NkoItem) =
             oldItem == newItem
     }
+
 }

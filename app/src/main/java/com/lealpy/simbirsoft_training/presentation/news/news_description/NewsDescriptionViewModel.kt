@@ -1,23 +1,26 @@
 package com.lealpy.simbirsoft_training.presentation.news.news_description
 
-import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide
-import com.lealpy.simbirsoft_training.App
+import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
+import com.lealpy.simbirsoft_training.data.api.NewsApi
 import com.lealpy.simbirsoft_training.domain.model.NewsItem
 import com.lealpy.simbirsoft_training.data.model.NewsItemJson
 import com.lealpy.simbirsoft_training.utils.AppUtils
+import com.lealpy.simbirsoft_training.utils.ResourceManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class NewsDescriptionViewModel (application: Application) : AndroidViewModel(application) {
-
-    private val _toastText = MutableLiveData <String> ()
-    val toastText : LiveData<String> = _toastText
+@HiltViewModel
+class NewsDescriptionViewModel @Inject constructor (
+    private val newsApi: NewsApi,
+    private val appUtils: AppUtils,
+    private val resourceManager: ResourceManager
+) : ViewModel() {
 
     private val _newsItem = MutableLiveData <NewsItem> ()
     val newsItem : LiveData<NewsItem> = _newsItem
@@ -28,11 +31,7 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
     private val _finishFragment = MutableLiveData <Boolean> ()
     val finishFragment : LiveData<Boolean> = _finishFragment
 
-    private val requestManager = Glide.with(getApplication<Application>())
-
     private val compositeDisposable = CompositeDisposable()
-
-    private val newsApi = (getApplication() as? App)?.newsApi
 
     override fun onCleared() {
         compositeDisposable.clear()
@@ -40,28 +39,25 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
     }
 
     private fun fetchNewsItem(newsItemId : Long) {
-
         _progressBarVisibility.value = View.VISIBLE
 
-        newsApi?.let {
-            compositeDisposable.add(newsApi
-                .getNewsItemsJson()
-                .subscribeOn(io.reactivex.schedulers.Schedulers.io())
-                .observeOn(io.reactivex.schedulers.Schedulers.computation())
-                .subscribe(
-                    { newsItemsJsonFromServer ->
-                        item(newsItemsJsonFromServer, newsItemId)
-                        _progressBarVisibility.postValue(View.GONE)
-                    },
-                    { error ->
-                        error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
-                        val newsItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<NewsItemJson>>(getApplication(), NEWS_ITEMS_JSON_FILE_NAME)
-                        item(newsItemsJsonFromFile, newsItemId)
-                        _progressBarVisibility.postValue(View.GONE)
-                    }
-                )
+        compositeDisposable.add(newsApi
+            .getNewsItemsJson()
+            .subscribeOn(io.reactivex.schedulers.Schedulers.io())
+            .observeOn(io.reactivex.schedulers.Schedulers.computation())
+            .subscribe(
+                { newsItemsJsonFromServer ->
+                    item(newsItemsJsonFromServer, newsItemId)
+                    _progressBarVisibility.postValue(View.GONE)
+                },
+                { error ->
+                    error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
+                    val newsItemsJsonFromFile = appUtils.getItemJsonFromFile<List<NewsItemJson>>(NEWS_ITEMS_JSON_FILE_NAME)
+                    item(newsItemsJsonFromFile, newsItemId)
+                    _progressBarVisibility.postValue(View.GONE)
+                }
             )
-        }
+        )
     }
 
     private fun item(newsItemsJson : List<NewsItemJson>, newsItemId : Long) {
@@ -69,7 +65,7 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
             newsItemJson.id == newsItemId
         }
         if(newsItemJson != null) {
-            val newsItem = AppUtils.newsItemJsonToNewsItem(newsItemJson, requestManager)
+            val newsItem = appUtils.newsItemJsonToNewsItem(newsItemJson)
             _newsItem.postValue(newsItem)
         }
         else {
@@ -78,7 +74,7 @@ class NewsDescriptionViewModel (application: Application) : AndroidViewModel(app
     }
 
     private fun showToast() {
-        _toastText.value = getApplication<Application>().getString(R.string.click_heard)
+        appUtils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     fun onSiteClicked() { showToast() }

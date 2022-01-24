@@ -1,19 +1,19 @@
 package com.lealpy.simbirsoft_training.presentation.help
 
-import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bumptech.glide.Glide
-import com.lealpy.simbirsoft_training.App
+import androidx.lifecycle.ViewModel
+import com.lealpy.simbirsoft_training.R
+import com.lealpy.simbirsoft_training.data.api.HelpApi
 import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
 import com.lealpy.simbirsoft_training.data.database.help.HelpRepository
 import com.lealpy.simbirsoft_training.data.model.HelpItemJson
 import com.lealpy.simbirsoft_training.domain.model.HelpItem
 import com.lealpy.simbirsoft_training.utils.AppUtils
-import com.lealpy.simbirsoft_training.utils.AppUtils.LOG_TAG
+import com.lealpy.simbirsoft_training.utils.AppUtils.Companion.LOG_TAG
+import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -21,9 +21,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HelpViewModel @Inject constructor(
-    application : Application,
-    private val repository : HelpRepository
-) : AndroidViewModel(application) {
+    private val repository : HelpRepository,
+    private val resourceManager: ResourceManager,
+    private val helpApi: HelpApi,
+    private val appUtils: AppUtils
+) : ViewModel() {
 
     private val _helpItems = MutableLiveData<List<HelpItem>>()
     val helpItems: LiveData<List<HelpItem>> = _helpItems
@@ -31,11 +33,7 @@ class HelpViewModel @Inject constructor(
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
 
-    private val requestManager = Glide.with(getApplication<Application>())
-
     private val compositeDisposable = CompositeDisposable()
-
-    private val helpApi = (getApplication<Application>() as? App)?.helpApi
 
     override fun onCleared() {
         compositeDisposable.clear()
@@ -53,26 +51,24 @@ class HelpViewModel @Inject constructor(
     private fun getHelpItemsFromServerOrFile() {
         _progressBarVisibility.value = View.VISIBLE
 
-        helpApi?.let {
-            compositeDisposable.add(
-                helpApi.getHelpItemsJson()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.computation())
-                    .subscribe(
-                        { helpItemsJsonFromServer ->
-                            val helpEntities = AppUtils.helpItemsJsonToHelpEntities(helpItemsJsonFromServer)
-                            insertHelpEntitiesInDb(helpEntities)
-                        },
-                        { error ->
-                            error.message?.let { err -> Log.e(LOG_TAG, err) }
+        compositeDisposable.add(
+            helpApi.getHelpItemsJson()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .subscribe(
+                    { helpItemsJsonFromServer ->
+                        val helpEntities = appUtils.helpItemsJsonToHelpEntities(helpItemsJsonFromServer)
+                        insertHelpEntitiesInDb(helpEntities)
+                    },
+                    { error ->
+                        error.message?.let { err -> Log.e(LOG_TAG, err) }
 
-                            val helpItemsJsonFromFile = AppUtils.getItemJsonFromFile<List<HelpItemJson>>(getApplication(), HELP_ITEMS_JSON_FILE_NAME)
-                            val helpEntities = AppUtils.helpItemsJsonToHelpEntities(helpItemsJsonFromFile)
-                            insertHelpEntitiesInDb(helpEntities)
-                        }
-                    )
-            )
-        }
+                        val helpItemsJsonFromFile = appUtils.getItemJsonFromFile<List<HelpItemJson>>(HELP_ITEMS_JSON_FILE_NAME)
+                        val helpEntities = appUtils.helpItemsJsonToHelpEntities(helpItemsJsonFromFile)
+                        insertHelpEntitiesInDb(helpEntities)
+                    }
+                )
+        )
     }
 
     private fun insertHelpEntitiesInDb(helpEntities: List<HelpEntity>) {
@@ -101,7 +97,7 @@ class HelpViewModel @Inject constructor(
                 .observeOn(Schedulers.computation())
                 .subscribe(
                     { helpEntities ->
-                        val helpItems = AppUtils.helpEntitiesToHelpItems(helpEntities, requestManager)
+                        val helpItems = appUtils.helpEntitiesToHelpItems(helpEntities)
                         _helpItems.postValue(helpItems)
                         _progressBarVisibility.postValue(View.GONE)
                     },
@@ -110,6 +106,10 @@ class HelpViewModel @Inject constructor(
                     }
                 )
         )
+    }
+
+    fun onItemClicked() {
+        appUtils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     companion object {

@@ -12,11 +12,9 @@ class EventItemDecoration(
 ) : ItemDecoration() {
 
     override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-
         if(parent.getChildAt(0) != null) drawTopLine(canvas, parent)
         drawDividers(canvas, parent)
         if(parent.getChildAt(parent.childCount - 1) != null) drawBottomLine(canvas, parent)
-
     }
 
     private fun drawDividers(canvas: Canvas, parent: RecyclerView) {

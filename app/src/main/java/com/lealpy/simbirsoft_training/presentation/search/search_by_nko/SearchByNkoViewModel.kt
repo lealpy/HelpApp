@@ -1,20 +1,27 @@
 package com.lealpy.simbirsoft_training.presentation.search.search_by_nko
 
-import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lealpy.simbirsoft_training.App
+import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
+import com.lealpy.simbirsoft_training.data.api.NkoApi
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
 import com.lealpy.simbirsoft_training.utils.AppUtils
+import com.lealpy.simbirsoft_training.utils.ResourceManager
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.util.*
+import javax.inject.Inject
 
-class SearchByNkoViewModel(application: Application) : AndroidViewModel(application) {
+@HiltViewModel
+class SearchByNkoViewModel @Inject constructor(
+    private val nkoApi: NkoApi,
+    private val appUtils: AppUtils,
+    private val resourceManager: ResourceManager
+) : ViewModel() {
 
     private val _nkoItems = MutableLiveData<List<NkoItem>> ()
     val nkoItems : LiveData<List<NkoItem>> = _nkoItems
@@ -27,8 +34,8 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
     private val _searchViewQuery = MutableLiveData<String>()
     val searchViewQuery: LiveData<String> = _searchViewQuery
 
-    private val _searchResults = MutableLiveData<String>(
-        String.format(getApplication<Application>().getString(R.string.search_by_nko_search_results), 0)
+    private val _searchResults = MutableLiveData(
+        String.format(resourceManager.getString(R.string.search_by_nko_search_results), 0)
     )
     val searchResults: LiveData<String> = _searchResults
 
@@ -36,7 +43,6 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
 
     private val compositeDisposable = CompositeDisposable()
 
-    private val nkoApi = (getApplication<Application>() as? App)?.nkoApi
 
     override fun onCleared() {
         compositeDisposable.clear()
@@ -46,25 +52,23 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
     private fun fetchNkoItemsJson() {
         _progressBarVisibility.value = View.VISIBLE
 
-        nkoApi?.let {
-            compositeDisposable.add(nkoApi
-                .getNkoItemsJson()
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .subscribe(
-                    { nkoItemsFromServer ->
-                        setRandomNkoItems(nkoItemsFromServer)
-                        _progressBarVisibility.postValue(View.GONE)
-                    },
-                    { error ->
-                        error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
-                        val nkoItemsFromFile = AppUtils.getItemJsonFromFile<List<NkoItem>>(getApplication(), NKO_ITEMS_JSON_FILE_NAME)
-                        setRandomNkoItems(nkoItemsFromFile)
-                        _progressBarVisibility.postValue(View.GONE)
-                    }
-                )
+        compositeDisposable.add(nkoApi
+            .getNkoItemsJson()
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.computation())
+            .subscribe(
+                { nkoItemsFromServer ->
+                    setRandomNkoItems(nkoItemsFromServer)
+                    _progressBarVisibility.postValue(View.GONE)
+                },
+                { error ->
+                    error.message?.let { err -> Log.e(AppUtils.LOG_TAG, err) }
+                    val nkoItemsFromFile = appUtils.getItemJsonFromFile<List<NkoItem>>(NKO_ITEMS_JSON_FILE_NAME)
+                    setRandomNkoItems(nkoItemsFromFile)
+                    _progressBarVisibility.postValue(View.GONE)
+                }
             )
-        }
+        )
     }
 
     private fun setRandomNkoItems(nkoItems : List<NkoItem>) {
@@ -93,7 +97,7 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
     }
 
     private fun setNumberOfFoundNkoItems(numberOfFoundNkoItems : Int) {
-        val searchResults = String.format(getApplication<Application>().getString(
+        val searchResults = String.format(resourceManager.getString(
             R.string.search_by_nko_search_results),
             numberOfFoundNkoItems
         )
@@ -117,6 +121,10 @@ class SearchByNkoViewModel(application: Application) : AndroidViewModel(applicat
 
     fun onSearchChanged(searchText: String) {
         this.searchText = searchText
+    }
+
+    fun onItemClicked() {
+        appUtils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     companion object {

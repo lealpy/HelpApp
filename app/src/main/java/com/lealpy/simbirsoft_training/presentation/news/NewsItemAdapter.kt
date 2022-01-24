@@ -9,7 +9,7 @@ import com.lealpy.simbirsoft_training.databinding.ItemNewsBinding
 import com.lealpy.simbirsoft_training.domain.model.NewsItem
 
 class NewsItemAdapter (
-    private val onItemClickListener: OnItemClickListener,
+    private val onItemClick : (newsItem : NewsItem) -> Unit,
 ): ListAdapter<NewsItem, NewsItemAdapter.NewsItemHolder>(DiffCallback()) {
 
     inner class NewsItemHolder(
@@ -17,13 +17,11 @@ class NewsItemAdapter (
     ): RecyclerView.ViewHolder(binding.root) {
 
         init {
-            binding.apply {
-                binding.root.setOnClickListener {
-                    val position = layoutPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        val newsItem = getItem(position)
-                        onItemClickListener.onItemClick(newsItem)
-                    }
+            binding.root.setOnClickListener {
+                val position = layoutPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val newsItem = getItem(position)
+                    onItemClick(newsItem)
                 }
             }
         }
@@ -50,10 +48,6 @@ class NewsItemAdapter (
         holder.bind(item)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(newsItem: NewsItem)
-    }
-
     class DiffCallback: DiffUtil.ItemCallback<NewsItem>() {
         override fun areItemsTheSame(oldItem: NewsItem, newItem: NewsItem) =
             oldItem.id == newItem.id
@@ -61,4 +55,5 @@ class NewsItemAdapter (
         override fun areContentsTheSame(oldItem: NewsItem, newItem: NewsItem) =
             oldItem == newItem
     }
+
 }

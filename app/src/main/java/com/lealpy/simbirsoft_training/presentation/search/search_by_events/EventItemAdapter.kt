@@ -9,20 +9,18 @@ import com.lealpy.simbirsoft_training.databinding.ItemEventBinding
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 
 class EventItemAdapter (
-    private val onItemClickListener: OnItemClickListener,
+    private val onItemClick : (eventItem : EventItem) -> Unit,
 ): ListAdapter<EventItem, EventItemAdapter.EventItemHolder>(DiffCallback()) {
 
     inner class EventItemHolder(
         private val binding: ItemEventBinding
     ): RecyclerView.ViewHolder(binding.root) {
         init {
-            binding.apply {
-                binding.root.setOnClickListener {
-                    val position = layoutPosition
-                    if (position != RecyclerView.NO_POSITION) {
-                        val eventItem = getItem(position)
-                        onItemClickListener.onItemClick(eventItem)
-                    }
+            binding.root.setOnClickListener {
+                val position = layoutPosition
+                if (position != RecyclerView.NO_POSITION) {
+                    val eventItem = getItem(position)
+                    onItemClick(eventItem)
                 }
             }
         }
@@ -47,10 +45,6 @@ class EventItemAdapter (
         holder.bind(item)
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(eventItem: EventItem)
-    }
-
     class DiffCallback: DiffUtil.ItemCallback<EventItem>() {
         override fun areItemsTheSame(oldItem: EventItem, newItem: EventItem) =
             oldItem.id == newItem.id
@@ -58,4 +52,5 @@ class EventItemAdapter (
         override fun areContentsTheSame(oldItem: EventItem, newItem: EventItem) =
             oldItem == newItem
     }
+
 }

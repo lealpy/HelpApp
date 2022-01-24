@@ -8,28 +8,29 @@ import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentAuthorizationBinding
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_authorization.*
 import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.schedulers.Schedulers
-import java.lang.Exception
 
+@AndroidEntryPoint
 class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
 
     private lateinit var binding : FragmentAuthorizationBinding
 
+    private val viewModel : AuthorizationViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAuthorizationBinding.bind(view)
-
         initViews()
+        initObservers()
         initEditTextLengthWatcher()
         initSpannableStringForgotPassword()
         initSpannableStringRegistration()
@@ -37,35 +38,44 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     private fun initViews() {
-        //Строка для тестирования:
-        binding.enterBtn.isEnabled = true
-        binding.enterBtn.setOnClickListener {
-            findNavController().navigate(R.id.actionAuthorizationFragmentToNavigationHelp)
+        binding.enterBtn.setOnClickListener { viewModel.onEnterBtnClicked() }
+        binding.vkIcon.setOnClickListener { viewModel.onVkIconClicked() }
+        binding.fbIcon.setOnClickListener { viewModel.onFbIconClicked() }
+        binding.okIcon.setOnClickListener { viewModel.onOkIconClicked() }
+    }
+
+    private fun initObservers() {
+        viewModel.navigateTo.observe(viewLifecycleOwner) { navigateTo ->
+            findNavController().navigate(navigateTo)
         }
-        binding.vkIcon.setOnClickListener { showToast() }
-        binding.fbIcon.setOnClickListener { showToast() }
-        binding.okIcon.setOnClickListener { showToast() }
+
+        viewModel.isEnterBtnEnabled.observe(viewLifecycleOwner) { isEnabled ->
+            binding.enterBtn.isEnabled = isEnabled
+        }
     }
 
     private fun initEditTextLengthWatcher() {
-        Observable.create<Boolean> { emitter ->
+        val observable = Observable.create<Map<String, Int>> { emitter ->
             binding.emailEditText.addTextChangedListener {
-                emitter.onNext(emailEditText.length() >= EMAIL_MIN_SYMBOLS && passwordEditText.length() >= PASSWORD_MIN_SYMBOLS)
+                emitter.onNext(
+                    mapOf(
+                        EMAIL_KEY to emailEditText.length(),
+                        PASSWORD_KEY to passwordEditText.length()
+                    )
+                )
             }
+
             binding.passwordEditText.addTextChangedListener {
-                emitter.onNext(emailEditText.length() >= EMAIL_MIN_SYMBOLS && passwordEditText.length() >= PASSWORD_MIN_SYMBOLS)
+                emitter.onNext(
+                    mapOf(
+                        EMAIL_KEY to emailEditText.length(),
+                        PASSWORD_KEY to passwordEditText.length()
+                    )
+                )
             }
         }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { isEnabled ->
-                    binding.enterBtn.isEnabled = isEnabled
-                },
-                { error ->
-                    throw Exception(error.message)
-                },
-            )
+
+        viewModel.onEditTextLengthWatcherInit(observable)
     }
 
     private fun initSpannableStringForgotPassword() {
@@ -76,7 +86,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         forgotPasswordButton.setSpan(
             object: ClickableSpan() {
                 override fun onClick(widget: View) {
-                    showToast()
+                    viewModel.onForgotPasswordSpanClicked()
                 }
                 override fun updateDrawState(ds: TextPaint) {
                     ds.isUnderlineText = true
@@ -99,7 +109,7 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         registrationButton.setSpan(
             object: ClickableSpan() {
                 override fun onClick(widget: View) {
-                    showToast()
+                    viewModel.onRegistrationSpanClicked()
                 }
                 override fun updateDrawState(ds: TextPaint) {
                     ds.isUnderlineText = true
@@ -114,17 +124,8 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
         binding.registrationBtn.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    private fun showToast() {
-        Toast.makeText(
-            requireContext(),
-            requireContext().getString(R.string.click_heard),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
-
     private fun initToolbar() {
         setHasOptionsMenu(true);
-
         val appCompatActivity = requireActivity() as? AppCompatActivity
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -141,8 +142,8 @@ class AuthorizationFragment : Fragment(R.layout.fragment_authorization) {
     }
 
     companion object {
-        private const val EMAIL_MIN_SYMBOLS = 6
-        private const val PASSWORD_MIN_SYMBOLS = 6
+        const val EMAIL_KEY = "AUTHORIZATION_EMAIL_KEY"
+        const val PASSWORD_KEY = "AUTHORIZATION_PASSWORD_KEY"
     }
 
 }

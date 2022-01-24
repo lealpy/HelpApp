@@ -7,12 +7,10 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentSearchByEventsBinding
-import com.lealpy.simbirsoft_training.domain.model.EventItem
 
 class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
@@ -20,18 +18,13 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
     private val viewModel : SearchByEventsViewModel by activityViewModels()
 
-    private val eventAdapter = EventItemAdapter(
-        object: EventItemAdapter.OnItemClickListener {
-            override fun onItemClick(eventItem: EventItem) {
-                showToast()
-            }
-        }
-    )
+    private val eventAdapter = EventItemAdapter {
+        viewModel.onItemClicked()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSearchByEventsBinding.bind(view)
-
         initViews()
         initObservers()
         viewModel.onViewCreated()
@@ -39,7 +32,6 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
     }
 
     private fun initViews() {
-
         binding.recyclerView.adapter = eventAdapter
 
         val eventItemDivider = requireContext().getDrawable(R.drawable.recycler_view_divider)?.let { drawable ->
@@ -57,7 +49,6 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
             viewModel.onRefreshSwiped()
             binding.swipeRefreshLayout.isRefreshing = false
         }
-
     }
 
     private fun initObservers() {
@@ -87,9 +78,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
     }
 
     private fun initSpannableString() {
-
         val searchExample = SpannableStringBuilder(requireContext().getString(R.string.search_by_events_search_example_1))
-
         val spanStart = 0
         val spanFinish = searchExample.length
 
@@ -110,15 +99,6 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
         binding.blankSearchExample1.text = searchExample
         binding.blankSearchExample1.movementMethod = LinkMovementMethod.getInstance()
-
-    }
-
-    private fun showToast() {
-        Toast.makeText(
-            requireContext(),
-            requireContext().getString(R.string.click_heard),
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
 }

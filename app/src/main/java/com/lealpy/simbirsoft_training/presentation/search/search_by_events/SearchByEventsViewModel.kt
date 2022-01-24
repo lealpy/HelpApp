@@ -1,28 +1,30 @@
 package com.lealpy.simbirsoft_training.presentation.search.search_by_events
 
-import android.app.Application
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.lealpy.simbirsoft_training.App
+import androidx.lifecycle.ViewModel
+import com.lealpy.simbirsoft_training.R
+import com.lealpy.simbirsoft_training.data.api.EventApi
 import com.lealpy.simbirsoft_training.data.database.events.EventEntity
 import com.lealpy.simbirsoft_training.data.database.events.EventRepository
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 import com.lealpy.simbirsoft_training.utils.AppUtils
-import com.lealpy.simbirsoft_training.utils.AppUtils.LOG_TAG
+import com.lealpy.simbirsoft_training.utils.AppUtils.Companion.LOG_TAG
+import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import java.lang.IllegalStateException
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchByEventsViewModel @Inject constructor(
-    application: Application,
-    private val repository : EventRepository
-) : AndroidViewModel(application) {
+    private val repository : EventRepository,
+    private val resourceManager: ResourceManager,
+    private val eventApi: EventApi,
+    private val appUtils: AppUtils
+) : ViewModel() {
 
     private val _eventItems = MutableLiveData<List<EventItem>> ()
     val eventItems : LiveData<List<EventItem>> = _eventItems
@@ -45,8 +47,6 @@ class SearchByEventsViewModel @Inject constructor(
     private var searchText = ""
 
     private val compositeDisposable = CompositeDisposable()
-
-    private val eventApi = (getApplication<Application>() as? App)?.eventApi
 
     override fun onCleared() {
         compositeDisposable.clear()
@@ -80,25 +80,23 @@ class SearchByEventsViewModel @Inject constructor(
         _progressBarVisibility.value = View.VISIBLE
         _recyclerViewVisibility.value = View.VISIBLE
 
-        eventApi?.let {
-            compositeDisposable.add(
-                eventApi.getEventItemsJson()
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.computation())
-                    .subscribe(
-                        { eventItemsFromServer ->
-                            val eventEntities = AppUtils.eventItemsToEventEntities(eventItemsFromServer)
-                            insertEventsEntitiesInDb(eventEntities)
-                        },
-                        { error ->
-                            error.message?.let { err -> Log.e(LOG_TAG, err) }
-                            val eventItemsFromFile = AppUtils.getItemJsonFromFile<List<EventItem>>(getApplication(), EVENT_ITEMS_JSON_FILE_NAME)
-                            val eventEntities = AppUtils.eventItemsToEventEntities(eventItemsFromFile)
-                            insertEventsEntitiesInDb(eventEntities)
-                        }
-                    )
-            )
-        }
+        compositeDisposable.add(
+            eventApi.getEventItemsJson()
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .subscribe(
+                    { eventItemsFromServer ->
+                        val eventEntities = appUtils.eventItemsToEventEntities(eventItemsFromServer)
+                        insertEventsEntitiesInDb(eventEntities)
+                    },
+                    { error ->
+                        error.message?.let { err -> Log.e(LOG_TAG, err) }
+                        val eventItemsFromFile = appUtils.getItemJsonFromFile<List<EventItem>>(EVENT_ITEMS_JSON_FILE_NAME)
+                        val eventEntities = appUtils.eventItemsToEventEntities(eventItemsFromFile)
+                        insertEventsEntitiesInDb(eventEntities)
+                    }
+                )
+        )
     }
 
     private fun insertEventsEntitiesInDb(eventsEntities: List<EventEntity>) {
@@ -131,7 +129,7 @@ class SearchByEventsViewModel @Inject constructor(
                     .observeOn(Schedulers.computation())
                     .subscribe(
                         { eventEntities ->
-                            val eventItems = AppUtils.eventEntitiesToEventItems(eventEntities)
+                            val eventItems = appUtils.eventEntitiesToEventItems(eventEntities)
                             showSearchResults(eventItems)
                         },
                         { error ->
@@ -139,7 +137,8 @@ class SearchByEventsViewModel @Inject constructor(
                         }
                     )
             )
-        } else {
+        }
+        else {
             _blankSearchViewsVisibility.value = View.VISIBLE
             _nothingFoundViewsVisibility.value = View.GONE
             _recyclerViewVisibility.value = View.GONE
@@ -153,6 +152,10 @@ class SearchByEventsViewModel @Inject constructor(
             else View.GONE
         )
         _progressBarVisibility.postValue(View.GONE)
+    }
+
+    fun onItemClicked() {
+        appUtils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     companion object {

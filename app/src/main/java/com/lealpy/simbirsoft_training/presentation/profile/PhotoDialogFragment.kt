@@ -15,20 +15,14 @@ class PhotoDialogFragment : DialogFragment() {
     private lateinit var binding : FragmentPhotoDialogBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-
         binding = FragmentPhotoDialogBinding.inflate(LayoutInflater.from(context))
-
         val builder = AlertDialog.Builder(context)
-
         builder.setView(binding.root)
-
         initViews()
-
         return builder.create()
     }
 
     private fun initViews() {
-
         binding.choosePhotoBtn.setOnClickListener {
             parentFragmentManager.setFragmentResult(PHOTO_DIALOG_REQUEST_KEY, bundleOf(
                 SELECTED_ITEM_KEY to SELECTED_CHOOSE_PHOTO))
@@ -46,10 +40,9 @@ class PhotoDialogFragment : DialogFragment() {
                 SELECTED_ITEM_KEY to SELECTED_DELETE_PHOTO))
             dismiss()
         }
-
     }
 
-    fun setupListener(
+    fun setListener(
         fragmentManager: FragmentManager,
         lifecycleOwner: LifecycleOwner,
         listener: (Int) -> Unit

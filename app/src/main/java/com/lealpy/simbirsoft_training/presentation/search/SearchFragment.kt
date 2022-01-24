@@ -34,17 +34,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentSearchBinding.bind(view)
-
         initToolbar()
         initViewPager()
         initObservers()
-
         if(savedInstanceState != null) {
             searchText = savedInstanceState.getString(SEARCH_KEY)
         }
-
     }
 
     private fun initObservers() {
@@ -73,7 +69,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private fun initToolbar() {
         setHasOptionsMenu(true)
-
         val appCompatActivity = (requireActivity() as? AppCompatActivity)
         appCompatActivity?.setSupportActionBar(binding.toolbar)
         appCompatActivity?.supportActionBar?.setDisplayShowTitleEnabled(false)
@@ -101,11 +96,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 }
             }
 
-            override fun onTabReselected(tab: TabLayout.Tab?) {
-            }
+            override fun onTabReselected(tab: TabLayout.Tab?) {}
 
-            override fun onTabUnselected(tab: TabLayout.Tab?) {
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
     }
 

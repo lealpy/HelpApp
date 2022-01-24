@@ -19,23 +19,17 @@ class MainActivity : AppCompatActivity() {
     val badgeSubject: PublishSubject<Int> = PublishSubject.create()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         initBottomNavView()
-
         if(savedInstanceState == null) {
             val startBadgeNumber = intent.getIntExtra(EXTRA_KEY, DEFAULT_BADGE_NUMBER)
             badgeSubject.onNext(startBadgeNumber)
         }
-
     }
 
     private fun initBottomNavView() {
-
         bottomNavView.setupWithNavController(navController)
-
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when(destination.id) {
                 R.id.navigationNews -> showBottomNavView()
@@ -60,7 +54,6 @@ class MainActivity : AppCompatActivity() {
                 throw Exception(error.message)
             }
         )
-
     }
 
     private fun showBottomNavView() {
@@ -88,4 +81,5 @@ class MainActivity : AppCompatActivity() {
     companion object {
         private const val DEFAULT_BADGE_NUMBER = 0
     }
+
 }

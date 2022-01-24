@@ -1,17 +1,13 @@
 package com.lealpy.simbirsoft_training.presentation.profile
 
 import android.Manifest
-import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.view.*
-import android.widget.ImageView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -19,11 +15,8 @@ import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.databinding.FragmentProfileBinding
-import com.lealpy.simbirsoft_training.utils.AppUtils
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
@@ -53,24 +46,37 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private val photoDialogFragment = PhotoDialogFragment()
 
-    private val requestManager by lazy { Glide.with(requireContext()) }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentProfileBinding.bind(view)
 
-        (requireActivity() as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
-
-        initMenu()
+        initToolbar()
+        initObservers()
         initViews()
         initDialogListener()
-
     }
 
-    private fun initMenu() {
-        setHasOptionsMenu(true);
+    private fun initToolbar() {
+        setHasOptionsMenu(true)
+        (requireActivity() as? AppCompatActivity)?.setSupportActionBar(binding.toolbar)
+    }
+
+    private fun initObservers() {
+        viewModel.avatarFriend1.observe(viewLifecycleOwner) { avatarFriend1 ->
+            binding.avatarFriend1.setImageBitmap(avatarFriend1)
+        }
+
+        viewModel.avatarFriend2.observe(viewLifecycleOwner) { avatarFriend2 ->
+            binding.avatarFriend2.setImageBitmap(avatarFriend2)
+        }
+
+        viewModel.avatarFriend3.observe(viewLifecycleOwner) { avatarFriend3 ->
+            binding.avatarFriend3.setImageBitmap(avatarFriend3)
+        }
+
+        viewModel.avatarUser.observe(viewLifecycleOwner) { avatarUser ->
+            binding.avatarUser.setImageBitmap(avatarUser)
+        }
     }
 
     private fun initViews() {
@@ -78,36 +84,28 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             showDialog()
         }
 
-        loadImageIntoImageView(FRIEND_1_IMAGE_URL, binding.avatarFriend1)
-        loadImageIntoImageView(FRIEND_2_IMAGE_URL, binding.avatarFriend2)
-        loadImageIntoImageView(FRIEND_3_IMAGE_URL, binding.avatarFriend3)
+        binding.exitButton.setOnClickListener {
+            viewModel.onExitButtonClicked()
+        }
+    }
 
+    /** Profile dialog fragment */
+
+    private fun showDialog() {
+        photoDialogFragment.show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
     }
 
     private fun initDialogListener() {
-        photoDialogFragment.setupListener(parentFragmentManager, requireActivity()) { selectedItem ->
+        photoDialogFragment.setListener(parentFragmentManager, viewLifecycleOwner) { selectedItem ->
             when(selectedItem) {
                 PhotoDialogFragment.SELECTED_CHOOSE_PHOTO -> readStoragePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                 PhotoDialogFragment.SELECTED_MAKE_PHOTO -> cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
-                PhotoDialogFragment.SELECTED_DELETE_PHOTO -> binding.avatarUser.setImageResource(R.drawable.no_photo)
+                PhotoDialogFragment.SELECTED_DELETE_PHOTO -> viewModel.onDeletePhotoSelected()
             }
         }
     }
 
-
-
-    private fun loadImageIntoImageView(imageURL : String, imageView : ImageView) {
-        requestManager
-            .asBitmap()
-            .load(imageURL)
-            .placeholder(R.drawable.no_photo)
-            .error(R.drawable.no_photo)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-            .skipMemoryCache(false)
-            .into(imageView)
-    }
-
-
+    /** Get photo from gallery */
 
     private fun onGotReadStoragePermissionResult(granted: Boolean) {
         if (granted) {
@@ -126,18 +124,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun onGotGalleryResult(result : ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            val selectedImageURI = result.data?.data
-            if(selectedImageURI != null) {
-                val inputStream = requireActivity().contentResolver.openInputStream(selectedImageURI)
-                val bitmap = BitmapFactory.decodeStream(inputStream)
-                val croppedBitmap = AppUtils.cropBitmap(bitmap, BITMAP_RATIO)
-                binding.avatarUser.setImageBitmap(croppedBitmap)
-            }
-        }
+        viewModel.onGotGalleryResult(result)
     }
 
-
+    /** Get photo from camera */
 
     private fun onGotCameraPermissionResult(granted: Boolean) {
         if (granted) {
@@ -155,14 +145,10 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun onGotCameraResult(result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            val bitmap = result.data?.extras?.get("data") as Bitmap
-            val croppedBitmap = AppUtils.cropBitmap(bitmap, BITMAP_RATIO)
-            binding.avatarUser.setImageBitmap(croppedBitmap)
-        }
+        viewModel.onGotCameraResult(result)
     }
 
-
+    /** Ask user for open android settings */
 
     private fun askUserForOpeningAppSettings(title : String) {
         val appSettingsIntent = Intent(
@@ -183,10 +169,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         }
     }
 
-    private fun showDialog() {
-        photoDialogFragment.show(parentFragmentManager, PhotoDialogFragment.PHOTO_DIALOG_TAG)
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_toolbar_menu, menu)
         super.onCreateOptionsMenu(menu,inflater)
@@ -194,16 +176,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.profileToolbarEdit -> viewModel.onMenuEditClicked()
+            R.id.profileToolbarEdit -> viewModel.onEditClicked()
         }
         return true
-    }
-
-    companion object {
-        private const val BITMAP_RATIO = 18.0 / 11.0
-        private const val FRIEND_1_IMAGE_URL = "https://user-images.githubusercontent.com/90380451/149196125-b3fe5703-386f-4842-bb2a-10f3d0b7284f.png"
-        private const val FRIEND_2_IMAGE_URL = "https://user-images.githubusercontent.com/90380451/149196129-d97e1509-ae98-4cf0-82cd-fa3b2e59a5c9.png"
-        private const val FRIEND_3_IMAGE_URL = "https://user-images.githubusercontent.com/90380451/149196131-e8f334c6-b755-424b-be42-5093b62cd5e8.png"
     }
 
 }
