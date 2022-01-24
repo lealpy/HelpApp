@@ -11,7 +11,7 @@
 
     <application
 
-        android:name=".HelpApp"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -20,7 +20,7 @@
         android:theme="@style/Theme.SimbirSoft_training">
 
         <activity
-            android:name=".SplashScreenActivity"
+            android:name=".presentation.splash_screen.SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name=".presentation.MainActivity"
             android:exported="true"
             android:launchMode="singleTop" >
             <intent-filter>
@@ -40,7 +40,7 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <service android:name="com.lealpy.simbirsoft_training.ui.search.search_by_nko.GetNkoItemsFromJsonIntentService" />
+        <service android:name="com.lealpy.simbirsoft_training.presentation.search.search_by_nko.GetNkoItemsFromJsonIntentService" />
 
     </application>
 

@@ -2,9 +2,10 @@ package com.lealpy.simbirsoft_training.data.database.help
 
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class HelpRepository(
-    private val helpDao: HelpDao,
+class HelpRepository @Inject constructor(
+    private val helpDao: HelpDao
 ) {
 
     fun getAllHelpEntities() : Single<List<HelpEntity>> {

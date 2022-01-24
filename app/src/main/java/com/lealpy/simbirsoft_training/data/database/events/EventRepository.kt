@@ -2,8 +2,9 @@ package com.lealpy.simbirsoft_training.data.database.events
 
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class EventRepository (
+class EventRepository @Inject constructor(
     private val eventDao : EventDao
 ) {
 

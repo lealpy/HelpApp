@@ -7,11 +7,11 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.lealpy.simbirsoft_training.data.database.events.EventEntity
 import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
-import com.lealpy.simbirsoft_training.ui.help.HelpItem
-import com.lealpy.simbirsoft_training.ui.help.HelpItemJson
-import com.lealpy.simbirsoft_training.ui.news.NewsItem
-import com.lealpy.simbirsoft_training.ui.news.NewsItemJson
-import com.lealpy.simbirsoft_training.ui.search.search_by_events.EventItem
+import com.lealpy.simbirsoft_training.domain.model.HelpItem
+import com.lealpy.simbirsoft_training.data.model.HelpItemJson
+import com.lealpy.simbirsoft_training.domain.model.NewsItem
+import com.lealpy.simbirsoft_training.data.model.NewsItemJson
+import com.lealpy.simbirsoft_training.domain.model.EventItem
 
 object AppUtils {
 
