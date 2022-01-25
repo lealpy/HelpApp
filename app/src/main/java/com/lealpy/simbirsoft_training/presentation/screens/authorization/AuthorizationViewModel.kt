@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AuthorizationViewModel @Inject constructor(
     private val resourceManager: ResourceManager,
-    private val presentationUtils: PresentationUtils
+    private val utils: PresentationUtils
 ) : ViewModel() {
 
     private val _navigateTo = MutableLiveData<Int>()
@@ -39,7 +39,7 @@ class AuthorizationViewModel @Inject constructor(
     fun onForgotPasswordSpanClicked() { showToast() }
 
     private fun showToast() {
-        presentationUtils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     fun onEditTextLengthWatcherInit(observable: Observable<Map<String, Int>>) {

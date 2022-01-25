@@ -22,7 +22,7 @@ class HelpViewModel @Inject constructor(
     private val getFromDbHelpItemsUseCase: GetFromDbHelpItemsUseCase,
     private val saveToDbHelpItemsUseCase : SaveToDbHelpItemsUseCase,
     private val resourceManager: ResourceManager,
-    private val presentationUtils: PresentationUtils
+    private val utils: PresentationUtils
 ) : ViewModel() {
 
     private val _helpItems = MutableLiveData<List<HelpItemUi>>()
@@ -63,7 +63,7 @@ class HelpViewModel @Inject constructor(
             .observeOn(Schedulers.io())
             .subscribe(
                 { helpItems ->
-                    val helpItemsUi = presentationUtils.helpItemsToHelpItemsUi(helpItems)
+                    val helpItemsUi = utils.helpItemsToHelpItemsUi(helpItems)
                     Log.d(LOG_TAG, helpItemsUi.size.toString())
                     helpItemsUi.forEach {
                         Log.d(LOG_TAG, it.text)
@@ -79,7 +79,7 @@ class HelpViewModel @Inject constructor(
     }
 
     fun onItemClicked() {
-        presentationUtils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
 }

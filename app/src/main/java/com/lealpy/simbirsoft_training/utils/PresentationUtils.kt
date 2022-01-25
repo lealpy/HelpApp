@@ -76,28 +76,6 @@ class PresentationUtils @Inject constructor(
         }
     }
 
-    fun helpItemsJsonToHelpEntities(helpItems: List<HelpItem>) : List<HelpEntity> {
-        return helpItems.map { helpItemJson ->
-            HelpEntity(
-                id = helpItemJson.id,
-                imageUrl = helpItemJson.imageUrl,
-                text = helpItemJson.text
-            )
-        }
-    }
-
-    fun helpEntitiesToHelpItems(helpEntities: List<HelpEntity>) : List<HelpItemUi> {
-        return helpEntities.map { helpEntity ->
-            val image = getBitmapFromUrl(helpEntity.imageUrl)
-
-            HelpItemUi(
-                id = helpEntity.id,
-                image = image,
-                text = helpEntity.text
-            )
-        }
-    }
-
     fun eventItemsToEventEntities(eventItems: List<EventItem>) : List<EventEntity> {
         return eventItems.map { eventItem ->
             EventEntity(

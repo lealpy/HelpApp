@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/authorizationFragment">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/navigationNews"
@@ -58,6 +58,15 @@
             app:destination="@id/navigationHelp"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true"/>
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.splash_screen.SplashScreenFragment"
+        android:label="fragment_splash_screen"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/actionSplashScreenFragmentToAuthorizationFragment"
+            app:destination="@id/authorizationFragment" />
     </fragment>
 
 </navigation>

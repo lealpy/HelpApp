@@ -6,7 +6,6 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.presentation.screens.splash_screen.SplashScreenActivity.Companion.EXTRA_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,10 +21,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initBottomNavView()
-        if(savedInstanceState == null) {
-            val startBadgeNumber = intent.getIntExtra(EXTRA_KEY, DEFAULT_BADGE_NUMBER)
-            badgeSubject.onNext(startBadgeNumber)
-        }
     }
 
     private fun initBottomNavView() {
@@ -76,10 +71,6 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
         super.onBackPressed()
-    }
-
-    companion object {
-        private const val DEFAULT_BADGE_NUMBER = 0
     }
 
 }

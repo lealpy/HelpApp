@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
     private val newsApi: NewsApi,
-    private val presentationUtils: PresentationUtils
+    private val utils: PresentationUtils
 ) : ViewModel() {
 
     private val compositeDisposable = CompositeDisposable()
@@ -23,7 +23,7 @@ class SplashScreenViewModel @Inject constructor(
     private val _startBadgeNumber = MutableLiveData<Int>()
     val startBadgeNumber: LiveData<Int> = _startBadgeNumber
 
-    fun onActivityCreated() {
+    fun onViewCreated() {
         compositeDisposable.add(newsApi
             .getNewsItems()
             .subscribeOn(io.reactivex.schedulers.Schedulers.io())
@@ -36,7 +36,7 @@ class SplashScreenViewModel @Inject constructor(
                 },
                 { error ->
                     error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
-                    val newsItemsJsonFromFile = presentationUtils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_JSON_FILE_NAME)
+                    val newsItemsJsonFromFile = utils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_JSON_FILE_NAME)
                     val startBadgeNumber = newsItemsJsonFromFile.size
                     Thread.sleep(SCREEN_TIME_MILLIS)
                     _startBadgeNumber.postValue(startBadgeNumber)

@@ -21,7 +21,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     application: Application,
-    private val presentationUtils: PresentationUtils
+    private val utils: PresentationUtils
 ) : AndroidViewModel(application) {
 
     private val _avatarUser = MutableLiveData<Bitmap>()
@@ -40,9 +40,9 @@ class ProfileViewModel @Inject constructor(
         Single.create<Map<String, Bitmap>> { emitter ->
             emitter.onSuccess(
                 mapOf(
-                    FRIEND_1_IMAGE_URL to presentationUtils.getBitmapFromUrl(FRIEND_1_IMAGE_URL),
-                    FRIEND_2_IMAGE_URL to presentationUtils.getBitmapFromUrl(FRIEND_2_IMAGE_URL),
-                    FRIEND_3_IMAGE_URL to presentationUtils.getBitmapFromUrl(FRIEND_3_IMAGE_URL)
+                    FRIEND_1_IMAGE_URL to utils.getBitmapFromUrl(FRIEND_1_IMAGE_URL),
+                    FRIEND_2_IMAGE_URL to utils.getBitmapFromUrl(FRIEND_2_IMAGE_URL),
+                    FRIEND_3_IMAGE_URL to utils.getBitmapFromUrl(FRIEND_3_IMAGE_URL)
                 )
             )
         }
@@ -61,7 +61,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun showToast() {
-        presentationUtils.showToast(getApplication<Application>().getString(R.string.click_heard))
+        utils.showToast(getApplication<Application>().getString(R.string.click_heard))
     }
 
     fun onEditClicked() { showToast() }
@@ -71,7 +71,7 @@ class ProfileViewModel @Inject constructor(
     fun onGotCameraResult(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             val bitmap = result.data?.extras?.get("data") as Bitmap
-            val croppedBitmap = presentationUtils.cropBitmap(bitmap, BITMAP_RATIO)
+            val croppedBitmap = utils.cropBitmap(bitmap, BITMAP_RATIO)
             _avatarUser.value = croppedBitmap
         }
     }
@@ -80,8 +80,8 @@ class ProfileViewModel @Inject constructor(
         if (result.resultCode == Activity.RESULT_OK) {
             val selectedImageURI = result.data?.data
             if(selectedImageURI != null) {
-                val bitmap = presentationUtils.getBitmapFromUri(selectedImageURI)
-                val croppedBitmap = presentationUtils.cropBitmap(bitmap, BITMAP_RATIO)
+                val bitmap = utils.getBitmapFromUri(selectedImageURI)
+                val croppedBitmap = utils.cropBitmap(bitmap, BITMAP_RATIO)
                 _avatarUser.value = croppedBitmap
             }
         }

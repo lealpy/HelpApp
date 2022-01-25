@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchByNkoViewModel @Inject constructor(
     private val nkoApi: NkoApi,
-    private val presentationUtils: PresentationUtils,
+    private val utils: PresentationUtils,
     private val resourceManager: ResourceManager
 ) : ViewModel() {
 
@@ -63,7 +63,7 @@ class SearchByNkoViewModel @Inject constructor(
                 },
                 { error ->
                     error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
-                    val nkoItemsFromFile = presentationUtils.getItemsFromFile<List<NkoItem>>(NKO_ITEMS_JSON_FILE_NAME)
+                    val nkoItemsFromFile = utils.getItemsFromFile<List<NkoItem>>(NKO_ITEMS_JSON_FILE_NAME)
                     setRandomNkoItems(nkoItemsFromFile)
                     _progressBarVisibility.postValue(View.GONE)
                 }
@@ -124,7 +124,7 @@ class SearchByNkoViewModel @Inject constructor(
     }
 
     fun onItemClicked() {
-        presentationUtils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     companion object {

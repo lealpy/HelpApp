@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     private val newsApi: NewsApi,
-    private val presentationUtils: PresentationUtils
+    private val utils: PresentationUtils
 ) : ViewModel() {
 
     private val _newsItems = MutableLiveData<List<NewsItemUi>>()
@@ -69,7 +69,7 @@ class NewsViewModel @Inject constructor(
             .observeOn(io.reactivex.schedulers.Schedulers.computation())
             .subscribe(
                 { newsItemsJsonFromServer ->
-                    val newsItemsResult = presentationUtils.newsItemsJsonToNewsItems(newsItemsJsonFromServer)
+                    val newsItemsResult = utils.newsItemsJsonToNewsItems(newsItemsJsonFromServer)
                     loadedNewsItems = newsItemsResult
                     _newsItems.postValue(newsItemsResult)
                     _progressBarVisibility.postValue(View.GONE)
@@ -77,8 +77,8 @@ class NewsViewModel @Inject constructor(
                 { error ->
                     error.message?.let { err -> Log.e(LOG_TAG, err) }
 
-                    val newsItemsJsonFromFile = presentationUtils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_JSON_FILE_NAME)
-                    val newsItemsResult = presentationUtils.newsItemsJsonToNewsItems(newsItemsJsonFromFile)
+                    val newsItemsJsonFromFile = utils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_JSON_FILE_NAME)
+                    val newsItemsResult = utils.newsItemsJsonToNewsItems(newsItemsJsonFromFile)
                     loadedNewsItems = newsItemsResult
                     _newsItems.postValue(newsItemsResult)
                     _progressBarVisibility.postValue(View.GONE)

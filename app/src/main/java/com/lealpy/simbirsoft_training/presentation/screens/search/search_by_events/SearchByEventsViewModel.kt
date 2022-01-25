@@ -23,7 +23,7 @@ class SearchByEventsViewModel @Inject constructor(
     private val repository : EventRepositoryImpl,
     private val resourceManager: ResourceManager,
     private val eventApi: EventApi,
-    private val presentationUtils: PresentationUtils
+    private val utils: PresentationUtils
 ) : ViewModel() {
 
     private val _eventItems = MutableLiveData<List<EventItem>> ()
@@ -86,13 +86,13 @@ class SearchByEventsViewModel @Inject constructor(
                 .observeOn(Schedulers.computation())
                 .subscribe(
                     { eventItemsFromServer ->
-                        val eventEntities = presentationUtils.eventItemsToEventEntities(eventItemsFromServer)
+                        val eventEntities = utils.eventItemsToEventEntities(eventItemsFromServer)
                         insertEventsEntitiesInDb(eventEntities)
                     },
                     { error ->
                         error.message?.let { err -> Log.e(LOG_TAG, err) }
-                        val eventItemsFromFile = presentationUtils.getItemsFromFile<List<EventItem>>(EVENT_ITEMS_JSON_FILE_NAME)
-                        val eventEntities = presentationUtils.eventItemsToEventEntities(eventItemsFromFile)
+                        val eventItemsFromFile = utils.getItemsFromFile<List<EventItem>>(EVENT_ITEMS_JSON_FILE_NAME)
+                        val eventEntities = utils.eventItemsToEventEntities(eventItemsFromFile)
                         insertEventsEntitiesInDb(eventEntities)
                     }
                 )
@@ -129,7 +129,7 @@ class SearchByEventsViewModel @Inject constructor(
                     .observeOn(Schedulers.computation())
                     .subscribe(
                         { eventEntities ->
-                            val eventItems = presentationUtils.eventEntitiesToEventItems(eventEntities)
+                            val eventItems = utils.eventEntitiesToEventItems(eventEntities)
                             showSearchResults(eventItems)
                         },
                         { error ->
@@ -155,7 +155,7 @@ class SearchByEventsViewModel @Inject constructor(
     }
 
     fun onItemClicked() {
-        presentationUtils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
     companion object {
