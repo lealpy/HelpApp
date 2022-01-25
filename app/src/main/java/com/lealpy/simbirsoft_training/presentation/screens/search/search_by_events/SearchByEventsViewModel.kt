@@ -36,17 +36,10 @@ class SearchByEventsViewModel @Inject constructor(
     private val _nothingFoundViewsVisibility = MutableLiveData<Int>()
     val nothingFoundViewsVisibility: LiveData<Int> = _nothingFoundViewsVisibility
 
-    private val _recyclerViewVisibility = MutableLiveData<Int>()
-    val recyclerViewVisibility: LiveData<Int> = _recyclerViewVisibility
-
     private val _searchViewQuery = MutableLiveData<String>()
     val searchViewQuery: LiveData<String> = _searchViewQuery
 
     private var searchText = ""
-
-    fun onViewCreated() {
-        if(_eventItems.value == null) getEventItemsFromServerOrFile()
-    }
 
     fun onSearchChanged(searchText: String) {
         this.searchText = searchText
@@ -55,6 +48,10 @@ class SearchByEventsViewModel @Inject constructor(
 
     fun onRefreshSwiped() {
         getEventItemsFromServerOrFile()
+    }
+
+    fun onViewCreated() {
+        if(_eventItems.value == null) getEventItemsFromServerOrFile()
     }
 
     fun onEventTabSelected() {
@@ -66,17 +63,24 @@ class SearchByEventsViewModel @Inject constructor(
         _searchViewQuery.value = searchExample
     }
 
+    fun onItemClicked() {
+        utils.showToast(resourceManager.getString(R.string.click_heard))
+    }
+
     private fun getEventItemsFromServerOrFile() {
         _blankSearchViewsVisibility.value = View.GONE
         _progressBarVisibility.value = View.VISIBLE
-        _recyclerViewVisibility.value = View.VISIBLE
 
         saveToDbEventItemsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .subscribe {
-                _blankSearchViewsVisibility.postValue(View.VISIBLE)
-                _progressBarVisibility.postValue(View.GONE)
+                if(searchText.isBlank()) {
+                    _blankSearchViewsVisibility.postValue(View.VISIBLE)
+                    _progressBarVisibility.postValue(View.GONE)
+                } else {
+                    search(searchText)
+                }
             }
     }
 
@@ -84,7 +88,6 @@ class SearchByEventsViewModel @Inject constructor(
         if(searchQuery.isNotBlank()) {
             _blankSearchViewsVisibility.value = View.GONE
             _progressBarVisibility.value = View.VISIBLE
-            _recyclerViewVisibility.value = View.VISIBLE
 
             getFromDbEventItemsByTitleUseCase.execute(searchQuery)
                 .subscribeOn(Schedulers.io())
@@ -99,9 +102,9 @@ class SearchByEventsViewModel @Inject constructor(
                 )
         }
         else {
+            _eventItems.value = emptyList()
             _blankSearchViewsVisibility.value = View.VISIBLE
             _nothingFoundViewsVisibility.value = View.GONE
-            _recyclerViewVisibility.value = View.GONE
         }
     }
 
@@ -112,10 +115,6 @@ class SearchByEventsViewModel @Inject constructor(
             else View.GONE
         )
         _progressBarVisibility.postValue(View.GONE)
-    }
-
-    fun onItemClicked() {
-        utils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
 }

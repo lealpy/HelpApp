@@ -27,7 +27,7 @@ class NkoItemAdapter (
         }
 
         fun bind(nkoItem: NkoItem) {
-            binding.nkoName.text = nkoItem.name
+            binding.nkoName.text = nkoItem.title
         }
     }
 

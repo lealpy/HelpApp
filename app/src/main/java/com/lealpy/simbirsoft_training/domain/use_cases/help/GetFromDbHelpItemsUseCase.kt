@@ -10,7 +10,7 @@ class GetFromDbHelpItemsUseCase @Inject constructor(
 ) {
 
     fun execute(): Single<List<HelpItem>> {
-        return repository.getFromDbHelpItems()
+        return repository.getFromDbAllHelpItems()
     }
 
 }

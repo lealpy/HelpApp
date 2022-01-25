@@ -27,8 +27,8 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
         binding = FragmentSearchByEventsBinding.bind(view)
         initViews()
         initObservers()
-        viewModel.onViewCreated()
         initSpannableString()
+        viewModel.onViewCreated()
     }
 
     private fun initViews() {
@@ -66,11 +66,6 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
         viewModel.nothingFoundViewsVisibility.observe(viewLifecycleOwner) { visibility ->
             binding.nothingFound.visibility = visibility
         }
-
-        viewModel.recyclerViewVisibility.observe(viewLifecycleOwner) { visibility ->
-            binding.recyclerView.visibility = visibility
-        }
-
 
         viewModel.eventItems.observe(viewLifecycleOwner) { eventItems ->
             eventAdapter.submitList(eventItems)

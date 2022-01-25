@@ -1,29 +1,28 @@
-package com.lealpy.simbirsoft_training.domain.use_cases.events
+package com.lealpy.simbirsoft_training.domain.use_cases.nko
 
 import android.util.Log
-import com.lealpy.simbirsoft_training.data.utils.DataUtils
 import com.lealpy.simbirsoft_training.data.utils.DataUtils.Companion.LOG_TAG
-import com.lealpy.simbirsoft_training.domain.repository.EventRepository
+import com.lealpy.simbirsoft_training.domain.repository.NkoRepository
 import io.reactivex.Completable
 import javax.inject.Inject
 
-class SaveToDbEventItemsUseCase @Inject constructor(
-    private val repository: EventRepository
-){
+class SaveToDbNkoItemsUseCase @Inject constructor(
+    private val repository: NkoRepository
+) {
 
     fun execute() : Completable {
         return Completable.create { emitter ->
-            repository.saveToDbEventItemsFromServer()
+            repository.saveToDbNkoItemsFromServer()
                 .subscribe(
                     {
                         emitter.onComplete()
                     },
                     {
-                        repository.getFromDbAllEventItems()
+                        repository.getFromDbAllNkoItems()
                             .subscribe(
-                                { eventItems ->
-                                    if(eventItems.isNullOrEmpty()) {
-                                        repository.saveToDbEventItemsFromFile()
+                                { nkoItems ->
+                                    if(nkoItems.isNullOrEmpty()) {
+                                        repository.saveToDbNkoItemsFromFile()
                                             .subscribe {
                                                 emitter.onComplete()
                                             }
@@ -35,11 +34,6 @@ class SaveToDbEventItemsUseCase @Inject constructor(
                                     Log.e(LOG_TAG, error.message.toString())
                                 }
                             )
-
-                        repository.saveToDbEventItemsFromFile()
-                            .subscribe {
-                                emitter.onComplete()
-                            }
                     }
                 )
         }

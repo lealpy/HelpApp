@@ -8,5 +8,6 @@ interface EventRepository {
     fun saveToDbEventItemsFromServer() : Completable
     fun saveToDbEventItemsFromFile() : Completable
     fun getFromDbEventItemsByTitle(searchQuery : String) : Single<List<EventItem>>
+    fun getFromDbAllEventItems() : Single<List<EventItem>>
     fun insertToDbEventItems(eventItems : List<EventItem>) : Completable
 }

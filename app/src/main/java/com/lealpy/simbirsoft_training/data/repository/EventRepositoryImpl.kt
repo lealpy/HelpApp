@@ -4,6 +4,7 @@ import android.util.Log
 import com.lealpy.simbirsoft_training.data.api.EventApi
 import com.lealpy.simbirsoft_training.data.database.events.EventDao
 import com.lealpy.simbirsoft_training.data.utils.DataUtils
+import com.lealpy.simbirsoft_training.data.utils.DataUtils.Companion.LOG_TAG
 import com.lealpy.simbirsoft_training.data.utils.toEventEntities
 import com.lealpy.simbirsoft_training.data.utils.toEventItems
 import com.lealpy.simbirsoft_training.domain.model.EventItem
@@ -34,12 +35,12 @@ class EventRepositoryImpl @Inject constructor(
                                     emitter.onComplete()
                                 },
                                 { error ->
-                                    Log.e(DataUtils.LOG_TAG, error.message.toString())
+                                    Log.e(LOG_TAG, error.message.toString())
                                 }
                             )
                     },
                     { error ->
-                        error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
+                        error.message?.let { err -> Log.e(LOG_TAG, err) }
                         emitter.onError(error)
                     }
                 )
@@ -55,7 +56,7 @@ class EventRepositoryImpl @Inject constructor(
                     {
                         emitter.onComplete()
                     },
-                    {error ->
+                    { error ->
                         Log.e(DataUtils.LOG_TAG, error.message.toString())
                     }
                 )
@@ -64,6 +65,12 @@ class EventRepositoryImpl @Inject constructor(
 
     override fun getFromDbEventItemsByTitle(searchQuery : String) : Single<List<EventItem>> {
         return eventDao.getEventEntitiesByTitle(searchQuery).map { eventEntities ->
+            eventEntities.toEventItems()
+        }
+    }
+
+    override fun getFromDbAllEventItems() : Single<List<EventItem>> {
+        return eventDao.getAllEventEntities().map { eventEntities ->
             eventEntities.toEventItems()
         }
     }

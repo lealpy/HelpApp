@@ -63,7 +63,7 @@ class HelpRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getFromDbHelpItems() : Single<List<HelpItem>> {
+    override fun getFromDbAllHelpItems() : Single<List<HelpItem>> {
         return helpDao.getAllHelpEntities().map { helpEntities ->
             helpEntities.toHelpItems()
         }

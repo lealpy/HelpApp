@@ -12,12 +12,17 @@ import com.lealpy.simbirsoft_training.data.database.AppDatabase
 import com.lealpy.simbirsoft_training.data.database.events.EventDao
 import com.lealpy.simbirsoft_training.data.repository.EventRepositoryImpl
 import com.lealpy.simbirsoft_training.data.database.help.HelpDao
+import com.lealpy.simbirsoft_training.data.database.nko.NkoDao
 import com.lealpy.simbirsoft_training.data.repository.HelpRepositoryImpl
+import com.lealpy.simbirsoft_training.data.repository.NkoRepositoryImpl
 import com.lealpy.simbirsoft_training.data.utils.DataUtils
 import com.lealpy.simbirsoft_training.domain.use_cases.events.GetFromDbEventItemsByTitleUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.events.SaveToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.SaveToDbHelpItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.nko.GetFromDbAllNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.nko.GetFromDbNkoItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.nko.SaveToDbNkoItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.Module
@@ -72,14 +77,20 @@ class AppModule {
 
     @Provides
     @Singleton
+    fun provideHelpDao(appDatabase: AppDatabase) : HelpDao {
+        return appDatabase.helpDao()
+    }
+
+    @Provides
+    @Singleton
     fun provideEventDao(appDatabase: AppDatabase) : EventDao {
         return appDatabase.eventDao()
     }
 
     @Provides
     @Singleton
-    fun provideHelpDao(appDatabase: AppDatabase) : HelpDao {
-        return appDatabase.helpDao()
+    fun provideNkoDao(appDatabase: AppDatabase) : NkoDao {
+        return appDatabase.nkoDao()
     }
 
     /** Retrofit */
@@ -158,6 +169,30 @@ class AppModule {
         eventRepositoryImpl: EventRepositoryImpl
     ) : SaveToDbEventItemsUseCase {
         return SaveToDbEventItemsUseCase(eventRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFromDbNkoItemsByTitleUseCase(
+        nkoRepositoryImpl: NkoRepositoryImpl
+    ) : GetFromDbNkoItemsByTitleUseCase {
+        return GetFromDbNkoItemsByTitleUseCase(nkoRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFromDbAllNkoItemsUseCase(
+        nkoRepositoryImpl: NkoRepositoryImpl
+    ) : GetFromDbAllNkoItemsUseCase {
+        return GetFromDbAllNkoItemsUseCase(nkoRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveToDbNkoItemsUseCase(
+        nkoRepositoryImpl: NkoRepositoryImpl
+    ) : SaveToDbNkoItemsUseCase {
+        return SaveToDbNkoItemsUseCase(nkoRepositoryImpl)
     }
 
     /** Resource manager */
