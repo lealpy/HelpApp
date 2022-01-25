@@ -14,6 +14,8 @@ import com.lealpy.simbirsoft_training.data.repository.EventRepositoryImpl
 import com.lealpy.simbirsoft_training.data.database.help.HelpDao
 import com.lealpy.simbirsoft_training.data.repository.HelpRepositoryImpl
 import com.lealpy.simbirsoft_training.data.utils.DataUtils
+import com.lealpy.simbirsoft_training.domain.use_cases.events.GetFromDbEventItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.events.SaveToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.SaveToDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
@@ -48,8 +50,12 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideEventRepository(eventDao: EventDao) : EventRepositoryImpl {
-        return EventRepositoryImpl(eventDao)
+    fun provideEventRepository(
+        eventDao: EventDao,
+        eventApi: EventApi,
+        dataUtils: DataUtils
+    ) : EventRepositoryImpl {
+        return EventRepositoryImpl(eventDao, eventApi, dataUtils)
     }
 
     /** Room */
@@ -136,6 +142,22 @@ class AppModule {
         helpRepositoryImpl: HelpRepositoryImpl
     ) : SaveToDbHelpItemsUseCase {
         return SaveToDbHelpItemsUseCase(helpRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetFromDbEventItemsByTitleUseCase(
+        eventRepositoryImpl: EventRepositoryImpl
+    ) : GetFromDbEventItemsByTitleUseCase {
+        return GetFromDbEventItemsByTitleUseCase(eventRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveToDbEventItemsUseCase(
+        eventRepositoryImpl: EventRepositoryImpl
+    ) : SaveToDbEventItemsUseCase {
+        return SaveToDbEventItemsUseCase(eventRepositoryImpl)
     }
 
     /** Resource manager */

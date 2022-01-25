@@ -1,22 +1,22 @@
-package com.lealpy.simbirsoft_training.domain.use_cases.help
+package com.lealpy.simbirsoft_training.domain.use_cases.events
 
-import com.lealpy.simbirsoft_training.domain.repository.HelpRepository
+import com.lealpy.simbirsoft_training.domain.repository.EventRepository
 import io.reactivex.Completable
 import javax.inject.Inject
 
-class SaveToDbHelpItemsUseCase @Inject constructor(
-    private val repository: HelpRepository
-) {
+class SaveToDbEventItemsUseCase @Inject constructor(
+    private val repository: EventRepository
+){
 
     fun execute() : Completable {
         return Completable.create { emitter ->
-            repository.saveToDbHelpItemsFromServer()
+            repository.saveToDbEventItemsFromServer()
                 .subscribe(
                     {
                         emitter.onComplete()
                     },
                     {
-                        repository.saveToDbHelpItemsFromFile()
+                        repository.saveToDbEventItemsFromFile()
                             .subscribe {
                                 emitter.onComplete()
                             }

@@ -6,23 +6,21 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.data.api.EventApi
-import com.lealpy.simbirsoft_training.data.database.events.EventEntity
-import com.lealpy.simbirsoft_training.data.repository.EventRepositoryImpl
 import com.lealpy.simbirsoft_training.domain.model.EventItem
+import com.lealpy.simbirsoft_training.domain.use_cases.events.GetFromDbEventItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.events.SaveToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
 import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class SearchByEventsViewModel @Inject constructor(
-    private val repository : EventRepositoryImpl,
+    private val saveToDbEventItemsUseCase: SaveToDbEventItemsUseCase,
+    private val getFromDbEventItemsByTitleUseCase: GetFromDbEventItemsByTitleUseCase,
     private val resourceManager: ResourceManager,
-    private val eventApi: EventApi,
     private val utils: PresentationUtils
 ) : ViewModel() {
 
@@ -46,15 +44,8 @@ class SearchByEventsViewModel @Inject constructor(
 
     private var searchText = ""
 
-    private val compositeDisposable = CompositeDisposable()
-
-    override fun onCleared() {
-        compositeDisposable.clear()
-        super.onCleared()
-    }
-
     fun onViewCreated() {
-        if(_eventItems.value == null) getHelpItemsFromServerOrFile()
+        if(_eventItems.value == null) getEventItemsFromServerOrFile()
     }
 
     fun onSearchChanged(searchText: String) {
@@ -63,7 +54,7 @@ class SearchByEventsViewModel @Inject constructor(
     }
 
     fun onRefreshSwiped() {
-        getHelpItemsFromServerOrFile()
+        getEventItemsFromServerOrFile()
     }
 
     fun onEventTabSelected() {
@@ -75,46 +66,18 @@ class SearchByEventsViewModel @Inject constructor(
         _searchViewQuery.value = searchExample
     }
 
-    private fun getHelpItemsFromServerOrFile() {
+    private fun getEventItemsFromServerOrFile() {
         _blankSearchViewsVisibility.value = View.GONE
         _progressBarVisibility.value = View.VISIBLE
         _recyclerViewVisibility.value = View.VISIBLE
 
-        compositeDisposable.add(
-            eventApi.getEventItems()
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.computation())
-                .subscribe(
-                    { eventItemsFromServer ->
-                        val eventEntities = utils.eventItemsToEventEntities(eventItemsFromServer)
-                        insertEventsEntitiesInDb(eventEntities)
-                    },
-                    { error ->
-                        error.message?.let { err -> Log.e(LOG_TAG, err) }
-                        val eventItemsFromFile = utils.getItemsFromFile<List<EventItem>>(EVENT_ITEMS_JSON_FILE_NAME)
-                        val eventEntities = utils.eventItemsToEventEntities(eventItemsFromFile)
-                        insertEventsEntitiesInDb(eventEntities)
-                    }
-                )
-        )
-    }
-
-    private fun insertEventsEntitiesInDb(eventsEntities: List<EventEntity>) {
-        _progressBarVisibility.postValue(View.VISIBLE)
-
-        compositeDisposable.add(repository.insertEventEntities(eventsEntities)
+        saveToDbEventItemsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
-            .subscribe(
-                {
-                    _blankSearchViewsVisibility.postValue(View.VISIBLE)
-                    _progressBarVisibility.postValue(View.GONE)
-                },
-                { error ->
-                    error.message?.let { err -> Log.e(LOG_TAG, err) }
-                }
-            )
-        )
+            .subscribe {
+                _blankSearchViewsVisibility.postValue(View.VISIBLE)
+                _progressBarVisibility.postValue(View.GONE)
+            }
     }
 
     private fun search(searchQuery : String) {
@@ -123,20 +86,17 @@ class SearchByEventsViewModel @Inject constructor(
             _progressBarVisibility.value = View.VISIBLE
             _recyclerViewVisibility.value = View.VISIBLE
 
-            compositeDisposable.add(
-                repository.getEventEntitiesByTitle(searchQuery)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(Schedulers.computation())
-                    .subscribe(
-                        { eventEntities ->
-                            val eventItems = utils.eventEntitiesToEventItems(eventEntities)
-                            showSearchResults(eventItems)
-                        },
-                        { error ->
-                            error.message?.let { err -> Log.e(LOG_TAG, err) }
-                        }
-                    )
-            )
+            getFromDbEventItemsByTitleUseCase.execute(searchQuery)
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.computation())
+                .subscribe(
+                    { eventItems ->
+                        showSearchResults(eventItems)
+                    },
+                    { error ->
+                        error.message?.let { err -> Log.e(LOG_TAG, err) }
+                    }
+                )
         }
         else {
             _blankSearchViewsVisibility.value = View.VISIBLE
@@ -156,10 +116,6 @@ class SearchByEventsViewModel @Inject constructor(
 
     fun onItemClicked() {
         utils.showToast(resourceManager.getString(R.string.click_heard))
-    }
-
-    companion object {
-        private const val EVENT_ITEMS_JSON_FILE_NAME = "event_items.json"
     }
 
 }
