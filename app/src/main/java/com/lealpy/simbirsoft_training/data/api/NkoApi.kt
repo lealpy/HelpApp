@@ -8,5 +8,5 @@ import retrofit2.http.Headers
 interface NkoApi {
     @GET("./getNkoItems")
     @Headers("Content-Type: application/json")
-    fun getNkoItemsJson(): Single<List<NkoItem>>
+    fun getNkoItems(): Single<List<NkoItem>>
 }

@@ -6,7 +6,7 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.presentation.splash_screen.SplashScreenActivity.Companion.EXTRA_KEY
+import com.lealpy.simbirsoft_training.presentation.screens.splash_screen.SplashScreenActivity.Companion.EXTRA_KEY
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.subjects.PublishSubject
 import kotlinx.android.synthetic.main.activity_main.*

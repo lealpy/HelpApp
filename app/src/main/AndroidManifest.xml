@@ -20,7 +20,7 @@
         android:theme="@style/Theme.SimbirSoft_training">
 
         <activity
-            android:name=".presentation.splash_screen.SplashScreenActivity"
+            android:name="com.lealpy.simbirsoft_training.presentation.screens.splash_screen.SplashScreenActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -40,7 +40,7 @@
                 android:resource="@xml/searchable"/>
         </activity>
 
-        <service android:name="com.lealpy.simbirsoft_training.presentation.search.search_by_nko.GetNkoItemsFromJsonIntentService" />
+        <service android:name="com.lealpy.simbirsoft_training.presentation.screens.search.search_by_nko.GetNkoItemsFromJsonIntentService" />
 
     </application>
 

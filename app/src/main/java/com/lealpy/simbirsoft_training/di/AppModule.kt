@@ -10,10 +10,13 @@ import com.lealpy.simbirsoft_training.data.api.NewsApi
 import com.lealpy.simbirsoft_training.data.api.NkoApi
 import com.lealpy.simbirsoft_training.data.database.AppDatabase
 import com.lealpy.simbirsoft_training.data.database.events.EventDao
-import com.lealpy.simbirsoft_training.data.database.events.EventRepository
+import com.lealpy.simbirsoft_training.data.repository.EventRepositoryImpl
 import com.lealpy.simbirsoft_training.data.database.help.HelpDao
-import com.lealpy.simbirsoft_training.data.database.help.HelpRepository
-import com.lealpy.simbirsoft_training.utils.AppUtils
+import com.lealpy.simbirsoft_training.data.repository.HelpRepositoryImpl
+import com.lealpy.simbirsoft_training.data.utils.DataUtils
+import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.help.SaveToDbHelpItemsUseCase
+import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.Module
 import dagger.Provides
@@ -30,6 +33,24 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class AppModule {
+
+    /** Repository */
+
+    @Provides
+    @Singleton
+    fun provideHelpRepository(
+        helpDao : HelpDao,
+        helpApi: HelpApi,
+        dataUtils: DataUtils
+    ) : HelpRepositoryImpl {
+        return HelpRepositoryImpl(helpDao, helpApi, dataUtils)
+    }
+
+    @Provides
+    @Singleton
+    fun provideEventRepository(eventDao: EventDao) : EventRepositoryImpl {
+        return EventRepositoryImpl(eventDao)
+    }
 
     /** Room */
 
@@ -53,18 +74,6 @@ class AppModule {
     @Singleton
     fun provideHelpDao(appDatabase: AppDatabase) : HelpDao {
         return appDatabase.helpDao()
-    }
-
-    @Provides
-    @Singleton
-    fun provideHelpRepository(helpDao : HelpDao) : HelpRepository {
-        return HelpRepository(helpDao)
-    }
-
-    @Provides
-    @Singleton
-    fun provideEventRepository(eventDao: EventDao) : EventRepository {
-        return EventRepository(eventDao)
     }
 
     /** Retrofit */
@@ -111,11 +120,31 @@ class AppModule {
         return retrofit.create(NkoApi::class.java)
     }
 
+    /** Use cases */
+
+    @Provides
+    @Singleton
+    fun provideGetFromDbHelpItemsUseCase(
+        helpRepositoryImpl: HelpRepositoryImpl
+    ) : GetFromDbHelpItemsUseCase {
+        return GetFromDbHelpItemsUseCase(helpRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSaveToDbHelpItemsUseCase(
+        helpRepositoryImpl: HelpRepositoryImpl
+    ) : SaveToDbHelpItemsUseCase {
+        return SaveToDbHelpItemsUseCase(helpRepositoryImpl)
+    }
+
     /** Resource manager */
 
     @Provides
     @Singleton
-    fun provideResourceManager(@ApplicationContext appContext: Context): ResourceManager {
+    fun provideResourceManager(
+        @ApplicationContext appContext: Context
+    ): ResourceManager {
         return ResourceManager(appContext.resources)
     }
 
@@ -123,7 +152,9 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRequestManager(@ApplicationContext appContext: Context) : RequestManager {
+    fun provideRequestManager(
+        @ApplicationContext appContext: Context
+    ) : RequestManager {
         return Glide.with(appContext)
     }
 
@@ -131,8 +162,19 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideAppUtils(@ApplicationContext appContext: Context, requestManager: RequestManager) : AppUtils {
-        return AppUtils(appContext, requestManager)
+    fun providePresentationUtils(
+        @ApplicationContext appContext: Context,
+        requestManager: RequestManager
+    ) : PresentationUtils {
+        return PresentationUtils(appContext, requestManager)
+    }
+
+    @Provides
+    @Singleton
+    fun provideDataUtils(
+        @ApplicationContext appContext: Context
+    ) : DataUtils {
+        return DataUtils(appContext)
     }
 
     companion object {

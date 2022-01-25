@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/navigationNews"
-        android:name="com.lealpy.simbirsoft_training.presentation.news.NewsFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
         <action
@@ -20,37 +20,37 @@
     </fragment>
     <fragment
         android:id="@+id/navigationSearch"
-        android:name="com.lealpy.simbirsoft_training.presentation.search.SearchFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/navigationHelp"
-        android:name="com.lealpy.simbirsoft_training.presentation.help.HelpFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.help.HelpFragment"
         android:label="fragment_help"
         tools:layout="@layout/fragment_help" />
     <fragment
         android:id="@+id/navigationHistory"
-        android:name="com.lealpy.simbirsoft_training.presentation.history.HistoryFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.history.HistoryFragment"
         android:label="fragment_history"
         tools:layout="@layout/fragment_history" />
     <fragment
         android:id="@+id/navigationProfile"
-        android:name="com.lealpy.simbirsoft_training.presentation.profile.ProfileFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/newsFilterFragment"
-        android:name="com.lealpy.simbirsoft_training.presentation.news.NewsFilterFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.NewsFilterFragment"
         android:label="NewsFilterFragment"
         tools:layout="@layout/fragment_news_filter"/>
     <fragment
         android:id="@+id/newsDescriptionFragment"
-        android:name="com.lealpy.simbirsoft_training.presentation.news.news_description.NewsDescriptionFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.news_description.NewsDescriptionFragment"
         android:label="NewsDescriptionFragment"
         tools:layout="@layout/fragment_news_description"/>
     <fragment
         android:id="@+id/authorizationFragment"
-        android:name="com.lealpy.simbirsoft_training.presentation.authorization.AuthorizationFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.authorization.AuthorizationFragment"
         android:label="AuthorizationFragment"
         tools:layout="@layout/fragment_authorization">
         <action

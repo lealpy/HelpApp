@@ -8,5 +8,5 @@ import retrofit2.http.Headers
 interface EventApi {
     @GET("./getEventItems")
     @Headers("Content-Type: application/json")
-    fun getEventItemsJson(): Single<List<EventItem>>
+    fun getEventItems(): Single<List<EventItem>>
 }
