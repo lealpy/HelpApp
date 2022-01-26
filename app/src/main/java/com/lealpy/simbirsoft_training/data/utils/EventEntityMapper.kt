@@ -1,6 +1,6 @@
 package com.lealpy.simbirsoft_training.data.utils
 
-import com.lealpy.simbirsoft_training.data.database.events.EventEntity
+import com.lealpy.simbirsoft_training.data.database.search_by_events.EventEntity
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 
 fun List<EventEntity>.toEventItems() : List<EventItem> {

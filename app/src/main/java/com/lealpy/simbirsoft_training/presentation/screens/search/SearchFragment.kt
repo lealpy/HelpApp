@@ -156,7 +156,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     companion object {
         const val POSITION_SEARCH_BY_EVENTS = 0
         const val POSITION_SEARCH_BY_NKO = 1
-        const val SEARCH_TIMEOUT : Long = 500
+        private const val SEARCH_TIMEOUT : Long = 500
         private const val SEARCH_KEY = "SEARCH_KEY"
     }
 

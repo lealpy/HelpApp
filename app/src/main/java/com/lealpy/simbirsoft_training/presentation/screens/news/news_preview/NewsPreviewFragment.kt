@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.presentation.screens.news
+package com.lealpy.simbirsoft_training.presentation.screens.news.news_preview
 
 import android.os.Bundle
 import android.view.*
@@ -8,16 +8,16 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.lealpy.simbirsoft_training.presentation.MainActivity
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.databinding.FragmentNewsBinding
+import com.lealpy.simbirsoft_training.databinding.FragmentNewsPreviewBinding
 import com.lealpy.simbirsoft_training.presentation.screens.news.news_description.NewsDescriptionFragment
 
-class NewsFragment : Fragment(R.layout.fragment_news) {
+class NewsPreviewFragment : Fragment(R.layout.fragment_news_preview) {
 
-    private lateinit var binding : FragmentNewsBinding
+    private lateinit var binding : FragmentNewsPreviewBinding
 
-    private val viewModel : NewsViewModel by activityViewModels()
+    private val viewModel : NewsPreviewViewModel by activityViewModels()
 
-    private val newsAdapter = NewsItemAdapter{ newsItem ->
+    private val newsAdapter = NewsPreviewItemAdapter{ newsItem ->
         val args = Bundle()
         args.putLong(NewsDescriptionFragment.ARGS_KEY, newsItem.id)
 
@@ -26,16 +26,15 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
             args
         )
 
-        viewModel.onNewsViewed(newsItem.id)
+        viewModel.onNewsWatched(newsItem.id)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentNewsBinding.bind(view)
+        binding = FragmentNewsPreviewBinding.bind(view)
         initViews()
         initObservers()
         initToolbar()
-        viewModel.onViewCreated()
     }
 
     private fun initToolbar() {
@@ -49,7 +48,7 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     private fun initViews() {
         binding.recyclerView.adapter = newsAdapter
 
-        val newsItemDecoration = NewsItemDecoration(
+        val newsItemDecoration = NewsPreviewItemDecoration(
             requireContext().resources.getDimension(R.dimen.dimen_8_dp).toInt()
         )
 
@@ -62,9 +61,8 @@ class NewsFragment : Fragment(R.layout.fragment_news) {
     }
 
     private fun initObservers() {
-        viewModel.newsItemsUi.observe(viewLifecycleOwner) { newsItems ->
+        viewModel.newsPreviewItemsUi.observe(viewLifecycleOwner) { newsItems ->
             newsAdapter.submitList(newsItems)
-            viewModel.onNewsItemsUpdated()
         }
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->

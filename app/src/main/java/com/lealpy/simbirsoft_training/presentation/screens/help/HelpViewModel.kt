@@ -11,7 +11,6 @@ import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUs
 import com.lealpy.simbirsoft_training.domain.use_cases.help.SaveToDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
-import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -20,7 +19,6 @@ import javax.inject.Inject
 class HelpViewModel @Inject constructor(
     private val getFromDbHelpItemsUseCase: GetFromDbHelpItemsUseCase,
     private val saveToDbHelpItemsUseCase : SaveToDbHelpItemsUseCase,
-    private val resourceManager: ResourceManager,
     private val utils: PresentationUtils
 ) : ViewModel() {
 
@@ -30,12 +28,16 @@ class HelpViewModel @Inject constructor(
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
 
-    fun onViewCreated() {
-        if(_helpItems.value == null) getHelpItemsFromServerOrFile()
+    init {
+        getHelpItemsFromServerOrFile()
     }
 
     fun onSwipedRefresh() {
         getHelpItemsFromServerOrFile()
+    }
+
+    fun onItemClicked() {
+        utils.showToast(utils.getString(R.string.click_heard))
     }
 
     private fun getHelpItemsFromServerOrFile() {
@@ -60,14 +62,10 @@ class HelpViewModel @Inject constructor(
                     _progressBarVisibility.postValue(View.GONE)
                 },
                 { error ->
-                    error.message?.let { err -> Log.e(LOG_TAG, err) }
+                    Log.e(LOG_TAG, error.message.toString())
                     _progressBarVisibility.postValue(View.GONE)
                 }
             )
-    }
-
-    fun onItemClicked() {
-        utils.showToast(resourceManager.getString(R.string.click_heard))
     }
 
 }

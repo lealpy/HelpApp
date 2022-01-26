@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.presentation.screens.news
+package com.lealpy.simbirsoft_training.presentation.screens.news.news_preview
 
 import android.os.Bundle
 import android.view.Menu
@@ -16,13 +16,11 @@ class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
 
     private lateinit var binding : FragmentNewsFilterBinding
 
-    private val viewModel : NewsViewModel by activityViewModels()
+    private val viewModel : NewsPreviewViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding = FragmentNewsFilterBinding.bind(view)
-
         initToolbar()
         initObservers()
     }

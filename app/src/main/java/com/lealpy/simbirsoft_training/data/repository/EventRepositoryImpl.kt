@@ -2,14 +2,13 @@ package com.lealpy.simbirsoft_training.data.repository
 
 import android.util.Log
 import com.lealpy.simbirsoft_training.data.api.EventApi
-import com.lealpy.simbirsoft_training.data.database.events.EventDao
+import com.lealpy.simbirsoft_training.data.database.search_by_events.EventDao
 import com.lealpy.simbirsoft_training.data.utils.DataUtils
 import com.lealpy.simbirsoft_training.data.utils.DataUtils.Companion.LOG_TAG
 import com.lealpy.simbirsoft_training.data.utils.toEventEntities
 import com.lealpy.simbirsoft_training.data.utils.toEventItems
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 import com.lealpy.simbirsoft_training.domain.repository.EventRepository
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -40,7 +39,7 @@ class EventRepositoryImpl @Inject constructor(
                             )
                     },
                     { error ->
-                        error.message?.let { err -> Log.e(LOG_TAG, err) }
+                        Log.e(LOG_TAG, error.message.toString())
                         emitter.onError(error)
                     }
                 )
@@ -57,7 +56,7 @@ class EventRepositoryImpl @Inject constructor(
                         emitter.onComplete()
                     },
                     { error ->
-                        Log.e(DataUtils.LOG_TAG, error.message.toString())
+                        Log.e(LOG_TAG, error.message.toString())
                     }
                 )
         }

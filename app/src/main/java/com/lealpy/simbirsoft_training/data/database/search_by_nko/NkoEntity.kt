@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.data.database.nko
+package com.lealpy.simbirsoft_training.data.database.search_by_nko
 
 import androidx.room.Entity
 import androidx.room.Index

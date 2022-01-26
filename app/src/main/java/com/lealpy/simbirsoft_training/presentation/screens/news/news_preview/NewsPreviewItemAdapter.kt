@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.presentation.screens.news
+package com.lealpy.simbirsoft_training.presentation.screens.news.news_preview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,11 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.simbirsoft_training.databinding.ItemNewsBinding
-import com.lealpy.simbirsoft_training.presentation.model.NewsItemUi
+import com.lealpy.simbirsoft_training.presentation.model.NewsPreviewItemUi
 
-class NewsItemAdapter (
-    private val onItemClick : (newsItemUi : NewsItemUi) -> Unit,
-): ListAdapter<NewsItemUi, NewsItemAdapter.NewsItemHolder>(DiffCallback()) {
+class NewsPreviewItemAdapter (
+    private val onItemClick : (newsPreviewItemUi : NewsPreviewItemUi) -> Unit,
+): ListAdapter<NewsPreviewItemUi, NewsPreviewItemAdapter.NewsItemHolder>(DiffCallback()) {
 
     inner class NewsItemHolder(
         private val binding: ItemNewsBinding
@@ -26,11 +26,11 @@ class NewsItemAdapter (
             }
         }
 
-        fun bind(newsItemUi: NewsItemUi) {
-            binding.newsItemImage.setImageBitmap(newsItemUi.image)
-            binding.newsItemTitle.text = newsItemUi.title
-            binding.newsItemText.text = newsItemUi.abbreviatedText
-            binding.newsItemDate.text = newsItemUi.date
+        fun bind(newsPreviewItemUi: NewsPreviewItemUi) {
+            binding.newsItemImage.setImageBitmap(newsPreviewItemUi.image)
+            binding.newsItemTitle.text = newsPreviewItemUi.title
+            binding.newsItemText.text = newsPreviewItemUi.abbreviatedText
+            binding.newsItemDate.text = newsPreviewItemUi.date
         }
     }
 
@@ -48,11 +48,11 @@ class NewsItemAdapter (
         holder.bind(item)
     }
 
-    class DiffCallback: DiffUtil.ItemCallback<NewsItemUi>() {
-        override fun areItemsTheSame(oldItemUi: NewsItemUi, newItemUi: NewsItemUi) =
+    class DiffCallback: DiffUtil.ItemCallback<NewsPreviewItemUi>() {
+        override fun areItemsTheSame(oldItemUi: NewsPreviewItemUi, newItemUi: NewsPreviewItemUi) =
             oldItemUi.id == newItemUi.id
 
-        override fun areContentsTheSame(oldItemUi: NewsItemUi, newItemUi: NewsItemUi) =
+        override fun areContentsTheSame(oldItemUi: NewsPreviewItemUi, newItemUi: NewsPreviewItemUi) =
             oldItemUi == newItemUi
     }
 

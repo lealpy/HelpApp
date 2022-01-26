@@ -6,76 +6,28 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.data.api.NewsApi
-import com.lealpy.simbirsoft_training.presentation.model.NewsItemUi
-import com.lealpy.simbirsoft_training.domain.model.NewsItem
+import com.lealpy.simbirsoft_training.domain.use_cases.news.GetFromDbNewsDescriptionItemByIdUseCase
+import com.lealpy.simbirsoft_training.presentation.model.NewsDescriptionItemUi
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.ResourceManager
+import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsDescriptionViewModel @Inject constructor (
-    private val newsApi: NewsApi,
-    private val presentationUtils: PresentationUtils,
-    private val resourceManager: ResourceManager
+    private val getFromDbNewsDescriptionItemByIdUseCase: GetFromDbNewsDescriptionItemByIdUseCase,
+    private val utils: PresentationUtils,
 ) : ViewModel() {
 
-    private val _newsItem = MutableLiveData <NewsItemUi> ()
-    val newsItemUi : LiveData<NewsItemUi> = _newsItem
+    private val _newsDescriptionItemUi = MutableLiveData <NewsDescriptionItemUi> ()
+    val newsDescriptionItemUi : LiveData<NewsDescriptionItemUi> = _newsDescriptionItemUi
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
 
     private val _finishFragment = MutableLiveData <Boolean> ()
     val finishFragment : LiveData<Boolean> = _finishFragment
-
-    private val compositeDisposable = CompositeDisposable()
-
-    override fun onCleared() {
-        compositeDisposable.clear()
-        super.onCleared()
-    }
-
-    private fun fetchNewsItem(newsItemId : Long) {
-        _progressBarVisibility.value = View.VISIBLE
-
-        compositeDisposable.add(newsApi
-            .getNewsItems()
-            .subscribeOn(io.reactivex.schedulers.Schedulers.io())
-            .observeOn(io.reactivex.schedulers.Schedulers.computation())
-            .subscribe(
-                { newsItemsJsonFromServer ->
-                    item(newsItemsJsonFromServer, newsItemId)
-                    _progressBarVisibility.postValue(View.GONE)
-                },
-                { error ->
-                    error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
-                    val newsItemsJsonFromFile = presentationUtils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_JSON_FILE_NAME)
-                    item(newsItemsJsonFromFile, newsItemId)
-                    _progressBarVisibility.postValue(View.GONE)
-                }
-            )
-        )
-    }
-
-    private fun item(newsItems : List<NewsItem>, newsItemId : Long) {
-        val newsItemJson = newsItems.find { newsItemJson ->
-            newsItemJson.id == newsItemId
-        }
-        if(newsItemJson != null) {
-            val newsItem = presentationUtils.newsItemJsonToNewsItem(newsItemJson)
-            _newsItem.postValue(newsItem)
-        }
-        else {
-            _finishFragment.postValue(true)
-        }
-    }
-
-    private fun showToast() {
-        presentationUtils.showToast(resourceManager.getString(R.string.click_heard))
-    }
 
     fun onSiteClicked() { showToast() }
 
@@ -94,11 +46,31 @@ class NewsDescriptionViewModel @Inject constructor (
     fun onSpanFeedbackClicked() { showToast() }
 
     fun getId(newsItemId: Long) {
-        fetchNewsItem(newsItemId)
+        getNewsDescriptionItemFromDb(newsItemId)
     }
 
-    companion object {
-        private const val NEWS_ITEMS_JSON_FILE_NAME = "news_items.json"
+    private fun getNewsDescriptionItemFromDb(newsItemId: Long) {
+        _progressBarVisibility.value = View.VISIBLE
+
+        getFromDbNewsDescriptionItemByIdUseCase.execute(newsItemId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(Schedulers.io())
+            .subscribe(
+                { newsDescriptionItem ->
+                    val newsDescriptionItemUi = utils.newsDescriptionItemToNewsDescriptionItemUi(newsDescriptionItem)
+                    _newsDescriptionItemUi.postValue(newsDescriptionItemUi)
+                    _progressBarVisibility.postValue(View.GONE)
+                },
+                { error ->
+                    Log.e(LOG_TAG, error.message.toString())
+                    _progressBarVisibility.postValue(View.GONE)
+                }
+            )
+
+    }
+
+    private fun showToast() {
+        utils.showToast(utils.getString(R.string.click_heard))
     }
 
 }

@@ -22,7 +22,6 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
         binding = FragmentHelpBinding.bind(view)
         initViews()
         initObservers()
-        viewModel.onViewCreated()
     }
 
     private fun initViews() {

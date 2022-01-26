@@ -1,14 +1,12 @@
 package com.lealpy.simbirsoft_training.presentation.screens.profile
 
 import android.app.Activity
-import android.app.Application
 import android.graphics.Bitmap
 import android.util.Log
 import androidx.activity.result.ActivityResult
-import androidx.core.graphics.drawable.toBitmap
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
@@ -20,9 +18,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    application: Application,
     private val utils: PresentationUtils
-) : AndroidViewModel(application) {
+) : ViewModel() {
 
     private val _avatarUser = MutableLiveData<Bitmap>()
     val avatarUser : LiveData<Bitmap> = _avatarUser
@@ -37,6 +34,37 @@ class ProfileViewModel @Inject constructor(
     val avatarFriend3 : LiveData<Bitmap> = _avatarFriend3
 
     init {
+        loadImages()
+    }
+
+    fun onGotCameraResult(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val bitmap = result.data?.extras?.get("data") as Bitmap
+            val croppedBitmap = utils.cropBitmap(bitmap, BITMAP_RATIO)
+            _avatarUser.value = croppedBitmap
+        }
+    }
+
+    fun onGotGalleryResult(result: ActivityResult) {
+        if (result.resultCode == Activity.RESULT_OK) {
+            val selectedImageURI = result.data?.data
+            if(selectedImageURI != null) {
+                val bitmap = utils.getBitmapFromUri(selectedImageURI)
+                val croppedBitmap = utils.cropBitmap(bitmap, BITMAP_RATIO)
+                _avatarUser.value = croppedBitmap
+            }
+        }
+    }
+
+    fun onDeletePhotoSelected() {
+        _avatarUser.value = utils.getBitmapById(R.drawable.no_photo)
+    }
+
+    fun onEditClicked() { showToast() }
+
+    fun onExitButtonClicked() { showToast() }
+
+    private fun loadImages() {
         Single.create<Map<String, Bitmap>> { emitter ->
             emitter.onSuccess(
                 mapOf(
@@ -61,34 +89,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     private fun showToast() {
-        utils.showToast(getApplication<Application>().getString(R.string.click_heard))
-    }
-
-    fun onEditClicked() { showToast() }
-
-    fun onExitButtonClicked() { showToast() }
-
-    fun onGotCameraResult(result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            val bitmap = result.data?.extras?.get("data") as Bitmap
-            val croppedBitmap = utils.cropBitmap(bitmap, BITMAP_RATIO)
-            _avatarUser.value = croppedBitmap
-        }
-    }
-
-    fun onGotGalleryResult(result: ActivityResult) {
-        if (result.resultCode == Activity.RESULT_OK) {
-            val selectedImageURI = result.data?.data
-            if(selectedImageURI != null) {
-                val bitmap = utils.getBitmapFromUri(selectedImageURI)
-                val croppedBitmap = utils.cropBitmap(bitmap, BITMAP_RATIO)
-                _avatarUser.value = croppedBitmap
-            }
-        }
-    }
-
-    fun onDeletePhotoSelected() {
-        _avatarUser.value = getApplication<Application>().getDrawable(R.drawable.no_photo)?.toBitmap()
+        utils.showToast(utils.getString(R.string.click_heard))
     }
 
     companion object {

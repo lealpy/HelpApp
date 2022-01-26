@@ -7,11 +7,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.domain.model.EventItem
-import com.lealpy.simbirsoft_training.domain.use_cases.events.GetFromDbEventItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.events.SaveToDbEventItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.GetFromDbEventItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.SaveToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
-import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -20,7 +19,6 @@ import javax.inject.Inject
 class SearchByEventsViewModel @Inject constructor(
     private val saveToDbEventItemsUseCase: SaveToDbEventItemsUseCase,
     private val getFromDbEventItemsByTitleUseCase: GetFromDbEventItemsByTitleUseCase,
-    private val resourceManager: ResourceManager,
     private val utils: PresentationUtils
 ) : ViewModel() {
 
@@ -41,6 +39,10 @@ class SearchByEventsViewModel @Inject constructor(
 
     private var searchText = ""
 
+    init {
+        getEventItemsFromServerOrFile()
+    }
+
     fun onSearchChanged(searchText: String) {
         this.searchText = searchText
         search(searchText)
@@ -48,10 +50,6 @@ class SearchByEventsViewModel @Inject constructor(
 
     fun onRefreshSwiped() {
         getEventItemsFromServerOrFile()
-    }
-
-    fun onViewCreated() {
-        if(_eventItems.value == null) getEventItemsFromServerOrFile()
     }
 
     fun onEventTabSelected() {
@@ -64,7 +62,7 @@ class SearchByEventsViewModel @Inject constructor(
     }
 
     fun onItemClicked() {
-        utils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(utils.getString(R.string.click_heard))
     }
 
     private fun getEventItemsFromServerOrFile() {
@@ -97,7 +95,7 @@ class SearchByEventsViewModel @Inject constructor(
                         showSearchResults(eventItems)
                     },
                     { error ->
-                        error.message?.let { err -> Log.e(LOG_TAG, err) }
+                        Log.e(LOG_TAG, error.message.toString())
                     }
                 )
         }

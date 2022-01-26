@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.domain.use_cases.events
+package com.lealpy.simbirsoft_training.domain.use_cases.search_by_events
 
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 import com.lealpy.simbirsoft_training.domain.repository.EventRepository

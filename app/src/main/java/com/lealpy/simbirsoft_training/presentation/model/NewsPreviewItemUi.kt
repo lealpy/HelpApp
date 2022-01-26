@@ -1,17 +1,13 @@
-package com.lealpy.simbirsoft_training.domain.model
+package com.lealpy.simbirsoft_training.presentation.model
 
-data class NewsItem (
+import android.graphics.Bitmap
+
+data class NewsPreviewItemUi (
     val id : Long,
-    val imageUrl : String,
+    val image : Bitmap,
     val title : String,
     val abbreviatedText : String,
     val date : String,
-    val fundName : String,
-    val address: String,
-    val phone : String,
-    val image2Url : String,
-    val image3Url : String,
-    val fullText : String,
     val isChildrenCategory : Boolean,
     val isAdultCategory : Boolean,
     val isElderlyCategory : Boolean,

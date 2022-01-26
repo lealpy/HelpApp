@@ -17,7 +17,6 @@ class SplashScreenFragment : Fragment(R.layout.fragment_splash_screen) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initObservers()
-        viewModel.onViewCreated()
     }
 
     private fun initObservers() {

@@ -7,7 +7,6 @@ import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.presentation.screens.authorization.AuthorizationFragment.Companion.EMAIL_KEY
 import com.lealpy.simbirsoft_training.presentation.screens.authorization.AuthorizationFragment.Companion.PASSWORD_KEY
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -17,7 +16,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthorizationViewModel @Inject constructor(
-    private val resourceManager: ResourceManager,
     private val utils: PresentationUtils
 ) : ViewModel() {
 
@@ -39,7 +37,7 @@ class AuthorizationViewModel @Inject constructor(
     fun onForgotPasswordSpanClicked() { showToast() }
 
     private fun showToast() {
-        utils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(utils.getString(R.string.click_heard))
     }
 
     fun onEditTextLengthWatcherInit(observable: Observable<Map<String, Int>>) {

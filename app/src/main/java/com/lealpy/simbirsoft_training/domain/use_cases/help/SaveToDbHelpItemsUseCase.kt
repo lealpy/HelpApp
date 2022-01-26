@@ -1,8 +1,8 @@
 package com.lealpy.simbirsoft_training.domain.use_cases.help
 
 import android.util.Log
-import com.lealpy.simbirsoft_training.data.utils.DataUtils
 import com.lealpy.simbirsoft_training.domain.repository.HelpRepository
+import com.lealpy.simbirsoft_training.domain.utils.DomainUtils.Companion.LOG_TAG
 import io.reactivex.Completable
 import javax.inject.Inject
 
@@ -31,14 +31,9 @@ class SaveToDbHelpItemsUseCase @Inject constructor(
                                     }
                                 },
                                 { error ->
-                                    Log.e(DataUtils.LOG_TAG, error.message.toString())
+                                    Log.e(LOG_TAG, error.message.toString())
                                 }
                             )
-
-                        repository.saveToDbHelpItemsFromFile()
-                            .subscribe {
-                                emitter.onComplete()
-                            }
                     }
                 )
         }

@@ -1,10 +1,10 @@
-package com.lealpy.simbirsoft_training.presentation.screens.news
+package com.lealpy.simbirsoft_training.presentation.screens.news.news_preview
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class NewsItemDecoration(
+class NewsPreviewItemDecoration(
     private val spacing: Int
 ) : RecyclerView.ItemDecoration() {
 

@@ -9,7 +9,6 @@ import com.lealpy.simbirsoft_training.data.utils.toHelpEntities
 import com.lealpy.simbirsoft_training.data.utils.toHelpItems
 import com.lealpy.simbirsoft_training.domain.model.HelpItem
 import com.lealpy.simbirsoft_training.domain.repository.HelpRepository
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
@@ -40,7 +39,7 @@ class HelpRepositoryImpl @Inject constructor(
                             )
                     },
                     { error ->
-                        error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
+                        Log.e(LOG_TAG, error.message.toString())
                         emitter.onError(error)
                     }
                 )
@@ -77,4 +76,5 @@ class HelpRepositoryImpl @Inject constructor(
     companion object {
         private const val HELP_ITEMS_FILE_NAME = "help_items.json"
     }
+
 }

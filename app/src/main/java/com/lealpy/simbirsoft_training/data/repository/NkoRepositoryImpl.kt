@@ -2,7 +2,7 @@ package com.lealpy.simbirsoft_training.data.repository
 
 import android.util.Log
 import com.lealpy.simbirsoft_training.data.api.NkoApi
-import com.lealpy.simbirsoft_training.data.database.nko.NkoDao
+import com.lealpy.simbirsoft_training.data.database.search_by_nko.NkoDao
 import com.lealpy.simbirsoft_training.data.utils.*
 import com.lealpy.simbirsoft_training.data.utils.DataUtils.Companion.LOG_TAG
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
@@ -37,7 +37,7 @@ class NkoRepositoryImpl @Inject constructor(
                             )
                     },
                     { error ->
-                        error.message?.let { err -> Log.e(LOG_TAG, err) }
+                        Log.e(LOG_TAG, error.message.toString())
                         emitter.onError(error)
                     }
                 )

@@ -1,17 +1,11 @@
 package com.lealpy.simbirsoft_training.domain.model
 
-data class NewsItem (
+data class NewsPreviewItem (
     val id : Long,
     val imageUrl : String,
     val title : String,
     val abbreviatedText : String,
     val date : String,
-    val fundName : String,
-    val address: String,
-    val phone : String,
-    val image2Url : String,
-    val image3Url : String,
-    val fullText : String,
     val isChildrenCategory : Boolean,
     val isAdultCategory : Boolean,
     val isElderlyCategory : Boolean,

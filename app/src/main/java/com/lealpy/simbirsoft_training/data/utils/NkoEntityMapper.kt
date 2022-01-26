@@ -1,6 +1,6 @@
 package com.lealpy.simbirsoft_training.data.utils
 
-import com.lealpy.simbirsoft_training.data.database.nko.NkoEntity
+import com.lealpy.simbirsoft_training.data.database.search_by_nko.NkoEntity
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
 
 fun List<NkoEntity>.toNkoItems() : List<NkoItem> {

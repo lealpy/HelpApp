@@ -4,13 +4,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/navigationSearch">
+    app:startDestination="@id/splashScreenFragment">
 
     <fragment
         android:id="@+id/navigationNews"
-        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.NewsFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.news_preview.NewsPreviewFragment"
         android:label="fragment_news"
-        tools:layout="@layout/fragment_news" >
+        tools:layout="@layout/fragment_news_preview" >
         <action
             android:id="@+id/actionNavigationNewsToNewsFilterFragment"
             app:destination="@id/newsFilterFragment" />
@@ -40,7 +40,7 @@
         tools:layout="@layout/fragment_profile"/>
     <fragment
         android:id="@+id/newsFilterFragment"
-        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.NewsFilterFragment"
+        android:name="com.lealpy.simbirsoft_training.presentation.screens.news.news_preview.NewsFilterFragment"
         android:label="NewsFilterFragment"
         tools:layout="@layout/fragment_news_filter"/>
     <fragment

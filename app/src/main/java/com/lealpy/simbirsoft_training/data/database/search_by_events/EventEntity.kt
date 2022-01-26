@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.data.database.events
+package com.lealpy.simbirsoft_training.data.database.search_by_events
 
 import androidx.room.Entity
 import androidx.room.Index

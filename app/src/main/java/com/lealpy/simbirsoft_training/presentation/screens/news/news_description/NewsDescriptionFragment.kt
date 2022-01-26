@@ -41,7 +41,7 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initObservers() {
-        viewModel.newsItemUi.observe(viewLifecycleOwner) { newsItem ->
+        viewModel.newsDescriptionItemUi.observe(viewLifecycleOwner) { newsItem ->
             binding.toolbarTitle.text = newsItem.title
             binding.title.text = newsItem.title
             binding.date.text = newsItem.date
@@ -54,8 +54,9 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             binding.image3.setImageBitmap(newsItem.image3)
         }
 
-        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
-            binding.progressBar.visibility = progressBarVisibility
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { visibility ->
+            binding.blankScreen.visibility = visibility
+            binding.progressBar.visibility = visibility
         }
 
         viewModel.finishFragment.observe(viewLifecycleOwner) { isFinishFragment ->

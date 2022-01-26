@@ -7,11 +7,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
-import com.lealpy.simbirsoft_training.domain.use_cases.nko.GetFromDbAllNkoItemsUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.nko.GetFromDbNkoItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.nko.SaveToDbNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbAllNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbNkoItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.SaveToDbNkoItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.ResourceManager
+import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -21,8 +21,7 @@ class SearchByNkoViewModel @Inject constructor(
     private val getFromDbNkoItemsByTitleUseCase: GetFromDbNkoItemsByTitleUseCase,
     private val getFromDbAllNkoItemsUseCase: GetFromDbAllNkoItemsUseCase,
     private val saveToDbNkoItemsUseCase: SaveToDbNkoItemsUseCase,
-    private val utils: PresentationUtils,
-    private val resourceManager: ResourceManager
+    private val utils: PresentationUtils
 ) : ViewModel() {
 
     private val _nkoItems = MutableLiveData<List<NkoItem>> ()
@@ -35,11 +34,15 @@ class SearchByNkoViewModel @Inject constructor(
     val searchViewQuery: LiveData<String> = _searchViewQuery
 
     private val _searchResults = MutableLiveData(
-        String.format(resourceManager.getString(R.string.search_by_nko_search_results), 0)
+        String.format(utils.getString(R.string.search_by_nko_search_results), 0)
     )
     val searchResults: LiveData<String> = _searchResults
 
     private var searchText = ""
+
+    init {
+        getNkoItemsFromServerOrFile()
+    }
 
     fun onNkoTabSelected() {
         _searchViewQuery.value = searchText
@@ -63,7 +66,7 @@ class SearchByNkoViewModel @Inject constructor(
     }
 
     fun onItemClicked() {
-        utils.showToast(resourceManager.getString(R.string.click_heard))
+        utils.showToast(utils.getString(R.string.click_heard))
     }
 
     private fun getNkoItemsFromServerOrFile() {
@@ -93,7 +96,7 @@ class SearchByNkoViewModel @Inject constructor(
                     _progressBarVisibility.postValue(View.GONE)
                 },
                 { error ->
-                    error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
+                    Log.e(LOG_TAG, error.message.toString())
                 }
             )
     }
@@ -113,7 +116,7 @@ class SearchByNkoViewModel @Inject constructor(
                         _progressBarVisibility.postValue(View.GONE)
                     },
                     { error ->
-                        error.message?.let { err -> Log.e(PresentationUtils.LOG_TAG, err) }
+                        Log.e(LOG_TAG, error.message.toString())
                     }
                 )
         }
@@ -124,7 +127,7 @@ class SearchByNkoViewModel @Inject constructor(
 
     private fun setNumberOfFoundNkoItems(numberOfFoundNkoItems : Int) {
         val searchResults = String.format(
-            resourceManager.getString(R.string.search_by_nko_search_results),
+            utils.getString(R.string.search_by_nko_search_results),
             numberOfFoundNkoItems
         )
         _searchResults.postValue(searchResults)

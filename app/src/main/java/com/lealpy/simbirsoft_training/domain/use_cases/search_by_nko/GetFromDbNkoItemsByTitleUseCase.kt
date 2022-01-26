@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.domain.use_cases.nko
+package com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko
 
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
 import com.lealpy.simbirsoft_training.domain.repository.NkoRepository

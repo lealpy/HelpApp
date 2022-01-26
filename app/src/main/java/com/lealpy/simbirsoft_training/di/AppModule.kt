@@ -9,22 +9,28 @@ import com.lealpy.simbirsoft_training.data.api.HelpApi
 import com.lealpy.simbirsoft_training.data.api.NewsApi
 import com.lealpy.simbirsoft_training.data.api.NkoApi
 import com.lealpy.simbirsoft_training.data.database.AppDatabase
-import com.lealpy.simbirsoft_training.data.database.events.EventDao
+import com.lealpy.simbirsoft_training.data.database.search_by_events.EventDao
 import com.lealpy.simbirsoft_training.data.repository.EventRepositoryImpl
 import com.lealpy.simbirsoft_training.data.database.help.HelpDao
-import com.lealpy.simbirsoft_training.data.database.nko.NkoDao
+import com.lealpy.simbirsoft_training.data.database.news.NewsDao
+import com.lealpy.simbirsoft_training.data.database.search_by_nko.NkoDao
 import com.lealpy.simbirsoft_training.data.repository.HelpRepositoryImpl
+import com.lealpy.simbirsoft_training.data.repository.NewsRepositoryImpl
 import com.lealpy.simbirsoft_training.data.repository.NkoRepositoryImpl
 import com.lealpy.simbirsoft_training.data.utils.DataUtils
-import com.lealpy.simbirsoft_training.domain.use_cases.events.GetFromDbEventItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.events.SaveToDbEventItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.GetFromDbEventItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.SaveToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.SaveToDbHelpItemsUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.nko.GetFromDbAllNkoItemsUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.nko.GetFromDbNkoItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.nko.SaveToDbNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.GetFromDbAllNewsPreviewItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.GetFromDbNewsDescriptionItemByIdUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.InsertToDbWatchedNewsIdUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.SaveToDbNewsItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbAllNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbNkoItemsByTitleUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.SaveToDbNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.ResourceManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -63,6 +69,26 @@ class AppModule {
         return EventRepositoryImpl(eventDao, eventApi, dataUtils)
     }
 
+    @Provides
+    @Singleton
+    fun provideNkoRepository(
+        nkoDao: NkoDao,
+        nkoApi: NkoApi,
+        dataUtils: DataUtils
+    ) : NkoRepositoryImpl {
+        return NkoRepositoryImpl(nkoDao, nkoApi, dataUtils)
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsRepository(
+        newsDao: NewsDao,
+        newsApi: NewsApi,
+        dataUtils: DataUtils
+    ) : NewsRepositoryImpl {
+        return NewsRepositoryImpl(newsDao, newsApi, dataUtils)
+    }
+
     /** Room */
 
     @Provides
@@ -91,6 +117,12 @@ class AppModule {
     @Singleton
     fun provideNkoDao(appDatabase: AppDatabase) : NkoDao {
         return appDatabase.nkoDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideNewsDao(appDatabase: AppDatabase) : NewsDao {
+        return appDatabase.newsDao()
     }
 
     /** Retrofit */
@@ -195,17 +227,47 @@ class AppModule {
         return SaveToDbNkoItemsUseCase(nkoRepositoryImpl)
     }
 
-    /** Resource manager */
+    @Provides
+    @Singleton
+    fun provideGetFromDbAllNewsPreviewItemsUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl
+    ) : GetFromDbAllNewsPreviewItemsUseCase {
+        return GetFromDbAllNewsPreviewItemsUseCase(newsRepositoryImpl)
+    }
 
     @Provides
     @Singleton
-    fun provideResourceManager(
-        @ApplicationContext appContext: Context
-    ): ResourceManager {
-        return ResourceManager(appContext.resources)
+    fun provideGetFromDbNewsDescriptionItemUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl
+    ) : GetFromDbNewsDescriptionItemByIdUseCase {
+        return GetFromDbNewsDescriptionItemByIdUseCase(newsRepositoryImpl)
     }
 
-    /** Request manager */
+    @Provides
+    @Singleton
+    fun provideSaveToDbNewsItemsUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl
+    ) : SaveToDbNewsItemsUseCase {
+        return SaveToDbNewsItemsUseCase(newsRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInsertToDbWatchedNewsIdUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl
+    ) : InsertToDbWatchedNewsIdUseCase {
+        return InsertToDbWatchedNewsIdUseCase(newsRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetUnviewedNewsNumberUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl
+    ) : GetUnwatchedNewsNumberUseCase {
+        return GetUnwatchedNewsNumberUseCase(newsRepositoryImpl)
+    }
+
+    /** Application utilities */
 
     @Provides
     @Singleton
@@ -214,8 +276,6 @@ class AppModule {
     ) : RequestManager {
         return Glide.with(appContext)
     }
-
-    /** Application utilities */
 
     @Provides
     @Singleton

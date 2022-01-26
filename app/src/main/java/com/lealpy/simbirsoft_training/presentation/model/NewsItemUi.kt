@@ -20,8 +20,8 @@ data class NewsItemUi (
     val image3 : Bitmap?,
     val fullText : String?,
     val isChildrenCategory : Boolean,
-    val isAdultsCategory : Boolean,
+    val isAdultCategory : Boolean,
     val isElderlyCategory : Boolean,
-    val isAnimalsCategory : Boolean,
-    val isEventsCategory : Boolean
+    val isAnimalCategory : Boolean,
+    val isEventCategory : Boolean
 )

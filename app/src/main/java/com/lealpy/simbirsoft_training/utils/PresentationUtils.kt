@@ -5,32 +5,26 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.widget.Toast
+import androidx.annotation.StringRes
+import androidx.core.graphics.drawable.toBitmap
 import com.bumptech.glide.RequestManager
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.data.database.events.EventEntity
-import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
-import com.lealpy.simbirsoft_training.presentation.model.HelpItemUi
 import com.lealpy.simbirsoft_training.domain.model.HelpItem
-import com.lealpy.simbirsoft_training.presentation.model.NewsItemUi
-import com.lealpy.simbirsoft_training.domain.model.NewsItem
-import com.lealpy.simbirsoft_training.domain.model.EventItem
+import com.lealpy.simbirsoft_training.domain.model.NewsDescriptionItem
+import com.lealpy.simbirsoft_training.domain.model.NewsPreviewItem
+import com.lealpy.simbirsoft_training.presentation.model.HelpItemUi
+import com.lealpy.simbirsoft_training.presentation.model.NewsDescriptionItemUi
+import com.lealpy.simbirsoft_training.presentation.model.NewsPreviewItemUi
 import javax.inject.Inject
 
 class PresentationUtils @Inject constructor(
     val appContext: Context,
     private val requestManager: RequestManager
-    ) {
+) {
 
     companion object {
         const val LOG_TAG = "HelpAppLog"
-    }
-
-    inline fun <reified T> getItemsFromFile(fileName: String) : T {
-        val jsonFileString = appContext.assets.open(fileName).bufferedReader().use { it.readText() }
-        return Gson().fromJson(jsonFileString, object: TypeToken<T>() {}.type)
     }
 
     fun getBitmapFromUrl(url : String) : Bitmap {
@@ -50,6 +44,10 @@ class PresentationUtils @Inject constructor(
         return BitmapFactory.decodeStream(inputStream)
     }
 
+    fun getBitmapById(id : Int) : Bitmap? {
+        return appContext.getDrawable(id)?.toBitmap()
+    }
+
     fun cropBitmap(bitmap: Bitmap, ratio : Double) : Bitmap {
         return Bitmap.createBitmap(
             bitmap,
@@ -58,6 +56,10 @@ class PresentationUtils @Inject constructor(
             bitmap.width,
             (bitmap.width / ratio).toInt()
         )
+    }
+
+    fun getString(@StringRes id: Int): String {
+        return appContext.getString(id)
     }
 
     fun showToast(text : String) {
@@ -76,73 +78,45 @@ class PresentationUtils @Inject constructor(
         }
     }
 
-    fun eventItemsToEventEntities(eventItems: List<EventItem>) : List<EventEntity> {
-        return eventItems.map { eventItem ->
-            EventEntity(
-                id = eventItem.id,
-                title = eventItem.title,
-                date = eventItem.date
-            )
-        }
-    }
-
-    fun eventEntitiesToEventItems(eventEntities: List<EventEntity>): List<EventItem> {
-        return eventEntities.map { eventEntity ->
-            EventItem(
-                id = eventEntity.id,
-                title = eventEntity.title,
-                date = eventEntity.date
-            )
-        }
-    }
-
-    fun newsItemsJsonToNewsItems(newsItems: List<NewsItem>) : List<NewsItemUi> {
-        return newsItems.map { newsItemJson ->
-            val image = getBitmapFromUrl(newsItemJson.imageUrl)
-
-            NewsItemUi(
-                id = newsItemJson.id,
+    fun newsPreviewItemsToNewsPreviewItemsUi (
+        newsPreviewItems: List<NewsPreviewItem>
+    ) : List<NewsPreviewItemUi> {
+        return newsPreviewItems.map { newsPreviewItem ->
+            val image = getBitmapFromUrl(newsPreviewItem.imageUrl)
+            NewsPreviewItemUi(
+                id = newsPreviewItem.id,
                 image = image,
-                title = newsItemJson.title,
-                abbreviatedText = newsItemJson.abbreviatedText,
-                date = newsItemJson.date,
-                fundName = null,
-                address = null,
-                phone = null,
-                image2 = null,
-                image3 = null,
-                fullText = null,
-                isChildrenCategory = newsItemJson.isChildrenCategory,
-                isAdultsCategory = newsItemJson.isAdultsCategory,
-                isElderlyCategory = newsItemJson.isElderlyCategory,
-                isAnimalsCategory = newsItemJson.isAnimalsCategory,
-                isEventsCategory = newsItemJson.isEventsCategory
+                title = newsPreviewItem.title,
+                abbreviatedText = newsPreviewItem.abbreviatedText,
+                date = newsPreviewItem.date,
+                isChildrenCategory = newsPreviewItem.isChildrenCategory,
+                isAdultCategory = newsPreviewItem.isAdultCategory,
+                isElderlyCategory = newsPreviewItem.isElderlyCategory,
+                isAnimalCategory = newsPreviewItem.isAnimalCategory,
+                isEventCategory = newsPreviewItem.isEventCategory
             )
         }
     }
 
-    fun newsItemJsonToNewsItem(newsItem: NewsItem) : NewsItemUi {
-        val image = getBitmapFromUrl(newsItem.imageUrl)
-        val image2 = getBitmapFromUrl(newsItem.image2Url)
-        val image3 = getBitmapFromUrl(newsItem.image3Url)
+    fun newsDescriptionItemToNewsDescriptionItemUi(
+        newsDescriptionItem: NewsDescriptionItem
+    ) : NewsDescriptionItemUi {
+        val image = getBitmapFromUrl(newsDescriptionItem.imageUrl)
+        val image2 = getBitmapFromUrl(newsDescriptionItem.image2Url)
+        val image3 = getBitmapFromUrl(newsDescriptionItem.image3Url)
 
-        return NewsItemUi(
-            id = newsItem.id,
+        return NewsDescriptionItemUi(
+            id = newsDescriptionItem.id,
             image = image,
-            title = newsItem.title,
-            abbreviatedText = newsItem.abbreviatedText,
-            date = newsItem.date,
-            fundName = newsItem.fundName,
-            address = newsItem.address,
-            phone = newsItem.phone,
+            title = newsDescriptionItem.title,
+            abbreviatedText = newsDescriptionItem.abbreviatedText,
+            date = newsDescriptionItem.date,
+            fundName = newsDescriptionItem.fundName,
+            address = newsDescriptionItem.address,
+            phone = newsDescriptionItem.phone,
             image2 = image2,
             image3 = image3,
-            fullText = newsItem.fullText,
-            isChildrenCategory = newsItem.isChildrenCategory,
-            isAdultsCategory = newsItem.isAdultsCategory,
-            isElderlyCategory = newsItem.isElderlyCategory,
-            isAnimalsCategory = newsItem.isAnimalsCategory,
-            isEventsCategory = newsItem.isEventsCategory
+            fullText = newsDescriptionItem.fullText,
         )
     }
 
