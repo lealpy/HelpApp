@@ -65,8 +65,7 @@ class MainActivity : AppCompatActivity() {
             navController.currentDestination?.id == R.id.navigationSearch ||
             navController.currentDestination?.id == R.id.navigationHelp ||
             navController.currentDestination?.id == R.id.navigationHistory ||
-            navController.currentDestination?.id == R.id.navigationProfile ||
-            navController.currentDestination?.id == R.id.authorizationFragment
+            navController.currentDestination?.id == R.id.navigationProfile
         ) {
             finish()
         }

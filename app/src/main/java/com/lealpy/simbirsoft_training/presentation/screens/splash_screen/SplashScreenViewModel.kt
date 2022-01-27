@@ -6,7 +6,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.SaveToDbNewsItemsUseCase
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
@@ -15,8 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
     private val saveToDbNewsItemsUseCase: SaveToDbNewsItemsUseCase,
-    private val getFromDbUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase,
-    private val utils: PresentationUtils
+    private val getFromDbUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase
 ) : ViewModel() {
 
     private val _startBadgeNumber = MutableLiveData<Int>()

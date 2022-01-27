@@ -66,7 +66,9 @@
         tools:layout="@layout/fragment_splash_screen" >
         <action
             android:id="@+id/actionSplashScreenFragmentToAuthorizationFragment"
-            app:destination="@id/authorizationFragment" />
+            app:destination="@id/authorizationFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>
