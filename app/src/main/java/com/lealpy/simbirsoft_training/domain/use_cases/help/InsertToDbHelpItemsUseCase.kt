@@ -6,13 +6,13 @@ import com.lealpy.simbirsoft_training.domain.utils.DomainUtils.Companion.LOG_TAG
 import io.reactivex.Completable
 import javax.inject.Inject
 
-class SaveToDbHelpItemsUseCase @Inject constructor(
+class InsertToDbHelpItemsUseCase @Inject constructor(
     private val repository: HelpRepository
 ) {
 
     fun execute() : Completable {
         return Completable.create { emitter ->
-            repository.saveToDbHelpItemsFromServer()
+            repository.insertToDbHelpItemsFromServer()
                 .subscribe(
                     {
                         emitter.onComplete()
@@ -22,7 +22,7 @@ class SaveToDbHelpItemsUseCase @Inject constructor(
                             .subscribe(
                                 { helpItems ->
                                     if(helpItems.isNullOrEmpty()) {
-                                        repository.saveToDbHelpItemsFromFile()
+                                        repository.insertToDbHelpItemsFromFile()
                                             .subscribe{
                                                 emitter.onComplete()
                                             }

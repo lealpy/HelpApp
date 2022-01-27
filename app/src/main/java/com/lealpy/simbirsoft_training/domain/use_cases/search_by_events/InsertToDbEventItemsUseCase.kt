@@ -1,28 +1,28 @@
-package com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko
+package com.lealpy.simbirsoft_training.domain.use_cases.search_by_events
 
 import android.util.Log
 import com.lealpy.simbirsoft_training.data.utils.DataUtils.Companion.LOG_TAG
-import com.lealpy.simbirsoft_training.domain.repository.NkoRepository
+import com.lealpy.simbirsoft_training.domain.repository.EventRepository
 import io.reactivex.Completable
 import javax.inject.Inject
 
-class SaveToDbNkoItemsUseCase @Inject constructor(
-    private val repository: NkoRepository
-) {
+class InsertToDbEventItemsUseCase @Inject constructor(
+    private val repository: EventRepository
+){
 
     fun execute() : Completable {
         return Completable.create { emitter ->
-            repository.saveToDbNkoItemsFromServer()
+            repository.insertToDbEventItemsFromServer()
                 .subscribe(
                     {
                         emitter.onComplete()
                     },
                     {
-                        repository.getFromDbAllNkoItems()
+                        repository.getFromDbAllEventItems()
                             .subscribe(
-                                { nkoItems ->
-                                    if(nkoItems.isNullOrEmpty()) {
-                                        repository.saveToDbNkoItemsFromFile()
+                                { eventItems ->
+                                    if(eventItems.isNullOrEmpty()) {
+                                        repository.insertToDbEventItemsFromFile()
                                             .subscribe {
                                                 emitter.onComplete()
                                             }

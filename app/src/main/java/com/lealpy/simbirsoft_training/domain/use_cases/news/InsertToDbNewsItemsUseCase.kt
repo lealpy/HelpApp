@@ -6,13 +6,13 @@ import com.lealpy.simbirsoft_training.domain.utils.DomainUtils.Companion.LOG_TAG
 import io.reactivex.Completable
 import javax.inject.Inject
 
-class SaveToDbNewsItemsUseCase @Inject constructor(
+class InsertToDbNewsItemsUseCase @Inject constructor(
     private val repository : NewsRepository
 ) {
 
     fun execute() : Completable {
         return Completable.create { emitter ->
-        repository.saveToDbNewsItemsFromServer()
+        repository.insertToDbNewsItemsFromServer()
             .subscribe(
                 {
                     emitter.onComplete()
@@ -22,7 +22,7 @@ class SaveToDbNewsItemsUseCase @Inject constructor(
                         .subscribe(
                             { newsItems ->
                                 if(newsItems.isNullOrEmpty()) {
-                                    repository.saveToDbNewsItemsFromFile()
+                                    repository.insertToDbNewsItemsFromFile()
                                         .subscribe{
                                             emitter.onComplete()
                                         }

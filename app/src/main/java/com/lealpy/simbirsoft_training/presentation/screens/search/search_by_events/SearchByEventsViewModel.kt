@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.GetFromDbEventItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.SaveToDbEventItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.InsertToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SearchByEventsViewModel @Inject constructor(
-    private val saveToDbEventItemsUseCase: SaveToDbEventItemsUseCase,
+    private val insertToDbEventItemsUseCase: InsertToDbEventItemsUseCase,
     private val getFromDbEventItemsByTitleUseCase: GetFromDbEventItemsByTitleUseCase,
     private val utils: PresentationUtils
 ) : ViewModel() {
@@ -69,7 +69,7 @@ class SearchByEventsViewModel @Inject constructor(
         _blankSearchViewsVisibility.value = View.GONE
         _progressBarVisibility.value = View.VISIBLE
 
-        saveToDbEventItemsUseCase.execute()
+        insertToDbEventItemsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .subscribe {

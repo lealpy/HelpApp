@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetFromDbAllNewsPreviewItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.InsertToDbWatchedNewsIdUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.news.SaveToDbNewsItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.InsertToDbNewsItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
 import com.lealpy.simbirsoft_training.presentation.model.NewsPreviewItemUi
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsPreviewViewModel @Inject constructor(
     private val getFromDbAllNewsPreviewItemsUseCase: GetFromDbAllNewsPreviewItemsUseCase,
-    private val saveToDbNewsItemsUseCase: SaveToDbNewsItemsUseCase,
+    private val insertToDbNewsItemsUseCase: InsertToDbNewsItemsUseCase,
     private val insertToDbWatchedNewsIdUseCase : InsertToDbWatchedNewsIdUseCase,
     private val getFromDbUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase,
     private val utils: PresentationUtils
@@ -103,7 +103,7 @@ class NewsPreviewViewModel @Inject constructor(
         _isAnimalsChecked.value = true
         _isEventsChecked.value = true
 
-        saveToDbNewsItemsUseCase.execute()
+        insertToDbNewsItemsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .subscribe {

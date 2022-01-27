@@ -9,7 +9,7 @@ class GetUnwatchedNewsNumberUseCase @Inject constructor(
 ) {
 
     fun execute() : Single<Int> {
-        return newsRepository.getFromDbUnwatchedNewsId()
+        return newsRepository.getFromDbUnwatchedNewsIdList()
     }
 
 }

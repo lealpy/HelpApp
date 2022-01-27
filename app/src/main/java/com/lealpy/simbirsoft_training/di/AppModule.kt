@@ -19,16 +19,16 @@ import com.lealpy.simbirsoft_training.data.repository.NewsRepositoryImpl
 import com.lealpy.simbirsoft_training.data.repository.NkoRepositoryImpl
 import com.lealpy.simbirsoft_training.data.utils.DataUtils
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.GetFromDbEventItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.SaveToDbEventItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.InsertToDbEventItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.help.SaveToDbHelpItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.help.InsertToDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetFromDbAllNewsPreviewItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetFromDbNewsDescriptionItemByIdUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.InsertToDbWatchedNewsIdUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.news.SaveToDbNewsItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.news.InsertToDbNewsItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbAllNkoItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbNkoItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.SaveToDbNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.InsertToDbNkoItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import dagger.Module
@@ -181,10 +181,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSaveToDbHelpItemsUseCase(
+    fun provideInsertToDbHelpItemsUseCase(
         helpRepositoryImpl: HelpRepositoryImpl
-    ) : SaveToDbHelpItemsUseCase {
-        return SaveToDbHelpItemsUseCase(helpRepositoryImpl)
+    ) : InsertToDbHelpItemsUseCase {
+        return InsertToDbHelpItemsUseCase(helpRepositoryImpl)
     }
 
     @Provides
@@ -197,10 +197,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSaveToDbEventItemsUseCase(
+    fun provideInsertToDbEventItemsUseCase(
         eventRepositoryImpl: EventRepositoryImpl
-    ) : SaveToDbEventItemsUseCase {
-        return SaveToDbEventItemsUseCase(eventRepositoryImpl)
+    ) : InsertToDbEventItemsUseCase {
+        return InsertToDbEventItemsUseCase(eventRepositoryImpl)
     }
 
     @Provides
@@ -221,10 +221,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSaveToDbNkoItemsUseCase(
+    fun provideInsertToDbNkoItemsUseCase(
         nkoRepositoryImpl: NkoRepositoryImpl
-    ) : SaveToDbNkoItemsUseCase {
-        return SaveToDbNkoItemsUseCase(nkoRepositoryImpl)
+    ) : InsertToDbNkoItemsUseCase {
+        return InsertToDbNkoItemsUseCase(nkoRepositoryImpl)
     }
 
     @Provides
@@ -245,10 +245,10 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideSaveToDbNewsItemsUseCase(
+    fun provideInsertToDbNewsItemsUseCase(
         newsRepositoryImpl: NewsRepositoryImpl
-    ) : SaveToDbNewsItemsUseCase {
-        return SaveToDbNewsItemsUseCase(newsRepositoryImpl)
+    ) : InsertToDbNewsItemsUseCase {
+        return InsertToDbNewsItemsUseCase(newsRepositoryImpl)
     }
 
     @Provides
@@ -261,7 +261,7 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideGetUnviewedNewsNumberUseCase(
+    fun provideGetUnwatchedNewsNumberUseCase(
         newsRepositoryImpl: NewsRepositoryImpl
     ) : GetUnwatchedNewsNumberUseCase {
         return GetUnwatchedNewsNumberUseCase(newsRepositoryImpl)

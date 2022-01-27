@@ -9,7 +9,7 @@ class InsertToDbWatchedNewsIdUseCase @Inject constructor(
 ) {
 
     fun execute(id : Long) : Completable {
-        return repository.funInsertWatchedNewsId(id)
+        return repository.funInsertToDbWatchedNewsId(id)
     }
 
 }

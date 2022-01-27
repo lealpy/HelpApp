@@ -20,7 +20,7 @@ class HelpRepositoryImpl @Inject constructor(
     private val utils: DataUtils
 ) : HelpRepository {
 
-    override fun saveToDbHelpItemsFromServer() : Completable {
+    override fun insertToDbHelpItemsFromServer() : Completable {
         return Completable.create{ emitter ->
             helpApi.getHelpItems()
                 .subscribeOn(Schedulers.io())
@@ -46,7 +46,7 @@ class HelpRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun saveToDbHelpItemsFromFile() : Completable {
+    override fun insertToDbHelpItemsFromFile() : Completable {
         return Completable.create{ emitter ->
             val helpItemsFromFile = utils.getItemsFromFile<List<HelpItem>>(HELP_ITEMS_FILE_NAME)
             insertToDbHelpItems(helpItemsFromFile)

@@ -25,7 +25,7 @@ interface NewsDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertWatchedNewsEntity(watchedNewsEntity : WatchedNewsEntity) : Completable
 
-    @Query("SELECT news_entities.id, id_watched_news.watchedNewsId FROM news_entities, id_watched_news WHERE news_entities.id != id_watched_news.watchedNewsId")
-    fun getUnwatchedNewsId() : Single<List<WatchedNewsEntity>>
+    @Query("SELECT id FROM news_entities EXCEPT SELECT id FROM watched_news_entities")
+    fun getUnwatchedNewsIdList() : Single<List<Long>>
 
 }

@@ -21,7 +21,7 @@ class NewsRepositoryImpl @Inject constructor(
     private val utils : DataUtils
 ) : NewsRepository {
 
-    override fun saveToDbNewsItemsFromServer() : Completable {
+    override fun insertToDbNewsItemsFromServer() : Completable {
         return Completable.create { emitter ->
             newsApi.getNewsItems()
                 .subscribeOn(Schedulers.io())
@@ -48,7 +48,7 @@ class NewsRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun saveToDbNewsItemsFromFile() : Completable {
+    override fun insertToDbNewsItemsFromFile() : Completable {
         return Completable.create{ emitter ->
             val newsItemsFromFile = utils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_FILE_NAME)
             insertToDbNewsItems(newsItemsFromFile)
@@ -87,13 +87,13 @@ class NewsRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun funInsertWatchedNewsId(id : Long): Completable {
+    override fun funInsertToDbWatchedNewsId(id : Long): Completable {
         val watchedNewsEntity = WatchedNewsEntity(id)
         return newsDao.insertWatchedNewsEntity(watchedNewsEntity)
     }
 
-    override fun getFromDbUnwatchedNewsId() : Single<Int> {
-        return newsDao.getUnwatchedNewsId().map { idList ->
+    override fun getFromDbUnwatchedNewsIdList() : Single<Int> {
+        return newsDao.getUnwatchedNewsIdList().map { idList ->
             idList.size
         }
     }

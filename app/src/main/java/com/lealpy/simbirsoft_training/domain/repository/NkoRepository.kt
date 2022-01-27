@@ -5,8 +5,8 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface NkoRepository {
-    fun saveToDbNkoItemsFromServer() : Completable
-    fun saveToDbNkoItemsFromFile() : Completable
+    fun insertToDbNkoItemsFromServer() : Completable
+    fun insertToDbNkoItemsFromFile() : Completable
     fun getFromDbNkoItemsByTitle(searchQuery : String) : Single<List<NkoItem>>
     fun getFromDbAllNkoItems() : Single<List<NkoItem>>
     fun insertToDbNkoItems(nkoItems : List<NkoItem>) : Completable

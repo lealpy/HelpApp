@@ -5,8 +5,8 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface EventRepository {
-    fun saveToDbEventItemsFromServer() : Completable
-    fun saveToDbEventItemsFromFile() : Completable
+    fun insertToDbEventItemsFromServer() : Completable
+    fun insertToDbEventItemsFromFile() : Completable
     fun getFromDbEventItemsByTitle(searchQuery : String) : Single<List<EventItem>>
     fun getFromDbAllEventItems() : Single<List<EventItem>>
     fun insertToDbEventItems(eventItems : List<EventItem>) : Completable

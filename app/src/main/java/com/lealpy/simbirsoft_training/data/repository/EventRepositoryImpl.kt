@@ -20,7 +20,7 @@ class EventRepositoryImpl @Inject constructor(
     private val utils : DataUtils
 ) : EventRepository {
 
-    override fun saveToDbEventItemsFromServer() : Completable {
+    override fun insertToDbEventItemsFromServer() : Completable {
         return Completable.create{ emitter ->
             eventApi.getEventItems()
                 .subscribeOn(Schedulers.io())
@@ -46,7 +46,7 @@ class EventRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun saveToDbEventItemsFromFile() : Completable {
+    override fun insertToDbEventItemsFromFile() : Completable {
         return Completable.create { emitter ->
             val eventItemsFromFile = utils.getItemsFromFile<List<EventItem>>(EVENT_ITEMS_FILE_NAME)
             insertToDbEventItems(eventItemsFromFile)

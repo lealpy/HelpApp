@@ -9,7 +9,7 @@ import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.domain.model.NkoItem
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbAllNkoItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbNkoItemsByTitleUseCase
-import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.SaveToDbNkoItemsUseCase
+import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.InsertToDbNkoItemsUseCase
 import com.lealpy.simbirsoft_training.utils.PresentationUtils
 import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class SearchByNkoViewModel @Inject constructor(
     private val getFromDbNkoItemsByTitleUseCase: GetFromDbNkoItemsByTitleUseCase,
     private val getFromDbAllNkoItemsUseCase: GetFromDbAllNkoItemsUseCase,
-    private val saveToDbNkoItemsUseCase: SaveToDbNkoItemsUseCase,
+    private val insertToDbNkoItemsUseCase: InsertToDbNkoItemsUseCase,
     private val utils: PresentationUtils
 ) : ViewModel() {
 
@@ -72,7 +72,7 @@ class SearchByNkoViewModel @Inject constructor(
     private fun getNkoItemsFromServerOrFile() {
         _progressBarVisibility.value = View.VISIBLE
 
-        saveToDbNkoItemsUseCase.execute()
+        insertToDbNkoItemsUseCase.execute()
             .subscribeOn(Schedulers.io())
             .observeOn(Schedulers.computation())
             .subscribe {

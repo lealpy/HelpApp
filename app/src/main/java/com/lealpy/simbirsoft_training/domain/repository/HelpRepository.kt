@@ -5,8 +5,8 @@ import io.reactivex.Completable
 import io.reactivex.Single
 
 interface HelpRepository {
-    fun saveToDbHelpItemsFromServer() : Completable
-    fun saveToDbHelpItemsFromFile() : Completable
+    fun insertToDbHelpItemsFromServer() : Completable
+    fun insertToDbHelpItemsFromFile() : Completable
     fun getFromDbAllHelpItems() : Single<List<HelpItem>>
     fun insertToDbHelpItems(helpItems: List<HelpItem>) : Completable
 }

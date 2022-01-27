@@ -3,8 +3,8 @@ package com.lealpy.simbirsoft_training.data.database.news
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity (tableName = "id_watched_news")
+@Entity (tableName = "watched_news_entities")
 data class WatchedNewsEntity (
     @PrimaryKey
-    val watchedNewsId : Long
+    val id : Long
 )

@@ -18,7 +18,7 @@ class NkoRepositoryImpl @Inject constructor(
     private val utils : DataUtils
 ) : NkoRepository {
 
-    override fun saveToDbNkoItemsFromServer() : Completable {
+    override fun insertToDbNkoItemsFromServer() : Completable {
         return Completable.create{ emitter ->
             nkoApi.getNkoItems()
                 .subscribeOn(Schedulers.io())
@@ -44,7 +44,7 @@ class NkoRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun saveToDbNkoItemsFromFile() : Completable {
+    override fun insertToDbNkoItemsFromFile() : Completable {
         return Completable.create { emitter ->
             val nkoItemsFromFile = utils.getItemsFromFile<List<NkoItem>>(NKO_ITEMS_FILE_NAME)
             insertToDbNkoItems(nkoItemsFromFile)
