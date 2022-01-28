@@ -752,3 +752,48 @@
  - Отключить кэширование изображений в памяти устройства (Disk Cache)
 5. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 6. Завершить task в PS и залогировать затраченное время
+
+
+
+---
+## XII. Базы данных. Content Provider
+---
+### Теоретическая часть
+
+**1. Android SQLite**
++ [Работа с SQLite средствами Android SDK](https://developer.android.com/training/data-storage/sqlite.html)  **(\*\*)**
++ [ORM](https://habrahabr.ru/company/yotadevices/blog/242559/)  **(\*\*)**
+
+**2. Основы Realm**
++ [Документация по Realm](https://realm.io/docs/java/latest/)  **(\*\*\*\*)**
++ [DatabaseProvider в androidbase](http://gitlab.simbirsoft/mobile/AndroidBase/blob/master/app/src/main/java/com/simbirsoft/baseplatform/data/db/DatabaseProvider.java)  **(\*\*)**
+
+**3. Основы Room**
++ [Документация по Room](https://developer.android.com/topic/libraries/architecture/room)  **(\*\*\*\*)**
++ [Room и Rx](https://medium.com/androiddevelopers/room-rxjava-acb0cd4f3757)  **(\*\*\*\*)**
+
+**4. Content Provider**
++ [Основы](https://developer.android.com/guide/topics/providers/content-provider-basics.html?hl=ru) **(\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – Content provider. Максим Хромцов](https://youtu.be/zeDzbzLmpLs?list=PLQC2_0cDcSKBNCR8UWeElzCUuFkXASduz) **(\*\*)**
+
+**5. Codelabs**
++ [Codelab по Room Java](https://codelabs.developers.google.com/codelabs/android-room-with-a-view/index.html?index=..%2F..index#0) **(\*\*\*)**
++ [Codelab по Room Kotlin](https://codelabs.developers.google.com/codelabs/android-room-with-a-view-kotlin/index.html?index=..%2F..index#0)  **(\*\*\*)**
++ [Paging](https://codelabs.developers.google.com/codelabs/android-paging/#0)  **(\*\*\*)**
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `data_base` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style. В системе PS также необходимо создать созвучную задачу, в которую после завершения будет залогировано время.
+
+1. Создать task в PS с заголовком "XII. Базы данных" и взять ее в работу.
+2. Необходимо создать базу данных с использованием Room для хранения сущностей Категории и Благотворительных событий.
+3. При первом получении данных для сущностей Категории и Благотворительные события, сохранять данные в базе данных, и дальнейшее получение производить из нее. Обновление данных должно происходить только для новой сессии.
+- Чтение и запись должны быть реализованы в фоновом потоке
+- На время выполнения фоновых операций пользователю должен быть показан Activity Indicator
+4. Наполнение экранов Категории и Благотворительных событий должно происходить из созданной базы данных
+- Все "тяжелые" операции должны быть реализованы в фоновом потоке
+- На время выполнения фоновых операций пользователю должен быть показан Activity Indicator
+5. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+6. Завершить task в PS и залогировать затраченное время

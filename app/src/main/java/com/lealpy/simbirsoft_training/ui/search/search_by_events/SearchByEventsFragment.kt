@@ -23,7 +23,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
     private val eventAdapter = EventItemAdapter(
         object: EventItemAdapter.OnItemClickListener {
             override fun onItemClick(eventItem: EventItem) {
-                // Задел на будущее
+                showToast()
             }
         }
     )
@@ -34,6 +34,7 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
         initViews()
         initObservers()
+        viewModel.onViewCreated()
         initSpannableString()
     }
 
@@ -100,7 +101,6 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
                 override fun onClick(widget: View) {
                     viewModel.onSearchExampleClicked(searchExample.toString())
-                    showToast()
                 }
             },
             spanStart,

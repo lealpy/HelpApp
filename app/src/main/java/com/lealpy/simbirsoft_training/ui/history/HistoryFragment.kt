@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.lealpy.simbirsoft_training.HelpApp
 import com.lealpy.simbirsoft_training.R
-import com.lealpy.simbirsoft_training.data.HelpApi
+import com.lealpy.simbirsoft_training.data.api.HelpApi
 import com.lealpy.simbirsoft_training.databinding.FragmentHistoryBinding
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

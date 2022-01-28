@@ -5,10 +5,13 @@ import android.graphics.Bitmap
 import com.bumptech.glide.RequestManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.lealpy.simbirsoft_training.data.database.events.EventEntity
+import com.lealpy.simbirsoft_training.data.database.help.HelpEntity
 import com.lealpy.simbirsoft_training.ui.help.HelpItem
 import com.lealpy.simbirsoft_training.ui.help.HelpItemJson
 import com.lealpy.simbirsoft_training.ui.news.NewsItem
 import com.lealpy.simbirsoft_training.ui.news.NewsItemJson
+import com.lealpy.simbirsoft_training.ui.search.search_by_events.EventItem
 
 object AppUtils {
 
@@ -45,6 +48,48 @@ object AppUtils {
                 id = helpItemJson.id,
                 image = image,
                 text = helpItemJson.text
+            )
+        }
+    }
+
+    fun helpItemsJsonToHelpEntities(helpItemsJson: List<HelpItemJson>) : List<HelpEntity> {
+        return helpItemsJson.map { helpItemJson ->
+            HelpEntity(
+                id = helpItemJson.id,
+                imageUrl = helpItemJson.imageURL,
+                text = helpItemJson.text
+            )
+        }
+    }
+
+    fun helpEntitiesToHelpItems(helpEntities: List<HelpEntity>, requestManager : RequestManager) : List<HelpItem> {
+        return helpEntities.map { helpEntity ->
+            val image = getBitmapFromUrl(requestManager, helpEntity.imageUrl)
+
+            HelpItem(
+                id = helpEntity.id,
+                image = image,
+                text = helpEntity.text
+            )
+        }
+    }
+
+    fun eventItemsToEventEntities(eventItems: List<EventItem>) : List<EventEntity> {
+        return eventItems.map { eventItem ->
+            EventEntity(
+                id = eventItem.id,
+                title = eventItem.title,
+                date = eventItem.date
+            )
+        }
+    }
+
+    fun eventEntitiesToEventItems(eventEntities: List<EventEntity>): List<EventItem> {
+        return eventEntities.map { eventEntity ->
+            EventItem(
+                id = eventEntity.id,
+                title = eventEntity.title,
+                date = eventEntity.date
             )
         }
     }
