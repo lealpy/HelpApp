@@ -30,7 +30,7 @@ import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbAl
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbNkoItemsByTitleUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.InsertToDbNkoItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

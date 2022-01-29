@@ -9,8 +9,8 @@ import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.presentation.model.HelpItemUi
 import com.lealpy.simbirsoft_training.domain.use_cases.help.GetFromDbHelpItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.help.InsertToDbHelpItemsUseCase
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

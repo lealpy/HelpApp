@@ -1,4 +1,4 @@
-package com.lealpy.simbirsoft_training.utils
+package com.lealpy.simbirsoft_training.presentation.utils
 
 import android.content.Context
 import android.graphics.Bitmap

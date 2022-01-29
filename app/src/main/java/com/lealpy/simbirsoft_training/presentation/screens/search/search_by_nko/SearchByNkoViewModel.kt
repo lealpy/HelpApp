@@ -10,8 +10,8 @@ import com.lealpy.simbirsoft_training.domain.model.NkoItem
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbAllNkoItemsUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.GetFromDbNkoItemsByTitleUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_nko.InsertToDbNkoItemsUseCase
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

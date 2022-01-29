@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.simbirsoft_training.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.news.InsertToDbNewsItemsUseCase
-import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject

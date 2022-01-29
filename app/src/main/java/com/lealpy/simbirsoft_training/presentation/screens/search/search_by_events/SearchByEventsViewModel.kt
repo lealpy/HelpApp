@@ -9,8 +9,8 @@ import com.lealpy.simbirsoft_training.R
 import com.lealpy.simbirsoft_training.domain.model.EventItem
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.GetFromDbEventItemsByTitleUseCase
 import com.lealpy.simbirsoft_training.domain.use_cases.search_by_events.InsertToDbEventItemsUseCase
-import com.lealpy.simbirsoft_training.utils.PresentationUtils
-import com.lealpy.simbirsoft_training.utils.PresentationUtils.Companion.LOG_TAG
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils
+import com.lealpy.simbirsoft_training.presentation.utils.PresentationUtils.Companion.LOG_TAG
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
