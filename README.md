@@ -797,3 +797,59 @@
 - На время выполнения фоновых операций пользователю должен быть показан Activity Indicator
 5. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 6. Завершить task в PS и залогировать затраченное время
+
+
+
+---
+## XIII. Архитектура приложений. Практика в рамках продуктового проекта.
+---
+### Теоретическая часть
+
+**1. Архитектура**
++ [Принципы SOLID](https://habr.com/ru/post/348286/)  **(\*\*\*\*)**
++ [MVC, MVP, MVVM](https://habrahabr.ru/company/mobileup/blog/313538/) **(\*\*)**
++ [MVI](https://habr.com/ru/company/badoo/blog/429728/) **(\*\*)**
++ [Redux (eng)](https://android.jlelse.eu/redux-rxkotlin-rxswift-awesome-native-mobile-apps-introduction-part-1-4ea7fa3be319) **(\*\*)**
++ [RIBs 1](https://habr.com/ru/company/sports_ru/blog/424305/) **(\*)**
++ [RIBs 2](https://apptractor.ru/info/articles/mobilnaya-razrabotka-v-bilayn-arhitektura-instrumentyi-i-tseli.html) **(\*)**
++ [Про создание архитектур](https://habr.com/ru/post/276593/) **(\*\*\*)**
++ [Общие принципы архитектур](https://habr.com/ru/post/456256/) **(\*\*)**
++ [Moxy - ссылка на библиотеку](https://github.com/Arello-Mobile/Moxy ) **(\*\*\*\*)**
++ [Moxy — статья о том, как она работает](https://habrahabr.ru/post/276189/) **(\*\*\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – MVP&Co. Дмитрий Попов](https://youtu.be/jOCjKyV9a5U?list=PLQC2_0cDcSKBNCR8UWeElzCUuFkXASduz)  рассказывает про архитектуру и наглядно показыватет как архитектура влияет на приложение в разработке. рекомендуется просмотр до момента, когда лектор начинает рассказывать про тестирование **(\*\*)**
+
++ [Android Architecture Components](https://developer.android.com/topic/libraries/architecture) **(\*\*)**
+
+**2. Clean Architecture**
++ [Статья самого Дядюшки Боба](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) **(\*\*\*\*)**
++ [Хороший цикл статей](https://five.agency/android-architecture-part-1-every-new-beginning-is-hard/) **(\*\*\*\*)**
++ [Видео-доклад "Чистая архитектура. Погружение"](https://www.youtube.com/watch?v=JePQFYb5WJI&feature=youtu.be) **(\*\*\*\*)**
++ [Пример использования архитектуры](https://github.com/android10/Android-CleanArchitecture) **(\*\*\*)**
++ [Заблуждения Clean Architecture](https://habr.com/ru/company/mobileup/blog/335382/) **(\*\*\*)**
++ [Руководство по применению чистой архитектуры в Android проектах](https://github.com/AndroidArchitecture/AndroidArchitectureBook) **(\*\*)**
+
+**3. DI**
++ [Dagger 2 - ссылка на библиотеку](https://github.com/google/dagger)  **(\*\*\*\*)**
++ [Dagger 2 - хороший цикл статей](https://habr.com/ru/post/343248/)  **(\*\*\*\*)**
++ [Dagger 2 - еще один хороший цикл статей](https://habr.com/post/279125/)  **(\*\*\*\*)**
++ [Toothpick](https://github.com/stephanenicolas/toothpick) **(\*\*)**
++ [Видео-лекция Яндекса: Школа мобильной разработки – MyFirstApp (Часть 2). Роман Григорьев](https://youtu.be/gRuTqyCPjv4?list=PLQC2_0cDcSKBNCR8UWeElzCUuFkXASduz)  Описывает флаги запуска активити, говорит о проблеме пересоздания активити в ос Андроид и подходы к созданияю приложения (на активити, на фрагметах, на вьюхах), поднимает проблему пересоздания активити при повороте экрана **(\*\*)**
+
+**4. Многомодульность**
++ [Многомодульность](https://habr.com/ru/company/kaspersky/blog/422555/) **(\*\*)**
+
+**5. Утечки памяти**
++ [Обзоп системы управления памятью в Android](https://developer.android.com/topic/performance/memory-overview) **(\*\*)**
++ [Описание принципов работы с памятью. Типичные утечки памяти](https://proandroiddev.com/everything-you-need-to-know-about-memory-leaks-in-android-d7a59faaf46a) **(\*\*)**
++ [Доклад про GC, Профилирование, Поиск и устранение утечек](https://youtu.be/jJDZdg0dP2Y) **(\*\*)**
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `architecture` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style. В системе PS также необходимо создать созвучную задачу, в которую после завершения будет залогировано время.
+
+
+1. Перпеписать свое приложение, применяя архитектурный подход Clean Architecture. В реализации presentation слоя применить архитектурный паттерн MVP с использованием библиотеки Moxy. Для предоставления зависимостей в соотвествии с техникой DI использовать библиотеку Dagger
+2. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+3. После завершения работ над заданием перевести задачу в Jira в статус "Code Review", уведомить своего ментора и залогировать затраченное время.
