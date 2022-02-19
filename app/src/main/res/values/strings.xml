@@ -11,29 +11,39 @@
     <string name="profile_user_birthday_title">Дата рождения</string>
     <string name="profile_user_name">Константинов Денис</string>
     <string name="profile_logout_title">Выйти из аккаунта</string>
+    <string name="profile_alert_camera_permission_denied_title">Разрешение отклонено</string>
+    <string name="profile_alert_storage_permission_denied_title">Разрешение отклонено</string>
+    <string name="permission_denied_forever_message" translatable="false">"Вы отклонили разрешение навсегда. Вы можете изменить свое решение в настройках.\n\nОткрыть настройки?"</string>
+    <string name="open">Открыть</string>
+    <string name="cancel">Отмена</string>
+
     <string name="splash_screen_loading_title">Загрузка…</string>
+
     <string name="news_screen_name">Новости</string>
     <string name="search_screen_name">Поиск</string>
     <string name="help_screen_name">Помочь</string>
     <string name="history_screen_name">История</string>
     <string name="profile_screen_name">Профиль</string>
+
     <string name="profile_toolbar_edit_title">Редактировать</string>
     <string name="profile_edit_click_message">Редактирование профиля</string>
     <string name="profile_dialog_choose_photo_title">Выбрать фото</string>
-    <string name="profile_dialog_make_photo_title">Сделать снимок</string>
+    <string name="profile_dialog_take_photo_title">Сделать снимок</string>
     <string name="profile_dialog_delete_title">Удалить</string>
+
     <string name="help_screen_title">Выберите категорию помощи</string>
 
     <string name="search_search_btn_click_message">Редактирование профиля</string>
-    <string name="search_searchview_hint">Введите название организации</string>
+    <string name="search_search_view_hint">Введите название организации</string>
     <string name="search_by_events_title">По мероприятиям</string>
     <string name="search_by_nko_title">По НКО</string>
 
     <string name="help_category_children">Дети</string>
-    <string name="help_category_adults">Взрослые</string>
+    <string name="help_category_adult">Взрослые</string>
     <string name="help_category_elderly">Пожилые</string>
-    <string name="help_category_animals">Животные</string>
-    <string name="help_category_events">Мероприятия</string>
+    <string name="help_category_animal">Животные</string>
+    <string name="help_category_event">Мероприятия</string>
+
     <string name="search_by_events_search_hint">Напишите в строке поиска название мероприятия или ключевые слова</string>
     <string name="search_by_events_search_example">Например,\u0020</string>
     <string name="search_by_events_search_example_clicked">По НКО</string>
@@ -41,12 +51,6 @@
     <string name="random_fond_name">Благотворительный фонд Алины Кабаевой</string>
 
     <string name="click_heard">Клик услышан</string>
-
-    <string name="profile_alert_camera_permission_denied_title">Разрешение отклонено</string>
-    <string name="profile_alert_storage_permission_denied_title">Разрешение отклонено</string>
-    <string name="permission_denied_forever_message" translatable="false">"Вы отклонили разрешение навсегда. Вы можете изменить свое решение в настройках.\n\nОткрыть настройки?"</string>
-    <string name="open" translatable="false">Открыть</string>
-    <string name="cancel" translatable="false">Отмена</string>
 
     <string name="news_item_1_title">Спонсоры отремонтируют школу-интернат</string>
     <string name="news_item_1_date">Осталось 13 дней (21.09 – 20.10)</string>
@@ -78,19 +82,87 @@
     <string name="news_description_prof_help_title">Проф. помощь</string>
     <string name="news_description_donate_money_title">Помочь деньгами</string>
     <string name="news_description_rated_value">+102</string>
-    <string name="authorization_title">Авторизация</string>
-    <string name="authorization_hint_login_via_social">Для участия в мероприятиях войдите в приложение через социальые сети</string>
-    <string name="authorization_hint_login_via_app">Или авторизуйтесь через приложение</string>
-    <string name="authorization_hint_e_mail">E-mail</string>
-    <string name="authorization_hint_enter_e_mail">Введите e-mail</string>
-    <string name="authorization_hint_password">Пароль</string>
-    <string name="authorization_hint_enter_password">Введите пароль</string>
-    <string name="authorization_enter_button_text">Войти</string>
-    <string name="authorization_forgot_password_button">Забыли пароль?</string>
-    <string name="authorization_registration_button">Регистрация</string>
+
+    <string name="sign_in_title">Авторизация</string>
+    <string name="sign_in_hint_login_via_social">Для участия в мероприятиях войдите в приложение через социальые сети</string>
+    <string name="sign_in_hint_login_via_app">Или авторизуйтесь через приложение</string>
+    <string name="sign_in_hint_e_mail">E-mail</string>
+    <string name="sign_in_hint_enter_e_mail">Введите e-mail</string>
+    <string name="sign_in_hint_password">Пароль</string>
+    <string name="sign_in_hint_enter_password">Введите пароль</string>
+    <string name="sign_in_login_button_text">Войти</string>
+    <string name="sign_in_forgot_password_button_text">Забыли пароль?</string>
+    <string name="sign_in_open_sign_up_button_text">Регистрация</string>
+    <string name="sign_in_unsuccessful_auth">Введен неверный e-mail или пароль</string>
+
+    <string name="sign_up_title">Регистрация</string>
+    <string name="sign_up_hint_name">Имя</string>
+    <string name="sign_up_hint_enter_name">Введите имя</string>
+    <string name="sign_up_hint_surname">Фамилия</string>
+    <string name="sign_up_hint_enter_surname">Введите фамилию</string>
+    <string name="sign_up_hint_e_mail">E-mail</string>
+    <string name="sign_up_hint_enter_e_mail">Введите e-mail</string>
+    <string name="sign_up_hint_password">Пароль</string>
+    <string name="sign_up_hint_enter_password">Введите пароль</string>
+    <string name="sign_up_hint_repeat_password">Подтвердите пароль</string>
+    <string name="sign_up_hint_repeat_enter_password">Введите пароль</string>
+    <string name="sign_up_open_sign_in_button_text">Зарегистрироваться</string>
+    <string name="sign_up_login_button_text">Уже есть аккаунт?</string>
+
     <string name="event_item_random_date">18.09.2021</string>
     <string name="event_item_random_title">Выставка собак в Московской области</string>
+
     <string name="search_by_events_nothing_found">Ничего не найдено</string>
     <string name="search_by_events_search_example_1">мастер-класс</string>
 
+    <string name="dialog_fragment_donate_money_title">Спасибо за решение помочь!</string>
+    <string name="dialog_fragment_donate_money_hint_donation_offer">Выберите размер пожертвования</string>
+    <string name="dialog_fragment_donate_money_hint_donation_edittext">или введите нужную сумму</string>
+    <string name="dialog_fragment_donate_money_donation_edittext">Введите сумму</string>
+    <string name="dialog_fragment_donate_money_donation_offer_1">100 ₽</string>
+    <string name="dialog_fragment_donate_money_donation_offer_2">500 ₽</string>
+    <string name="dialog_fragment_donate_money_donation_offer_3">1000 ₽</string>
+    <string name="dialog_fragment_donate_money_donation_offer_4">2000 ₽</string>
+    <string name="dialog_fragment_donate_money_positive_button">Перевести</string>
+    <string name="dialog_fragment_donate_money_negative_button">Отмена</string>
+
+    <string name="donate_notification_worker_first_notification_text">Спасибо, что пожертвовали %1$d ₽! Будем очень признательны, если вы сможете пожертвовать еще больше.</string>
+    <string name="donate_notification_worker_button_remind">Напомнить позже</string>
+    <string name="donate_notification_worker_repeated_notification_text">Напоминаем, что мы будем очень признательны, если вы сможете пожертвовать еще больше.</string>
+    <string name="no_internet_connection">Нет подключения к Интернету</string>
+    <string name="sign_up_hint_date_of_birth">Дата рождения</string>
+    <string name="sign_up_hint_choose_date_of_birth">Выберите дату рождения</string>
+    <string name="sign_up_hint_field_of_area">Сфера деятельности</string>
+    <string name="sign_up_hint_enter_field_of_area">Введите сферу деятельности</string>
+    <string name="sign_up_open_restore_password_button_text">Восстановить пароль</string>
+    <string name="password_recovery_check_mail">Письмо с инструкциями для восстановления пароля отправлено на указанную почту</string>
+    <string name="password_recovery_wrong_email">Введенный e-mail не найден</string>
+    <string name="password_recovery_invalid_email">Введен некорректный e-mail</string>
+    <string name="auth_invalid_name">Введено некорректное имя</string>
+    <string name="auth_invalid_surname">Введена некорректная фамилия</string>
+    <string name="auth_invalid_field_of_activity">Введена некорректная сфера деятельности</string>
+    <string name="auth_invalid_email">Введен некорректный e-mail</string>
+    <string name="auth_invalid_password">Введен некорректный пароль</string>
+    <string name="auth_passwords_not_match">Введенные пароли не совпадают</string>
+    <string name="auth_invalid_date_of_birth">Не выбрана дата рождения</string>
+    <string name="password_recovery_title">Восстановление пароля</string>
+    <string name="auth_email_exists">Введенный e-mail уже существует</string>
+    <string name="auth_sign_in_success">Регистрация выполнена успешно</string>
+    <string name="auth_sign_in_unsuccess">Регистрация не завершена. Проверьте заполненные поля.</string>
+    <string name="firebase_network_exception">Отсутствует интернет-соединение</string>
+
+    <array name="months">
+        <item>января</item>
+        <item>февраля</item>
+        <item>марта</item>
+        <item>апреля</item>
+        <item>мая</item>
+        <item>июня</item>
+        <item>июля</item>
+        <item>августа</item>
+        <item>сентября</item>
+        <item>октября</item>
+        <item>ноября</item>
+        <item>декабря</item>
+    </array>
 </resources>

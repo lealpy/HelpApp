@@ -853,3 +853,67 @@
 1. Перпеписать свое приложение, применяя архитектурный подход Clean Architecture. В реализации presentation слоя применить архитектурный паттерн MVP с использованием библиотеки Moxy. Для предоставления зависимостей в соотвествии с техникой DI использовать библиотеку Dagger
 2. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 3. После завершения работ над заданием перевести задачу в Jira в статус "Code Review", уведомить своего ментора и залогировать затраченное время.
+
+
+
+## XIV. WorkManager. Push Notifications. BroadcastReceiver. Deep Links
+---
+### Теоретическая часть
+
+**1. BroadcastReceiver**  
++ [BroadcastReceiver - основы](https://developer.android.com/guide/components/broadcasts) **(\*\*\*\*)**
++ [Broadcast Limitations Android 8.0+](https://developer.android.com/about/versions/oreo/background#broadcasts) **(\*\*)**
++ [Implicit Broadcast Exceptions](https://developer.android.com/guide/components/broadcast-exceptions.html) **(\*\*)**
+
+**2. Push Notifications**  
++ [Push Notifications - основы](https://developer.android.com/guide/topics/ui/notifiers/notifications) **(\*\*\*\*)**
++ [Notification priority levels](https://material.io/design/platform-guidance/android-notifications.html#settings) **(\*\*)**
++ [FCM FAQ](https://firebase.google.com/support/faq/#cloud-messaging}) **(\*)**
+
+**3. WorkManager**
++ [Job Scheduler](http://ticketmastermobilestudio.com/blog/how-to-use-androids-job-scheduler) **(\*\*\*\*)**
++ [WorkManager - основы](https://developer.android.com/topic/libraries/architecture/workmanager) **(\*\*\*\*)**
++ [WorkManager - типы Constraints](https://developer.android.com/reference/androidx/work/Constraints.Builder.html) **(\*\*)**
++ [Цикл статей "Introducing WorkManager"](https://medium.com/androiddevelopers/introducing-workmanager-2083bcfc4712) **(\*\*)**
++ [Видео "WorkManager: Beyond the Basics"](https://www.youtube.com/watch?v=Bz0z694SrEE&feature=youtu.be) **(\*\*)**
+
+**4. Deep links**
++ [Deep links и App links - в чем разница?](https://developer.android.com/training/app-links) **(\*\*\*\*)**
++ [Создание Deep links](https://developer.android.com/training/app-links/deep-linking) **(\*\*\*\*)**
++ [Android app linking types](https://simonmarquis.github.io/Android-App-Linking/) - очень удобная сравнительная таблица **(\*\*\*)**
+
+**5. Codelabs**
++ [BroadcastReceivers](https://codelabs.developers.google.com/codelabs/android-training-broadcast-receivers/index.html) **(\*\*)**
++ [Alarm Manager](https://codelabs.developers.google.com/codelabs/android-training-alarm-manager/index.html) **(\*\*)**
++ [Push Notifications](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-notifications/#0) **(\*\*\*)**
++ [FCM](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-notifications-fcm/#0) **(\*\*)**
++ [WorkManager](https://codelabs.developers.google.com/codelabs/android-workmanager/index.html) **(\*\*\*)**
++ [WorkManager Advanced](https://codelabs.developers.google.com/codelabs/android-adv-workmanager/index.html) **(\*\*\*)**
+
+
+
+### Практическое задание
+Работа должна производится в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `workmanager` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style.
+
+
+1. В рамках блока 6 "Структура данных" был реализован экран "Детальное описание события". Необходимо на данном экране по нажатию на кнопку "Помочь деньгами" отображать [диалог](https://zpl.io/aM45oe3).
+ - Поле ввода суммы должно принимать только числовые значения от 1 до 9 999 999. Если сумма в поле ввода не валидна, кнопка "Перевести" должна быть не активна.
+ - После нажатия на кнопку "Перевести" должен создаваться OneTimeWorkRequest, который будет запущен как только мы поставим телефон на зарядку. В качестве параметров необходимо передать:
+    - id события, которому мы помогаем деньгами;
+    - название события;
+    - сумма перевода. Сумма берется из поля ввода. Если поле пустое - сумма, указанная выше поля ввода.
+2. В методе doWork() нашего OneTimeWorkRequest необходимо отобразить пользователю Notification:
+ - В качестве заголовка отображать название события, которому помогли деньгами.
+ - В качестве тела уведомления отображать фразу "Спасибо, что пожертвовали {сумма пожертвования} ₽! Будем очень признательны, если вы сможете пожертвовать еще больше."
+ - По нажатию на уведомление должен открываться экран "Детальное описание события" события, на которое мы пожертвовали деньги.
+ - Также на уведомлении необходимо отобразить кнопку "Напомнить позже", по нажатию на которую текущее уведомление скрывается, но через 30 минут пользователю отображается новое:
+    - В качестве заголовка отображать название события, которому помогли деньгами.
+    - В качестве тела уведомления отображать фразу "Напоминаем, что мы будем очень признательны, если вы сможете пожертвовать еще больше."
+    - По нажатию на уведомление должен открываться экран "Детальное описание события" события, на которое мы пожертвовали деньги.
+    - Кнопка "Напомнить позже" отображаться не должна
+3. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
+4. После завершения работ над заданием перевести задачу в Jira в статус "Code Review", уведомить своего ментора и залогировать затраченное время.
+

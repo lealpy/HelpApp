@@ -14,7 +14,7 @@
         android:paddingTop="@dimen/dimen_4_dp"
         android:paddingStart="@dimen/dimen_4_dp"
         android:paddingEnd="@dimen/dimen_4_dp"
-        app:srcCompat="@drawable/news_item_1_image"
+        app:srcCompat="@drawable/no_photo"
         app:shapeAppearanceOverlay="@style/NewsItemImageShape"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

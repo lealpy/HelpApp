@@ -51,35 +51,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blankSearchImage" />
 
-    <TextView
-        android:id="@+id/blankSearchExample"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dimen_38_dp"
-        android:text="@string/search_by_events_search_example"
-        android:textAlignment="textEnd"
-        android:textColor="@color/black_70"
-        android:textSize="@dimen/dimen_14_sp"
-        android:layout_marginBottom="@dimen/dimen_40_dp"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/blankSearchExample1"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="@+id/blankSearchImage"
-        app:layout_constraintTop_toBottomOf="@+id/blankSearchHint" />
-
-    <TextView
-        android:id="@+id/blankSearchExample1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/search_by_events_search_example_1"
-        android:textColor="@color/leaf"
-        android:textSize="@dimen/dimen_14_sp"
-        app:layout_constraintBottom_toBottomOf="@+id/blankSearchExample"
-        app:layout_constraintEnd_toEndOf="@id/blankSearchImage"
-        app:layout_constraintStart_toEndOf="@id/blankSearchExample"
-        app:layout_constraintTop_toTopOf="@+id/blankSearchExample" />
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="@dimen/dimen_0_dp"
@@ -99,6 +70,37 @@
             tools:listitem="@layout/item_event" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <TextView
+        android:id="@+id/blankSearchExample"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_38_dp"
+        android:text="@string/search_by_events_search_example"
+        android:textAlignment="textEnd"
+        android:textColor="@color/black_70"
+        android:textSize="@dimen/dimen_14_sp"
+        android:layout_marginBottom="@dimen/dimen_40_dp"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/blankSearchExample1"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="@+id/blankSearchImage"
+        app:layout_constraintTop_toBottomOf="@+id/blankSearchHint"
+        tools:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/blankSearchExample1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_by_events_search_example_1"
+        android:textColor="@color/leaf"
+        android:textSize="@dimen/dimen_14_sp"
+        app:layout_constraintBottom_toBottomOf="@+id/blankSearchExample"
+        app:layout_constraintEnd_toEndOf="@id/blankSearchImage"
+        app:layout_constraintStart_toEndOf="@id/blankSearchExample"
+        app:layout_constraintTop_toTopOf="@+id/blankSearchExample"
+        tools:visibility="gone"/>
 
     <ProgressBar
         android:id="@+id/progressBar"

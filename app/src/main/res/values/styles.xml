@@ -115,4 +115,19 @@
         <item name="cornerSize">50%</item>
     </style>
 
+    <style name="AuthTextViewHint">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/black_38</item>
+        <item name="android:textSize">@dimen/dimen_12_sp</item>
+    </style>
+
+    <style name="AuthTextInputEditText">
+        <item name="android:textColor">@color/black_70</item>
+        <item name="android:textSize">@dimen/dimen_16_sp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:backgroundTint">@color/black_12</item>
+        <item name="android:backgroundTintMode">add</item>
+        <item name="android:ems">10</item>
+    </style>
+
 </resources>

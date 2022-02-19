@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "967872435206",
+    "project_id": "help-app-b05d1",
+    "storage_bucket": "help-app-b05d1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:967872435206:android:3b90314a931ba0f9cf1f87",
+        "android_client_info": {
+          "package_name": "com.lealpy.help_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "967872435206-t8b5p7j1ns432vra5qdhv414lpfksgeo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lealpy.help_app",
+            "certificate_hash": "6b33a2395bf001e9198119a9de580f0e0c9e6a35"
+          }
+        },
+        {
+          "client_id": "967872435206-jtfdugrsv1him695a27maukvk3e554d6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAsbhxroPr5cPynrpGK97d2g3cIwkkq-lQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "967872435206-jtfdugrsv1him695a27maukvk3e554d6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

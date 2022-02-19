@@ -4,7 +4,7 @@
     "imageUrl" : "https://user-images.githubusercontent.com/90380451/148294432-59c570bd-443a-4951-936c-7ed5cb13219e.png",
     "title" : "Спонсоры отремонтируют школу-интернат",
     "abbreviatedText" : "Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …",
-    "date" : "Осталось 13 дней (21.09 – 20.10)",
+    "date" : "1612137600000",
     "fundName" : "Благотворительный Фонд «Счастливый Мир»",
     "address" : "Санкт-Петербург, Кирочная улица, д. 50А, каб. 208",
     "phone" : "+7 (937) 037 37-73\n+7 (937) 016 16-16",
@@ -12,10 +12,10 @@
     "image3Url" : "https://user-images.githubusercontent.com/90380451/148293732-3fabffab-559b-47cf-8862-af0c1c238d67.png",
     "fullText" : "Участники и болельщики смогли весело и активно провести время на «Петербургском благотворительном марафоне» и при этом финансово поучаствовать в помощи детям.\n\nПри этом финансово поучаствовать в помощи детям. При этом финансово поучаствовать в помощи детям.",
     "isChildrenCategory" : "true",
-    "isAdultsCategory" : "false",
+    "isAdultCategory" : "false",
     "isElderlyCategory" : "false",
-    "isAnimalsCategory" : "false",
-    "isEventsCategory" : "false"
+    "isAnimalCategory" : "false",
+    "isEventCategory" : "false"
   },
 
   {
@@ -23,7 +23,7 @@
     "imageUrl" : "https://user-images.githubusercontent.com/90380451/148293903-d865011e-b5c7-4c7d-a74b-7bdf6ef8e54f.png",
     "title" : "Конкурс по вокальному пению в детском доме №6",
     "abbreviatedText" : "Дубовская школа-интернат для детей с ограниченными возможностями здоровья стала первой в области …",
-    "date" : "Октябрь 20, 2016",
+    "date" : "1610755200000",
     "fundName" : "Благотворительный фонд «Обнаженные сердца»",
     "address" : "Брянская область, Дубровский район, пгт. Дубровка, ул. Журавлева, д. 50",
     "phone" : "8 999 111 22 33",
@@ -31,10 +31,10 @@
     "image3Url" : "https://user-images.githubusercontent.com/90380451/148293732-3fabffab-559b-47cf-8862-af0c1c238d67.png",
     "fullText" : "Воспитанница Дубровского детского дома - интерната Ольгина Ольга заняла 1 место в областном конкурсе по вокальному пению. Мы сердечно поздравляем Олю и желаем ей дальнейших успехов в творческой деятельности!",
     "isChildrenCategory" : "true",
-    "isAdultsCategory" : "false",
+    "isAdultCategory" : "false",
     "isElderlyCategory" : "false",
-    "isAnimalsCategory" : "false",
-    "isEventsCategory" : "true"
+    "isAnimalCategory" : "false",
+    "isEventCategory" : "true"
   },
 
   {
@@ -42,7 +42,7 @@
     "imageUrl" : "https://user-images.githubusercontent.com/90380451/148643334-07754b36-85ec-4bc8-968e-ca3c457c6321.jpg",
     "title" : "Выставка бездомных животных",
     "abbreviatedText" : "Сегодня сотни собак и кошек живут в приютах в ожидании любящего и заботливого хозяина. Для того чтобы хвостатые …",
-    "date" : "Октябрь 25, 2015",
+    "date" : "1609718400000",
     "fundName" : "Фонд Защиты Животных «Сострадание»",
     "address" : "Архангельская область, город Сергиев Посад, наб. Будапештсткая, 76",
     "phone" : "8 963 234 21 23",
@@ -50,10 +50,10 @@
     "image3Url" : "https://user-images.githubusercontent.com/90380451/148293732-3fabffab-559b-47cf-8862-af0c1c238d67.png",
     "fullText" : "25 октября в пространстве «Ангар» на территории «Хлебозавода № 9» представят 120 жителей приютов — кошек и собак, которые готовы стать домашними. Участники выставки «Надо брать! Осенью!» здоровы, привиты и доброжелательно настроены к людям. Их отдадут совершенно бесплатно, но по договору, так что тем, кто готов взять питомца сразу, нужно взять с собой паспорт.",
     "isChildrenCategory" : "false",
-    "isAdultsCategory" : "false",
+    "isAdultCategory" : "false",
     "isElderlyCategory" : "false",
-    "isAnimalsCategory" : "true",
-    "isEventsCategory" : "true"
+    "isAnimalCategory" : "true",
+    "isEventCategory" : "true"
   },
 
   {
@@ -61,7 +61,7 @@
     "imageUrl" : "https://user-images.githubusercontent.com/90380451/148643672-dabdf82e-91a7-496f-a5fd-b2c663e7b10b.jpg",
     "title" : "Фестиваль творчества детей с ограниченными возможностями",
     "abbreviatedText" : "Проект позволит детям с инвалидностью открыться для всего остального мира и чувствовать себя полноценными жителями современного общества …",
-    "date" : "Октябрь 10, 2014",
+    "date" : "1640217600000",
     "fundName" : "Благотворительный фонд «Подсолнух»",
     "address" : "Ярославская область, город Коломна, пл. Балканская, 04",
     "phone" : "8 932 345 25 75",
@@ -69,10 +69,10 @@
     "image3Url" : "https://user-images.githubusercontent.com/90380451/148293732-3fabffab-559b-47cf-8862-af0c1c238d67.png",
     "fullText" : "Проект «Фестиваль творчества детей с ограниченными возможностями здоровья «Очень добрый концерт» позволит детям с инвалидностью открыться для всего остального мира и чувствовать себя полноценными жителями современного общества, а здоровым ребятам – сформировать устойчивый позитивный взгляд на людей с физическими проблемами здоровья.",
     "isChildrenCategory" : "true",
-    "isAdultsCategory" : "false",
+    "isAdultCategory" : "false",
     "isElderlyCategory" : "false",
-    "isAnimalsCategory" : "false",
-    "isEventsCategory" : "true"
+    "isAnimalCategory" : "false",
+    "isEventCategory" : "true"
   },
 
   {
@@ -80,7 +80,7 @@
     "imageUrl" : "https://user-images.githubusercontent.com/90380451/148643694-d5dea5a1-a30f-4956-a8bb-9c634360c97f.jpg",
     "title" : "Праздничный концерт для ветеранов Великой Отечественной войны",
     "abbreviatedText" : "В Детской школе искусств № 18 состоялся праздничный концерт, посвященный 70-летию Победы в Великой Отечественной войне …",
-    "date" : "Май 20, 2014",
+    "date" : "1639526400000",
     "fundName" : "Правозащитный центр «Мемориал»",
     "address" : "Пензенская область, город Можайск, шоссе Ладыгина, 83",
     "phone" : "8 956 423 64 35",
@@ -88,10 +88,10 @@
     "image3Url" : "https://user-images.githubusercontent.com/90380451/148293732-3fabffab-559b-47cf-8862-af0c1c238d67.png",
     "fullText" : "На концерт были приглашены ветераны Великой Отечественной войны, труженики тыла, жители блокадного Ленинграда, а также активные жители нашего района. В начале мероприятия Василий Евгеньевич Пушкин поздравил всех с наступающим праздником Великой Победы. Затем с концертной программой выступил фольклорный ансамбль «Веретёнце». Всего в мероприятии приняли участие более 300 человек. В заключение все приглашенные получили сладкие подарки от депутата Пушкина В.Е.",
     "isChildrenCategory" : "false",
-    "isAdultsCategory" : "true",
+    "isAdultCategory" : "true",
     "isElderlyCategory" : "true",
-    "isAnimalsCategory" : "false",
-    "isEventsCategory" : "true"
+    "isAnimalCategory" : "false",
+    "isEventCategory" : "true"
   }
 
 ]
