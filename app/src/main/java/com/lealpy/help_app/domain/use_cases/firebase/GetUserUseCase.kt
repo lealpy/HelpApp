@@ -2,14 +2,15 @@ package com.lealpy.help_app.domain.use_cases.firebase
 
 import com.lealpy.help_app.domain.model.User
 import com.lealpy.help_app.domain.repository.FireRepository
-import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
+import javax.inject.Named
 
 class GetUserUseCase @Inject constructor(
     private val repository: FireRepository
 ) {
 
-    operator fun invoke() : Observable<User> {
+    operator fun invoke() : Single<User> {
         return repository.getUser()
     }
 

@@ -11,7 +11,6 @@ import com.lealpy.help_app.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
 import com.lealpy.help_app.presentation.model.NewsPreviewItemUi
 import com.lealpy.help_app.presentation.utils.Const.LOG_TAG
 import com.lealpy.help_app.presentation.utils.PresentationMappers
-import com.lealpy.help_app.presentation.utils.PresentationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -21,9 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsPreviewViewModel @Inject constructor(
     private val getNewsPreviewItemsUseCase: GetNewsPreviewItemsUseCase,
-    private val getFromDbUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase,
+    private val getUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase,
     private val insertToDbWatchedNewsIdUseCase : InsertToDbWatchedNewsIdUseCase,
-    private val utils: PresentationUtils,
     private val mappers: PresentationMappers,
 ) : ViewModel() {
 
@@ -53,13 +51,10 @@ class NewsPreviewViewModel @Inject constructor(
 
     private var loadedNewsPreviewItemsUi = listOf<NewsPreviewItemUi>()
 
-    private val watchedNewsId = mutableSetOf<Long>()
-
     private val disposable = CompositeDisposable()
 
     init {
         getNewsItems()
-        getFromDbUnwatchedNewsNumber()
     }
 
     override fun onCleared() {
@@ -97,7 +92,6 @@ class NewsPreviewViewModel @Inject constructor(
     }
 
     fun onNewsWatched(id: Long) {
-        watchedNewsId.add(id)
         insertToDbWatchedNewsId(id)
     }
 
@@ -122,6 +116,7 @@ class NewsPreviewViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { newsPreviewItemsUi ->
+                        getFromDbUnwatchedNewsNumber()
                         loadedNewsPreviewItemsUi = newsPreviewItemsUi
                         _newsPreviewItemsUi.value = newsPreviewItemsUi
                         _progressBarVisibility.value = View.GONE
@@ -136,7 +131,7 @@ class NewsPreviewViewModel @Inject constructor(
 
     private fun getFromDbUnwatchedNewsNumber() {
         disposable.add(
-            getFromDbUnwatchedNewsNumberUseCase()
+            getUnwatchedNewsNumberUseCase()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(

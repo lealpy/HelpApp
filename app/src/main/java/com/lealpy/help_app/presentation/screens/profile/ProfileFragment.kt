@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
+import android.util.Log
 import android.view.*
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -18,11 +19,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lealpy.help_app.R
 import com.lealpy.help_app.databinding.FragmentProfileBinding
+import com.lealpy.help_app.presentation.utils.Const.LOG_TAG
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_CHOOSE_PHOTO_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DIALOG_RESULT_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DELETE_PHOTO_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_TAKE_PHOTO_KEY
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -93,15 +96,20 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 ?: binding.avatarUser.setImageResource(R.drawable.no_photo)
         }
 
-        findNavController().currentBackStackEntry
-            ?.savedStateHandle
-            ?.getLiveData<String>(PROFILE_FEATURE_DIALOG_RESULT_KEY)
-            ?.observe(viewLifecycleOwner) { selectedItemKey ->
-                when(selectedItemKey) {
-                    PROFILE_FEATURE_CHOOSE_PHOTO_KEY -> readStoragePermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-                    PROFILE_FEATURE_TAKE_PHOTO_KEY -> cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
-                    PROFILE_FEATURE_DELETE_PHOTO_KEY -> viewModel.onDeletePhotoSelected()
+        try {
+            findNavController().currentBackStackEntry
+                ?.savedStateHandle
+                ?.getLiveData<String>(PROFILE_FEATURE_DIALOG_RESULT_KEY)
+                ?.observe(viewLifecycleOwner) { selectedItemKey ->
+                    when (selectedItemKey) {
+                        PROFILE_FEATURE_CHOOSE_PHOTO_KEY -> readStoragePermissionLauncher.launch(
+                            Manifest.permission.READ_EXTERNAL_STORAGE)
+                        PROFILE_FEATURE_TAKE_PHOTO_KEY -> cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                        PROFILE_FEATURE_DELETE_PHOTO_KEY -> viewModel.onDeletePhotoSelected()
+                    }
                 }
+        } catch (e : Exception) {
+            Log.e(LOG_TAG, e.toString())
         }
     }
 

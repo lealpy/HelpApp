@@ -24,8 +24,8 @@ class HelpViewModel @Inject constructor(
     private val mappers: PresentationMappers,
 ) : ViewModel() {
 
-    private val _helpItems = MutableLiveData<List<HelpItemUi>>()
-    val helpItemsUi: LiveData<List<HelpItemUi>> = _helpItems
+    private val _helpItemsUi = MutableLiveData<List<HelpItemUi>>()
+    val helpItemsUi: LiveData<List<HelpItemUi>> = _helpItemsUi
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
@@ -61,7 +61,7 @@ class HelpViewModel @Inject constructor(
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { helpItemsUi ->
-                        _helpItems.value = helpItemsUi
+                        _helpItemsUi.value = helpItemsUi
                         _progressBarVisibility.value = View.GONE
                     },
                     { error ->

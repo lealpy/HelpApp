@@ -68,33 +68,6 @@ class ProfileViewModel @Inject constructor(
         super.onCleared()
     }
 
-    private fun getUser() {
-        _progressBarVisibility.value = View.VISIBLE
-
-        disposable.add(
-            getUserUseCase()
-                .observeOn(Schedulers.io())
-                .map{ user ->
-                    mappers.userToUserUi(user)
-                }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                    { userUi ->
-                        _userUi.value = userUi
-                        _progressBarVisibility.value = View.GONE
-                        _userUi.postValue(userUi)
-                        _progressBarVisibility.postValue(View.GONE)
-                    },
-                    { error ->
-                        Log.e(LOG_TAG, error.message.toString())
-                        _progressBarVisibility.value = View.GONE
-                        _progressBarVisibility.postValue(View.GONE)
-                    }
-                )
-        )
-    }
-
     fun onGotCameraResult(result: ActivityResult) {
         if (result.resultCode == Activity.RESULT_OK) {
             val bitmap = result.data?.extras?.get("data") as Bitmap
@@ -144,6 +117,30 @@ class ProfileViewModel @Inject constructor(
             setSettingGetPushUseCase(settingGetPush)
             _settingGetPush.value = settingGetPush
         }
+    }
+
+    private fun getUser() {
+        _progressBarVisibility.value = View.VISIBLE
+
+        disposable.add(
+            getUserUseCase()
+                .observeOn(Schedulers.io())
+                .map{ user ->
+                    mappers.userToUserUi(user)
+                }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    { userUi ->
+                        _userUi.value = userUi
+                        _progressBarVisibility.value = View.GONE
+                    },
+                    { error ->
+                        Log.e(LOG_TAG, error.message.toString())
+                        _progressBarVisibility.value = View.GONE
+                    }
+                )
+        )
     }
 
     private fun getSettings() {

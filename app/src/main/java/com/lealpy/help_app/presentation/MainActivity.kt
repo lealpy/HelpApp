@@ -6,12 +6,14 @@ import android.view.View
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lealpy.help_app.R
+import com.lealpy.help_app.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.subjects.PublishSubject
-import kotlinx.android.synthetic.main.activity_main.*
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
 
     private val navController by lazy { findNavController(R.id.navHostFragment) }
 
@@ -19,14 +21,15 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         initBottomNavView()
     }
 
     private fun initBottomNavView() {
-        bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            bottomNavView.visibility = when(destination.id) {
+            binding.bottomNavView.visibility = when(destination.id) {
                 R.id.navigationNews -> View.VISIBLE
                 R.id.navigationSearch -> View.VISIBLE
                 R.id.navigationHelp -> View.VISIBLE
@@ -38,7 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         badgeSubject.subscribe(
             { badgeNumber ->
-                bottomNavView.getOrCreateBadge(
+                binding.bottomNavView.getOrCreateBadge(
                     R.id.navigationNews
                 ).apply {
                     number = badgeNumber

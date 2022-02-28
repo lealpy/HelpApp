@@ -17,7 +17,6 @@ import com.lealpy.help_app.databinding.FragmentSignInBinding
 import com.lealpy.help_app.presentation.utils.Const.AUTHORIZATION_FEATURE_EMAIL_KEY
 import com.lealpy.help_app.presentation.utils.Const.AUTHORIZATION_FEATURE_PASSWORD_KEY
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_sign_in.*
 import io.reactivex.rxjava3.core.Observable
 
 @AndroidEntryPoint
@@ -69,8 +68,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             binding.emailEditText.addTextChangedListener {
                 emitter.onNext(
                     mapOf(
-                        AUTHORIZATION_FEATURE_EMAIL_KEY to emailEditText.text.toString(),
-                        AUTHORIZATION_FEATURE_PASSWORD_KEY to passwordEditText.text.toString()
+                        AUTHORIZATION_FEATURE_EMAIL_KEY to binding.emailEditText.text.toString(),
+                        AUTHORIZATION_FEATURE_PASSWORD_KEY to binding.passwordEditText.text.toString()
                     )
                 )
             }
@@ -78,8 +77,8 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             binding.passwordEditText.addTextChangedListener {
                 emitter.onNext(
                     mapOf(
-                        AUTHORIZATION_FEATURE_EMAIL_KEY to emailEditText.text.toString(),
-                        AUTHORIZATION_FEATURE_PASSWORD_KEY to passwordEditText.text.toString()
+                        AUTHORIZATION_FEATURE_EMAIL_KEY to binding.emailEditText.text.toString(),
+                        AUTHORIZATION_FEATURE_PASSWORD_KEY to binding.passwordEditText.text.toString()
                     )
                 )
             }

@@ -7,7 +7,6 @@ import com.google.firebase.storage.FirebaseStorage
 import com.lealpy.help_app.domain.model.User
 import com.lealpy.help_app.domain.repository.FireRepository
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import java.lang.NullPointerException
 import javax.inject.Inject
@@ -92,15 +91,15 @@ class FireRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getUser() : Observable<User> {
-        return Observable.create { emitter ->
+    override fun getUser() : Single<User> {
+        return Single.create { emitter ->
             firebaseAuth.currentUser?.uid?.let { uid ->
                 firebaseDatabase.getReference(DATABASE_USERS_PATH)
                     .child(uid)
                     .get()
                     .addOnSuccessListener { snapshot ->
                         val user = snapshot.getValue<User>()
-                        user?.let { emitter.onNext(it) } ?: emitter.onError(NullPointerException())
+                        user?.let { emitter.onSuccess(it) } ?: emitter.onError(NullPointerException())
                     }
                     .addOnFailureListener { exception ->
                         emitter.onError(exception)

@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.SimbirSoft_training" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.HelpApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/light_green</item>
         <item name="colorPrimaryVariant">@color/dark_green</item>

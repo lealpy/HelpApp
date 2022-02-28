@@ -41,8 +41,8 @@ class HelpFragment : Fragment(R.layout.fragment_help) {
     }
 
     private fun initObservers() {
-        viewModel.helpItemsUi.observe(viewLifecycleOwner) { helpItems ->
-            helpAdapter.submitList(helpItems)
+        viewModel.helpItemsUi.observe(viewLifecycleOwner) { helpItemsUi ->
+            helpAdapter.submitList(helpItemsUi)
         }
 
         viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->

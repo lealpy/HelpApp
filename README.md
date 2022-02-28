@@ -917,3 +917,54 @@
 3. Запустить статические анализаторы кода (lint, ktlint, SonarLint) и исправить найденные замечания
 4. После завершения работ над заданием перевести задачу в Jira в статус "Code Review", уведомить своего ментора и залогировать затраченное время.
 
+
+
+---
+## XVIII. Тестирование
+---
+### Теоретическая часть
+
+**1. Unit-тестирование**
++ [Видео-лекция по unit-тестированию](https://www.youtube.com/watch?time_continue=1&v=7GuZMutlJmE&feature=emb_logo) **(\*\*\*)**
++ [Краткое руководство по JUnit](https://androidpedia.net/en/tutorial/3205/unit-testing-in-android-with-junit), дополнительную информацию можно найти в [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/) или [JUnit 4](https://github.com/junit-team/junit4/wiki) **(\*\*\*\*)**
++ [Руководство по библиотеке Mockito](https://habr.com/ru/post/444982/), дополнительную информацию можно найти в [Mockito docs](https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html) **(\*\*\*\*)**
++ Зачем нужна библиотека [Mockito-Kotlin](https://github.com/nhaarman/mockito-kotlin/wiki), а также про её особенности - ["Mocking-and-verifying"](https://github.com/nhaarman/mockito-kotlin/wiki/Mocking-and-verifying) and ["Parameter-specified-as-non-null-is-null"](https://github.com/nhaarman/mockito-kotlin/wiki/Parameter-specified-as-non-null-is-null) **(\*\*\*\*)**
++ [Краткое руководство по библиотеке Mockk](https://medium.com/@prashantspol/mockk-better-to-way-to-mock-in-kotlin-than-mockito-1b659c5232ec) **(\*\*\*\*)**
++ [Подробнее о библиотеке Mockk](https://mockk.io/), особенно серия статей - “Mocking is not rocket science” **(\*\*\*)**
++ [Зачем нужна библиотека Kotest](https://medium.com/sodalabs/painless-unit-testing-with-kotlintest-mockk-8854d549b96b]) **(\*\*)**
++ [Руководство по библиотеке Kotest](https://github.com/kotest/kotest/wiki/Reference-Doc) **(\*\*)**
+
+**2. Ui-тестирование**
++ [Руководство по Espresso](https://habr.com/ru/company/otus/blog/472372/) **(\*\*\*\*)**
++ [Руководство по Kaspresso](https://medium.com/sodalabs/painless-ui-testing-with-kaspresso-1a02d02ca7ae) **(\*\*\*\*)**
++ [О Kaspresso](https://habr.com/ru/company/kaspersky/blog/467617/) **(\*)**
+
+**3. Общее**
++ [Отличия между разными типами тестов](https://medium.com/@lawrey/unit-tests-ui-tests-integration-tests-end-to-end-tests-c0d98e0218a6) **(\*\*\*\)**
+
+### Практическое задание
+
+1. Создать task в PS с заголовком "XVIII. Тестирование" и взять ее в работу.
+2. Пройти codelabs - основы запуска и написания тестов
+- [Testing Basics](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-testing-basics/index.html?index=..%2F..index#0)
+3. Пройти codelabs - инъекция зависимостей, создание моков, работа с Espresso и т.д.:
+- [Dependency Injection and Test Doubles](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-testing-test-doubles/#0)
+4. Пройти codelabs - корутины, Room, Espresso Idling Resource, e2e тесты и т.д.:
+- [Survey of Testing Topics](https://codelabs.developers.google.com/codelabs/advanced-android-kotlin-training-testing-survey/#0)
+
+**Важно**
+Дальнейшая работа должна производиться в созданном ранее проекте.
+
+Все изменения должны быть закоммичены, а названия коммитов должны коротко и исчерпывающе описывать содержащие изменения. Каждый коммит должен быть рабочим, отправка некомпилирующегося кода недопустима. Для работы над этим заданием необходимо переключится на ветку `test` и все изменения пушить в нее. После завершения работы над задачей в gitlab необходимо создать merge request в ветку `develop`.
+Код должен быть читабельным и написан согласно code-style.
+
+5. Покрыть unit-тестами:
+- Презентер экрана помощи (категории)
+- Презентер экрана новостей (события)
+- Презентер экрана фильтров новостей
+- Презентер экрана профиля
+- Маппер/конвертер событий
+6. Покрыть компонентными ui-тестами (**не** e2e) экраны:
+- Экран новостей (события)
+- Экран профиля
+- Экран детального просмотра события

@@ -68,7 +68,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
         val datePickerListener =
             DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                viewModel.onDateOfBirthPicked(year, month, dayOfMonth)
+                viewModel.onDateOfBirthPicked(year, month + 1, dayOfMonth)
             }
 
         viewModel.datePickerData.observe(viewLifecycleOwner) { datePickerData ->

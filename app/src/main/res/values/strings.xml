@@ -84,7 +84,7 @@
     <string name="news_description_rated_value">+102</string>
 
     <string name="sign_in_title">Авторизация</string>
-    <string name="sign_in_hint_login_via_social">Для участия в мероприятиях войдите в приложение через социальые сети</string>
+    <string name="sign_in_hint_login_via_social">Для участия в мероприятиях войдите в приложение через социальные сети</string>
     <string name="sign_in_hint_login_via_app">Или авторизуйтесь через приложение</string>
     <string name="sign_in_hint_e_mail">E-mail</string>
     <string name="sign_in_hint_enter_e_mail">Введите e-mail</string>

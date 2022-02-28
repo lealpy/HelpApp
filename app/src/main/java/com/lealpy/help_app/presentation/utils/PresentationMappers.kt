@@ -19,7 +19,9 @@ class PresentationMappers @Inject constructor(
     private val utils: PresentationUtils,
 ) {
 
-    fun helpItemsToHelpItemsUi(helpItems : List<HelpItem>) : List<HelpItemUi> {
+    private val calendar by lazy { GregorianCalendar() }
+
+    fun helpItemsToHelpItemsUi(helpItems: List<HelpItem>): List<HelpItemUi> {
         return helpItems.map { helpItem ->
             val image = utils.getBitmapFromUrl(helpItem.imageUrl)
 
@@ -33,7 +35,7 @@ class PresentationMappers @Inject constructor(
 
     fun newsPreviewItemsToNewsPreviewItemsUi(
         newsPreviewItems: List<NewsPreviewItem>,
-    ) : List<NewsPreviewItemUi> {
+    ): List<NewsPreviewItemUi> {
         return newsPreviewItems.map { newsPreviewItem ->
             val image = utils.getBitmapFromUrl(newsPreviewItem.imageUrl)
             NewsPreviewItemUi(
@@ -53,7 +55,7 @@ class PresentationMappers @Inject constructor(
 
     fun newsDescriptionItemToNewsDescriptionItemUi(
         newsDescriptionItem: NewsDescriptionItem,
-    ) : NewsDescriptionItemUi {
+    ): NewsDescriptionItemUi {
         val image = utils.getBitmapFromUrl(newsDescriptionItem.imageUrl)
         val image2 = utils.getBitmapFromUrl(newsDescriptionItem.image2Url)
         val image3 = utils.getBitmapFromUrl(newsDescriptionItem.image3Url)
@@ -73,10 +75,10 @@ class PresentationMappers @Inject constructor(
         )
     }
 
-    fun userToUserUi(user : User) : UserUi {
+    fun userToUserUi(user: User): UserUi {
         val avatar = utils.getBitmapFromUrl(user.avatarUrl)
 
-        return UserUi (
+        return UserUi(
             id = user.id,
             name = user.name,
             surname = user.surname,
@@ -88,12 +90,12 @@ class PresentationMappers @Inject constructor(
     }
 
     fun getDateStringByTimestamp(date: Long): String {
-        val day = SimpleDateFormat("dd").format(Date(date))
-        val month = SimpleDateFormat("MM").format(Date(date))
-        val year = SimpleDateFormat("yyyy").format(Date(date))
+        val day = getDayIntByTimestamp(date)
+        val month = getMonthIntByTimestamp(date)
+        val year = getYearIntByTimestamp(date)
         val months = appContext.resources.getStringArray(R.array.months)
 
-        return when(month.toInt()) {
+        return when (month) {
             1 -> "$day ${months[0]} $year"
             2 -> "$day ${months[1]} $year"
             3 -> "$day ${months[2]} $year"
@@ -110,20 +112,29 @@ class PresentationMappers @Inject constructor(
         }
     }
 
-    fun getTimestampByInt(year: Int, month: Int, day: Int, hour: Int, minute: Int): Long {
-        return GregorianCalendar(year, month, day, hour, minute).timeInMillis
+    fun getTimestampByInt(
+        year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0, second: Int = 0,
+    ): Long {
+        return GregorianCalendar(year, month - 1, day, hour, minute, second).timeInMillis
     }
 
     fun getYearIntByTimestamp(date: Long): Int {
-        return SimpleDateFormat("yyyy").format(Date(date)).toInt()
+        return SimpleDateFormat("yyyy", Locale.getDefault())
+            .format(Date(date - getGmt())).toInt()
     }
 
     fun getMonthIntByTimestamp(date: Long): Int {
-        return SimpleDateFormat("MM").format(Date(date)).toInt()
+        return SimpleDateFormat("MM", Locale.getDefault())
+            .format(Date(date - getGmt())).toInt()
     }
 
     fun getDayIntByTimestamp(date: Long): Int {
-        return SimpleDateFormat("dd").format(Date(date)).toInt()
+        return SimpleDateFormat("dd", Locale.getDefault())
+            .format(Date(date - getGmt())).toInt()
+    }
+
+    private fun getGmt(): Long {
+        return calendar.timeZone.rawOffset.toLong()
     }
 
 }

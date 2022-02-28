@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.lealpy.help_app.R
 import com.lealpy.help_app.databinding.FragmentHistoryBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 
+@AndroidEntryPoint
 class HistoryFragment : Fragment(R.layout.fragment_history) {
 
     private lateinit var binding : FragmentHistoryBinding
