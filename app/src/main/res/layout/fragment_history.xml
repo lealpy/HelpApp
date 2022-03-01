@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -9,8 +8,8 @@
         android:id="@+id/test1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RX Test 1"
         android:layout_marginTop="@dimen/dimen_90_dp"
+        android:text="RX Test 1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,8 +28,8 @@
         android:id="@+id/test3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RX Test 3"
         android:layout_marginTop="@dimen/dimen_20_dp"
+        android:text="RX Test 3"
         app:layout_constraintEnd_toEndOf="@+id/test2"
         app:layout_constraintStart_toStartOf="@+id/test2"
         app:layout_constraintTop_toBottomOf="@+id/test2" />

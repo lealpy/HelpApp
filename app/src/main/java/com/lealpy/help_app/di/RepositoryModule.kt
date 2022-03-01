@@ -20,7 +20,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -87,8 +86,8 @@ class RepositoryModule {
     @Singleton
     fun provideFireRepository(
         firebaseAuth: FirebaseAuth,
-        firebaseDatabase : FirebaseDatabase,
-        firebaseStorage: FirebaseStorage
+        firebaseDatabase: FirebaseDatabase,
+        firebaseStorage: FirebaseStorage,
     ): FireRepositoryImpl {
         return FireRepositoryImpl(firebaseAuth, firebaseDatabase, firebaseStorage)
     }

@@ -5,6 +5,6 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 interface NkoRepository {
-    fun getFromDbNkoItemsByTitle(searchQuery : String) : Single<List<NkoItem>>
-    fun updateNkoItems() : Completable
+    fun getFromDbNkoItemsByTitle(searchQuery: String): Single<List<NkoItem>>
+    fun updateNkoItems(): Completable
 }

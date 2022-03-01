@@ -6,10 +6,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class GetNewsPreviewItemsUseCase @Inject constructor(
-    private val repository : NewsRepository
+    private val repository: NewsRepository,
 ) {
 
-    operator fun invoke() : Single<List<NewsPreviewItem>> {
+    operator fun invoke(): Single<List<NewsPreviewItem>> {
         return repository.getAllNewsPreviewItems()
     }
 

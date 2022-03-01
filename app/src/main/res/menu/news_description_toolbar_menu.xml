@@ -7,6 +7,6 @@
         android:icon="@drawable/ic_baseline_share_24"
         android:iconTint="@color/white"
         android:title="@string/news_description_toolbar_share_title"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 </menu>

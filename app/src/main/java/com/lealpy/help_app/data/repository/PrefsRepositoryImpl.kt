@@ -6,16 +6,16 @@ import com.lealpy.help_app.domain.repository.PrefsRepository
 import javax.inject.Inject
 
 class PrefsRepositoryImpl @Inject constructor(
-    private val prefs : SharedPreferences
+    private val prefs: SharedPreferences,
 ) : PrefsRepository {
 
-    override fun setSettingGetPushToPrefs(settingGetPush : Boolean) {
-        prefs.edit{
+    override fun setSettingGetPushToPrefs(settingGetPush: Boolean) {
+        prefs.edit {
             putBoolean(SETTING_GET_PUSH_KEY, settingGetPush)
         }
     }
 
-    override fun getSettingGetPushToPrefs() : Boolean {
+    override fun getSettingGetPushToPrefs(): Boolean {
         return prefs.getBoolean(SETTING_GET_PUSH_KEY, SETTING_GET_PUSH_DEFAULT_VALUE)
     }
 

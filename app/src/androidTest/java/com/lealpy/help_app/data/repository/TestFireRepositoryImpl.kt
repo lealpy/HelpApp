@@ -42,6 +42,15 @@ class TestFireRepositoryImpl : FireRepository {
         return Completable.complete()
     }
 
+    override fun editUser(
+        surname: String,
+        name: String,
+        dateOfBirth: Long,
+        fieldOfActivity: String,
+    ): Completable {
+        return Completable.complete()
+    }
+
     companion object {
         val TEST_USER = User(
             id = "TEST_ID",

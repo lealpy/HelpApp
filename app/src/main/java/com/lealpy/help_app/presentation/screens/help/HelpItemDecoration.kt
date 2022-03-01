@@ -15,18 +15,18 @@ class HelpItemDecoration(
         outRect: Rect,
         view: View,
         parent: RecyclerView,
-        state: RecyclerView.State
+        state: RecyclerView.State,
     ) {
         val position = parent.getChildAdapterPosition(view)
         val column = position % spanCount
-            outRect.left =
-                spacing - column * spacing / spanCount
-            outRect.right =
-                (column + 1) * spacing / spanCount
-            if (position < spanCount) {
-                outRect.top = spacing
-            }
-            outRect.bottom = spacing
+        outRect.left =
+            spacing - column * spacing / spanCount
+        outRect.right =
+            (column + 1) * spacing / spanCount
+        if (position < spanCount) {
+            outRect.top = spacing
+        }
+        outRect.bottom = spacing
     }
 
 }

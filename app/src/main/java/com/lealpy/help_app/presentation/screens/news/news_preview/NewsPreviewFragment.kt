@@ -1,23 +1,26 @@
 package com.lealpy.help_app.presentation.screens.news.news_preview
 
 import android.os.Bundle
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.lealpy.help_app.presentation.MainActivity
 import com.lealpy.help_app.R
 import com.lealpy.help_app.databinding.FragmentNewsPreviewBinding
+import com.lealpy.help_app.presentation.MainActivity
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 
 class NewsPreviewFragment : Fragment(R.layout.fragment_news_preview) {
 
-    private lateinit var binding : FragmentNewsPreviewBinding
+    private lateinit var binding: FragmentNewsPreviewBinding
 
-    private val viewModel : NewsPreviewViewModel by activityViewModels()
+    private val viewModel: NewsPreviewViewModel by activityViewModels()
 
-    private val newsAdapter = NewsPreviewItemAdapter{ newsItem ->
+    private val newsAdapter = NewsPreviewItemAdapter { newsItem ->
         val args = Bundle()
         args.putLong(NEWS_FEATURE_NEWS_ID_KEY, newsItem.id)
 
@@ -76,11 +79,11 @@ class NewsPreviewFragment : Fragment(R.layout.fragment_news_preview) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.news_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.newsToolbarFilter -> {
                 findNavController().navigate(R.id.actionNavigationNewsToNewsFilterFragment)
             }

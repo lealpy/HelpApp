@@ -14,9 +14,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PasswordRecoveryFragment : Fragment(R.layout.fragment_password_recovery) {
 
-    private lateinit var binding : FragmentPasswordRecoveryBinding
+    private lateinit var binding: FragmentPasswordRecoveryBinding
 
-    private val viewModel : PasswordRecoveryViewModel by viewModels()
+    private val viewModel: PasswordRecoveryViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +47,7 @@ class PasswordRecoveryFragment : Fragment(R.layout.fragment_password_recovery) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> findNavController().popBackStack()
         }
         return true

@@ -21,9 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
-    private lateinit var binding : FragmentNewsDescriptionBinding
+    private lateinit var binding: FragmentNewsDescriptionBinding
 
-    private val viewModel : NewsDescriptionViewModel by viewModels()
+    private val viewModel: NewsDescriptionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -80,7 +80,8 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initSpanFeedback() {
-        val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_feedback_title))
+        val spanFeedback =
+            SpannableStringBuilder(requireContext().getString(R.string.news_description_feedback_title))
 
         val spanStart = spanFeedback.indexOf('?') + SYMBOLS_AFTER_QUESTION
         val spanFinish = spanFeedback.length
@@ -92,20 +93,23 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         spanFeedback.setSpan(
-            object: ClickableSpan() {
-                override fun onClick(widget: View) { viewModel.onSpanFeedbackClicked() }
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    viewModel.onSpanFeedbackClicked()
+                }
             },
             spanStart,
             spanFinish,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-            binding.feedback.text = spanFeedback
-            binding.feedback.movementMethod = LinkMovementMethod.getInstance()
+        binding.feedback.text = spanFeedback
+        binding.feedback.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun initSpanSite() {
-        val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_site_title))
+        val spanFeedback =
+            SpannableStringBuilder(requireContext().getString(R.string.news_description_site_title))
 
         val spanStart = 0
         val spanFinish = spanFeedback.length
@@ -117,8 +121,10 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         spanFeedback.setSpan(
-            object: ClickableSpan() {
-                override fun onClick(widget: View) { viewModel.onSpanSiteClicked() }
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    viewModel.onSpanSiteClicked()
+                }
             },
             spanStart,
             spanFinish,
@@ -131,11 +137,11 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.news_description_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.newsDescriptionToolbarShare -> viewModel.onShareClicked()
             android.R.id.home -> findNavController().popBackStack()
         }

@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey
     tableName = "nko_entities",
     indices = [Index("title")]
 )
-data class NkoEntity (
+data class NkoEntity(
     @PrimaryKey
     val id: Long,
-    val title : String
+    val title: String,
 )

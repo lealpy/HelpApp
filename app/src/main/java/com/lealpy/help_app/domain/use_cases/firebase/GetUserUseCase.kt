@@ -4,13 +4,12 @@ import com.lealpy.help_app.domain.model.User
 import com.lealpy.help_app.domain.repository.FireRepository
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
-import javax.inject.Named
 
 class GetUserUseCase @Inject constructor(
-    private val repository: FireRepository
+    private val repository: FireRepository,
 ) {
 
-    operator fun invoke() : Single<User> {
+    operator fun invoke(): Single<User> {
         return repository.getUser()
     }
 

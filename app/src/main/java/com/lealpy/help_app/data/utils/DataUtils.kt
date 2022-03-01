@@ -6,12 +6,13 @@ import com.google.gson.reflect.TypeToken
 import javax.inject.Inject
 
 class DataUtils @Inject constructor(
-    val appContext : Context
+    val appContext: Context,
 ) {
-    inline fun <reified T> getItemsFromFile(fileName: String) : T {
+    inline fun <reified T> getItemsFromFile(fileName: String): T {
         val jsonFileString = appContext.assets.open(fileName).bufferedReader().use { it.readText() }
-        return Gson().fromJson(jsonFileString, object: TypeToken<T>() {}.type)
+        return Gson().fromJson(jsonFileString, object : TypeToken<T>() {}.type)
     }
+
     companion object {
         const val LOG_TAG = "HelpAppLog"
     }

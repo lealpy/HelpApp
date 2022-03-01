@@ -7,13 +7,13 @@ import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.lealpy.help_app.databinding.DialogFragmentPhotoBinding
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_CHOOSE_PHOTO_KEY
-import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DIALOG_RESULT_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DELETE_PHOTO_KEY
+import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DIALOG_RESULT_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_TAKE_PHOTO_KEY
 
 class PhotoDialogFragment : DialogFragment() {
 
-    private lateinit var binding : DialogFragmentPhotoBinding
+    private lateinit var binding: DialogFragmentPhotoBinding
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogFragmentPhotoBinding.inflate(layoutInflater)
@@ -37,7 +37,7 @@ class PhotoDialogFragment : DialogFragment() {
         }
     }
 
-    private fun setDialogResult(selectedItemKey : String) {
+    private fun setDialogResult(selectedItemKey: String) {
         findNavController()
             .previousBackStackEntry
             ?.savedStateHandle

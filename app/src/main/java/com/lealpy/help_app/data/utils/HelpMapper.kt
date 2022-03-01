@@ -3,7 +3,7 @@ package com.lealpy.help_app.data.utils
 import com.lealpy.help_app.data.database.help.HelpEntity
 import com.lealpy.help_app.domain.model.HelpItem
 
-fun List<HelpEntity>.toHelpItems() : List<HelpItem> {
+fun List<HelpEntity>.toHelpItems(): List<HelpItem> {
     return this.map { helpEntity ->
         HelpItem(
             id = helpEntity.id,
@@ -13,7 +13,7 @@ fun List<HelpEntity>.toHelpItems() : List<HelpItem> {
     }
 }
 
-fun List<HelpItem>.toHelpEntities() : List<HelpEntity> {
+fun List<HelpItem>.toHelpEntities(): List<HelpEntity> {
     return this.map { helpItem ->
         HelpEntity(
             id = helpItem.id,

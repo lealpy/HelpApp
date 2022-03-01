@@ -1,11 +1,11 @@
 package com.lealpy.help_app.domain.model
 
-data class User (
-    var id : String = "",
-    var name : String = "",
-    var surname : String = "",
-    var dateOfBirth : Long = 0,
-    var fieldOfActivity : String = "",
-    var email : String = "",
-    var avatarUrl : String = ""
+data class User(
+    val id: String = "",
+    val name: String = "",
+    val surname: String = "",
+    val dateOfBirth: Long = 0,
+    val fieldOfActivity: String = "",
+    val email: String = "",
+    val avatarUrl: String = "",
 )

@@ -7,6 +7,6 @@
         android:icon="@drawable/ic_baseline_mode_edit_24"
         android:iconTint="@color/white"
         android:title="@string/profile_toolbar_edit_title"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -15,9 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
-    private lateinit var binding : FragmentEditProfileBinding
+    private lateinit var binding: FragmentEditProfileBinding
 
-    private val viewModel : EditProfileViewModel by viewModels()
+    private val viewModel: EditProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +28,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
     }
 
     private fun initViews() {
-        binding.dateOfBirthEditText.setOnClickListener{
+        binding.dateOfBirthEditText.setOnClickListener {
             viewModel.onDateOfBirthClicked()
         }
 
@@ -41,7 +41,7 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
             )
         }
 
-        binding.dateOfBirthEditText.setOnClickListener{
+        binding.dateOfBirthEditText.setOnClickListener {
             viewModel.onDateOfBirthClicked()
         }
 

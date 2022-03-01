@@ -8,32 +8,33 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.Settings
 import android.util.Log
-import android.view.*
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lealpy.help_app.R
 import com.lealpy.help_app.databinding.FragmentProfileBinding
 import com.lealpy.help_app.presentation.utils.Const.LOG_TAG
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_CHOOSE_PHOTO_KEY
-import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DIALOG_RESULT_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DELETE_PHOTO_KEY
+import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_DIALOG_RESULT_KEY
 import com.lealpy.help_app.presentation.utils.Const.PROFILE_FEATURE_TAKE_PHOTO_KEY
 import dagger.hilt.android.AndroidEntryPoint
-import java.lang.Exception
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private lateinit var binding: FragmentProfileBinding
 
-    private val viewModel : ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
 
     private val readStoragePermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission(),
@@ -81,7 +82,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             binding.surnameAndName.text = "${userUi.surname} ${userUi.name}"
             binding.dateOfBirth.text = userUi.dateOfBirth
             binding.fieldOfActivity.text = userUi.fieldOfActivity
-            userUi.avatar?.let{ binding.avatarUser.setImageBitmap(it) }
+            userUi.avatar?.let { binding.avatarUser.setImageBitmap(it) }
                 ?: binding.avatarUser.setImageResource(R.drawable.no_photo)
         }
 
@@ -97,7 +98,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                         PROFILE_FEATURE_DELETE_PHOTO_KEY -> viewModel.onDeletePhotoSelected()
                     }
                 }
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             Log.e(LOG_TAG, e.toString())
         }
     }
@@ -123,7 +124,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         if (granted) {
             choosePhotoFromGallery()
         } else {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                    Manifest.permission.READ_EXTERNAL_STORAGE)
+            ) {
                 askUserForOpeningAppSettings(requireContext().getString(R.string.profile_alert_storage_permission_denied_title))
             }
         }
@@ -135,7 +138,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         galleryLauncher.launch(galleryIntent)
     }
 
-    private fun onGotGalleryResult(result : ActivityResult) {
+    private fun onGotGalleryResult(result: ActivityResult) {
         viewModel.onGotGalleryResult(result)
     }
 
@@ -145,7 +148,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         if (granted) {
             takePhotoOnCamera()
         } else {
-            if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), Manifest.permission.CAMERA)) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(),
+                    Manifest.permission.CAMERA)
+            ) {
                 askUserForOpeningAppSettings(requireContext().getString(R.string.profile_alert_camera_permission_denied_title))
             }
         }
@@ -162,13 +167,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     /** Ask user for open android settings */
 
-    private fun askUserForOpeningAppSettings(title : String) {
+    private fun askUserForOpeningAppSettings(title: String) {
         val appSettingsIntent = Intent(
             Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
             Uri.fromParts("package", requireActivity().packageName, null)
         )
 
-        if (requireActivity().packageManager.resolveActivity(appSettingsIntent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
+        if (requireActivity().packageManager.resolveActivity(appSettingsIntent,
+                PackageManager.MATCH_DEFAULT_ONLY) != null
+        ) {
             AlertDialog.Builder(requireContext())
                 .setTitle(title)
                 .setMessage(R.string.permission_denied_forever_message)
@@ -183,11 +190,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.profile_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.profileToolbarEdit -> {
                 findNavController().navigate(R.id.actionNavigationProfileToEditProfileFragment)
             }

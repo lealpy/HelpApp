@@ -10,7 +10,6 @@ import com.lealpy.help_app.domain.use_cases.firebase.EditUserUseCase
 import com.lealpy.help_app.domain.use_cases.firebase.GetUserUseCase
 import com.lealpy.help_app.presentation.model.DatePickerData
 import com.lealpy.help_app.presentation.model.UserUi
-import com.lealpy.help_app.presentation.screens.auth.sign_up.SignUpViewModel
 import com.lealpy.help_app.presentation.utils.Const
 import com.lealpy.help_app.presentation.utils.PresentationMappers
 import com.lealpy.help_app.presentation.utils.PresentationUtils
@@ -34,7 +33,7 @@ class EditProfileViewModel @Inject constructor(
     val userUi: LiveData<UserUi> = _userUi
 
     private val _navigateTo = MutableLiveData<Int>()
-    val navigateTo : LiveData<Int> = _navigateTo
+    val navigateTo: LiveData<Int> = _navigateTo
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility

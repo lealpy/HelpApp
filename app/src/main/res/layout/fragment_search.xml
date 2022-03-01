@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -12,45 +10,45 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/leaf"
-        android:paddingEnd="@dimen/dimen_5_dp"
         android:paddingStart="@dimen/dimen_5_dp"
+        android:paddingEnd="@dimen/dimen_5_dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_21_sp"
-            android:textColor="@color/white"
+            android:layout_gravity="center"
             android:fontFamily="@font/officina_sans_extra_bold_scc"
             android:text="@string/search_screen_name"
-            android:layout_gravity="center" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_21_sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:background="@color/leaf"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabIndicatorColor="@color/macaroni_and_cheese"
+        android:background="@color/leaf"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:tabIndicatorColor="@color/macaroni_and_cheese"
+        app:tabSelectedTextColor="@color/white"
         app:tabTextAppearance="@style/TabLayout"
-        app:tabTextColor="@color/white_70"
-        app:tabSelectedTextColor="@color/white" />
+        app:tabTextColor="@color/white_70" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="@dimen/dimen_0_dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" >
+        app:layout_constraintTop_toBottomOf="@id/tabLayout">
 
     </androidx.viewpager2.widget.ViewPager2>
 

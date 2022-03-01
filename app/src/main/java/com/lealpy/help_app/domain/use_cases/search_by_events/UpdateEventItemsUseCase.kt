@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class UpdateEventItemsUseCase @Inject constructor(
-    private val repository: EventRepository
-){
+    private val repository: EventRepository,
+) {
 
-    operator fun invoke() : Completable {
+    operator fun invoke(): Completable {
         return repository.updateEventItems()
     }
 

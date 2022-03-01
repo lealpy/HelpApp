@@ -5,6 +5,6 @@ import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
 interface EventRepository {
-    fun updateEventItems() : Completable
-    fun getFromDbEventItemsByTitle(searchQuery : String) : Single<List<EventItem>>
+    fun updateEventItems(): Completable
+    fun getFromDbEventItemsByTitle(searchQuery: String): Single<List<EventItem>>
 }

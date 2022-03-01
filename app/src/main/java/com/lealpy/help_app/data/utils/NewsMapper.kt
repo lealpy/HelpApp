@@ -6,7 +6,7 @@ import com.lealpy.help_app.domain.model.NewsDescriptionItem
 import com.lealpy.help_app.domain.model.NewsItem
 import com.lealpy.help_app.domain.model.NewsPreviewItem
 
-fun List<NewsEntity>.toNewsItems() : List<NewsItem> {
+fun List<NewsEntity>.toNewsItems(): List<NewsItem> {
     return this.map { newsEntity ->
         NewsItem(
             id = newsEntity.id,
@@ -29,7 +29,7 @@ fun List<NewsEntity>.toNewsItems() : List<NewsItem> {
     }
 }
 
-fun List<NewsItem>.toNewsEntities() : List<NewsEntity> {
+fun List<NewsItem>.toNewsEntities(): List<NewsEntity> {
     return this.map { newsItem ->
         NewsEntity(
             id = newsItem.id,
@@ -52,7 +52,7 @@ fun List<NewsItem>.toNewsEntities() : List<NewsEntity> {
     }
 }
 
-fun NewsDescriptionDb.toNewsDescriptionItem() : NewsDescriptionItem {
+fun NewsDescriptionDb.toNewsDescriptionItem(): NewsDescriptionItem {
     return NewsDescriptionItem(
         id = this.id,
         imageUrl = this.imageUrl,
@@ -68,7 +68,7 @@ fun NewsDescriptionDb.toNewsDescriptionItem() : NewsDescriptionItem {
     )
 }
 
-fun List<NewsItem>.toNewsPreviewItems() : List<NewsPreviewItem> {
+fun List<NewsItem>.toNewsPreviewItems(): List<NewsPreviewItem> {
     return this.map { newsItem ->
         NewsPreviewItem(
             id = newsItem.id,

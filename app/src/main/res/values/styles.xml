@@ -70,7 +70,7 @@
         <item name="layout_constraintHorizontal_bias">1.0</item>
     </style>
 
-    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance" >
+    <style name="TextAppearance.AppCompat.Widget.ActionBar.Title" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/officina_sans_extra_bold_scc</item>
         <item name="android:textSize">@dimen/dimen_21_sp</item>
     </style>

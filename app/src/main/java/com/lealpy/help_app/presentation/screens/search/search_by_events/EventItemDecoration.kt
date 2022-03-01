@@ -1,20 +1,20 @@
 package com.lealpy.help_app.presentation.screens.search.search_by_events
 
-import androidx.recyclerview.widget.RecyclerView
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 
 class EventItemDecoration(
-    private val mDivider : Drawable,
-    private val paddingLeft: Int
+    private val mDivider: Drawable,
+    private val paddingLeft: Int,
 ) : ItemDecoration() {
 
     override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        if(parent.getChildAt(0) != null) drawTopLine(canvas, parent)
+        if (parent.getChildAt(0) != null) drawTopLine(canvas, parent)
         drawDividers(canvas, parent)
-        if(parent.getChildAt(parent.childCount - 1) != null) drawBottomLine(canvas, parent)
+        if (parent.getChildAt(parent.childCount - 1) != null) drawBottomLine(canvas, parent)
     }
 
     private fun drawDividers(canvas: Canvas, parent: RecyclerView) {
@@ -23,7 +23,7 @@ class EventItemDecoration(
         for (i in 0 until parent.childCount) {
             val child: View = parent.getChildAt(i)
             val params = child.layoutParams as? RecyclerView.LayoutParams
-            if(params != null) {
+            if (params != null) {
                 val top: Int = child.bottom + params.bottomMargin
                 val bottom = top + mDivider.intrinsicHeight
                 mDivider.setBounds(left, top, right, bottom)

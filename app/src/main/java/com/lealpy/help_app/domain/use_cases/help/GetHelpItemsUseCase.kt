@@ -6,7 +6,7 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class GetHelpItemsUseCase @Inject constructor(
-    private val repository: HelpRepository
+    private val repository: HelpRepository,
 ) {
 
     operator fun invoke(): Single<List<HelpItem>> {

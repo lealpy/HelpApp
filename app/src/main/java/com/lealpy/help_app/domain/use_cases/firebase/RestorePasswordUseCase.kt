@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class RestorePasswordUseCase @Inject constructor(
-    private val repository: FireRepository
+    private val repository: FireRepository,
 ) {
 
-    operator fun invoke(email : String) : Completable {
+    operator fun invoke(email: String): Completable {
         return repository.restorePassword(email)
     }
 

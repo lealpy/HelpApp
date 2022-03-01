@@ -23,8 +23,8 @@ import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
 
 class DonateNotificationWorker(
-    context : Context,
-    params : WorkerParameters
+    context: Context,
+    params: WorkerParameters,
 ) : Worker(context, params) {
 
     init {
@@ -32,12 +32,15 @@ class DonateNotificationWorker(
     }
 
     override fun doWork(): Result {
-        val newsId = inputData.getLong(NEWS_FEATURE_NEWS_ID_KEY, DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID)
+        val newsId =
+            inputData.getLong(NEWS_FEATURE_NEWS_ID_KEY, DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID)
         val newsTitle = inputData.getString(NEWS_FEATURE_NEWS_TITLE_KEY) ?: ""
-        val donationAmount = inputData.getInt(DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY, DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT)
-        val isFirstNotification = inputData.getBoolean(DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY, true)
+        val donationAmount = inputData.getInt(DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY,
+            DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT)
+        val isFirstNotification =
+            inputData.getBoolean(DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY, true)
 
-        if(isFirstNotification) {
+        if (isFirstNotification) {
             sendFirstNotification(
                 notificationId = generateNotificationId(),
                 newsId = newsId,
@@ -57,10 +60,10 @@ class DonateNotificationWorker(
     }
 
     private fun sendFirstNotification(
-        notificationId : Int,
+        notificationId: Int,
         newsId: Long,
-        newsTitle : String,
-        donationAmount : Int
+        newsTitle: String,
+        donationAmount: Int,
     ) {
         val navigatePendingIntent = NavDeepLinkBuilder(applicationContext)
             .setComponentName(MainActivity::class.java)
@@ -91,7 +94,8 @@ class DonateNotificationWorker(
             donationAmount
         )
 
-        val notification = NotificationCompat.Builder(applicationContext, DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL)
+        val notification = NotificationCompat.Builder(applicationContext,
+            DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL)
             .setSmallIcon(R.drawable.ic_hands)
             .setContentTitle(newsTitle)
             .setContentText(notificationText)
@@ -116,10 +120,10 @@ class DonateNotificationWorker(
     }
 
     private fun sendRepeatedNotification(
-        notificationId : Int,
+        notificationId: Int,
         newsId: Long,
-        newsTitle : String,
-        donationAmount : Int
+        newsTitle: String,
+        donationAmount: Int,
     ) {
         val navigatePendingIntent = NavDeepLinkBuilder(applicationContext)
             .setComponentName(MainActivity::class.java)
@@ -133,7 +137,8 @@ class DonateNotificationWorker(
             donationAmount
         )
 
-        val notification = NotificationCompat.Builder(applicationContext, DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL)
+        val notification = NotificationCompat.Builder(applicationContext,
+            DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL)
             .setSmallIcon(R.drawable.ic_hands)
             .setContentTitle(newsTitle)
             .setContentText(notificationText)
@@ -158,11 +163,12 @@ class DonateNotificationWorker(
             DONATE_MONEY_FEATURE_NOTIFICATION_NAME,
             IMPORTANCE_HIGH
         )
-        val notificationManager = applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        val notificationManager =
+            applicationContext.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
         notificationManager.createNotificationChannel(channel)
     }
 
-    private fun generateNotificationId() : Int {
+    private fun generateNotificationId(): Int {
         val prefs = applicationContext.getSharedPreferences(PREFS_FILE_NAME, Context.MODE_PRIVATE)
         val id = if (id.equals(Integer.MAX_VALUE)) {
             0
@@ -176,9 +182,12 @@ class DonateNotificationWorker(
     companion object {
         private const val PREFS_FILE_NAME = "donate_money_notification_ids"
         private const val PREFS_ID_KEY = "DONATE_MONEY_PREFS_NOTIFICATION_ID_KEY"
-        private const val DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL = "DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL"
-        private const val DONATE_MONEY_FEATURE_NOTIFICATION_NAME = "DONATE_MONEY_FEATURE_NOTIFICATION_NAME"
-        private const val DONATE_MONEY_FEATURE_FIRST_NOTIFICATION_ID_KEY = "FIRST_NOTIFICATION_ID_KEY"
+        private const val DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL =
+            "DONATE_MONEY_FEATURE_NOTIFICATION_CHANNEL"
+        private const val DONATE_MONEY_FEATURE_NOTIFICATION_NAME =
+            "DONATE_MONEY_FEATURE_NOTIFICATION_NAME"
+        private const val DONATE_MONEY_FEATURE_FIRST_NOTIFICATION_ID_KEY =
+            "FIRST_NOTIFICATION_ID_KEY"
     }
 
 }

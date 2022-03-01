@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class SignInUseCase @Inject constructor(
-    private val repository: FireRepository
+    private val repository: FireRepository,
 ) {
 
-    operator fun invoke(email : String, password : String): Completable {
+    operator fun invoke(email: String, password: String): Completable {
         return repository.signIn(email, password)
     }
 

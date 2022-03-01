@@ -18,11 +18,11 @@ import io.reactivex.rxjava3.core.Observable
 @AndroidEntryPoint
 class DonateMoneyDialogFragment : DialogFragment() {
 
-    private lateinit var binding : DialogFragmentDonateMoneyBinding
+    private lateinit var binding: DialogFragmentDonateMoneyBinding
 
-    private val viewModel : DonateMoneyViewModel by viewModels()
+    private val viewModel: DonateMoneyViewModel by viewModels()
 
-    private lateinit var alertDialog : AlertDialog
+    private lateinit var alertDialog: AlertDialog
 
     private val positiveButton by lazy {
         alertDialog.getButton(Dialog.BUTTON_POSITIVE)
@@ -31,12 +31,12 @@ class DonateMoneyDialogFragment : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogFragmentDonateMoneyBinding.inflate(layoutInflater)
         alertDialog = AlertDialog.Builder(context)
-                .setView(binding.root)
-                .setPositiveButton(R.string.dialog_fragment_donate_money_positive_button) { _, _ ->
-                    viewModel.onPositiveButtonClicked(binding.donationEditText.text)
-                }
-                .setNegativeButton(R.string.dialog_fragment_donate_money_negative_button, null)
-                .create()
+            .setView(binding.root)
+            .setPositiveButton(R.string.dialog_fragment_donate_money_positive_button) { _, _ ->
+                viewModel.onPositiveButtonClicked(binding.donationEditText.text)
+            }
+            .setNegativeButton(R.string.dialog_fragment_donate_money_negative_button, null)
+            .create()
         return alertDialog
     }
 

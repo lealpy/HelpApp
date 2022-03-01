@@ -23,18 +23,18 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class NewsDescriptionViewModel @Inject constructor (
+class NewsDescriptionViewModel @Inject constructor(
     private val getNewsDescriptionItemUseCase: GetNewsDescriptionItemUseCase,
     private val utils: PresentationUtils,
     private val savedStateHandle: SavedStateHandle,
     private val mappers: PresentationMappers,
 ) : ViewModel() {
 
-    private val _newsDescriptionItemUi = MutableLiveData <NewsDescriptionItemUi> ()
-    val newsDescriptionItemUi : LiveData<NewsDescriptionItemUi> = _newsDescriptionItemUi
+    private val _newsDescriptionItemUi = MutableLiveData<NewsDescriptionItemUi>()
+    val newsDescriptionItemUi: LiveData<NewsDescriptionItemUi> = _newsDescriptionItemUi
 
-    private val _dialogArgs = MutableLiveData <Bundle> ()
-    val dialogArgs : LiveData<Bundle> = _dialogArgs
+    private val _dialogArgs = MutableLiveData<Bundle>()
+    val dialogArgs: LiveData<Bundle> = _dialogArgs
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
@@ -50,19 +50,33 @@ class NewsDescriptionViewModel @Inject constructor (
         super.onCleared()
     }
 
-    fun onSiteClicked() { showToast() }
+    fun onSiteClicked() {
+        showToast()
+    }
 
-    fun onDonateThingsClicked() { showToast() }
+    fun onDonateThingsClicked() {
+        showToast()
+    }
 
-    fun onBecomeVolunteerClicked() { showToast() }
+    fun onBecomeVolunteerClicked() {
+        showToast()
+    }
 
-    fun onProfHelpClicked() { showToast() }
+    fun onProfHelpClicked() {
+        showToast()
+    }
 
-    fun onShareClicked() { showToast() }
+    fun onShareClicked() {
+        showToast()
+    }
 
-    fun onSpanSiteClicked() { showToast() }
+    fun onSpanSiteClicked() {
+        showToast()
+    }
 
-    fun onSpanFeedbackClicked() { showToast() }
+    fun onSpanFeedbackClicked() {
+        showToast()
+    }
 
     fun onDonateMoneyClicked() {
         val bundle = bundleOf(

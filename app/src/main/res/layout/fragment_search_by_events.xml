@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,15 +11,15 @@
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_38_dp"
+        android:gravity="center"
         android:text="@string/search_by_events_nothing_found"
         android:textColor="@color/black_70"
         android:textSize="@dimen/dimen_14_sp"
-        android:gravity="center"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/blankSearchImage"
@@ -40,13 +39,13 @@
         android:id="@+id/blankSearchHint"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_40_dp"
         android:layout_marginTop="@dimen/dimen_38_dp"
+        android:layout_marginEnd="@dimen/dimen_40_dp"
         android:text="@string/search_by_events_search_hint"
+        android:textAlignment="center"
         android:textColor="@color/black_70"
         android:textSize="@dimen/dimen_14_sp"
-        android:textAlignment="center"
-        android:layout_marginStart="@dimen/dimen_40_dp"
-        android:layout_marginEnd="@dimen/dimen_40_dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/blankSearchImage" />
@@ -55,11 +54,11 @@
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="@dimen/dimen_0_dp"
         android:layout_height="@dimen/dimen_0_dp"
-        app:layout_constraintVertical_bias="0"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
@@ -76,18 +75,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dimen_38_dp"
+        android:layout_marginBottom="@dimen/dimen_40_dp"
         android:text="@string/search_by_events_search_example"
         android:textAlignment="textEnd"
         android:textColor="@color/black_70"
         android:textSize="@dimen/dimen_14_sp"
-        android:layout_marginBottom="@dimen/dimen_40_dp"
-        app:layout_constraintVertical_bias="0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/blankSearchExample1"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="@+id/blankSearchImage"
         app:layout_constraintTop_toBottomOf="@+id/blankSearchHint"
-        tools:visibility="gone"/>
+        app:layout_constraintVertical_bias="0"
+        tools:visibility="gone" />
 
     <TextView
         android:id="@+id/blankSearchExample1"
@@ -100,18 +99,18 @@
         app:layout_constraintEnd_toEndOf="@id/blankSearchImage"
         app:layout_constraintStart_toEndOf="@id/blankSearchExample"
         app:layout_constraintTop_toTopOf="@+id/blankSearchExample"
-        tools:visibility="gone"/>
+        tools:visibility="gone" />
 
     <ProgressBar
         android:id="@+id/progressBar"
+        style="@style/ProgressBar"
         android:layout_width="@dimen/dimen_38_dp"
         android:layout_height="@dimen/dimen_38_dp"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:visibility="visible"
-        style="@style/ProgressBar" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

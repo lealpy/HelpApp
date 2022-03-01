@@ -11,7 +11,7 @@ import com.lealpy.help_app.presentation.utils.Const.SEARCH_FEATURE_POSITION_SEAR
 
 class ViewPagerAdapter(
     fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
+    lifecycle: Lifecycle,
 ) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     override fun getItemCount(): Int {
@@ -19,7 +19,7 @@ class ViewPagerAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position) {
+        return when (position) {
             SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS -> SearchByEventsFragment()
             SEARCH_FEATURE_POSITION_SEARCH_BY_NKO -> SearchByNkoFragment()
             else -> Fragment()

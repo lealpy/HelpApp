@@ -15,9 +15,9 @@ import com.lealpy.help_app.databinding.FragmentSearchByEventsBinding
 
 class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
 
-    private lateinit var binding : FragmentSearchByEventsBinding
+    private lateinit var binding: FragmentSearchByEventsBinding
 
-    private val viewModel : SearchByEventsViewModel by activityViewModels()
+    private val viewModel: SearchByEventsViewModel by activityViewModels()
 
     private val eventAdapter = EventItemAdapter {
         viewModel.onItemClicked()
@@ -76,12 +76,13 @@ class SearchByEventsFragment : Fragment(R.layout.fragment_search_by_events) {
     }
 
     private fun initSpannableString() {
-        val searchExample = SpannableStringBuilder(requireContext().getString(R.string.search_by_events_search_example_1))
+        val searchExample =
+            SpannableStringBuilder(requireContext().getString(R.string.search_by_events_search_example_1))
         val spanStart = 0
         val spanFinish = searchExample.length
 
         searchExample.setSpan(
-            object: ClickableSpan() {
+            object : ClickableSpan() {
                 override fun updateDrawState(ds: TextPaint) {
                     ds.isUnderlineText = true
                 }

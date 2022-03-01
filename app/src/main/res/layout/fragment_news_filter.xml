@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_grey_two">
@@ -21,11 +19,11 @@
             android:id="@+id/toolbarTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/dimen_21_sp"
-            android:textColor="@color/white"
+            android:layout_gravity="center"
             android:fontFamily="@font/officina_sans_extra_bold_scc"
             android:text="@string/news_filter_screen_name"
-            android:layout_gravity="center" />
+            android:textColor="@color/white"
+            android:textSize="@dimen/dimen_21_sp" />
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -54,25 +52,25 @@
 
         <TextView
             android:id="@+id/filterTitleChildren"
+            style="@style/TextViewNewsFilterFilterTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_18_dp"
             android:text="@string/help_category_children"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            style="@style/TextViewNewsFilterFilterTitle" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/filterSwitcherChildren"
+            style="@style/Switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_16_dp"
             android:checked="true"
-            app:layout_constraintTop_toTopOf="@id/filterTitleChildren"
             app:layout_constraintBottom_toBottomOf="@id/filterTitleChildren"
-            app:layout_constraintStart_toEndOf="@+id/filterTitleChildren"
             app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Switcher" />
+            app:layout_constraintStart_toEndOf="@+id/filterTitleChildren"
+            app:layout_constraintTop_toTopOf="@id/filterTitleChildren" />
 
         <View
             android:id="@+id/filterDividerChildren"
@@ -96,15 +94,15 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/filter_switcher_adult"
+            style="@style/Switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_16_dp"
             android:checked="true"
-            app:layout_constraintTop_toTopOf="@id/filterTitleAdult"
             app:layout_constraintBottom_toBottomOf="@id/filterTitleAdult"
-            app:layout_constraintStart_toEndOf="@+id/filterTitleAdult"
             app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Switcher" />
+            app:layout_constraintStart_toEndOf="@+id/filterTitleAdult"
+            app:layout_constraintTop_toTopOf="@id/filterTitleAdult" />
 
         <View
             android:id="@+id/filterDividerAdult"
@@ -128,15 +126,15 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/filterSwitcherElderly"
+            style="@style/Switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_16_dp"
             android:checked="true"
-            app:layout_constraintTop_toTopOf="@id/filterTitleElderly"
             app:layout_constraintBottom_toBottomOf="@id/filterTitleElderly"
-            app:layout_constraintStart_toEndOf="@+id/filterTitleElderly"
             app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Switcher" />
+            app:layout_constraintStart_toEndOf="@+id/filterTitleElderly"
+            app:layout_constraintTop_toTopOf="@id/filterTitleElderly" />
 
         <View
             android:id="@+id/filterDividerElderly"
@@ -161,15 +159,15 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/filter_switcher_animal"
+            style="@style/Switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_16_dp"
             android:checked="true"
-            app:layout_constraintTop_toTopOf="@id/filterTitleAnimal"
             app:layout_constraintBottom_toBottomOf="@id/filterTitleAnimal"
-            app:layout_constraintStart_toEndOf="@+id/filterTitleAnimal"
             app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Switcher" />
+            app:layout_constraintStart_toEndOf="@+id/filterTitleAnimal"
+            app:layout_constraintTop_toTopOf="@id/filterTitleAnimal" />
 
         <View
             android:id="@+id/filterDividerAnimal"
@@ -195,15 +193,15 @@
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/filter_switcher_event"
+            style="@style/Switcher"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/dimen_16_dp"
             android:checked="true"
-            app:layout_constraintTop_toTopOf="@id/filterTitleEvent"
             app:layout_constraintBottom_toBottomOf="@id/filterTitleEvent"
-            app:layout_constraintStart_toEndOf="@+id/filterTitleEvent"
             app:layout_constraintEnd_toEndOf="parent"
-            style="@style/Switcher" />
+            app:layout_constraintStart_toEndOf="@+id/filterTitleEvent"
+            app:layout_constraintTop_toTopOf="@id/filterTitleEvent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
