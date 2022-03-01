@@ -69,4 +69,12 @@ class UseCasesFirebaseModule {
         return GetAuthStateUseCase(fireRepositoryImpl)
     }
 
+    @Provides
+    @Singleton
+    fun provideEditUserUseCase(
+        fireRepositoryImpl: FireRepositoryImpl,
+    ): EditUserUseCase {
+        return EditUserUseCase(fireRepositoryImpl)
+    }
+
 }

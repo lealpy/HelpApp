@@ -1,4 +1,4 @@
-package com.lealpy.help_app.presentation.screens.auth.sign_up
+package com.lealpy.help_app.presentation.screens.profile.edit_profile
 
 import android.app.DatePickerDialog
 import android.os.Bundle
@@ -9,57 +9,40 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lealpy.help_app.R
-import com.lealpy.help_app.databinding.FragmentSignUpBinding
+import com.lealpy.help_app.databinding.FragmentEditProfileBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
+class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
 
-    private lateinit var binding: FragmentSignUpBinding
+    private lateinit var binding : FragmentEditProfileBinding
 
-    private val viewModel: SignUpViewModel by viewModels()
+    private val viewModel : EditProfileViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSignUpBinding.bind(view)
+        binding = FragmentEditProfileBinding.bind(view)
+        initToolbar()
         initViews()
         initObservers()
-        initToolbar()
     }
 
     private fun initViews() {
-        binding.loginScreenBtn.setOnClickListener {
-            findNavController().popBackStack()
-        }
-
-        binding.dateOfBirthEditText.setOnClickListener {
+        binding.dateOfBirthEditText.setOnClickListener{
             viewModel.onDateOfBirthClicked()
         }
 
-        binding.signUpBtn.setOnClickListener {
-            viewModel.onSignUpBtnClicked(
+        binding.saveChangesBtn.setOnClickListener {
+            viewModel.onSaveChangesClicked(
                 name = binding.nameEditText.text.toString(),
                 surname = binding.surnameEditText.text.toString(),
                 dateOfBirth = binding.dateOfBirthEditText.text.toString(),
                 fieldOfActivity = binding.fieldOfActivityEditText.text.toString(),
-                email = binding.emailEditText.text.toString(),
-                password = binding.passwordEditText.text.toString(),
-                repeatPassword = binding.repeatPasswordEditText.text.toString()
             )
         }
-    }
 
-    private fun initObservers() {
-        viewModel.navigateTo.observe(viewLifecycleOwner) { navigateTo ->
-            findNavController().navigate(navigateTo)
-        }
-
-        viewModel.isSignUpBtnEnabled.observe(viewLifecycleOwner) { isEnabled ->
-            binding.signUpBtn.isEnabled = isEnabled
-        }
-
-        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
-            binding.progressBar.visibility = progressBarVisibility
+        binding.dateOfBirthEditText.setOnClickListener{
+            viewModel.onDateOfBirthClicked()
         }
 
         viewModel.dateOfBirth.observe(viewLifecycleOwner) { dateOfBirth ->
@@ -80,6 +63,23 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                     datePickerData.day
                 ).show()
             }
+        }
+    }
+
+    private fun initObservers() {
+        viewModel.userUi.observe(viewLifecycleOwner) { userUi ->
+            binding.surnameEditText.setText(userUi.surname)
+            binding.nameEditText.setText(userUi.name)
+            binding.dateOfBirthEditText.setText(userUi.dateOfBirth)
+            binding.fieldOfActivityEditText.setText(userUi.fieldOfActivity)
+        }
+
+        viewModel.navigateTo.observe(viewLifecycleOwner) { destination ->
+            findNavController().navigate(destination)
+        }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
         }
     }
 

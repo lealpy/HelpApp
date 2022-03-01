@@ -33,8 +33,8 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="@dimen/dimen_0_dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -135,7 +135,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -168,7 +168,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"

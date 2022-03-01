@@ -34,8 +34,8 @@
     </androidx.appcompat.widget.Toolbar>
 
     <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="@dimen/dimen_0_dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
@@ -71,7 +71,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -105,7 +105,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/surnameInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -163,31 +163,31 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
-                android:id="@+id/fieldOfAreaHint"
+                android:id="@+id/fieldOfActivityHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/sign_up_hint_field_of_area"
+                android:text="@string/sign_up_hint_field_of_activity"
                 android:layout_marginTop="@dimen/dimen_20_dp"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirthInputLayout"
                 style="@style/AuthTextViewHint" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/fieldOfAreaInputLayout"
-                android:layout_width="0dp"
+                android:id="@+id/fieldOfActivityInputLayout"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
-                app:layout_constraintTop_toBottomOf="@+id/fieldOfAreaHint"
+                app:layout_constraintTop_toBottomOf="@+id/fieldOfActivityHint"
                 app:boxBackgroundColor="@color/white"
                 style="@style/EditText" >
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fieldOfAreaEditText"
+                    android:id="@+id/fieldOfActivityEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_enter_field_of_area"
+                    android:hint="@string/sign_up_hint_enter_field_of_activity"
                     android:inputType="textCapSentences"
                     android:paddingStart="@dimen/dimen_0_dp"
                     android:paddingEnd="@dimen/dimen_0_dp"
@@ -202,12 +202,12 @@
                 android:text="@string/sign_up_hint_e_mail"
                 android:layout_marginTop="@dimen/dimen_20_dp"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
-                app:layout_constraintTop_toBottomOf="@id/fieldOfAreaInputLayout"
+                app:layout_constraintTop_toBottomOf="@id/fieldOfActivityInputLayout"
                 style="@style/AuthTextViewHint" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -241,7 +241,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -277,7 +277,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/repeatPasswordInputLayout"
-                android:layout_width="0dp"
+                android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/black_38"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
@@ -311,7 +311,7 @@
                 android:backgroundTint="@color/background_sign_in_login_button"
                 android:fontFamily="@font/roboto_medium"
                 android:textSize="@dimen/dimen_16_sp"
-                android:insetTop="0dp"
+                android:insetTop="@dimen/dimen_0_dp"
                 android:insetBottom="@dimen/dimen_0_dp"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"

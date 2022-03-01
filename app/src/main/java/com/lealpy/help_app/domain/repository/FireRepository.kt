@@ -19,4 +19,10 @@ interface FireRepository {
     fun getUser() : Single<User>
     fun getAuthState() : Single<Boolean>
     fun saveAvatarToStorage(byteArray : ByteArray) : Completable
+    fun editUser(
+        surname: String,
+        name: String,
+        dateOfBirth: Long,
+        fieldOfActivity: String,
+    ): Completable
 }

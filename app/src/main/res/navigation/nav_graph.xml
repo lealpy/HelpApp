@@ -40,6 +40,9 @@
             app:destination="@id/authorizationFragment"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionNavigationProfileToEditProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
     <fragment
         android:id="@+id/newsFilterFragment"
@@ -106,5 +109,15 @@
         android:id="@+id/passwordRecoveryFragment"
         android:name="com.lealpy.help_app.presentation.screens.auth.password_recovery.PasswordRecoveryFragment"
         android:label="PasswordRecoveryFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.lealpy.help_app.presentation.screens.profile.edit_profile.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/actionEditProfileFragmentToNavigationProfile"
+            app:destination="@id/navigationProfile"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

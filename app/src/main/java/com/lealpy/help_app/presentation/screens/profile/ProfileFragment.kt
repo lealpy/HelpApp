@@ -15,6 +15,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.lealpy.help_app.R
@@ -68,18 +69,6 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     }
 
     private fun initObservers() {
-        viewModel.avatarFriend1.observe(viewLifecycleOwner) { avatarFriend1 ->
-            binding.avatarFriend1.setImageBitmap(avatarFriend1)
-        }
-
-        viewModel.avatarFriend2.observe(viewLifecycleOwner) { avatarFriend2 ->
-            binding.avatarFriend2.setImageBitmap(avatarFriend2)
-        }
-
-        viewModel.avatarFriend3.observe(viewLifecycleOwner) { avatarFriend3 ->
-            binding.avatarFriend3.setImageBitmap(avatarFriend3)
-        }
-
         viewModel.settingGetPush.observe(viewLifecycleOwner) { settingGetPush ->
             binding.switcherGetPush.isChecked = settingGetPush
         }
@@ -199,7 +188,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
-            R.id.profileToolbarEdit -> viewModel.onEditClicked()
+            R.id.profileToolbarEdit -> {
+                findNavController().navigate(R.id.actionNavigationProfileToEditProfileFragment)
+            }
         }
         return true
     }

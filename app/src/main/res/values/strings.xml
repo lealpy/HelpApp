@@ -132,8 +132,8 @@
     <string name="no_internet_connection">Нет подключения к Интернету</string>
     <string name="sign_up_hint_date_of_birth">Дата рождения</string>
     <string name="sign_up_hint_choose_date_of_birth">Выберите дату рождения</string>
-    <string name="sign_up_hint_field_of_area">Сфера деятельности</string>
-    <string name="sign_up_hint_enter_field_of_area">Введите сферу деятельности</string>
+    <string name="sign_up_hint_field_of_activity">Сфера деятельности</string>
+    <string name="sign_up_hint_enter_field_of_activity">Введите сферу деятельности</string>
     <string name="sign_up_open_restore_password_button_text">Восстановить пароль</string>
     <string name="password_recovery_check_mail">Письмо с инструкциями для восстановления пароля отправлено на указанную почту</string>
     <string name="password_recovery_wrong_email">Введенный e-mail не найден</string>
@@ -150,6 +150,10 @@
     <string name="auth_sign_in_success">Регистрация выполнена успешно</string>
     <string name="auth_sign_in_unsuccess">Регистрация не завершена. Проверьте заполненные поля.</string>
     <string name="firebase_network_exception">Отсутствует интернет-соединение</string>
+    <string name="profile_settings_title">Настройки</string>
+    <string name="profile_personal_data_title">Персональные данные</string>
+    <string name="edit_profile_title">Редактирование профиля</string>
+    <string name="edit_profile_save_changes_btn_text">Сохранить изменения</string>
 
     <array name="months">
         <item>января</item>
