@@ -54,20 +54,46 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             binding.progressBar.visibility = visibility
         }
 
-        viewModel.dialogArgs.observe(viewLifecycleOwner) { args ->
+        viewModel.donateMoneyDialogArgs.observe(viewLifecycleOwner) { args ->
             findNavController().navigate(
                 R.id.actionNewsDescriptionFragmentToDonateMoneyDialogFragment,
+                args
+            )
+        }
+
+        viewModel.donateDialogArgs.observe(viewLifecycleOwner) { args ->
+            findNavController().navigate(
+                R.id.actionNewsDescriptionFragmentToDonateDialogFragment,
                 args
             )
         }
     }
 
     private fun initViews() {
-        binding.site.setOnClickListener { viewModel.onSiteClicked() }
-        binding.donateThings.setOnClickListener { viewModel.onDonateThingsClicked() }
-        binding.becomeVolunteer.setOnClickListener { viewModel.onBecomeVolunteerClicked() }
-        binding.profHelp.setOnClickListener { viewModel.onProfHelpClicked() }
-        binding.donateMoney.setOnClickListener { viewModel.onDonateMoneyClicked() }
+        binding.site.setOnClickListener {
+            viewModel.onSiteClicked()
+        }
+        binding.donateThings.setOnClickListener {
+            viewModel.onDonateThingsClicked()
+        }
+        binding.becomeVolunteer.setOnClickListener {
+            viewModel.onBecomeVolunteerClicked()
+        }
+        binding.profHelp.setOnClickListener {
+            viewModel.onProfHelpClicked()
+        }
+        binding.donateMoney.setOnClickListener {
+            viewModel.onDonateMoneyClicked()
+        }
+        binding.donateThings.setOnClickListener {
+            viewModel.onDonateClicked()
+        }
+        binding.becomeVolunteer.setOnClickListener {
+            viewModel.onDonateClicked()
+        }
+        binding.profHelp.setOnClickListener {
+            viewModel.onDonateClicked()
+        }
     }
 
     private fun initToolbar() {

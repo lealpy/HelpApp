@@ -54,6 +54,9 @@
         <action
             android:id="@+id/actionNewsDescriptionFragmentToDonateMoneyDialogFragment"
             app:destination="@id/donateMoneyDialogFragment" />
+        <action
+            android:id="@+id/actionNewsDescriptionFragmentToDonateDialogFragment"
+            app:destination="@id/donateDialogFragment" />
     </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
@@ -118,5 +121,9 @@
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
     </fragment>
+    <dialog
+        android:id="@+id/donateDialogFragment"
+        android:name="com.lealpy.help_app.presentation.screens.news.news_description.donate.DonateDialogFragment"
+        android:label="DonateDialogFragment" />
 
 </navigation>
