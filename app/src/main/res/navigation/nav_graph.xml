@@ -22,7 +22,11 @@
     <fragment
         android:id="@+id/navigationHelp"
         android:name="com.lealpy.help_app.presentation.screens.help.HelpFragment"
-        android:label="fragment_help" />
+        android:label="fragment_help" >
+        <action
+            android:id="@+id/actionNavigationHelpToNavigationNews"
+            app:destination="@id/navigationNews" />
+    </fragment>
     <fragment
         android:id="@+id/navigationHistory"
         android:name="com.lealpy.help_app.presentation.screens.history.HistoryFragment"

@@ -124,6 +124,7 @@
     <string name="dialog_fragment_donate_money_donation_offer_4">2000 ₽</string>
     <string name="dialog_fragment_donate_money_positive_button">Перевести</string>
     <string name="dialog_fragment_donate_money_negative_button">Отмена</string>
+    <string name="dialog_fragment_donate_money_success">Перевод отправлен</string>
 
     <string name="donate_notification_worker_first_notification_text">Спасибо, что пожертвовали %1$d ₽! Будем очень признательны, если вы сможете пожертвовать еще больше.</string>
     <string name="donate_notification_worker_button_remind">Напомнить позже</string>
@@ -155,6 +156,7 @@
     <string name="edit_profile_save_changes_btn_text">Сохранить изменения</string>
     <string name="dialog_fragment_donate_positive_button">Ок</string>
     <string name="dialog_fragment_donate_dialog_text">Пожалуйста, свяжитесь с организацией %1$s по тел.: \n%2$s</string>
+    <string name="history_screen_title">Ваши пожертвования</string>
 
     <array name="months">
         <item>января</item>

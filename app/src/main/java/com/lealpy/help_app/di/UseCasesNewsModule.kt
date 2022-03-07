@@ -53,4 +53,20 @@ class UseCasesNewsModule {
         return StartDonateNotificationWorkerUseCase(workerRepositoryImpl)
     }
 
+    @Provides
+    @Singleton
+    fun provideAddDonationHistoryItemUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl,
+    ): AddDonationHistoryItemUseCase {
+        return AddDonationHistoryItemUseCase(newsRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetDonationHistoryItemsUseCase(
+        newsRepositoryImpl: NewsRepositoryImpl,
+    ): GetDonationHistoryItemsUseCase {
+        return GetDonationHistoryItemsUseCase(newsRepositoryImpl)
+    }
+
 }

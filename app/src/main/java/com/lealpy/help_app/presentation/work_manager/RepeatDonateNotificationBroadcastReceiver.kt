@@ -9,7 +9,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT
-import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID
+import com.lealpy.help_app.presentation.utils.Const.ILLEGAL_ID
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
@@ -18,7 +18,7 @@ class RepeatDonateNotificationBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         val newsId =
-            intent?.getLongExtra(NEWS_FEATURE_NEWS_ID_KEY, DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID)
+            intent?.getLongExtra(NEWS_FEATURE_NEWS_ID_KEY, ILLEGAL_ID)
         val newsTitle = intent?.getStringExtra(NEWS_FEATURE_NEWS_TITLE_KEY)
         val donationAmount = intent?.getIntExtra(DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY,
             DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT)

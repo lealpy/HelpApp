@@ -6,6 +6,7 @@ import com.lealpy.help_app.data.database.news.NewsDao
 import com.lealpy.help_app.data.database.news.WatchedNewsEntity
 import com.lealpy.help_app.data.utils.*
 import com.lealpy.help_app.data.utils.DataUtils.Companion.LOG_TAG
+import com.lealpy.help_app.domain.model.DonationHistoryItem
 import com.lealpy.help_app.domain.model.NewsDescriptionItem
 import com.lealpy.help_app.domain.model.NewsItem
 import com.lealpy.help_app.domain.model.NewsPreviewItem
@@ -73,6 +74,14 @@ class NewsRepositoryImpl @Inject constructor(
         return newsDao.getAllNewsEntities().map { newsEntities ->
             newsEntities.toNewsItems()
         }
+    }
+
+    override fun addDonationHistoryItem(donationHistoryItem: DonationHistoryItem): Completable {
+        return newsApi.postDonationHistoryItem(donationHistoryItem = donationHistoryItem)
+    }
+
+    override fun getDonationHistoryItems(): Single<List<DonationHistoryItem>> {
+        return newsApi.getDonationHistoryItems()
     }
 
     companion object {

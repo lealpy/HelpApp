@@ -17,7 +17,7 @@ import com.lealpy.help_app.R
 import com.lealpy.help_app.presentation.MainActivity
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT
-import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID
+import com.lealpy.help_app.presentation.utils.Const.ILLEGAL_ID
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
@@ -33,7 +33,7 @@ class DonateNotificationWorker(
 
     override fun doWork(): Result {
         val newsId =
-            inputData.getLong(NEWS_FEATURE_NEWS_ID_KEY, DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID)
+            inputData.getLong(NEWS_FEATURE_NEWS_ID_KEY, ILLEGAL_ID)
         val newsTitle = inputData.getString(NEWS_FEATURE_NEWS_TITLE_KEY) ?: ""
         val donationAmount = inputData.getInt(DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY,
             DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT)

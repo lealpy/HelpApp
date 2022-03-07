@@ -2,22 +2,28 @@ package com.lealpy.help_app.presentation.screens.news.news_description.donate_mo
 
 import android.app.Application
 import android.text.Editable
+import android.util.Log
 import androidx.core.text.isDigitsOnly
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import com.lealpy.help_app.R
+import com.lealpy.help_app.domain.model.DonationHistoryItem
+import com.lealpy.help_app.domain.use_cases.news.AddDonationHistoryItemUseCase
 import com.lealpy.help_app.domain.use_cases.news.StartDonateNotificationWorkerUseCase
 import com.lealpy.help_app.domain.use_cases.prefs.GetSettingGetPushUseCase
+import com.lealpy.help_app.presentation.utils.Const
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_OFFER_1_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_OFFER_2_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_OFFER_3_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_OFFER_4_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY
+import com.lealpy.help_app.presentation.utils.Const.ILLEGAL_ID
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
+import com.lealpy.help_app.presentation.utils.PresentationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
@@ -31,6 +37,8 @@ class DonateMoneyViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val getSettingGetPushUseCase: GetSettingGetPushUseCase,
     private val startDonateNotificationWorkerUseCase: StartDonateNotificationWorkerUseCase,
+    private val addDonationHistoryItemUseCase: AddDonationHistoryItemUseCase,
+    private val utils: PresentationUtils,
 ) : AndroidViewModel(application) {
 
     private val _donationText = MutableLiveData<String>()
@@ -80,6 +88,7 @@ class DonateMoneyViewModel @Inject constructor(
     fun onPositiveButtonClicked(donationText: Editable) {
         if (donationText.toString().isDigitsOnly() && getSettingGetPushUseCase()) {
             startWorkManager(donationText.toString().toInt())
+            addDonationHistoryItem(donationText.toString().toInt())
         }
     }
 
@@ -97,13 +106,17 @@ class DonateMoneyViewModel @Inject constructor(
     private fun onTextChanged(donationAmount: String) {
         when (donationAmount) {
             donationAmountOffer1 -> _selectedButton.postValue(
-                DONATE_MONEY_FEATURE_DONATION_OFFER_1_KEY)
+                DONATE_MONEY_FEATURE_DONATION_OFFER_1_KEY
+            )
             donationAmountOffer2 -> _selectedButton.postValue(
-                DONATE_MONEY_FEATURE_DONATION_OFFER_2_KEY)
+                DONATE_MONEY_FEATURE_DONATION_OFFER_2_KEY
+            )
             donationAmountOffer3 -> _selectedButton.postValue(
-                DONATE_MONEY_FEATURE_DONATION_OFFER_3_KEY)
+                DONATE_MONEY_FEATURE_DONATION_OFFER_3_KEY
+            )
             donationAmountOffer4 -> _selectedButton.postValue(
-                DONATE_MONEY_FEATURE_DONATION_OFFER_4_KEY)
+                DONATE_MONEY_FEATURE_DONATION_OFFER_4_KEY
+            )
             else -> _selectedButton.postValue("")
         }
 
@@ -122,6 +135,32 @@ class DonateMoneyViewModel @Inject constructor(
             NEWS_FEATURE_NEWS_TITLE_KEY to savedStateHandle.get<String>(NEWS_FEATURE_NEWS_TITLE_KEY),
             DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY to donationAmount,
             DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY to true
+        )
+    }
+
+    private fun addDonationHistoryItem(donationAmount: Int) {
+        disposable.add(
+            addDonationHistoryItemUseCase(
+                DonationHistoryItem(
+                    id = System.currentTimeMillis().toString(),
+                    newsId = savedStateHandle.get<Long>(NEWS_FEATURE_NEWS_ID_KEY) ?: ILLEGAL_ID,
+                    newsTitle = savedStateHandle.get<String>(NEWS_FEATURE_NEWS_TITLE_KEY) ?: "",
+                    donationAmount = donationAmount,
+                    date = System.currentTimeMillis(),
+                )
+            )
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        utils.showToast(
+                            utils.getString(R.string.dialog_fragment_donate_money_success)
+                        )
+                    },
+                    { error ->
+                        Log.e(Const.LOG_TAG, error.message.toString())
+                    }
+                )
         )
     }
 

@@ -2,14 +2,8 @@ package com.lealpy.help_app.presentation.utils
 
 import android.content.Context
 import com.lealpy.help_app.R
-import com.lealpy.help_app.domain.model.HelpItem
-import com.lealpy.help_app.domain.model.NewsDescriptionItem
-import com.lealpy.help_app.domain.model.NewsPreviewItem
-import com.lealpy.help_app.domain.model.User
-import com.lealpy.help_app.presentation.model.HelpItemUi
-import com.lealpy.help_app.presentation.model.NewsDescriptionItemUi
-import com.lealpy.help_app.presentation.model.NewsPreviewItemUi
-import com.lealpy.help_app.presentation.model.UserUi
+import com.lealpy.help_app.domain.model.*
+import com.lealpy.help_app.presentation.model.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -87,6 +81,19 @@ class PresentationMappers @Inject constructor(
             email = user.email,
             avatar = avatar
         )
+    }
+
+    fun donationHistoryItemsToDonationHistoryItemsUi(
+        donationHistoryItems: List<DonationHistoryItem>
+    ) : List<DonationHistoryItemUi> {
+        return donationHistoryItems.map { donationHistoryItem ->
+            DonationHistoryItemUi(
+                id = donationHistoryItem.id,
+                newsTitle = donationHistoryItem.newsTitle,
+                date = getDateStringByTimestamp(donationHistoryItem.date),
+                donationAmount = "${donationHistoryItem.donationAmount} ₽"
+            )
+        }
     }
 
     fun getDateStringByTimestamp(date: Long): String {
