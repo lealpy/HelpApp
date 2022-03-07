@@ -44,9 +44,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 binding.passwordEditText.text.toString()
             )
         }
-        binding.vkIcon.setOnClickListener { viewModel.onVkIconClicked() }
-        binding.fbIcon.setOnClickListener { viewModel.onFbIconClicked() }
-        binding.okIcon.setOnClickListener { viewModel.onOkIconClicked() }
     }
 
     private fun initObservers() {

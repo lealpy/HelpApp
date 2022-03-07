@@ -44,7 +44,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/hintLoginViaSocial"
+                android:id="@+id/hintLogin"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dimen_54_dp"
@@ -53,60 +53,12 @@
                 android:fontFamily="@font/roboto_regular"
                 android:gravity="center"
                 android:lineHeight="@dimen/dimen_20_sp"
-                android:text="@string/sign_in_hint_login_via_social"
+                android:text="@string/sign_in_hint_login"
                 android:textColor="@color/black_70"
                 android:textSize="@dimen/dimen_14_sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/vkIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dimen_80_dp"
-                android:layout_marginTop="@dimen/dimen_20_dp"
-                app:layout_constraintEnd_toStartOf="@+id/fbIcon"
-                app:layout_constraintHorizontal_chainStyle="spread_inside"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hintLoginViaSocial"
-                app:srcCompat="@drawable/ic_vk" />
-
-            <ImageView
-                android:id="@+id/fbIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="@+id/vkIcon"
-                app:layout_constraintEnd_toStartOf="@+id/okIcon"
-                app:layout_constraintStart_toEndOf="@+id/vkIcon"
-                app:layout_constraintTop_toTopOf="@+id/vkIcon"
-                app:srcCompat="@drawable/ic_fb" />
-
-            <ImageView
-                android:id="@+id/okIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/dimen_80_dp"
-                app:layout_constraintBottom_toBottomOf="@+id/fbIcon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/fbIcon"
-                app:layout_constraintTop_toTopOf="@+id/fbIcon"
-                app:srcCompat="@drawable/ic_odnoklassniki" />
-
-            <TextView
-                android:id="@+id/hintLoginViaApp"
-                android:layout_width="@dimen/dimen_0_dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dimen_40_dp"
-                android:fontFamily="@font/roboto_regular"
-                android:gravity="center"
-                android:lineHeight="@dimen/dimen_20_sp"
-                android:text="@string/sign_in_hint_login_via_app"
-                android:textColor="@color/black_70"
-                android:textSize="@dimen/dimen_14_sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vkIcon" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineBegin"
@@ -130,27 +82,23 @@
                 android:layout_marginTop="@dimen/dimen_20_dp"
                 android:text="@string/sign_in_hint_e_mail"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
-                app:layout_constraintTop_toBottomOf="@+id/hintLoginViaApp" />
+                app:layout_constraintTop_toBottomOf="@+id/hintLogin" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_in_hint_enter_e_mail"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/eMailHint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/sign_in_hint_enter_e_mail"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:layout_height="wrap_content" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -167,11 +115,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_in_hint_enter_password"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/passwordHint"
@@ -181,13 +129,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_in_hint_enter_password"
-                    android:inputType="textPassword"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -246,8 +190,8 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/ProgressBar"
-        android:layout_width="@dimen/dimen_38_dp"
-        android:layout_height="@dimen/dimen_38_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

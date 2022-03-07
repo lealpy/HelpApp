@@ -70,11 +70,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nameInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_enter_name"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/nameHint"
@@ -82,13 +82,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/nameEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_enter_name"
-                    android:inputType="textCapSentences"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,24 +100,20 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/surnameInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_enter_surname"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/surnameHint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/surnameEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_enter_surname"
-                    android:inputType="textCapSentences"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -137,27 +129,23 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/dateOfBirthInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_choose_date_of_birth"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/dateOfBirthHint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/dateOfBirthEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:clickable="false"
                     android:cursorVisible="false"
                     android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:hint="@string/sign_up_hint_choose_date_of_birth"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:focusableInTouchMode="false" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -173,24 +161,20 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/fieldOfActivityInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_enter_field_of_activity"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/fieldOfActivityHint">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/fieldOfActivityEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_enter_field_of_activity"
-                    android:inputType="textCapSentences"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textCapSentences" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -206,11 +190,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_enter_e_mail"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/eMailHint"
@@ -218,13 +202,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/emailEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_enter_e_mail"
-                    android:inputType="textEmailAddress"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -240,11 +220,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_enter_password"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/passwordHint"
@@ -254,13 +234,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_enter_password"
-                    android:inputType="textPassword"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -276,11 +252,11 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/repeatPasswordInputLayout"
-                style="@style/EditText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="@dimen/dimen_0_dp"
                 android:layout_height="wrap_content"
+                android:hint="@string/sign_up_hint_repeat_enter_password"
                 android:textColorHint="@color/black_38"
-                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toStartOf="@+id/guidelineEnd"
                 app:layout_constraintStart_toStartOf="@+id/guidelineBegin"
                 app:layout_constraintTop_toBottomOf="@+id/repeatPasswordHint"
@@ -290,13 +266,9 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/repeatPasswordEditText"
-                    style="@style/AuthTextInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/sign_up_hint_repeat_enter_password"
-                    android:inputType="textPassword"
-                    android:paddingStart="@dimen/dimen_0_dp"
-                    android:paddingEnd="@dimen/dimen_0_dp" />
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -338,8 +310,8 @@
     <ProgressBar
         android:id="@+id/progressBar"
         style="@style/ProgressBar"
-        android:layout_width="@dimen/dimen_38_dp"
-        android:layout_height="@dimen/dimen_38_dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

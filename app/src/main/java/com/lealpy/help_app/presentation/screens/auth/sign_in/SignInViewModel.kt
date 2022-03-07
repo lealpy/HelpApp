@@ -80,18 +80,6 @@ class SignInViewModel @Inject constructor(
         }
     }
 
-    fun onVkIconClicked() {
-        showToast()
-    }
-
-    fun onFbIconClicked() {
-        showToast()
-    }
-
-    fun onOkIconClicked() {
-        showToast()
-    }
-
     fun onEditTextLengthWatcherInit(observable: Observable<Map<String, String>>) {
         disposable.add(
             observable
