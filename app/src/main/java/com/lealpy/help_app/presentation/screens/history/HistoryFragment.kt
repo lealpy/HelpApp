@@ -32,6 +32,11 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
         )
 
         binding.recyclerView.addItemDecoration(historyItemDecoration)
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            viewModel.onSwipedRefresh()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     private fun initObservers() {

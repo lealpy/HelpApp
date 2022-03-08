@@ -84,8 +84,8 @@ class PresentationMappers @Inject constructor(
     }
 
     fun donationHistoryItemsToDonationHistoryItemsUi(
-        donationHistoryItems: List<DonationHistoryItem>
-    ) : List<DonationHistoryItemUi> {
+        donationHistoryItems: List<DonationHistoryItem>,
+    ): List<DonationHistoryItemUi> {
         return donationHistoryItems.map { donationHistoryItem ->
             DonationHistoryItemUi(
                 id = donationHistoryItem.id,
@@ -127,20 +127,24 @@ class PresentationMappers @Inject constructor(
 
     fun getYearIntByTimestamp(date: Long): Int {
         return SimpleDateFormat("yyyy", Locale.getDefault())
-            .format(Date(date - getGmt())).toInt()
+            .format(Date(date - getGmtDelta())).toInt()
     }
 
     fun getMonthIntByTimestamp(date: Long): Int {
         return SimpleDateFormat("MM", Locale.getDefault())
-            .format(Date(date - getGmt())).toInt()
+            .format(Date(date - getGmtDelta())).toInt()
     }
 
     fun getDayIntByTimestamp(date: Long): Int {
         return SimpleDateFormat("dd", Locale.getDefault())
-            .format(Date(date - getGmt())).toInt()
+            .format(Date(date - getGmtDelta())).toInt()
     }
 
-    private fun getGmt(): Long {
+    fun getCurrentTimeGmt(): Long {
+        return System.currentTimeMillis() - getGmtDelta()
+    }
+
+    private fun getGmtDelta(): Long {
         return calendar.timeZone.rawOffset.toLong()
     }
 

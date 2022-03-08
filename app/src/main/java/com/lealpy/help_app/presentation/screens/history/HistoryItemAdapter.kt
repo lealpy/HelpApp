@@ -5,19 +5,30 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.lealpy.help_app.R
 import com.lealpy.help_app.databinding.ItemHistoryBinding
 import com.lealpy.help_app.presentation.model.DonationHistoryItemUi
 
-class HistoryItemAdapter() :
+class HistoryItemAdapter :
     ListAdapter<DonationHistoryItemUi, HistoryItemAdapter.HistoryItemHolder>(DiffCallback()) {
 
     inner class HistoryItemHolder(
         private val binding: ItemHistoryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(donationHistoryItemUi: DonationHistoryItemUi) {
-            binding.newsTitle.text = donationHistoryItemUi.newsTitle
-            binding.amount.text = donationHistoryItemUi.donationAmount
-            binding.date.text = donationHistoryItemUi.date
+            binding.newsTitle.text = String.format(
+                itemView.context.getString(R.string.history_item_newsTitle),
+                donationHistoryItemUi.newsTitle
+            )
+            binding.amount.text = String.format(
+                itemView.context.getString(R.string.history_item_donation_amount),
+                donationHistoryItemUi.donationAmount
+            )
+
+            binding.date.text = String.format(
+                itemView.context.getString(R.string.history_item_date),
+                donationHistoryItemUi.date
+            )
         }
     }
 

@@ -23,6 +23,7 @@ import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_IS_FIRS
 import com.lealpy.help_app.presentation.utils.Const.ILLEGAL_ID
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
+import com.lealpy.help_app.presentation.utils.PresentationMappers
 import com.lealpy.help_app.presentation.utils.PresentationUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -39,6 +40,7 @@ class DonateMoneyViewModel @Inject constructor(
     private val startDonateNotificationWorkerUseCase: StartDonateNotificationWorkerUseCase,
     private val addDonationHistoryItemUseCase: AddDonationHistoryItemUseCase,
     private val utils: PresentationUtils,
+    private val mappers: PresentationMappers
 ) : AndroidViewModel(application) {
 
     private val _donationText = MutableLiveData<String>()
@@ -146,7 +148,7 @@ class DonateMoneyViewModel @Inject constructor(
                     newsId = savedStateHandle.get<Long>(NEWS_FEATURE_NEWS_ID_KEY) ?: ILLEGAL_ID,
                     newsTitle = savedStateHandle.get<String>(NEWS_FEATURE_NEWS_TITLE_KEY) ?: "",
                     donationAmount = donationAmount,
-                    date = System.currentTimeMillis(),
+                    date = mappers.getCurrentTimeGmt(),
                 )
             )
                 .subscribeOn(Schedulers.io())

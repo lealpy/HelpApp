@@ -34,6 +34,10 @@ class HistoryViewModel @Inject constructor(
         getDonationHistoryItems()
     }
 
+    fun onSwipedRefresh() {
+        getDonationHistoryItems()
+    }
+
     private fun getDonationHistoryItems() {
         disposable.add(
             getDonationHistoryItemsUseCase()
@@ -56,11 +60,3 @@ class HistoryViewModel @Inject constructor(
     }
 
 }
-
-//                        if (donationHistoryItems.isEmpty()) {
-//                            Log.e(LOG_TAG, "donationHistoryItems are empty")
-//                        }
-//                        donationHistoryItems.forEach { donationHistoryItem ->
-//                            Log.e(LOG_TAG,
-//                                "id=${donationHistoryItem.id} amount=${donationHistoryItem.donationAmount}")
-//                        }
