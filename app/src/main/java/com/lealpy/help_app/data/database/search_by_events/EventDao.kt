@@ -11,12 +11,12 @@ import io.reactivex.rxjava3.core.Single
 interface EventDao {
 
     @Query("SELECT * FROM event_entities WHERE title LIKE '%' || :searchQuery || '%'")
-    fun getEventEntitiesByTitle(searchQuery : String) : Single<List<EventEntity>>
+    fun getEventEntitiesByTitle(searchQuery: String): Single<List<EventEntity>>
 
     @Query("SELECT * FROM event_entities")
     fun getAllEventEntities(): Single<List<EventEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertEventEntities(eventEntities : List<EventEntity>) : Completable
+    fun insertEventEntities(eventEntities: List<EventEntity>): Completable
 
 }

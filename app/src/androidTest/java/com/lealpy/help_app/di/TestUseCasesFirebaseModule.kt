@@ -1,7 +1,7 @@
 package com.lealpy.help_app.di
 
-import com.lealpy.help_app.domain.use_cases.firebase.*
 import com.lealpy.help_app.data.repository.TestFireRepositoryImpl
+import com.lealpy.help_app.domain.use_cases.firebase.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

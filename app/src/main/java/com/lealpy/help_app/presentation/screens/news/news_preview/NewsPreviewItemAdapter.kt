@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.help_app.databinding.ItemNewsBinding
 import com.lealpy.help_app.presentation.model.NewsPreviewItemUi
 
-class NewsPreviewItemAdapter (
-    private val onItemClick : (newsPreviewItemUi : NewsPreviewItemUi) -> Unit,
-): ListAdapter<NewsPreviewItemUi, NewsPreviewItemAdapter.NewsItemHolder>(DiffCallback()) {
+class NewsPreviewItemAdapter(
+    private val onItemClick: (newsPreviewItemUi: NewsPreviewItemUi) -> Unit,
+) : ListAdapter<NewsPreviewItemUi, NewsPreviewItemAdapter.NewsItemHolder>(DiffCallback()) {
 
     inner class NewsItemHolder(
-        private val binding: ItemNewsBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemNewsBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
@@ -48,11 +48,14 @@ class NewsPreviewItemAdapter (
         holder.bind(item)
     }
 
-    class DiffCallback: DiffUtil.ItemCallback<NewsPreviewItemUi>() {
+    class DiffCallback : DiffUtil.ItemCallback<NewsPreviewItemUi>() {
         override fun areItemsTheSame(oldItemUi: NewsPreviewItemUi, newItemUi: NewsPreviewItemUi) =
             oldItemUi.id == newItemUi.id
 
-        override fun areContentsTheSame(oldItemUi: NewsPreviewItemUi, newItemUi: NewsPreviewItemUi) =
+        override fun areContentsTheSame(
+            oldItemUi: NewsPreviewItemUi,
+            newItemUi: NewsPreviewItemUi,
+        ) =
             oldItemUi == newItemUi
     }
 

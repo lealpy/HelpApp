@@ -15,9 +15,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
 
-    private lateinit var binding : FragmentSignUpBinding
+    private lateinit var binding: FragmentSignUpBinding
 
-    private val viewModel : SignUpViewModel by viewModels()
+    private val viewModel: SignUpViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,11 +28,11 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     private fun initViews() {
-        binding.loginScreenBtn.setOnClickListener{
+        binding.loginScreenBtn.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        binding.dateOfBirthEditText.setOnClickListener{
+        binding.dateOfBirthEditText.setOnClickListener {
             viewModel.onDateOfBirthClicked()
         }
 
@@ -41,7 +41,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                 name = binding.nameEditText.text.toString(),
                 surname = binding.surnameEditText.text.toString(),
                 dateOfBirth = binding.dateOfBirthEditText.text.toString(),
-                fieldOfActivity = binding.fieldOfAreaEditText.text.toString(),
+                fieldOfActivity = binding.fieldOfActivityEditText.text.toString(),
                 email = binding.emailEditText.text.toString(),
                 password = binding.passwordEditText.text.toString(),
                 repeatPassword = binding.repeatPasswordEditText.text.toString()
@@ -66,13 +66,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
             binding.dateOfBirthEditText.setText(dateOfBirth)
         }
 
-        val datePickerListener =
-            DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                viewModel.onDateOfBirthPicked(year, month + 1, dayOfMonth)
-            }
+        val datePickerListener = DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
+            viewModel.onDateOfBirthPicked(year, month + 1, dayOfMonth)
+        }
 
         viewModel.datePickerData.observe(viewLifecycleOwner) { datePickerData ->
-            if(datePickerData != null) {
+            if (datePickerData != null) {
                 DatePickerDialog(
                     requireContext(),
                     datePickerListener,
@@ -93,7 +92,7 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             android.R.id.home -> findNavController().popBackStack()
         }
         return true

@@ -14,30 +14,31 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class EventRepositoryImpl @Inject constructor(
-    private val eventDao : EventDao,
+    private val eventDao: EventDao,
     private val eventApi: EventApi,
-    private val utils : DataUtils
+    private val utils: DataUtils,
 ) : EventRepository {
 
-    override fun getFromDbEventItemsByTitle(searchQuery : String) : Single<List<EventItem>> {
+    override fun getFromDbEventItemsByTitle(searchQuery: String): Single<List<EventItem>> {
         return eventDao.getEventEntitiesByTitle(searchQuery).map { eventEntities ->
             eventEntities.toEventItems()
         }
     }
 
-    override fun updateEventItems() : Completable {
+    override fun updateEventItems(): Completable {
         return eventApi.getEventItems()
             .doOnSuccess { eventItems ->
                 insertToDbEventItems(eventItems).blockingSubscribe()
             }
-            .onErrorResumeNext{ error ->
+            .onErrorResumeNext { error ->
                 Log.e(LOG_TAG, error.message.toString())
                 getFromDbAllEventItems()
                     .flatMap { eventItemsFromDb ->
-                        if(eventItemsFromDb.isNotEmpty()) {
+                        if (eventItemsFromDb.isNotEmpty()) {
                             Single.just(eventItemsFromDb)
                         } else {
-                            val eventItemsFromFile = utils.getItemsFromFile<List<EventItem>>(EVENT_ITEMS_FILE_NAME)
+                            val eventItemsFromFile =
+                                utils.getItemsFromFile<List<EventItem>>(EVENT_ITEMS_FILE_NAME)
                             insertToDbEventItems(eventItemsFromFile).blockingSubscribe()
                             Single.just(eventItemsFromFile)
                         }
@@ -48,13 +49,13 @@ class EventRepositoryImpl @Inject constructor(
             }
     }
 
-    private fun getFromDbAllEventItems() : Single<List<EventItem>> {
+    private fun getFromDbAllEventItems(): Single<List<EventItem>> {
         return eventDao.getAllEventEntities().map { eventEntities ->
             eventEntities.toEventItems()
         }
     }
 
-    private fun insertToDbEventItems(eventItems : List<EventItem>) : Completable {
+    private fun insertToDbEventItems(eventItems: List<EventItem>): Completable {
         val eventEntities = eventItems.toEventEntities()
         return eventDao.insertEventEntities(eventEntities)
     }

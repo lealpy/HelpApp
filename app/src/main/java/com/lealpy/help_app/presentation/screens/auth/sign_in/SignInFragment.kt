@@ -22,9 +22,9 @@ import io.reactivex.rxjava3.core.Observable
 @AndroidEntryPoint
 class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
-    private lateinit var binding : FragmentSignInBinding
+    private lateinit var binding: FragmentSignInBinding
 
-    private val viewModel : SignInViewModel by viewModels()
+    private val viewModel: SignInViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -44,9 +44,6 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 binding.passwordEditText.text.toString()
             )
         }
-        binding.vkIcon.setOnClickListener { viewModel.onVkIconClicked() }
-        binding.fbIcon.setOnClickListener { viewModel.onFbIconClicked() }
-        binding.okIcon.setOnClickListener { viewModel.onOkIconClicked() }
     }
 
     private fun initObservers() {
@@ -88,15 +85,17 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     }
 
     private fun initSpannableStringForgotPassword() {
-        val forgotPasswordButton = SpannableStringBuilder(requireContext().getString(R.string.sign_in_forgot_password_button_text))
+        val forgotPasswordButton =
+            SpannableStringBuilder(requireContext().getString(R.string.sign_in_forgot_password_button_text))
         val spanStart = 0
         val spanFinish = forgotPasswordButton.length
 
         forgotPasswordButton.setSpan(
-            object: ClickableSpan() {
+            object : ClickableSpan() {
                 override fun onClick(widget: View) {
                     findNavController().navigate(R.id.actionAuthorizationFragmentToPasswordRecoveryFragment)
                 }
+
                 override fun updateDrawState(ds: TextPaint) {
                     ds.isUnderlineText = true
                 }
@@ -111,15 +110,17 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
     }
 
     private fun initSpannableStringRegistration() {
-        val registrationButton = SpannableStringBuilder(requireContext().getString(R.string.sign_in_open_sign_up_button_text))
+        val registrationButton =
+            SpannableStringBuilder(requireContext().getString(R.string.sign_in_open_sign_up_button_text))
         val spanStart = 0
         val spanFinish = registrationButton.length
 
         registrationButton.setSpan(
-            object: ClickableSpan() {
+            object : ClickableSpan() {
                 override fun onClick(widget: View) {
                     findNavController().navigate(R.id.actionAuthorizationFragmentToRegistrationFragment)
                 }
+
                 override fun updateDrawState(ds: TextPaint) {
                     ds.isUnderlineText = true
                 }

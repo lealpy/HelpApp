@@ -4,5 +4,5 @@ import com.lealpy.help_app.domain.model.HelpItem
 import io.reactivex.rxjava3.core.Single
 
 interface HelpRepository {
-    fun getHelpItems() : Single<List<HelpItem>>
+    fun getHelpItems(): Single<List<HelpItem>>
 }

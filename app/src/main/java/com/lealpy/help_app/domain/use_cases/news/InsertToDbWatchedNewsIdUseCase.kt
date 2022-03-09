@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class InsertToDbWatchedNewsIdUseCase @Inject constructor(
-    private val repository: NewsRepository
+    private val repository: NewsRepository,
 ) {
 
-    operator fun invoke(id : Long) : Completable {
+    operator fun invoke(id: Long): Completable {
         return repository.funInsertToDbWatchedNewsId(id)
     }
 

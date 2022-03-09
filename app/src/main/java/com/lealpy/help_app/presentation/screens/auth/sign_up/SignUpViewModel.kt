@@ -53,13 +53,13 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun onSignUpBtnClicked(
-        name : String,
-        surname : String,
-        dateOfBirth : String,
-        fieldOfActivity : String,
-        email : String,
-        password : String,
-        repeatPassword : String
+        name: String,
+        surname: String,
+        dateOfBirth: String,
+        fieldOfActivity: String,
+        email: String,
+        password: String,
+        repeatPassword: String,
     ) {
         when {
             !validators.isValidName(name) -> {
@@ -130,7 +130,7 @@ class SignUpViewModel @Inject constructor(
         }
     }
 
-    private fun showToast(text : String = utils.getString(R.string.click_heard)) {
+    private fun showToast(text: String = utils.getString(R.string.click_heard)) {
         utils.showToast(text)
     }
 

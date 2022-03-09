@@ -4,11 +4,11 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import com.lealpy.help_app.R
+import com.lealpy.help_app.data.repository.TestFireRepositoryImpl.Companion.TEST_USER
 import com.lealpy.help_app.di.RepositoryModule
 import com.lealpy.help_app.di.UseCasesFirebaseModule
 import com.lealpy.help_app.launchFragmentInHiltContainer
 import com.lealpy.help_app.presentation.utils.PresentationMappers
-import com.lealpy.help_app.data.repository.TestFireRepositoryImpl.Companion.TEST_USER
 import com.squareup.rx3.idler.Rx3Idler
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest

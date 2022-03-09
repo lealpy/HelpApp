@@ -14,9 +14,9 @@ import com.lealpy.help_app.databinding.FragmentNewsFilterBinding
 
 class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
 
-    private lateinit var binding : FragmentNewsFilterBinding
+    private lateinit var binding: FragmentNewsFilterBinding
 
-    private val viewModel : NewsPreviewViewModel by activityViewModels()
+    private val viewModel: NewsPreviewViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -58,11 +58,11 @@ class NewsFilterFragment : Fragment(R.layout.fragment_news_filter) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.news_filter_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.newsFilterToolbarOk -> {
                 viewModel.applyFilters(
                     binding.filterSwitcherChildren.isChecked,

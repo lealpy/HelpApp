@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class UpdateNkoItemsUseCase @Inject constructor(
-    private val repository: NkoRepository
+    private val repository: NkoRepository,
 ) {
 
-    operator fun invoke() : Completable {
+    operator fun invoke(): Completable {
         return repository.updateNkoItems()
     }
 

@@ -6,6 +6,7 @@ import com.lealpy.help_app.data.database.news.NewsDao
 import com.lealpy.help_app.data.database.news.WatchedNewsEntity
 import com.lealpy.help_app.data.utils.*
 import com.lealpy.help_app.data.utils.DataUtils.Companion.LOG_TAG
+import com.lealpy.help_app.domain.model.DonationHistoryItem
 import com.lealpy.help_app.domain.model.NewsDescriptionItem
 import com.lealpy.help_app.domain.model.NewsItem
 import com.lealpy.help_app.domain.model.NewsPreviewItem
@@ -15,35 +16,35 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class NewsRepositoryImpl @Inject constructor(
-    private val newsDao : NewsDao,
+    private val newsDao: NewsDao,
     private val newsApi: NewsApi,
-    private val utils : DataUtils
+    private val utils: DataUtils,
 ) : NewsRepository {
 
-    override fun getAllNewsPreviewItems() : Single<List<NewsPreviewItem>> {
+    override fun getAllNewsPreviewItems(): Single<List<NewsPreviewItem>> {
         return getNewsItems().map { newsItems ->
             newsItems.toNewsPreviewItems()
         }
     }
 
-    override fun getNewsDescriptionItem(id : Long) : Single<NewsDescriptionItem> {
+    override fun getNewsDescriptionItem(id: Long): Single<NewsDescriptionItem> {
         return newsDao.getNewsDescriptionEntities(id).map { newsDescriptionEntity ->
             newsDescriptionEntity.toNewsDescriptionItem()
         }
     }
 
-    override fun funInsertToDbWatchedNewsId(id : Long): Completable {
+    override fun funInsertToDbWatchedNewsId(id: Long): Completable {
         val watchedNewsEntity = WatchedNewsEntity(id)
         return newsDao.insertWatchedNewsEntity(watchedNewsEntity)
     }
 
-    override fun getUnwatchedNewsNumber() : Single<Int> {
+    override fun getUnwatchedNewsNumber(): Single<Int> {
         return newsDao.getUnwatchedNewsIdList().map { idList ->
             idList.size
         }
     }
 
-    private fun getNewsItems() : Single<List<NewsItem>> {
+    private fun getNewsItems(): Single<List<NewsItem>> {
         return newsApi.getNewsItems()
             .doOnSuccess { newsItemsFromServer ->
                 insertToDbNewsItems(newsItemsFromServer).blockingSubscribe()
@@ -52,10 +53,11 @@ class NewsRepositoryImpl @Inject constructor(
                 Log.e(LOG_TAG, error.message.toString())
                 getFromDbAllNewsItems()
                     .flatMap { newsItemsFromDb ->
-                        if(newsItemsFromDb.isNotEmpty()) {
+                        if (newsItemsFromDb.isNotEmpty()) {
                             Single.just(newsItemsFromDb)
                         } else {
-                            val newsItemsFromFile = utils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_FILE_NAME)
+                            val newsItemsFromFile =
+                                utils.getItemsFromFile<List<NewsItem>>(NEWS_ITEMS_FILE_NAME)
                             insertToDbNewsItems(newsItemsFromFile).blockingSubscribe()
                             Single.just(newsItemsFromFile)
                         }
@@ -63,15 +65,23 @@ class NewsRepositoryImpl @Inject constructor(
             }
     }
 
-    private fun insertToDbNewsItems(newsItems : List<NewsItem>) : Completable {
+    private fun insertToDbNewsItems(newsItems: List<NewsItem>): Completable {
         val newsEntities = newsItems.toNewsEntities()
         return newsDao.insertNewsEntities(newsEntities)
     }
 
-    private fun getFromDbAllNewsItems() : Single<List<NewsItem>> {
+    private fun getFromDbAllNewsItems(): Single<List<NewsItem>> {
         return newsDao.getAllNewsEntities().map { newsEntities ->
             newsEntities.toNewsItems()
         }
+    }
+
+    override fun addDonationHistoryItem(donationHistoryItem: DonationHistoryItem): Completable {
+        return newsApi.postDonationHistoryItem(donationHistoryItem = donationHistoryItem)
+    }
+
+    override fun getDonationHistoryItems(): Single<List<DonationHistoryItem>> {
+        return newsApi.getDonationHistoryItems()
     }
 
     companion object {

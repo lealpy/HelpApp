@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.help_app.databinding.ItemHelpBinding
 import com.lealpy.help_app.presentation.model.HelpItemUi
 
-class HelpItemAdapter (
-    private val onItemClick: (helpItemUi : HelpItemUi) -> Unit,
-): ListAdapter<HelpItemUi, HelpItemAdapter.HelpItemHolder>(DiffCallback()) {
+class HelpItemAdapter(
+    private val onItemClick: (helpItemUi: HelpItemUi) -> Unit,
+) : ListAdapter<HelpItemUi, HelpItemAdapter.HelpItemHolder>(DiffCallback()) {
 
     inner class HelpItemHolder(
-        private val binding: ItemHelpBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemHelpBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
@@ -46,7 +46,7 @@ class HelpItemAdapter (
         holder.bind(item)
     }
 
-    class DiffCallback: DiffUtil.ItemCallback<HelpItemUi>() {
+    class DiffCallback : DiffUtil.ItemCallback<HelpItemUi>() {
         override fun areItemsTheSame(oldItemUi: HelpItemUi, newItemUi: HelpItemUi) =
             oldItemUi.id == newItemUi.id
 

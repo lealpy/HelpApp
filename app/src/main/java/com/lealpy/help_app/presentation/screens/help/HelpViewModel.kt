@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.help_app.R
-import com.lealpy.help_app.presentation.model.HelpItemUi
 import com.lealpy.help_app.domain.use_cases.help.GetHelpItemsUseCase
+import com.lealpy.help_app.presentation.model.HelpItemUi
 import com.lealpy.help_app.presentation.utils.Const.LOG_TAG
 import com.lealpy.help_app.presentation.utils.PresentationMappers
 import com.lealpy.help_app.presentation.utils.PresentationUtils

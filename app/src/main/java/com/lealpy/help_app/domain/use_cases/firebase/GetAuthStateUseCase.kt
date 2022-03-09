@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class GetAuthStateUseCase @Inject constructor(
-    private val repository: FireRepository
+    private val repository: FireRepository,
 ) {
 
-    operator fun invoke() : Single<Boolean> {
+    operator fun invoke(): Single<Boolean> {
         return repository.getAuthState()
     }
 

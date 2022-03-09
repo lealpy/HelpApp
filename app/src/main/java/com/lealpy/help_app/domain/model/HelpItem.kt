@@ -1,7 +1,7 @@
 package com.lealpy.help_app.domain.model
 
-data class HelpItem (
+data class HelpItem(
     val id: Long,
     val imageUrl: String,
-    val text: String
+    val text: String,
 )

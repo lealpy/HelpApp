@@ -21,11 +21,11 @@ import javax.inject.Inject
 class SearchByNkoViewModel @Inject constructor(
     private val getFromDbNkoItemsByTitleUseCase: GetFromDbNkoItemsByTitleUseCase,
     private val updateNkoItemsUseCase: UpdateNkoItemsUseCase,
-    private val utils: PresentationUtils
+    private val utils: PresentationUtils,
 ) : ViewModel() {
 
-    private val _nkoItems = MutableLiveData<List<NkoItem>> ()
-    val nkoItems : LiveData<List<NkoItem>> = _nkoItems
+    private val _nkoItems = MutableLiveData<List<NkoItem>>()
+    val nkoItems: LiveData<List<NkoItem>> = _nkoItems
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
@@ -54,7 +54,7 @@ class SearchByNkoViewModel @Inject constructor(
     fun onNkoTabSelected() {
         _searchViewQuery.value = searchText
 
-        if(_nkoItems.value == null) {
+        if (_nkoItems.value == null) {
             getNkoItems()
         } else {
             val shuffledNkoItems = _nkoItems.value?.shuffled()
@@ -88,7 +88,7 @@ class SearchByNkoViewModel @Inject constructor(
         )
     }
 
-    private fun search(searchQuery : String) {
+    private fun search(searchQuery: String) {
         _progressBarVisibility.value = View.VISIBLE
 
         disposable.add(
@@ -109,7 +109,7 @@ class SearchByNkoViewModel @Inject constructor(
         )
     }
 
-    private fun setNumberOfFoundNkoItems(numberOfFoundNkoItems : Int) {
+    private fun setNumberOfFoundNkoItems(numberOfFoundNkoItems: Int) {
         val searchResults = String.format(
             utils.getString(R.string.search_by_nko_search_results),
             numberOfFoundNkoItems

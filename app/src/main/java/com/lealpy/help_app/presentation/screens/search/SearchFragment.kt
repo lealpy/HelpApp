@@ -1,12 +1,14 @@
 package com.lealpy.help_app.presentation.screens.search
 
-import io.reactivex.rxjava3.core.Observable
 import android.graphics.PorterDuff
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.widget.SearchView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.tabs.TabLayout
@@ -18,21 +20,21 @@ import com.lealpy.help_app.presentation.screens.search.search_by_nko.SearchByNko
 import com.lealpy.help_app.presentation.utils.Const.SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS
 import com.lealpy.help_app.presentation.utils.Const.SEARCH_FEATURE_POSITION_SEARCH_BY_NKO
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     private lateinit var binding: FragmentSearchBinding
 
-    private val searchByNkoViewModel : SearchByNkoViewModel by activityViewModels()
+    private val searchByNkoViewModel: SearchByNkoViewModel by activityViewModels()
 
-    private val searchByEventsViewModel : SearchByEventsViewModel by activityViewModels()
+    private val searchByEventsViewModel: SearchByEventsViewModel by activityViewModels()
 
-    private var searchView : SearchView? = null
-    private var searchText : String? = null
-    private var searchItem : MenuItem? = null
+    private var searchView: SearchView? = null
+    private var searchText: String? = null
+    private var searchItem: MenuItem? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,14 +42,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         initToolbar()
         initViewPager()
         initObservers()
-        if(savedInstanceState != null) {
+        if (savedInstanceState != null) {
             searchText = savedInstanceState.getString(SEARCH_KEY)
         }
     }
 
     private fun initObservers() {
         searchByEventsViewModel.searchViewQuery.observe(viewLifecycleOwner) { query ->
-            if(query.isNotBlank()) {
+            if (query.isNotBlank()) {
                 searchItem?.expandActionView()
             }
             searchView?.setQuery(query, true)
@@ -55,7 +57,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         }
 
         searchByNkoViewModel.searchViewQuery.observe(viewLifecycleOwner) { query ->
-            if(query.isNotBlank()) {
+            if (query.isNotBlank()) {
                 searchItem?.expandActionView()
             }
             searchView?.setQuery(query, true)
@@ -83,16 +85,18 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
-            when(position) {
-                SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS -> tab.text = requireActivity().getString(R.string.search_by_events_title)
-                SEARCH_FEATURE_POSITION_SEARCH_BY_NKO -> tab.text = requireActivity().getString(R.string.search_by_nko_title)
+            when (position) {
+                SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS -> tab.text =
+                    requireActivity().getString(R.string.search_by_events_title)
+                SEARCH_FEATURE_POSITION_SEARCH_BY_NKO -> tab.text =
+                    requireActivity().getString(R.string.search_by_nko_title)
             }
 
         }.attach()
 
-        binding.tabLayout.addOnTabSelectedListener (object : TabLayout.OnTabSelectedListener {
+        binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                when(tab?.position) {
+                when (tab?.position) {
                     SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS -> searchByEventsViewModel.onEventTabSelected()
                     SEARCH_FEATURE_POSITION_SEARCH_BY_NKO -> searchByNkoViewModel.onNkoTabSelected()
                 }
@@ -121,7 +125,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         )
         searchView?.queryHint = requireContext().getString(R.string.search_search_view_hint)
         searchView?.maxWidth = Integer.MAX_VALUE
-        searchItem?.icon?.setColorFilter(requireContext().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP)
+        searchItem?.icon?.setColorFilter(requireContext().getColor(R.color.white),
+            PorterDuff.Mode.SRC_ATOP)
         searchView?.setIconifiedByDefault(false)
 
         Observable.create<String> { emitter ->
@@ -145,9 +150,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { searchText ->
-                    when(binding.tabLayout.selectedTabPosition) {
-                        SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS -> searchByEventsViewModel.onSearchChanged(searchText)
-                        SEARCH_FEATURE_POSITION_SEARCH_BY_NKO -> searchByNkoViewModel.onSearchChanged(searchText)
+                    when (binding.tabLayout.selectedTabPosition) {
+                        SEARCH_FEATURE_POSITION_SEARCH_BY_EVENTS -> searchByEventsViewModel.onSearchChanged(
+                            searchText)
+                        SEARCH_FEATURE_POSITION_SEARCH_BY_NKO -> searchByNkoViewModel.onSearchChanged(
+                            searchText)
                     }
                 },
                 { error ->
@@ -155,11 +162,11 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 },
             )
 
-        super.onCreateOptionsMenu(menu,inflater)
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     companion object {
-        private const val SEARCH_TIMEOUT : Long = 500
+        private const val SEARCH_TIMEOUT: Long = 500
         private const val SEARCH_KEY = "SEARCH_KEY"
     }
 

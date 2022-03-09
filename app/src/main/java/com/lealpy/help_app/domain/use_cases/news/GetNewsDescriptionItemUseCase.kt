@@ -6,10 +6,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class GetNewsDescriptionItemUseCase @Inject constructor(
-    private val repository : NewsRepository
+    private val repository: NewsRepository,
 ) {
 
-    operator fun invoke(id : Long) : Single<NewsDescriptionItem> {
+    operator fun invoke(id: Long): Single<NewsDescriptionItem> {
         return repository.getNewsDescriptionItem(id)
     }
 

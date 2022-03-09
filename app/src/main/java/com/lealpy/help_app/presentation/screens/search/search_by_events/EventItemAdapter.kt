@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.help_app.databinding.ItemEventBinding
 import com.lealpy.help_app.domain.model.EventItem
 
-class EventItemAdapter (
-    private val onItemClick : (eventItem : EventItem) -> Unit,
-): ListAdapter<EventItem, EventItemAdapter.EventItemHolder>(DiffCallback()) {
+class EventItemAdapter(
+    private val onItemClick: (eventItem: EventItem) -> Unit,
+) : ListAdapter<EventItem, EventItemAdapter.EventItemHolder>(DiffCallback()) {
 
     inner class EventItemHolder(
-        private val binding: ItemEventBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemEventBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
                 val position = layoutPosition
@@ -45,7 +45,7 @@ class EventItemAdapter (
         holder.bind(item)
     }
 
-    class DiffCallback: DiffUtil.ItemCallback<EventItem>() {
+    class DiffCallback : DiffUtil.ItemCallback<EventItem>() {
         override fun areItemsTheSame(oldItem: EventItem, newItem: EventItem) =
             oldItem.id == newItem.id
 

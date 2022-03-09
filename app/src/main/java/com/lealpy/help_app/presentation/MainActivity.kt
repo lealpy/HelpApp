@@ -1,8 +1,8 @@
 package com.lealpy.help_app.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.lealpy.help_app.R
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     private fun initBottomNavView() {
         binding.bottomNavView.setupWithNavController(navController)
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            binding.bottomNavView.visibility = when(destination.id) {
+            binding.bottomNavView.visibility = when (destination.id) {
                 R.id.navigationNews -> View.VISIBLE
                 R.id.navigationSearch -> View.VISIBLE
                 R.id.navigationHelp -> View.VISIBLE

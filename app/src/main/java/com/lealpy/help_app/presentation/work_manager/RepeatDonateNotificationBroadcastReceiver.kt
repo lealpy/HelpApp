@@ -9,7 +9,7 @@ import androidx.work.WorkManager
 import androidx.work.workDataOf
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT
-import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID
+import com.lealpy.help_app.presentation.utils.Const.ILLEGAL_ID
 import com.lealpy.help_app.presentation.utils.Const.DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
@@ -17,12 +17,16 @@ import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
 class RepeatDonateNotificationBroadcastReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
-        val newsId = intent?.getLongExtra(NEWS_FEATURE_NEWS_ID_KEY, DONATE_MONEY_FEATURE_ILLEGAL_NEWS_ID)
+        val newsId =
+            intent?.getLongExtra(NEWS_FEATURE_NEWS_ID_KEY, ILLEGAL_ID)
         val newsTitle = intent?.getStringExtra(NEWS_FEATURE_NEWS_TITLE_KEY)
-        val donationAmount = intent?.getIntExtra(DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY, DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT)
-        val firstNotificationId = intent?.getIntExtra(DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY, ILLEGAL_NOTIFICATION_ID)
+        val donationAmount = intent?.getIntExtra(DONATE_MONEY_FEATURE_DONATION_AMOUNT_KEY,
+            DONATE_MONEY_FEATURE_ILLEGAL_DONATION_AMOUNT)
+        val firstNotificationId =
+            intent?.getIntExtra(DONATE_MONEY_FEATURE_IS_FIRST_NOTIFICATION_KEY,
+                ILLEGAL_NOTIFICATION_ID)
 
-        if(
+        if (
             context != null &&
             newsId != null &&
             newsTitle != null &&
@@ -31,16 +35,17 @@ class RepeatDonateNotificationBroadcastReceiver : BroadcastReceiver() {
         ) {
             startWorkManager(context, newsId, newsTitle, donationAmount)
 
-            val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
+            val notificationManager =
+                context.getSystemService(Context.NOTIFICATION_SERVICE) as? NotificationManager
             notificationManager?.cancel(firstNotificationId)
         }
     }
 
     private fun startWorkManager(
         context: Context,
-        newsId : Long,
-        newsTitle : String,
-        donationAmount : Int
+        newsId: Long,
+        newsTitle: String,
+        donationAmount: Int,
     ) {
         val inputData = workDataOf(
             NEWS_FEATURE_NEWS_ID_KEY to newsId,

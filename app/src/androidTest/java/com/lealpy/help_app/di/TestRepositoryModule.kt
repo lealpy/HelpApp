@@ -10,8 +10,6 @@ import com.lealpy.help_app.data.database.search_by_events.EventDao
 import com.lealpy.help_app.data.database.search_by_nko.NkoDao
 import com.lealpy.help_app.data.repository.*
 import com.lealpy.help_app.data.utils.DataUtils
-import com.lealpy.help_app.data.repository.TestFireRepositoryImpl
-import com.lealpy.help_app.data.repository.TestNewsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.android.qualifiers.ApplicationContext

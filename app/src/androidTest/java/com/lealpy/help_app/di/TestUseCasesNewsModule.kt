@@ -1,8 +1,8 @@
 package com.lealpy.help_app.di
 
+import com.lealpy.help_app.data.repository.TestNewsRepositoryImpl
 import com.lealpy.help_app.data.repository.WorkerRepositoryImpl
 import com.lealpy.help_app.domain.use_cases.news.*
-import com.lealpy.help_app.data.repository.TestNewsRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.components.SingletonComponent

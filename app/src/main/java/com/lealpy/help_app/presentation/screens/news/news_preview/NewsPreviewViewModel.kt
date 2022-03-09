@@ -6,8 +6,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lealpy.help_app.domain.use_cases.news.GetNewsPreviewItemsUseCase
-import com.lealpy.help_app.domain.use_cases.news.InsertToDbWatchedNewsIdUseCase
 import com.lealpy.help_app.domain.use_cases.news.GetUnwatchedNewsNumberUseCase
+import com.lealpy.help_app.domain.use_cases.news.InsertToDbWatchedNewsIdUseCase
 import com.lealpy.help_app.presentation.model.NewsPreviewItemUi
 import com.lealpy.help_app.presentation.utils.Const.LOG_TAG
 import com.lealpy.help_app.presentation.utils.PresentationMappers
@@ -21,7 +21,7 @@ import javax.inject.Inject
 class NewsPreviewViewModel @Inject constructor(
     private val getNewsPreviewItemsUseCase: GetNewsPreviewItemsUseCase,
     private val getUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase,
-    private val insertToDbWatchedNewsIdUseCase : InsertToDbWatchedNewsIdUseCase,
+    private val insertToDbWatchedNewsIdUseCase: InsertToDbWatchedNewsIdUseCase,
     private val mappers: PresentationMappers,
 ) : ViewModel() {
 
@@ -72,7 +72,7 @@ class NewsPreviewViewModel @Inject constructor(
         val filteredNewsSet = mutableSetOf<NewsPreviewItemUi>()
 
         loadedNewsPreviewItemsUi.forEach { newsPreviewItemUi ->
-            if(
+            if (
                 isChildrenChecked && newsPreviewItemUi.isChildrenCategory ||
                 isAdultChecked && newsPreviewItemUi.isAdultCategory ||
                 isElderlyChecked && newsPreviewItemUi.isElderlyCategory ||
@@ -145,7 +145,7 @@ class NewsPreviewViewModel @Inject constructor(
         )
     }
 
-    private fun insertToDbWatchedNewsId (newsId : Long) {
+    private fun insertToDbWatchedNewsId(newsId: Long) {
         disposable.add(
             insertToDbWatchedNewsIdUseCase(newsId)
                 .subscribeOn(Schedulers.io())

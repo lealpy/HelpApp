@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashScreenViewModel @Inject constructor(
     private val getFromDbUnwatchedNewsNumberUseCase: GetUnwatchedNewsNumberUseCase,
-    private val getAuthStateUseCase: GetAuthStateUseCase
+    private val getAuthStateUseCase: GetAuthStateUseCase,
 ) : ViewModel() {
 
     private val _startBadgeNumber = MutableLiveData<Int>()
@@ -62,7 +62,7 @@ class SplashScreenViewModel @Inject constructor(
                 .subscribe(
                     { authState ->
                         Thread.sleep(SLEEP_TIME_MILLIS)
-                        if(authState) {
+                        if (authState) {
                             _navigateTo.postValue(R.id.actionSplashScreenFragmentToNavigationHelp)
                         } else {
                             _navigateTo.postValue(R.id.actionSplashScreenFragmentToAuthorizationFragment)

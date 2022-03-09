@@ -21,9 +21,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
 
-    private lateinit var binding : FragmentNewsDescriptionBinding
+    private lateinit var binding: FragmentNewsDescriptionBinding
 
-    private val viewModel : NewsDescriptionViewModel by viewModels()
+    private val viewModel: NewsDescriptionViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,20 +54,46 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             binding.progressBar.visibility = visibility
         }
 
-        viewModel.dialogArgs.observe(viewLifecycleOwner) { args ->
+        viewModel.donateMoneyDialogArgs.observe(viewLifecycleOwner) { args ->
             findNavController().navigate(
                 R.id.actionNewsDescriptionFragmentToDonateMoneyDialogFragment,
+                args
+            )
+        }
+
+        viewModel.donateDialogArgs.observe(viewLifecycleOwner) { args ->
+            findNavController().navigate(
+                R.id.actionNewsDescriptionFragmentToDonateDialogFragment,
                 args
             )
         }
     }
 
     private fun initViews() {
-        binding.site.setOnClickListener { viewModel.onSiteClicked() }
-        binding.donateThings.setOnClickListener { viewModel.onDonateThingsClicked() }
-        binding.becomeVolunteer.setOnClickListener { viewModel.onBecomeVolunteerClicked() }
-        binding.profHelp.setOnClickListener { viewModel.onProfHelpClicked() }
-        binding.donateMoney.setOnClickListener { viewModel.onDonateMoneyClicked() }
+        binding.site.setOnClickListener {
+            viewModel.onSiteClicked()
+        }
+        binding.donateThings.setOnClickListener {
+            viewModel.onDonateThingsClicked()
+        }
+        binding.becomeVolunteer.setOnClickListener {
+            viewModel.onBecomeVolunteerClicked()
+        }
+        binding.profHelp.setOnClickListener {
+            viewModel.onProfHelpClicked()
+        }
+        binding.donateMoney.setOnClickListener {
+            viewModel.onDonateMoneyClicked()
+        }
+        binding.donateThings.setOnClickListener {
+            viewModel.onDonateClicked()
+        }
+        binding.becomeVolunteer.setOnClickListener {
+            viewModel.onDonateClicked()
+        }
+        binding.profHelp.setOnClickListener {
+            viewModel.onDonateClicked()
+        }
     }
 
     private fun initToolbar() {
@@ -80,7 +106,8 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
     }
 
     private fun initSpanFeedback() {
-        val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_feedback_title))
+        val spanFeedback =
+            SpannableStringBuilder(requireContext().getString(R.string.news_description_feedback_title))
 
         val spanStart = spanFeedback.indexOf('?') + SYMBOLS_AFTER_QUESTION
         val spanFinish = spanFeedback.length
@@ -92,20 +119,23 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         spanFeedback.setSpan(
-            object: ClickableSpan() {
-                override fun onClick(widget: View) { viewModel.onSpanFeedbackClicked() }
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    viewModel.onSpanFeedbackClicked()
+                }
             },
             spanStart,
             spanFinish,
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-            binding.feedback.text = spanFeedback
-            binding.feedback.movementMethod = LinkMovementMethod.getInstance()
+        binding.feedback.text = spanFeedback
+        binding.feedback.movementMethod = LinkMovementMethod.getInstance()
     }
 
     private fun initSpanSite() {
-        val spanFeedback = SpannableStringBuilder(requireContext().getString(R.string.news_description_site_title))
+        val spanFeedback =
+            SpannableStringBuilder(requireContext().getString(R.string.news_description_site_title))
 
         val spanStart = 0
         val spanFinish = spanFeedback.length
@@ -117,8 +147,10 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         spanFeedback.setSpan(
-            object: ClickableSpan() {
-                override fun onClick(widget: View) { viewModel.onSpanSiteClicked() }
+            object : ClickableSpan() {
+                override fun onClick(widget: View) {
+                    viewModel.onSpanSiteClicked()
+                }
             },
             spanStart,
             spanFinish,
@@ -129,14 +161,8 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         binding.site.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.news_description_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu,inflater)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
-            R.id.newsDescriptionToolbarShare -> viewModel.onShareClicked()
+        when (item.itemId) {
             android.R.id.home -> findNavController().popBackStack()
         }
         return true

@@ -46,10 +46,10 @@ class SignInViewModel @Inject constructor(
     fun onSignInBtnClicked(email: String, password: String) {
         when {
             !validators.isValidEmail(email) -> {
-                showToast(utils.getString(R.string.auth_invalid_email))
+                utils.showToast(utils.getString(R.string.auth_invalid_email))
             }
             !validators.isValidPassword(password) -> {
-                showToast(utils.getString(R.string.auth_invalid_password))
+                utils.showToast(utils.getString(R.string.auth_invalid_password))
             }
             else -> {
                 _progressBarVisibility.value = View.VISIBLE
@@ -67,10 +67,10 @@ class SignInViewModel @Inject constructor(
                                 _progressBarVisibility.value = View.GONE
                                 when (error) {
                                     is FirebaseNetworkException -> {
-                                        showToast(utils.getString(R.string.firebase_network_exception))
+                                        utils.showToast(utils.getString(R.string.firebase_network_exception))
                                     }
                                     else -> {
-                                        showToast(utils.getString(R.string.sign_in_unsuccessful_auth))
+                                        utils.showToast(utils.getString(R.string.sign_in_unsuccessful_auth))
                                     }
                                 }
                             }
@@ -78,18 +78,6 @@ class SignInViewModel @Inject constructor(
                 )
             }
         }
-    }
-
-    fun onVkIconClicked() {
-        showToast()
-    }
-
-    fun onFbIconClicked() {
-        showToast()
-    }
-
-    fun onOkIconClicked() {
-        showToast()
     }
 
     fun onEditTextLengthWatcherInit(observable: Observable<Map<String, String>>) {
@@ -109,10 +97,6 @@ class SignInViewModel @Inject constructor(
                     },
                 )
         )
-    }
-
-    private fun showToast(text: String = utils.getString(R.string.click_heard)) {
-        utils.showToast(text)
     }
 
 }

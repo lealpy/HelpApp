@@ -5,10 +5,10 @@ import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class GetUnwatchedNewsNumberUseCase @Inject constructor(
-    private val newsRepository: NewsRepository
+    private val newsRepository: NewsRepository,
 ) {
 
-    operator fun invoke() : Single<Int> {
+    operator fun invoke(): Single<Int> {
         return newsRepository.getUnwatchedNewsNumber()
     }
 

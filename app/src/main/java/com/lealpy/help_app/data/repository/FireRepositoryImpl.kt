@@ -8,27 +8,26 @@ import com.lealpy.help_app.domain.model.User
 import com.lealpy.help_app.domain.repository.FireRepository
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
-import java.lang.NullPointerException
 import javax.inject.Inject
 
 class FireRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val firebaseDatabase : FirebaseDatabase,
-    private val firebaseStorage: FirebaseStorage
+    private val firebaseDatabase: FirebaseDatabase,
+    private val firebaseStorage: FirebaseStorage,
 ) : FireRepository {
 
     override fun signUp(
-        name : String,
-        surname : String,
-        dateOfBirth : Long,
-        fieldOfActivity : String,
-        email : String,
-        password : String
-    ) : Completable {
-        return Completable.create{ emitter ->
+        name: String,
+        surname: String,
+        dateOfBirth: Long,
+        fieldOfActivity: String,
+        email: String,
+        password: String,
+    ): Completable {
+        return Completable.create { emitter ->
             firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { authTask ->
-                    if(authTask.isSuccessful) {
+                    if (authTask.isSuccessful) {
                         firebaseAuth.currentUser?.uid?.let { uid ->
                             val user = User(
                                 id = uid,
@@ -44,54 +43,54 @@ class FireRepositoryImpl @Inject constructor(
                                 .child(uid)
                                 .setValue(user)
                                 .addOnCompleteListener { databaseTask ->
-                                    if(databaseTask.isSuccessful) {
+                                    if (databaseTask.isSuccessful) {
                                         emitter.onComplete()
                                     } else {
-                                        databaseTask.exception?.let{ emitter.onError(it) }
+                                        databaseTask.exception?.let { emitter.onError(it) }
                                     }
                                 }
                         }
                     } else {
-                        authTask.exception?.let{ emitter.onError(it) }
+                        authTask.exception?.let { emitter.onError(it) }
                     }
                 }
         }
     }
 
-    override fun signIn(email : String, password : String) : Completable {
+    override fun signIn(email: String, password: String): Completable {
         return Completable.create { emitter ->
             firebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         emitter.onComplete()
                     } else {
-                        task.exception?.let{ emitter.onError(it) }
+                        task.exception?.let { emitter.onError(it) }
                     }
                 }
         }
     }
 
-    override fun signOut() : Completable {
+    override fun signOut(): Completable {
         return Completable.create { emitter ->
             firebaseAuth.signOut()
             emitter.onComplete()
         }
     }
 
-    override fun restorePassword(email : String) : Completable {
+    override fun restorePassword(email: String): Completable {
         return Completable.create { emitter ->
             firebaseAuth.sendPasswordResetEmail(email)
                 .addOnCompleteListener { restorePasswordTask ->
                     if (restorePasswordTask.isSuccessful) {
                         emitter.onComplete()
                     } else {
-                        restorePasswordTask.exception?.let{ emitter.onError(it) }
+                        restorePasswordTask.exception?.let { emitter.onError(it) }
                     }
                 }
         }
     }
 
-    override fun getUser() : Single<User> {
+    override fun getUser(): Single<User> {
         return Single.create { emitter ->
             firebaseAuth.currentUser?.uid?.let { uid ->
                 firebaseDatabase.getReference(DATABASE_USERS_PATH)
@@ -99,7 +98,8 @@ class FireRepositoryImpl @Inject constructor(
                     .get()
                     .addOnSuccessListener { snapshot ->
                         val user = snapshot.getValue<User>()
-                        user?.let { emitter.onSuccess(it) } ?: emitter.onError(NullPointerException())
+                        user?.let { emitter.onSuccess(it) }
+                            ?: emitter.onError(NullPointerException())
                     }
                     .addOnFailureListener { exception ->
                         emitter.onError(exception)
@@ -108,11 +108,11 @@ class FireRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAuthState() : Single<Boolean> {
+    override fun getAuthState(): Single<Boolean> {
         return Single.just(firebaseAuth.currentUser?.uid != null)
     }
 
-    override fun saveAvatarToStorage(byteArray : ByteArray) : Completable {
+    override fun saveAvatarToStorage(byteArray: ByteArray): Completable {
         return Completable.create { emitter ->
             firebaseAuth.currentUser?.uid?.let { uid ->
                 val reference = firebaseStorage.reference.child("$STORAGE_AVATAR_PATH/$uid.jpg")
@@ -134,7 +134,7 @@ class FireRepositoryImpl @Inject constructor(
                                         if (databaseTask.isSuccessful) {
                                             emitter.onComplete()
                                         } else {
-                                            databaseTask.exception?.let{ emitter.onError(it) }
+                                            databaseTask.exception?.let { emitter.onError(it) }
                                         }
                                     }
                             }
@@ -144,6 +144,41 @@ class FireRepositoryImpl @Inject constructor(
                     }
             }
         }
+    }
+
+    override fun editUser(
+        surname: String,
+        name: String,
+        dateOfBirth: Long,
+        fieldOfActivity: String,
+    ): Completable {
+        return getUser()
+            .flatMapCompletable { user ->
+                val editedUser = User(
+                    id = user.id,
+                    name = name,
+                    surname = surname,
+                    dateOfBirth = dateOfBirth,
+                    fieldOfActivity = fieldOfActivity,
+                    email = user.email,
+                    avatarUrl = user.avatarUrl,
+                )
+
+                Completable.create { emitter ->
+                    firebaseAuth.currentUser?.uid?.let { uid ->
+                        firebaseDatabase.getReference(DATABASE_USERS_PATH)
+                            .child(uid)
+                            .setValue(editedUser)
+                            .addOnCompleteListener { databaseTask ->
+                                if (databaseTask.isSuccessful) {
+                                    emitter.onComplete()
+                                } else {
+                                    databaseTask.exception?.let { emitter.onError(it) }
+                                }
+                            }
+                    }
+                }
+            }
     }
 
     companion object {

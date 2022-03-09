@@ -7,6 +7,6 @@
         android:icon="@drawable/ic_ok"
         android:iconTint="@color/white"
         android:title="@string/news_filter_toolbar_ok_title"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
 </menu>

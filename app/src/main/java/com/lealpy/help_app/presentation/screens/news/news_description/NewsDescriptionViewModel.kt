@@ -12,7 +12,9 @@ import com.lealpy.help_app.R
 import com.lealpy.help_app.domain.use_cases.news.GetNewsDescriptionItemUseCase
 import com.lealpy.help_app.presentation.model.NewsDescriptionItemUi
 import com.lealpy.help_app.presentation.utils.Const.LOG_TAG
+import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_FUND_NAME_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_ID_KEY
+import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_PHONE_KEY
 import com.lealpy.help_app.presentation.utils.Const.NEWS_FEATURE_NEWS_TITLE_KEY
 import com.lealpy.help_app.presentation.utils.PresentationMappers
 import com.lealpy.help_app.presentation.utils.PresentationUtils
@@ -23,18 +25,21 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class NewsDescriptionViewModel @Inject constructor (
+class NewsDescriptionViewModel @Inject constructor(
     private val getNewsDescriptionItemUseCase: GetNewsDescriptionItemUseCase,
     private val utils: PresentationUtils,
     private val savedStateHandle: SavedStateHandle,
     private val mappers: PresentationMappers,
 ) : ViewModel() {
 
-    private val _newsDescriptionItemUi = MutableLiveData <NewsDescriptionItemUi> ()
-    val newsDescriptionItemUi : LiveData<NewsDescriptionItemUi> = _newsDescriptionItemUi
+    private val _newsDescriptionItemUi = MutableLiveData<NewsDescriptionItemUi>()
+    val newsDescriptionItemUi: LiveData<NewsDescriptionItemUi> = _newsDescriptionItemUi
 
-    private val _dialogArgs = MutableLiveData <Bundle> ()
-    val dialogArgs : LiveData<Bundle> = _dialogArgs
+    private val _donateMoneyDialogArgs = MutableLiveData<Bundle>()
+    val donateMoneyDialogArgs: LiveData<Bundle> = _donateMoneyDialogArgs
+
+    private val _donateDialogArgs = MutableLiveData<Bundle>()
+    val donateDialogArgs: LiveData<Bundle> = _donateDialogArgs
 
     private val _progressBarVisibility = MutableLiveData<Int>()
     val progressBarVisibility: LiveData<Int> = _progressBarVisibility
@@ -50,26 +55,48 @@ class NewsDescriptionViewModel @Inject constructor (
         super.onCleared()
     }
 
-    fun onSiteClicked() { showToast() }
+    fun onSiteClicked() {
+        showToast()
+    }
 
-    fun onDonateThingsClicked() { showToast() }
+    fun onDonateThingsClicked() {
+        showToast()
+    }
 
-    fun onBecomeVolunteerClicked() { showToast() }
+    fun onBecomeVolunteerClicked() {
+        showToast()
+    }
 
-    fun onProfHelpClicked() { showToast() }
+    fun onProfHelpClicked() {
+        showToast()
+    }
 
-    fun onShareClicked() { showToast() }
+    fun onShareClicked() {
+        showToast()
+    }
 
-    fun onSpanSiteClicked() { showToast() }
+    fun onSpanSiteClicked() {
+        showToast()
+    }
 
-    fun onSpanFeedbackClicked() { showToast() }
+    fun onSpanFeedbackClicked() {
+        showToast()
+    }
 
     fun onDonateMoneyClicked() {
         val bundle = bundleOf(
             NEWS_FEATURE_NEWS_ID_KEY to _newsDescriptionItemUi.value?.id,
             NEWS_FEATURE_NEWS_TITLE_KEY to _newsDescriptionItemUi.value?.title
         )
-        _dialogArgs.value = bundle
+        _donateMoneyDialogArgs.value = bundle
+    }
+
+    fun onDonateClicked() {
+        val bundle = bundleOf(
+            NEWS_FEATURE_NEWS_FUND_NAME_KEY to _newsDescriptionItemUi.value?.fundName,
+            NEWS_FEATURE_NEWS_PHONE_KEY to _newsDescriptionItemUi.value?.phone
+        )
+        _donateDialogArgs.value = bundle
     }
 
     private fun getNewsDescriptionItem() {

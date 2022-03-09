@@ -8,13 +8,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.lealpy.help_app.databinding.ItemNkoBinding
 import com.lealpy.help_app.domain.model.NkoItem
 
-class NkoItemAdapter (
-    private val onItemClick : (nkoItem : NkoItem) -> Unit,
-): ListAdapter<NkoItem, NkoItemAdapter.NkoItemHolder>(DiffCallback()) {
+class NkoItemAdapter(
+    private val onItemClick: (nkoItem: NkoItem) -> Unit,
+) : ListAdapter<NkoItem, NkoItemAdapter.NkoItemHolder>(DiffCallback()) {
 
     inner class NkoItemHolder(
-        private val binding: ItemNkoBinding
-    ): RecyclerView.ViewHolder(binding.root) {
+        private val binding: ItemNkoBinding,
+    ) : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.root.setOnClickListener {
                 val position = layoutPosition
@@ -45,7 +45,7 @@ class NkoItemAdapter (
         holder.bind(item)
     }
 
-    class DiffCallback: DiffUtil.ItemCallback<NkoItem>() {
+    class DiffCallback : DiffUtil.ItemCallback<NkoItem>() {
         override fun areItemsTheSame(oldItem: NkoItem, newItem: NkoItem) =
             oldItem.id == newItem.id
 

@@ -8,9 +8,9 @@ import androidx.room.PrimaryKey
     tableName = "event_entities",
     indices = [Index("title")]
 )
-data class EventEntity (
+data class EventEntity(
     @PrimaryKey
-    val id : Long,
-    val title : String,
-    val date : String
+    val id: Long,
+    val title: String,
+    val date: String,
 )

@@ -16,10 +16,10 @@ import javax.inject.Inject
 class HelpRepositoryImpl @Inject constructor(
     private val helpDao: HelpDao,
     private val helpApi: HelpApi,
-    private val utils: DataUtils
+    private val utils: DataUtils,
 ) : HelpRepository {
 
-    override fun getHelpItems() : Single<List<HelpItem>> {
+    override fun getHelpItems(): Single<List<HelpItem>> {
         return helpApi.getHelpItems()
             .doOnSuccess { helpItemsFromServer ->
                 insertToDbHelpItems(helpItemsFromServer).blockingSubscribe()
@@ -31,7 +31,8 @@ class HelpRepositoryImpl @Inject constructor(
                         if (helpItemsFromDb.isNotEmpty()) {
                             Single.just(helpItemsFromDb)
                         } else {
-                            val helpItemsFromFile = utils.getItemsFromFile<List<HelpItem>>(HELP_ITEMS_FILE_NAME)
+                            val helpItemsFromFile =
+                                utils.getItemsFromFile<List<HelpItem>>(HELP_ITEMS_FILE_NAME)
                             insertToDbHelpItems(helpItemsFromFile).blockingSubscribe()
                             Single.just(helpItemsFromFile)
                         }
@@ -39,13 +40,13 @@ class HelpRepositoryImpl @Inject constructor(
             }
     }
 
-    private fun getFromDbAllHelpItems() : Single<List<HelpItem>> {
+    private fun getFromDbAllHelpItems(): Single<List<HelpItem>> {
         return helpDao.getAllHelpEntities().map { helpEntities ->
             helpEntities.toHelpItems()
         }
     }
 
-    private fun insertToDbHelpItems(helpItems: List<HelpItem>) : Completable {
+    private fun insertToDbHelpItems(helpItems: List<HelpItem>): Completable {
         val helpEntities = helpItems.toHelpEntities()
         return helpDao.insertHelpEntities(helpEntities)
     }

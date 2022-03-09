@@ -9,9 +9,9 @@ import com.lealpy.help_app.databinding.FragmentHelpBinding
 
 class HelpFragment : Fragment(R.layout.fragment_help) {
 
-    private lateinit var binding : FragmentHelpBinding
+    private lateinit var binding: FragmentHelpBinding
 
-    private val viewModel : HelpViewModel by activityViewModels()
+    private val viewModel: HelpViewModel by activityViewModels()
 
     private val helpAdapter = HelpItemAdapter {
         viewModel.onItemClicked()

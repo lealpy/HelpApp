@@ -4,10 +4,10 @@ import com.lealpy.help_app.domain.repository.PrefsRepository
 import javax.inject.Inject
 
 class GetSettingGetPushUseCase @Inject constructor(
-    private val repository : PrefsRepository
+    private val repository: PrefsRepository,
 ) {
 
-    operator fun invoke() : Boolean {
+    operator fun invoke(): Boolean {
         return repository.getSettingGetPushToPrefs()
     }
 

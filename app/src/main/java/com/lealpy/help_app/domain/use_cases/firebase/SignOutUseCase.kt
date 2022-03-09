@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class SignOutUseCase @Inject constructor(
-    private val repository: FireRepository
+    private val repository: FireRepository,
 ) {
 
     operator fun invoke(): Completable {

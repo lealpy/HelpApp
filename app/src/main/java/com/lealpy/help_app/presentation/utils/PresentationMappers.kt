@@ -2,14 +2,8 @@ package com.lealpy.help_app.presentation.utils
 
 import android.content.Context
 import com.lealpy.help_app.R
-import com.lealpy.help_app.domain.model.HelpItem
-import com.lealpy.help_app.domain.model.NewsDescriptionItem
-import com.lealpy.help_app.domain.model.NewsPreviewItem
-import com.lealpy.help_app.domain.model.User
-import com.lealpy.help_app.presentation.model.HelpItemUi
-import com.lealpy.help_app.presentation.model.NewsDescriptionItemUi
-import com.lealpy.help_app.presentation.model.NewsPreviewItemUi
-import com.lealpy.help_app.presentation.model.UserUi
+import com.lealpy.help_app.domain.model.*
+import com.lealpy.help_app.presentation.model.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -89,6 +83,19 @@ class PresentationMappers @Inject constructor(
         )
     }
 
+    fun donationHistoryItemsToDonationHistoryItemsUi(
+        donationHistoryItems: List<DonationHistoryItem>,
+    ): List<DonationHistoryItemUi> {
+        return donationHistoryItems.map { donationHistoryItem ->
+            DonationHistoryItemUi(
+                id = donationHistoryItem.id,
+                newsTitle = donationHistoryItem.newsTitle,
+                date = getDateStringByTimestamp(donationHistoryItem.date),
+                donationAmount = "${donationHistoryItem.donationAmount} ₽"
+            )
+        }
+    }
+
     fun getDateStringByTimestamp(date: Long): String {
         val day = getDayIntByTimestamp(date)
         val month = getMonthIntByTimestamp(date)
@@ -120,20 +127,24 @@ class PresentationMappers @Inject constructor(
 
     fun getYearIntByTimestamp(date: Long): Int {
         return SimpleDateFormat("yyyy", Locale.getDefault())
-            .format(Date(date - getGmt())).toInt()
+            .format(Date(date - getGmtDelta())).toInt()
     }
 
     fun getMonthIntByTimestamp(date: Long): Int {
         return SimpleDateFormat("MM", Locale.getDefault())
-            .format(Date(date - getGmt())).toInt()
+            .format(Date(date - getGmtDelta())).toInt()
     }
 
     fun getDayIntByTimestamp(date: Long): Int {
         return SimpleDateFormat("dd", Locale.getDefault())
-            .format(Date(date - getGmt())).toInt()
+            .format(Date(date - getGmtDelta())).toInt()
     }
 
-    private fun getGmt(): Long {
+    fun getCurrentTimeGmt(): Long {
+        return System.currentTimeMillis() - getGmtDelta()
+    }
+
+    private fun getGmtDelta(): Long {
         return calendar.timeZone.rawOffset.toLong()
     }
 

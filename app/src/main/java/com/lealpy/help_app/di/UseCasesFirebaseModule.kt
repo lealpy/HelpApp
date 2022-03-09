@@ -6,7 +6,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -67,6 +66,14 @@ class UseCasesFirebaseModule {
         fireRepositoryImpl: FireRepositoryImpl,
     ): GetAuthStateUseCase {
         return GetAuthStateUseCase(fireRepositoryImpl)
+    }
+
+    @Provides
+    @Singleton
+    fun provideEditUserUseCase(
+        fireRepositoryImpl: FireRepositoryImpl,
+    ): EditUserUseCase {
+        return EditUserUseCase(fireRepositoryImpl)
     }
 
 }
