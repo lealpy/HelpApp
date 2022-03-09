@@ -1,0 +1,101 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white">
+
+    <ImageView
+        android:id="@+id/newsItemImage"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:paddingStart="@dimen/dimen_4_dp"
+        android:paddingTop="@dimen/dimen_4_dp"
+        android:paddingEnd="@dimen/dimen_4_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/NewsItemImageShape"
+        app:srcCompat="@drawable/no_photo" />
+
+    <ImageView
+        android:id="@+id/newsItemImageShape"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="@dimen/dimen_0_dp"
+        android:adjustViewBounds="true"
+        android:paddingStart="@dimen/dimen_4_dp"
+        android:paddingTop="@dimen/dimen_4_dp"
+        android:paddingEnd="@dimen/dimen_4_dp"
+        app:layout_constraintBottom_toBottomOf="@id/newsItemImage"
+        app:layout_constraintEnd_toEndOf="@id/newsItemImage"
+        app:layout_constraintStart_toStartOf="@id/newsItemImage"
+        app:layout_constraintTop_toTopOf="@id/newsItemImage"
+        app:srcCompat="@drawable/news_item_image_shape" />
+
+    <TextView
+        android:id="@+id/newsItemTitle"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_38_dp"
+        android:layout_marginEnd="@dimen/dimen_38_dp"
+        android:fontFamily="@font/officina_sans_extra_bold_scc"
+        android:gravity="center"
+        android:lineSpacingExtra="@dimen/dimen_12_dp"
+        android:textColor="@color/blue_grey"
+        android:textSize="@dimen/dimen_21_sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsItemImage"
+        tools:text="@string/news_item_1_title" />
+
+    <ImageView
+        android:id="@+id/newsItemDecor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dimen_8_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newsItemTitle"
+        app:srcCompat="@drawable/news_item_decor" />
+
+    <TextView
+        android:id="@+id/newsItemText"
+        android:layout_width="@dimen/dimen_0_dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dimen_26_dp"
+        android:layout_marginTop="@dimen/dimen_10_dp"
+        android:layout_marginEnd="@dimen/dimen_26_dp"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:textColor="@color/black_70"
+        android:textSize="@dimen/dimen_14_sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsItemDecor"
+        tools:text="@string/news_item_1_abbreviated_text" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/newsItemDate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_32_dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/dimen_16_dp"
+        android:backgroundTint="@color/turtle_green"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center"
+        android:insetTop="@dimen/dimen_0_dp"
+        android:insetBottom="@dimen/dimen_0_dp"
+        android:padding="@dimen/dimen_0_dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textSize="@dimen/dimen_12_sp"
+        app:cornerRadius="@dimen/dimen_0_dp"
+        app:icon="@drawable/ic_icon_calendar"
+        app:iconGravity="textStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/newsItemText"
+        tools:text="@string/news_item_1_date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigationNews"
+        android:icon="@drawable/ic_baseline_format_list_bulleted_24"
+        android:title="@string/news_screen_name" />
+
+    <item
+        android:id="@+id/navigationSearch"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search_screen_name" />
+
+    <item
+        android:id="@+id/navigationHelp"
+        android:icon="@drawable/ic_baseline_favorite_24"
+        android:title="@string/help_screen_name" />
+
+    <item
+        android:id="@+id/navigationHistory"
+        android:icon="@drawable/ic_baseline_history_24"
+        android:title="@string/history_screen_name" />
+
+    <item
+        android:id="@+id/navigationProfile"
+        android:icon="@drawable/ic_baseline_manage_accounts_24"
+        android:title="@string/profile_screen_name" />
+
+</menu>

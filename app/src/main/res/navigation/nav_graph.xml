@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashScreenFragment">
+
+    <fragment
+        android:id="@+id/navigationNews"
+        android:name="com.lealpy.help_app.presentation.screens.news.news_preview.NewsPreviewFragment"
+        android:label="fragment_news">
+        <action
+            android:id="@+id/actionNavigationNewsToNewsFilterFragment"
+            app:destination="@id/newsFilterFragment" />
+        <action
+            android:id="@+id/actionNavigationNewsToNewsDescriptionFragment"
+            app:destination="@id/newsDescriptionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationSearch"
+        android:name="com.lealpy.help_app.presentation.screens.search.SearchFragment"
+        android:label="fragment_search" />
+    <fragment
+        android:id="@+id/navigationHelp"
+        android:name="com.lealpy.help_app.presentation.screens.help.HelpFragment"
+        android:label="fragment_help" >
+        <action
+            android:id="@+id/actionNavigationHelpToNavigationNews"
+            app:destination="@id/navigationNews" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationHistory"
+        android:name="com.lealpy.help_app.presentation.screens.history.HistoryFragment"
+        android:label="fragment_history" />
+    <fragment
+        android:id="@+id/navigationProfile"
+        android:name="com.lealpy.help_app.presentation.screens.profile.ProfileFragment"
+        android:label="ProfileFragment">
+        <action
+            android:id="@+id/action_navigationProfileToPhotoDialogFragment"
+            app:destination="@id/photoDialogFragment" />
+        <action
+            android:id="@+id/actionNavigationProfileToAuthorizationFragment"
+            app:destination="@id/authorizationFragment"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionNavigationProfileToEditProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newsFilterFragment"
+        android:name="com.lealpy.help_app.presentation.screens.news.news_preview.NewsFilterFragment"
+        android:label="NewsFilterFragment" />
+    <fragment
+        android:id="@+id/newsDescriptionFragment"
+        android:name="com.lealpy.help_app.presentation.screens.news.news_description.NewsDescriptionFragment"
+        android:label="NewsDescriptionFragment">
+        <action
+            android:id="@+id/actionNewsDescriptionFragmentToDonateMoneyDialogFragment"
+            app:destination="@id/donateMoneyDialogFragment" />
+        <action
+            android:id="@+id/actionNewsDescriptionFragmentToDonateDialogFragment"
+            app:destination="@id/donateDialogFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authorizationFragment"
+        android:name="com.lealpy.help_app.presentation.screens.auth.sign_in.SignInFragment"
+        android:label="AuthorizationFragment">
+        <action
+            android:id="@+id/actionAuthorizationFragmentToNavigationHelp"
+            app:destination="@id/navigationHelp"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionAuthorizationFragmentToRegistrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/actionAuthorizationFragmentToPasswordRecoveryFragment"
+            app:destination="@id/passwordRecoveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.lealpy.help_app.presentation.screens.splash_screen.SplashScreenFragment"
+        android:label="fragment_splash_screen">
+        <action
+            android:id="@+id/actionSplashScreenFragmentToAuthorizationFragment"
+            app:destination="@id/authorizationFragment"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/actionSplashScreenFragmentToNavigationHelp"
+            app:destination="@id/navigationHelp"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/donateMoneyDialogFragment"
+        android:name="com.lealpy.help_app.presentation.screens.news.news_description.donate_money.DonateMoneyDialogFragment"
+        android:label="DonateMoneyDialogFragment" />
+    <dialog
+        android:id="@+id/photoDialogFragment"
+        android:name="com.lealpy.help_app.presentation.screens.profile.PhotoDialogFragment"
+        android:label="PhotoDialogFragment" />
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.lealpy.help_app.presentation.screens.auth.sign_up.SignUpFragment"
+        android:label="RegistrationFragment">
+        <action
+            android:id="@+id/actionRegistrationFragmentToNavigationProfile"
+            app:destination="@id/navigationProfile"
+            app:popUpTo="@id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordRecoveryFragment"
+        android:name="com.lealpy.help_app.presentation.screens.auth.password_recovery.PasswordRecoveryFragment"
+        android:label="PasswordRecoveryFragment" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.lealpy.help_app.presentation.screens.profile.edit_profile.EditProfileFragment"
+        android:label="EditProfileFragment">
+        <action
+            android:id="@+id/actionEditProfileFragmentToNavigationProfile"
+            app:destination="@id/navigationProfile"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <dialog
+        android:id="@+id/donateDialogFragment"
+        android:name="com.lealpy.help_app.presentation.screens.news.news_description.donate.DonateDialogFragment"
+        android:label="DonateDialogFragment" />
+
+</navigation>

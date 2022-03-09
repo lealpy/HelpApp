@@ -1,0 +1,31 @@
+[
+  {
+    "id" : "0",
+    "imageUrl" : "https://user-images.githubusercontent.com/90380451/148290811-d935fcbf-be7a-4d93-b376-b4b042322b6c.png",
+    "text" : "Дети"
+  },
+
+  {
+    "id" : "1",
+    "imageUrl" : "https://user-images.githubusercontent.com/90380451/148290806-6b7da751-67f0-491b-ae6c-626e50927cea.png",
+    "text" : "Взрослые"
+  },
+
+  {
+    "id" : "2",
+    "imageUrl" : "https://user-images.githubusercontent.com/90380451/148290812-8ef1904e-e7ec-40ea-9374-0c3464f2144b.png",
+    "text" : "Пожилые"
+  },
+
+  {
+    "id" : "3",
+    "imageUrl" : "https://user-images.githubusercontent.com/90380451/148290810-7428783d-2746-4a1b-87e5-ac00c5fa622b.png",
+    "text" : "Животные"
+  },
+
+  {
+    "id" : "4",
+    "imageUrl" : "https://user-images.githubusercontent.com/90380451/148290813-3b56ef20-9266-439e-a2db-76eb9f77c59e.png",
+    "text" : "Мероприятия"
+  }
+]
