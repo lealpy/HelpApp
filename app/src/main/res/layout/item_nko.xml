@@ -20,6 +20,6 @@
         android:textSize="@dimen/dimen_16_sp"
         app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
         app:drawableTint="@color/warm_grey"
-        tools:text="@string/random_fond_name" />
+        tools:text="Благотворительный фонд Алины Кабаевой" />
 
 </FrameLayout>
