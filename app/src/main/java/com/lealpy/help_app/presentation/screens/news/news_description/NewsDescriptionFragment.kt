@@ -161,14 +161,8 @@ class NewsDescriptionFragment : Fragment(R.layout.fragment_news_description) {
         binding.site.movementMethod = LinkMovementMethod.getInstance()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.news_description_toolbar_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.newsDescriptionToolbarShare -> viewModel.onShareClicked()
             android.R.id.home -> findNavController().popBackStack()
         }
         return true

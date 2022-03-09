@@ -10,7 +10,11 @@ class GetNewsPreviewItemsUseCase @Inject constructor(
 ) {
 
     operator fun invoke(): Single<List<NewsPreviewItem>> {
-        return repository.getAllNewsPreviewItems()
+        return repository.getAllNewsPreviewItems().map { newsPreviewItems ->
+            newsPreviewItems.sortedByDescending { newsPreviewItem ->
+                newsPreviewItem.date
+            }
+        }
     }
 
 }

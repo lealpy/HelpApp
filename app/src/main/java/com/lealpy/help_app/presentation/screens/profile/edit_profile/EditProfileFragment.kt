@@ -44,6 +44,23 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
         binding.dateOfBirthEditText.setOnClickListener {
             viewModel.onDateOfBirthClicked()
         }
+    }
+
+    private fun initObservers() {
+        viewModel.userUi.observe(viewLifecycleOwner) { userUi ->
+            binding.surnameEditText.setText(userUi.surname)
+            binding.nameEditText.setText(userUi.name)
+            binding.dateOfBirthEditText.setText(userUi.dateOfBirth)
+            binding.fieldOfActivityEditText.setText(userUi.fieldOfActivity)
+        }
+
+        viewModel.navigateTo.observe(viewLifecycleOwner) { destination ->
+            findNavController().navigate(destination)
+        }
+
+        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
+            binding.progressBar.visibility = progressBarVisibility
+        }
 
         viewModel.dateOfBirth.observe(viewLifecycleOwner) { dateOfBirth ->
             binding.dateOfBirthEditText.setText(dateOfBirth)
@@ -63,23 +80,6 @@ class EditProfileFragment : Fragment(R.layout.fragment_edit_profile) {
                     datePickerData.day
                 ).show()
             }
-        }
-    }
-
-    private fun initObservers() {
-        viewModel.userUi.observe(viewLifecycleOwner) { userUi ->
-            binding.surnameEditText.setText(userUi.surname)
-            binding.nameEditText.setText(userUi.name)
-            binding.dateOfBirthEditText.setText(userUi.dateOfBirth)
-            binding.fieldOfActivityEditText.setText(userUi.fieldOfActivity)
-        }
-
-        viewModel.navigateTo.observe(viewLifecycleOwner) { destination ->
-            findNavController().navigate(destination)
-        }
-
-        viewModel.progressBarVisibility.observe(viewLifecycleOwner) { progressBarVisibility ->
-            binding.progressBar.visibility = progressBarVisibility
         }
     }
 
