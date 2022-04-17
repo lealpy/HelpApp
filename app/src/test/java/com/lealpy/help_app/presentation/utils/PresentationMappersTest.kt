@@ -229,7 +229,7 @@ class PresentationMappersTest {
         val testSecond = TEST_SECOND
 
         /** When */
-        val testTimestamp = presentationMappers.getTimestampByInt(
+        val testTimestamp = presentationMappers.getTimestampGmtByInt(
             year = testYear,
             month = testMonth,
             day = testDay,
@@ -250,7 +250,7 @@ class PresentationMappersTest {
         val testTimestamp = TEST_TIMESTAMP
 
         /** When */
-        val testYear = presentationMappers.getYearIntByTimestamp(testTimestamp)
+        val testYear = presentationMappers.getYearIntCurrentTimezoneByTimestamp(testTimestamp)
 
         /** Then */
         val expected = TEST_YEAR
@@ -264,7 +264,7 @@ class PresentationMappersTest {
         val testTimestamp = TEST_TIMESTAMP
 
         /** When */
-        val testMonth = presentationMappers.getMonthIntByTimestamp(testTimestamp)
+        val testMonth = presentationMappers.getMonthIntCurrentTimezoneByTimestamp(testTimestamp)
 
         /** Then */
         val expected = TEST_MONTH
@@ -278,7 +278,7 @@ class PresentationMappersTest {
         val testTimestamp = TEST_TIMESTAMP
 
         /** When */
-        val testDay = presentationMappers.getDayIntByTimestamp(testTimestamp)
+        val testDay = presentationMappers.getDayIntCurrentTimezoneByTimestamp(testTimestamp)
 
         /** Then */
         val expected = TEST_DAY
@@ -306,14 +306,14 @@ class PresentationMappersTest {
     }
 
     companion object {
-        private const val TEST_TIMESTAMP = 1595105115000L
+        private const val TEST_TIMESTAMP = 1595115915000L
         private const val TEST_YEAR = 2020
         private const val TEST_MONTH = 7
         private const val TEST_DAY = 18
         private const val TEST_HOUR = 23
         private const val TEST_MINUTE = 45
         private const val TEST_SECOND = 15
-        private const val TEST_DATE_STRING = "18 июля 2020"
+        private const val TEST_DATE_STRING = "19 июля 2020" // Для GMT -> 18 июля; GMT+1 -> 19 июля
     }
 
 }

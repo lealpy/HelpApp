@@ -97,9 +97,9 @@ class PresentationMappers @Inject constructor(
     }
 
     fun getDateStringByTimestamp(date: Long): String {
-        val day = getDayIntByTimestamp(date)
-        val month = getMonthIntByTimestamp(date)
-        val year = getYearIntByTimestamp(date)
+        val day = getDayIntCurrentTimezoneByTimestamp(date)
+        val month = getMonthIntCurrentTimezoneByTimestamp(date)
+        val year = getYearIntCurrentTimezoneByTimestamp(date)
         val months = appContext.resources.getStringArray(R.array.months)
 
         return when (month) {
@@ -119,25 +119,26 @@ class PresentationMappers @Inject constructor(
         }
     }
 
-    fun getTimestampByInt(
+    fun getTimestampGmtByInt(
         year: Int, month: Int, day: Int, hour: Int = 0, minute: Int = 0, second: Int = 0,
     ): Long {
-        return GregorianCalendar(year, month - 1, day, hour, minute, second).timeInMillis
+        return GregorianCalendar(year, month - 1, day, hour, minute, second)
+            .timeInMillis + getGmtDelta()
     }
 
-    fun getYearIntByTimestamp(date: Long): Int {
+    fun getYearIntCurrentTimezoneByTimestamp(date: Long): Int {
         return SimpleDateFormat("yyyy", Locale.getDefault())
-            .format(Date(date - getGmtDelta())).toInt()
+            .format(Date(date )).toInt()
     }
 
-    fun getMonthIntByTimestamp(date: Long): Int {
+    fun getMonthIntCurrentTimezoneByTimestamp(date: Long): Int {
         return SimpleDateFormat("MM", Locale.getDefault())
-            .format(Date(date - getGmtDelta())).toInt()
+            .format(Date(date)).toInt()
     }
 
-    fun getDayIntByTimestamp(date: Long): Int {
+    fun getDayIntCurrentTimezoneByTimestamp(date: Long): Int {
         return SimpleDateFormat("dd", Locale.getDefault())
-            .format(Date(date - getGmtDelta())).toInt()
+            .format(Date(date)).toInt()
     }
 
     fun getCurrentTimeGmt(): Long {

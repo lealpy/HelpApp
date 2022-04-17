@@ -93,8 +93,11 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 ?.observe(viewLifecycleOwner) { selectedItemKey ->
                     when (selectedItemKey) {
                         PROFILE_FEATURE_CHOOSE_PHOTO_KEY -> readStoragePermissionLauncher.launch(
-                            Manifest.permission.READ_EXTERNAL_STORAGE)
-                        PROFILE_FEATURE_TAKE_PHOTO_KEY -> cameraPermissionLauncher.launch(Manifest.permission.CAMERA)
+                            Manifest.permission.READ_EXTERNAL_STORAGE
+                        )
+                        PROFILE_FEATURE_TAKE_PHOTO_KEY -> cameraPermissionLauncher.launch(
+                            Manifest.permission.CAMERA
+                        )
                         PROFILE_FEATURE_DELETE_PHOTO_KEY -> viewModel.onDeletePhotoSelected()
                     }
                 }

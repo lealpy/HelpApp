@@ -135,16 +135,16 @@ class SignUpViewModel @Inject constructor(
     }
 
     fun onDateOfBirthClicked() {
-        val year = mappers.getYearIntByTimestamp(dateOfBirthTimestamp)
-        val month = mappers.getMonthIntByTimestamp(dateOfBirthTimestamp)
-        val day = mappers.getDayIntByTimestamp(dateOfBirthTimestamp)
+        val year = mappers.getYearIntCurrentTimezoneByTimestamp(dateOfBirthTimestamp)
+        val month = mappers.getMonthIntCurrentTimezoneByTimestamp(dateOfBirthTimestamp)
+        val day = mappers.getDayIntCurrentTimezoneByTimestamp(dateOfBirthTimestamp)
 
         val datePickerData = DatePickerData(year, month - 1, day)
         _datePickerData.value = datePickerData
     }
 
     fun onDateOfBirthPicked(year: Int, month: Int, dayOfMonth: Int) {
-        dateOfBirthTimestamp = mappers.getTimestampByInt(year, month, dayOfMonth, 0, 0)
+        dateOfBirthTimestamp = mappers.getTimestampGmtByInt(year, month, dayOfMonth, 0, 0)
         _dateOfBirth.value = mappers.getDateStringByTimestamp(dateOfBirthTimestamp)
     }
 
