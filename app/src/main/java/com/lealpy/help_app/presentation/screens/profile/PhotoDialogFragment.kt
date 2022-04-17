@@ -17,10 +17,10 @@ class PhotoDialogFragment : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         binding = DialogFragmentPhotoBinding.inflate(layoutInflater)
-        val builder = AlertDialog.Builder(context)
-        builder.setView(binding.root)
         initViews()
-        return builder.create()
+        return AlertDialog.Builder(context)
+            .setView(binding.root)
+            .create()
     }
 
     private fun initViews() {
